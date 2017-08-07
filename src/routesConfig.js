@@ -1,7 +1,7 @@
 // import Home from "./components/pages/Home";
 import { Container, } from "./components/common";
+import Home from "./components/pages/Home";
 
-const Home = props => <Container>Home</Container>;
 const Books = props => <Container>Books</Container>;
 const About = props => <Container>About</Container>;
 

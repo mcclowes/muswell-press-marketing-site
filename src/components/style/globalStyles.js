@@ -10,6 +10,8 @@ import { objMap, } from "../../lib/util";
 export default () => injectGlobal`
 	@import url('https://fonts.googleapis.com/css?family=Fredoka+One');
 	@import url('https://fonts.googleapis.com/css?family=Raleway:400,600');
+	@import url('https://fonts.googleapis.com/css?family=IM+Fell+English:400i');
+	@import url('https://fonts.googleapis.com/css?family=Arvo:400,400i,700,700i');
 
 	*, *:before, *:after {
 		box-sizing: border-box;
@@ -26,8 +28,7 @@ export default () => injectGlobal`
 		${m.bp.md.min`
 			margin-right: ${v.dim.scrollbar};
 			background-color: ${v.scrollbar.color.track};
-		`}
-		
+		`}		
 	}
 
 	body {
