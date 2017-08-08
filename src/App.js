@@ -11,6 +11,7 @@ import injectGlobalStyles from "./components/style/globalStyles";
 import Nav from "./components/common/Nav";
 import Main from "./components/common/Main";
 import Footer from "./components/common/Footer";
+import ScrollToTop from "./components/common/ScrollToTop";
 
 // --------------------------------------------------
 
@@ -25,10 +26,12 @@ const routes = routesConfig.map(route => (
 
 export default () => (
 	<Router>
-		<div>
-			<Nav/>
-			<Main>{ routes }</Main>
-			<Footer/>
-		</div>
+		<ScrollToTop>
+			<div>
+				<Nav/>
+				<Main>{ routes }</Main>
+				<Footer/>
+			</div>
+		</ScrollToTop>
 	</Router>
 );

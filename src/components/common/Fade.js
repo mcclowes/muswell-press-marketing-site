@@ -15,20 +15,91 @@ export class Fader extends React.Component {
 	constructor(props) {
 		super(props);
 		this.ref = this.ref.bind(this);
+		[
+			"fadeIn",
+			"fadeOut",
+			"slideDown",
+			"slideUp",
+		].map(name => this[name] = this[name].bind(this))
+	}
+
+	fadeIn(cb) {
+		Velocity(
+			this._wrapper,
+			{
+				opacity: 1,
+			},
+			{
+				duration: this.props.fadeDuration,
+				complete: cb,
+				mobileHA: false,
+			}
+		);
+	}
+
+	fadeOut(cb) {
+		Velocity(
+			this._wrapper,
+			{
+				opacity: 0,
+			},
+			{
+				duration: this.props.fadeDuration,
+				complete: cb,
+				mobileHA: false,
+			}
+		);
+	}
+
+	slideDown(cb) {
+		Velocity(
+			this._wrapper,
+			{
+				maxHeight: "1000px",
+			},
+			{
+				duration: this.props.fadeDuration,
+				complete: cb,
+			}
+		);
+	}
+
+	slideUp(cb) {
+		Velocity(
+			this._wrapper,
+			{
+				maxHeight: 0,
+			},
+			{
+				duration: this.props.fadeDuration,
+				complete: cb,
+			}
+		);
 	}
 
 	componentWillEnter(cb) {
 		try {
+			// this._wrapper.style.opacity = 0;
+			// Velocity(
+			// 	this._wrapper,
+			// 	{
+			// 		opacity: 1,
+			// 	},
+			// 	{
+			// 		duration: this.props.fadeDuration,
+			// 		complete: cb,
+			// 		mobileHA: false,
+			// 	}
+			// );
+
 			this._wrapper.style.opacity = 0;
-			Velocity(
-				this._wrapper,
-				{ opacity: 1, },
-				{
-					duration: this.props.fadeDuration,
-					complete: cb,
-					mobileHA: false,
-				}
-			);
+			if(this.props.slide) {
+				this._wrapper.style.maxHeight = 0;
+				this.slideDown(() => this.fadeIn(cb));
+			}
+			else {
+				this.fadeIn(cb);
+			}
 		}
 		catch(err) {
 			console.log("something went wrong with componentWillEnter");
@@ -38,15 +109,12 @@ export class Fader extends React.Component {
 
 	componentWillLeave(cb) {
 		try {
-			Velocity(
-				this._wrapper,
-				{ opacity: 0, },
-				{
-					duration: this.props.fadeDuration,
-					complete: cb,
-					mobileHA: false,
-				}
-			);
+			if(this.props.slide) {
+				this.fadeOut(() => this.slideUp(cb));
+			}
+			else {
+				this.fadeOut(cb);
+			}
 		}
 		catch(err) {
 			console.log("something went wrong with componentWillLeave");
@@ -84,6 +152,7 @@ export default (props) => (
 				? (
 					<Fader
 						fadeDuration = { props.fadeDuration }
+						slide = { props.slide }
 					>
 						{ props.children }
 					</Fader>

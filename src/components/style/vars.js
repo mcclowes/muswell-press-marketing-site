@@ -4,7 +4,7 @@ import { objMap, } from "../../lib/util";
 
 const sm = 768;
 const md = 992;
-const lg = 1300;
+const lg = 1200;
 
 export const breakpoints = {
 	xs: { min: 0, max: sm - 1, },
@@ -55,7 +55,7 @@ const gutter = {
 	xs: 15,
 	sm: 20,
 	md: 30,
-	lg: 40,
+	lg: 30,
 };
 
 export const scrollbar = {
@@ -84,7 +84,7 @@ export const dimensions = {
 	footer: {
 		height: {
 			xs: "50px",
-			other: "100px",
+			other: "60px",
 		}
 	},
 	gutter: {		
@@ -121,3 +121,5 @@ dimensions.gutter.container = {
 export const dim = dimensions;
 
 export const imageViewerFadeDuration = 200;
+
+export const bookUrl = "/img/the-rainbow-conspiracy.png";

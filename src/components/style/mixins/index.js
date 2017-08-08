@@ -42,3 +42,15 @@ export const bgImage = url => `
 	background-position: center center;
 	background-image: url(${url});
 `;
+
+export const clearfix = `
+	&:before,
+	&:after {
+		content: "";
+		display: table;
+	}
+
+	&:after {
+		clear: both;
+	}
+`;

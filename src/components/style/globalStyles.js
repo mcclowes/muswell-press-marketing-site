@@ -12,6 +12,7 @@ export default () => injectGlobal`
 	@import url('https://fonts.googleapis.com/css?family=Raleway:400,600');
 	@import url('https://fonts.googleapis.com/css?family=IM+Fell+English:400i');
 	@import url('https://fonts.googleapis.com/css?family=Arvo:400,400i,700,700i');
+	@import url('https://fonts.googleapis.com/css?family=Archivo:400,600');
 
 	*, *:before, *:after {
 		box-sizing: border-box;
@@ -33,7 +34,7 @@ export default () => injectGlobal`
 
 	body {
 		background: white;
-		font-family: Raleway, sans-serif;
+		font-family: Archivo, sans-serif;
 		${m.bpEach("font-size", v.font.size)}
 		color: ${v.colors.text};
 		margin: 0;
@@ -69,21 +70,21 @@ export default () => injectGlobal`
 		vertical-align: bottom;
 	}
 
-	::-webkit-scrollbar-track {
-		background-color: ${v.scrollbar.color.track};
-	}
+	// ::-webkit-scrollbar-track {
+	// 	background-color: ${v.scrollbar.color.track};
+	// }
 
-	::-webkit-scrollbar	{
-		width: ${v.dim.scrollbar};
-		height: ${v.dim.scrollbar};
-		background-color: #F5F5F5;
-	}
+	// ::-webkit-scrollbar	{
+	// 	width: ${v.dim.scrollbar};
+	// 	height: ${v.dim.scrollbar};
+	// 	background-color: #F5F5F5;
+	// }
 
-	::-webkit-scrollbar-thumb {
-		border-radius: 10px;
-		-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
-		background-color: ${v.scrollbar.color.thumb};
-	}
+	// ::-webkit-scrollbar-thumb {
+	// 	border-radius: 10px;
+	// 	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	// 	background-color: ${v.scrollbar.color.thumb};
+	// }
 
 	.fade-enter {
 	  opacity: 0;

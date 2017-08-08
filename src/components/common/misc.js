@@ -2,6 +2,7 @@ import React from "react";
 import styled, { css, } from "styled-components";
 import R from "ramda";
 import { Link, } from "react-router-dom";
+import MQ from "react-responsive";
 
 import * as m from "../style/mixins";
 import * as v from "../style/vars";
@@ -14,8 +15,10 @@ export const GridCell = styled.div`
 	${p => p.flex ? `flex: ${p.flex};` : ""}
 `;
 
+const textBoxMargins = objMap(v.font.size, (key, val) => `-${val} 0`);
+
 export const TextBox = styled.div`
-	${m.bpEach("margin", objMap(v.font.size, (key, val) => `-${val} 0`))}
+	${m.bpEach("margin", textBoxMargins)}
 	${p => p.bold ? "font-weight: bold;" : ""}
 	${p => p.align ? `text-align: ${p.align};` : ""}
 `;
@@ -77,10 +80,9 @@ export const Icon = props => (
 
 export const ButtonWrapper = styled.div`
 	display: inline-block;
-	padding: 0 1.5em;
-	border-radius: 1.5em;
+	padding: 0 1.25em;
 	line-height: 1;
-	height: 3em;
+	height: 2.8em;
 	background: ${p => p.color || v.colors.text};
 	transition: 0.1s linear background;
 	cursor: pointer;
@@ -134,3 +136,12 @@ export const IconButton = props => {
 };
 
 export const Button = IconButton;
+
+export const PSpacing = styled.div`
+	${m.bpEach("height", v.font.size)}
+`;
+
+export const Only = objMap(v.bps, (key, val) => ({ children, }) => <MQ
+	query = { `(min-width: ${val.min}px) and (max-width: ${val.max}px)` }
+	children = { children }
+/>);

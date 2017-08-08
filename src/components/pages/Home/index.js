@@ -1,5 +1,19 @@
-import { Container, GridCell, TextCell, FullWidthImg, } from "../common";
 import styled from "styled-components";
+import { Link, } from "react-router-dom";
+
+import { Container, GridCell, TextCell, FullWidthImg, } from "../../common";
+import * as v from "../../style/vars";
+
+import NewBooks from "./NewBooks";
+import About from "./About";
+
+// --------------------------------------------------
+
+const books = [
+	{ foo: "great book" },
+	{ foo: "lovely book" },
+	{ foo: "smashing book" },
+];
 
 // --------------------------------------------------
 
@@ -27,6 +41,22 @@ const TitleText = styled.p`
 	font-style: italic;
 `;
 
+const Container2 = Container1;
+
+const FlexCell = styled(GridCell)`
+	flex: 1;
+`;
+
+const Book = props => (
+	<FlexCell>
+		<Link to = { `/book/${props.foo}` }>
+			<FullWidthImg
+				src = { v.bookUrl }	
+			/>
+		</Link>
+	</FlexCell>
+);
+
 const Home = props => (
 	<div>
 		<Background1>
@@ -34,7 +64,7 @@ const Home = props => (
 				<LeftCol>
 					<GridCell>
 						<FullWidthImg
-							src = "https://thebookworm1305.files.wordpress.com/2013/05/classic_red_book_cover.jpg"
+							src = { v.bookUrl }
 						/>
 					</GridCell>
 				</LeftCol>
@@ -48,6 +78,9 @@ const Home = props => (
 				</RightCol>
 			</Container1>
 		</Background1>
+
+		<NewBooks/>
+		<About/>
 	</div>
 );
 
