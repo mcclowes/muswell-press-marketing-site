@@ -1,0 +1,18 @@
+image: codogo/pipelines-universal:latest
+
+pipelines:
+  branches:
+    master:
+      - step:
+          script:
+          - yarn install 
+          - yarn run lint
+          - yarn run build
+          - aws s3 sync --delete build s3://codogo-app-muswell-press-marketing
+
+  default: 
+    - step:
+        script:
+          - yarn install 
+          - yarn run lint
+          - yarn run build
