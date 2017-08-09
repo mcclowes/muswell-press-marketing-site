@@ -14,6 +14,11 @@ export default [
 		component: Home,
 		exact: true,
 		show: false,
+		colors: {
+			bg: "#f8ddbb",
+			logo1: "#4C9AA3",
+			logo2: "#FFFDF1",
+		},
 	},
 	{
 		path: "/books",
@@ -33,5 +38,21 @@ export default [
 		path: "/book/:bookId",
 		title: "Book",
 		component: Book,
+		colors: {
+			bg: "pink",
+			logo1: "hotpink",
+			logo2: "white",
+			body: "pink",
+			footer: "pink",
+		}
+	},
+	{
+		path: "/test",
+		title: "Test",
+		component: () => <div>tets</div>,
+		show: false,
+		colors: {
+			body: "#abdfbd",
+		},
 	}
 ];

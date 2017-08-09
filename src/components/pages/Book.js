@@ -90,7 +90,7 @@ const BookPage = props => (console.log(props),
 					<PSpacing/>
 					<Button
 						href = "https://amazon.co.uk"
-						color = "#43c"
+						color = "#146eb4"
 						text = "Buy on Amazon"
 						icon = "shopping_cart"
 					/>

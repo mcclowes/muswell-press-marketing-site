@@ -39,7 +39,7 @@ const wrapperStyle = [
 		left: 0;
 		right: 0;
 		top: ${v.dim.nav.height.xs};
-		background: ${v.colors.nav};
+		background: ${props => props && props.colors && props.colors.bg ? props.colors.bg : v.colors.nav};
 	`,
 
 	`

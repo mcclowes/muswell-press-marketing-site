@@ -14,6 +14,13 @@ export default () => injectGlobal`
 	@import url('https://fonts.googleapis.com/css?family=Arvo:400,400i,700,700i');
 	@import url('https://fonts.googleapis.com/css?family=Archivo:400,600');
 
+	@font-face {
+	  font-family: 'TradeGothic';
+	  font-style: normal;
+	  font-weight: 700;
+	  src: url(/fonts/TradeGothic-Bold.woff) format('woff');
+	}
+
 	*, *:before, *:after {
 		box-sizing: border-box;
 		margin: 0;

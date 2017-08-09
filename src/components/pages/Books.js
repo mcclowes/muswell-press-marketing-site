@@ -91,7 +91,7 @@ const CenterCell = styled(GridCell)`
 `;
 
 const enhanceGrid = compose(
-	withState("rows", "setRows", 1),
+	withState("rows", "setRows", 2),
 	withHandlers({
 		loadMore: ({ setRows, rows }) => () => {
 			setRows(rows + 1);

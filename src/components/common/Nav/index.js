@@ -10,6 +10,7 @@ import routesConfig from "../../../routesConfig";
 import Links from "./Links";
 import Burger from "./Burger";
 import Fade from "../Fade";
+import _Logo from "../Logo";
 
 // --------------------------------------------------
 
@@ -22,9 +23,10 @@ export default class Nav extends React.Component {
 	}
 
 	render() {
+		const { colors, } = this.props; 
 		return (
 			
-			<Wrapper>
+			<Wrapper colors = { colors }>
 				<Inner>
 					<MobileStuff>
 						<Fade visible = { this.state.open }>
@@ -40,10 +42,11 @@ export default class Nav extends React.Component {
 							open: false,
 						})}
 						{ ...this.state }
+						colors = { colors }
 					/>
 
 					<MobileStuff>
-						<Overlay/>
+						<Overlay { ...this.state } colors = { colors }/>
 						<BurgerWrapper onClick = { () => this.setState({
 							open: !this.state.open,
 						})}>
@@ -66,11 +69,11 @@ export default class Nav extends React.Component {
 // --------------------------------------------------
 
 const Wrapper = styled.nav`
-	${m.bp.sm.min`${m.shadow(1)}`}
+	${m.bp.sm.min`${m.shadow(0)}`}
 	${m.bpEither("height", v.dim.nav.height)}
-	background: ${v.colors.nav};
+	background: ${props => props && props.colors && props.colors.bg ? props.colors.bg : v.colors.nav};
 	left: 0;
-	position: fixed;
+	position: absolute;
 	right: 0;
 	top: 0;
 	z-index: 2;
@@ -100,8 +103,9 @@ const Dark = styled.div`
 
 const Overlay = styled.div`
 	${m.contained()}
-	${m.shadow(1)}
-	background: ${v.colors.nav};
+	${({ open, }) => open ? m.shadow(1) : ""}
+	transition: 0.3s all ease-out;
+	background: ${props => props && props.colors && props.colors.bg ? props.colors.bg : v.colors.nav};
 `;
 
 const BurgerWrapper = styled.div`
@@ -114,10 +118,11 @@ const BurgerWrapper = styled.div`
 const Logo = (props) => (
 	<LogoWrapper to = "/">
 		{
-			true
-			? <LogoText>Muswell Press</LogoText>
-			: <LogoImg src = { props.src } />
-		}		
+			// true
+			// ? <LogoText>Muswell Press</LogoText>
+			// : <LogoImg src = { props.src } />
+		}
+		<_Logo/>
 	</LogoWrapper>
 );
 
@@ -146,4 +151,5 @@ const LogoText = styled.div`
 	font-size: 1.5em;
 	text-transform: uppercase;
 	font-weight: bold;
+	font-family: TradeGothic;
 `;

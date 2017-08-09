@@ -17,7 +17,7 @@ export const bps = breakpoints;
 export const colors = {
 	text: "#444",
 	nav: "#fff",
-	footer: "#ddd",
+	footer: "#fff",
 	grey: "rgba(0,0,0,0.2)",
 	lines: "rgba(0,0,0,0.2)",
 };
