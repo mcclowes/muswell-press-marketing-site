@@ -2,28 +2,39 @@ import styled from "styled-components";
 import { Link, } from "react-router-dom";
 import { compose, withState, withHandlers, } from "recompose";
 
-import { Container, GridCell, TextCell, FullWidthImg, Para, Button, PSpacing, Only, } from "../../common";
+import {
+	Container,
+	GridCell,
+	TextCell,
+	FullWidthImg,
+	Para,
+	Button,
+	PSpacing,
+	Only,
+} from "../../common";
 import * as v from "../../style/vars";
 import * as m from "../../style/mixins";
 import { objMap, } from "../../../lib/util";
 
 // --------------------------------------------------
 
-const LeftCol = styled.div`
-	width: 50%;
-`;
+const LeftCol = styled.div`width: 50%;`;
 
 const RightCol = styled(GridCell)`
 	flex: 1;
 `;
 
 const Background1 = styled.div`
-	${props => props.colors && props.colors.bg ? `background-color: ${props.colors.bg};` : ""}
+	${props =>
+		props.colors && props.colors.bg
+			? `background-color: ${props.colors.bg};`
+			: ""};
 `;
 
-
-
-const containerHeights = objMap(v.dim.nav.height, (k, v) => "calc(100vh - " + v + ")");
+const containerHeights = objMap(
+	v.dim.nav.height,
+	(k, v) => "calc(100vh - " + v + ")",
+);
 
 const Container1 = styled(Container)`
 	${m.bpEither("height", containerHeights)}
@@ -66,11 +77,11 @@ const Cover = styled.img`
 
 // --------------------------------------------------
 
-const Hero = props => (
+const Hero = props =>
 	<Background1 { ...props }>
 		<Container1>
 			<ContainerInner>
-				<Cover src = { v.bookUrl }/>
+				<Cover src = { v.bookUrl } />
 				<RightCol>
 					<TextCell>
 						<TitleText>A nice book</TitleText>
@@ -81,7 +92,6 @@ const Hero = props => (
 				</RightCol>
 			</ContainerInner>
 		</Container1>
-	</Background1>
-);
+	</Background1>;
 
 export default Hero;

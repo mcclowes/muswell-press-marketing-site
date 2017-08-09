@@ -5,22 +5,13 @@ import Velocity from "velocity-animate";
 
 // --------------------------------------------------
 
-const Wrapper = styled.div`
-	${p => p.zIndex ? `z-index: ${p.zIndex};` : ""}
-`;
-
-// --------------------------------------------------
-
 export class Fader extends React.Component {
 	constructor(props) {
 		super(props);
 		this.ref = this.ref.bind(this);
-		[
-			"fadeIn",
-			"fadeOut",
-			"slideDown",
-			"slideUp",
-		].map(name => this[name] = this[name].bind(this))
+		["fadeIn", "fadeOut", "slideDown", "slideUp",].map(
+			name => (this[name] = this[name].bind(this)),
+		);
 	}
 
 	fadeIn(cb) {
@@ -33,7 +24,7 @@ export class Fader extends React.Component {
 				duration: this.props.fadeDuration,
 				complete: cb,
 				mobileHA: false,
-			}
+			},
 		);
 	}
 
@@ -47,7 +38,7 @@ export class Fader extends React.Component {
 				duration: this.props.fadeDuration,
 				complete: cb,
 				mobileHA: false,
-			}
+			},
 		);
 	}
 
@@ -60,7 +51,7 @@ export class Fader extends React.Component {
 			{
 				duration: this.props.fadeDuration,
 				complete: cb,
-			}
+			},
 		);
 	}
 
@@ -73,7 +64,7 @@ export class Fader extends React.Component {
 			{
 				duration: this.props.fadeDuration,
 				complete: cb,
-			}
+			},
 		);
 	}
 
@@ -93,15 +84,13 @@ export class Fader extends React.Component {
 			// );
 
 			this._wrapper.style.opacity = 0;
-			if(this.props.slide) {
+			if (this.props.slide) {
 				this._wrapper.style.maxHeight = 0;
 				this.slideDown(() => this.fadeIn(cb));
-			}
-			else {
+			} else {
 				this.fadeIn(cb);
 			}
-		}
-		catch(err) {
+		} catch (err) {
 			console.log("something went wrong with componentWillEnter");
 			cb();
 		}
@@ -109,14 +98,12 @@ export class Fader extends React.Component {
 
 	componentWillLeave(cb) {
 		try {
-			if(this.props.slide) {
+			if (this.props.slide) {
 				this.fadeOut(() => this.slideUp(cb));
-			}
-			else {
+			} else {
 				this.fadeOut(cb);
 			}
-		}
-		catch(err) {
+		} catch (err) {
 			console.log("something went wrong with componentWillLeave");
 			cb();
 		}
@@ -126,38 +113,30 @@ export class Fader extends React.Component {
 		this._wrapper = comp || this._wrapper;
 	}
 
-	render () {
-		return (			
+	render() {
+		return (
 			<div ref = { this.ref }>
-				{ this.props.children }
+				{this.props.children}
 			</div>
-		)
+		);
 	}
 
 	defaultProps = {
 		fadeDuration: 300,
-	}
+	};
 }
 
 // --------------------------------------------------
 
-const FirstChild = (props) => React.Children.toArray(props.children)[0] || null;
+const FirstChild = props => React.Children.toArray(props.children)[0] || null;
 
 // --------------------------------------------------
 
-export default (props) => (
+export default props =>
 	<ReactTransitionGroup component = { FirstChild }>
-		{
-			props.visible
-				? (
-					<Fader
-						fadeDuration = { props.fadeDuration }
-						slide = { props.slide }
-					>
-						{ props.children }
-					</Fader>
-				)
-				: null
-		}		
-	</ReactTransitionGroup>
-)
+		{props.visible
+			? <Fader fadeDuration = { props.fadeDuration } slide = { props.slide }>
+				{props.children}
+			</Fader>
+			: null}
+	</ReactTransitionGroup>;

@@ -2,7 +2,16 @@ import styled from "styled-components";
 import { Link, } from "react-router-dom";
 import { compose, withState, withHandlers, } from "recompose";
 
-import { Container, GridCell, TextCell, FullWidthImg, Para, Button, PSpacing, Only, } from "../../common";
+import {
+	Container,
+	GridCell,
+	TextCell,
+	FullWidthImg,
+	Para,
+	Button,
+	PSpacing,
+	Only,
+} from "../../common";
 import * as v from "../../style/vars";
 import * as m from "../../style/mixins";
 import { objMap, } from "../../../lib/util";
@@ -22,9 +31,7 @@ const dummyBooks = R.repeat(dummyContent, 4);
 
 // --------------------------------------------------
 
-const Background1 = styled.div`
-	// background: #ddd;
-`;
+const Background1 = styled.div`// background: #ddd;`;
 
 const Container1 = styled(Container)`
 	display: flex;
@@ -78,7 +85,7 @@ const FeaturedBookCover = styled.div`
 	${m.shadow(2)};
 	position: relative;
 	z-index: 1;
-	transform: perspective( 600px ) rotateY( -15deg );
+	transform: perspective(600px) rotateY(-15deg);
 	transform: none;
 `;
 
@@ -90,18 +97,14 @@ const FeaturedBookDetails = styled(TextCell)`
 	right: 0;
 `;
 
-const FeaturedBookDetailsInner = styled.div`
-	padding-left: 1em;
-`;
+const FeaturedBookDetailsInner = styled.div`padding-left: 1em;`;
 
 const FeaturedBookTitle = styled.h3`
 	margin-bottom: 0.2em;
 	line-height: 1.1;
 `;
 
-const FeaturedBookAuthor = styled.div`
-	font-weight: bold;
-`;
+const FeaturedBookAuthor = styled.div`font-weight: bold;`;
 
 const CenterCell = styled(GridCell)`
 	text-align: center;
@@ -109,56 +112,51 @@ const CenterCell = styled(GridCell)`
 	margin-top: 3em;
 `;
 
-const FeaturedBook = props => (
+const FeaturedBook = props =>
 	<FeaturedBookWrapper>
 		<Link to = { `/book/${props.title}` }>
-			{
-				false
-				? (
-					<BookTile>
-						<BookTileLeftCol>
-							<FullWidthImg src = { v.bookUrl }/>
-						</BookTileLeftCol>
-						<BookTileRightCol>
-							<BookTileTitle>{ props.title }</BookTileTitle>
-							<BookTileAuthor>{ props.author }</BookTileAuthor>
-							<Para>{ props.blurb }</Para>
-						</BookTileRightCol>
-					</BookTile>
-				)
-				: (
-					<FeaturedBookInner>
-						<FeaturedBookCover>
-							<FullWidthImg src = { v.bookUrl }/>
-						</FeaturedBookCover>
-						<FeaturedBookDetails>
-							<FeaturedBookDetailsInner>
-								<FeaturedBookTitle>{ props.title }</FeaturedBookTitle>
-								<FeaturedBookAuthor>{ props.author }</FeaturedBookAuthor>
-								<Para>{ props.blurb }</Para>
-							</FeaturedBookDetailsInner>
-						</FeaturedBookDetails>
-					</FeaturedBookInner>
-				)
-			}
+			{false
+				? <BookTile>
+					<BookTileLeftCol>
+						<FullWidthImg src = { v.bookUrl } />
+					</BookTileLeftCol>
+					<BookTileRightCol>
+						<BookTileTitle>
+							{props.title}
+						</BookTileTitle>
+						<BookTileAuthor>
+							{props.author}
+						</BookTileAuthor>
+						<Para>
+							{props.blurb}
+						</Para>
+					</BookTileRightCol>
+				</BookTile>
+				: <FeaturedBookInner>
+					<FeaturedBookCover>
+						<FullWidthImg src = { v.bookUrl } />
+					</FeaturedBookCover>
+					<FeaturedBookDetails>
+						<FeaturedBookDetailsInner>
+							<FeaturedBookTitle>
+								{props.title}
+							</FeaturedBookTitle>
+							<FeaturedBookAuthor>
+								{props.author}
+							</FeaturedBookAuthor>
+							<Para>
+								{props.blurb}
+							</Para>
+						</FeaturedBookDetailsInner>
+					</FeaturedBookDetails>
+				</FeaturedBookInner>}
 		</Link>
-	</FeaturedBookWrapper>
-);
+	</FeaturedBookWrapper>;
 
-export default () => (
+export default () =>
 	<Container1 border>
-		{
-			dummyBooks
-			.map((o, i) => <FeaturedBook
-				{ ...o }
-				key = { i }
-			/>)
-		}
+		{dummyBooks.map((o, i) => <FeaturedBook { ...o } key = { i } />)}
 		<CenterCell>
-			<Button
-				to = "/books"
-				text = "View more of our publications"
-			/>
+			<Button to = "/books" text = "View more of our publications" />
 		</CenterCell>
-	</Container1>
-);
+	</Container1>;

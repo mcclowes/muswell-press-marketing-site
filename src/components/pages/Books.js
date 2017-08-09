@@ -2,7 +2,16 @@ import styled from "styled-components";
 import { Link, } from "react-router-dom";
 import { compose, withState, withHandlers, } from "recompose";
 
-import { Container, GridCell, TextCell, FullWidthImg, Para, Button, PSpacing, Only, } from "../common";
+import {
+	Container,
+	GridCell,
+	TextCell,
+	FullWidthImg,
+	Para,
+	Button,
+	PSpacing,
+	Only,
+} from "../common";
 import * as v from "../style/vars";
 import * as m from "../style/mixins";
 import { objMap, } from "../../lib/util";
@@ -29,7 +38,7 @@ const colsMap = {
 	lg: 5,
 };
 
-const colWidths = objMap(colsMap, (k, v) => (100 / v) + "%");
+const colWidths = objMap(colsMap, (k, v) => 100 / v + "%");
 
 const OtherBookWrapper = styled(GridCell)`
 	${m.bpEach("width", colWidths)}
@@ -44,15 +53,18 @@ const OtherBookCover = styled(FullWidthImg)`
 	${m.shadow(1)};
 `;
 
-const OtherBook = props => (
+const OtherBook = props =>
 	<OtherBookWrapper>
 		<Link to = { `/book/${props.title}` }>
-			<OtherBookCover src = { v.bookUrl }/>
-			<OtherBookTitle>{ props.title }</OtherBookTitle>
-			<div>{ props.author }</div>
+			<OtherBookCover src = { v.bookUrl } />
+			<OtherBookTitle>
+				{props.title}
+			</OtherBookTitle>
+			<div>
+				{props.author}
+			</div>
 		</Link>
-	</OtherBookWrapper>
-);
+	</OtherBookWrapper>;
 
 const Row = styled.div`
 	display: flex;
@@ -61,26 +73,22 @@ const Row = styled.div`
 
 const Rows = ({ rows, cols, }) => {
 	const rowsArr = [];
-	for(let i = 0; i < rows; i++) {
+	for (let i = 0; i < rows; i++) {
 		console.log("lol");
 		rowsArr.push(
 			dummyBooks
-			.slice(i * cols, (i + 1) * cols)
-			.map((o, i) => <OtherBook
-				{ ...o }
-				key = { o.title + i }
-			/>)
+				.slice(i * cols, (i + 1) * cols)
+				.map((o, i) => <OtherBook { ...o } key = { o.title + i } />),
 		);
-	};
+	}
 
 	return (
 		<div>
-			{
-				rowsArr
-				.map((row, r) => (
-					<Row key = { r }>{ row }</Row>
-				))
-			}
+			{rowsArr.map((row, r) =>
+				<Row key = { r }>
+					{row}
+				</Row>,
+			)}
 		</div>
 	);
 };
@@ -93,50 +101,41 @@ const CenterCell = styled(GridCell)`
 const enhanceGrid = compose(
 	withState("rows", "setRows", 2),
 	withHandlers({
-		loadMore: ({ setRows, rows }) => () => {
+		loadMore: ({ setRows, rows, }) => () => {
 			setRows(rows + 1);
 		},
-	})
+	}),
 );
 
 const _Grid = props => {
 	return (
 		<div>
-			{
-				Object.keys(colsMap)
-				.map(bp => {
-					const OnlyBp = Only[bp];
+			{Object.keys(colsMap).map(bp => {
+				const OnlyBp = Only[bp];
 
-					return (
-						<OnlyBp key = { bp }>
-							<Rows
-								rows = { props.rows }
-								cols = { colsMap[bp] }
-							/>
-							{
-								dummyBooks.length > props.rows * colsMap[bp]
-								? <CenterCell>
-									<Button
-										onClick = { props.loadMore }
-										text = "Load More"
-									/>
-								</CenterCell>
-								: null
-							}							
-						</OnlyBp>
-					);
-				})
-			}
+				return (
+					<OnlyBp key = { bp }>
+						<Rows rows = { props.rows } cols = { colsMap[bp] } />
+						{dummyBooks.length > props.rows * colsMap[bp]
+							? <CenterCell>
+								<Button
+									onClick = { props.loadMore }
+									text = "Load More"
+								/>
+							</CenterCell>
+							: null}
+					</OnlyBp>
+				);
+			})}
 		</div>
-	);	
+	);
 };
 
 const Grid = enhanceGrid(_Grid);
 
-const Books = props => (
+const Books = props =>
 	<Container>
-		<Grid/>
-	</Container>
-);
+		<Grid />
+	</Container>;
 
 export default Books;

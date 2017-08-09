@@ -1,6 +1,14 @@
 import styled from "styled-components";
 
-import { Container, GridCell, TextCell, FullWidthImg, Para, Button, PSpacing, } from "../common";
+import {
+	Container,
+	GridCell,
+	TextCell,
+	FullWidthImg,
+	Para,
+	Button,
+	PSpacing,
+} from "../common";
 import * as v from "../style/vars";
 import * as m from "../style/mixins";
 import { objMap, } from "../../lib/util";
@@ -26,15 +34,16 @@ const Title = styled.h1`
 	margin: 0;
 `;
 
-const About = props => (
+const About = props =>
 	<Container maxWidth = { 800 }>
 		<GridCell>
 			<Title>Who we are</Title>
-			<Para>{ spiel }</Para>
-			<PSpacing/>
-			<Pic/>
+			<Para>
+				{spiel}
+			</Para>
+			<PSpacing />
+			<Pic />
 		</GridCell>
-	</Container>
-);
+	</Container>;
 
 export default About;

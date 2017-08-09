@@ -49,7 +49,7 @@ export const font = {
 		},
 		family: "Fredoka One",
 	},
-}
+};
 
 const gutter = {
 	xs: 15,
@@ -64,7 +64,7 @@ export const scrollbar = {
 		track: "#ddd",
 		thumb: colors.text,
 	},
-}
+};
 
 export const dimensions = {
 	nav: {
@@ -85,18 +85,18 @@ export const dimensions = {
 		height: {
 			xs: "50px",
 			other: "60px",
-		}
+		},
 	},
-	gutter: {		
-		full: objMap(gutter, (k,v) => v + "px"),
-		half: objMap(gutter, (k,v) => (0.5 * v) + "px"),
-		quarter: objMap(gutter, (k,v) => (0.25 * v) + "px"),
-		minusQuarter: objMap(gutter, (k,v) => (-0.25 * v) + "px"),
-		tripleHalf: objMap(gutter, (k,v) => (1.5 * v) + "px"),
+	gutter: {
+		full: objMap(gutter, (k, v) => v + "px"),
+		half: objMap(gutter, (k, v) => 0.5 * v + "px"),
+		quarter: objMap(gutter, (k, v) => 0.25 * v + "px"),
+		minusQuarter: objMap(gutter, (k, v) => -0.25 * v + "px"),
+		tripleHalf: objMap(gutter, (k, v) => 1.5 * v + "px"),
 		fullNum: gutter,
-		halfNum: objMap(gutter, (k,v) => 0.5 * v),
-		quarterNum: objMap(gutter, (k,v) => 0.25 * v),
-		tripleHalfNum: objMap(gutter, (k,v) => 1.5 * v),
+		halfNum: objMap(gutter, (k, v) => 0.5 * v),
+		quarterNum: objMap(gutter, (k, v) => 0.25 * v),
+		tripleHalfNum: objMap(gutter, (k, v) => 1.5 * v),
 	},
 	scrollbar: scrollbar.width,
 	imageViewer: {
@@ -111,8 +111,8 @@ export const dimensions = {
 			sm: "300px",
 			md: "350px",
 			lg: "400px",
-		}
-	}
+		},
+	},
 };
 dimensions.gutter.container = {
 	...dimensions.gutter.tripleHalf,

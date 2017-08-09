@@ -11,18 +11,19 @@ const Wrapper = styled.footer`
 	bottom: 0;
 	left: 0;
 	right: 0;
-	${m.bpEither("height", v.dim.footer.height)}
-	overflow: hidden;
-	
-	${({ theme: { footer, }}) => `
+	${m.bpEither("height", v.dim.footer.height)} overflow: hidden;
+
+	${({ theme: { footer, }, }) => `
 		background-color: ${footer};
-		${footer && footer !== v.colors.footer ? "" : `border-top: 1px solid ${m.tr(0.2)};`}		
+		${footer && footer !== v.colors.footer
+		? ""
+		: `border-top: 1px solid ${m.tr(0.2)};`}		
 	`};
 
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	${m.bpEither("padding", v.dim.nav.margin)}
+	${m.bpEither("padding", v.dim.nav.margin)};
 `;
 
 const Left = styled.div`
@@ -32,30 +33,25 @@ const Left = styled.div`
 
 const Right = styled.div`
 	opacity: 0.67;
-	
+
 	& > a:hover,
 	& > a:active {
 		text-decoration: underline;
 	}
 `;
 
-const Divider = styled.span`
-	margin: 0 0.5em;
-`;
+const Divider = styled.span`margin: 0 0.5em;`;
 
-const Footer = () => (
+const Footer = () =>
 	<Wrapper>
-		<Left>			
-			© Muswell Press 2017
-		</Left>
+		<Left>© Muswell Press 2017</Left>
 		<Right>
 			<a href = "/">Submissions</a>
-			<Divider>|</Divider> 
+			<Divider>|</Divider>
 			<a href = "https://www.facebook.com/MuswellPress?fref=ts">Facebook</a>
-			<Divider>|</Divider> 
+			<Divider>|</Divider>
 			<a href = "https://twitter.com/MuswellPress">Twitter</a>
 		</Right>
-	</Wrapper>
-)
+	</Wrapper>;
 
 export default Footer;

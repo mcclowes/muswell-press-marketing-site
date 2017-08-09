@@ -44,7 +44,7 @@ export default [
 			logo2: "white",
 			body: "pink",
 			footer: "pink",
-		}
+		},
 	},
 	{
 		path: "/test",
@@ -54,5 +54,5 @@ export default [
 		colors: {
 			body: "#abdfbd",
 		},
-	}
+	},
 ];

@@ -1,6 +1,14 @@
 import styled from "styled-components";
 
-import { Container, GridCell, TextCell, FullWidthImg, Para, Button, PSpacing, } from "../common";
+import {
+	Container,
+	GridCell,
+	TextCell,
+	FullWidthImg,
+	Para,
+	Button,
+	PSpacing,
+} from "../common";
 import * as v from "../style/vars";
 import * as m from "../style/mixins";
 import { objMap, } from "../../lib/util";
@@ -27,15 +35,16 @@ const leftColWidth = {
 	lg: "320px",
 };
 
-const colMinHeight = objMap(leftColWidth, (k, v) => m.px(m.num(v) * (424 / 290)));
+const colMinHeight = objMap(leftColWidth, (k, v) =>
+	m.px(m.num(v) * (424 / 290)),
+);
 
 const LeftCol = styled.div`
 	${m.bp.sm.min`
 		${m.bpEach("width", leftColWidth)};
 		position: fixed;
 		float: left;
-	`}
-	${m.xs`
+	`} ${m.xs`
 		border-bottom: 1px solid ${v.colors.lines};
 		padding-bottom: ${v.dim.gutter.full.xs};
 		margin-bottom: ${v.dim.gutter.full.xs};
@@ -45,18 +54,16 @@ const LeftCol = styled.div`
 			width: 200px;
 			margin: 0 auto;
 		}
-	`}
-	
+	`};
 `;
 
 const RightCol = styled.div`
 	${m.bp.sm.min`
 		${m.bpEach("margin-left", leftColWidth)};
 		${m.bpEach("min-height", colMinHeight)};
-	`}
-	${m.xs`
+	`} ${m.xs`
 		text-align: justify;
-	`}
+	`};
 `;
 
 const Container1 = styled(Container)`
@@ -69,35 +76,44 @@ const Title = styled.h2`
 	margin-bottom: 0.2em;
 `;
 
-const Author = styled.h3`
-	margin-top: 0;
-`;
+const Author = styled.h3`margin-top: 0;`;
 
-const BookPage = props => (console.log(props),
-	<div>
-		<Container1>
-			<LeftCol>
-				<GridCell>
-					<FullWidthImg src = { v.bookUrl }/>
-				</GridCell>
-			</LeftCol>
-			<RightCol>
-				<GridCell>
-					<Title>{ dummyContent.title }</Title>
-					<Author>{ dummyContent.author }</Author>
-					<Para>{ dummyContent.blurb }</Para>
-					<Para>{ dummyContent.blurb }</Para>
-					<PSpacing/>
-					<Button
-						href = "https://amazon.co.uk"
-						color = "#146eb4"
-						text = "Buy on Amazon"
-						icon = "shopping_cart"
-					/>
-				</GridCell>
-			</RightCol>
-		</Container1>
-	</div>
+const BookPage = props => (
+	console.log(props),
+	(
+		<div>
+			<Container1>
+				<LeftCol>
+					<GridCell>
+						<FullWidthImg src = { v.bookUrl } />
+					</GridCell>
+				</LeftCol>
+				<RightCol>
+					<GridCell>
+						<Title>
+							{dummyContent.title}
+						</Title>
+						<Author>
+							{dummyContent.author}
+						</Author>
+						<Para>
+							{dummyContent.blurb}
+						</Para>
+						<Para>
+							{dummyContent.blurb}
+						</Para>
+						<PSpacing />
+						<Button
+							href = "https://amazon.co.uk"
+							color = "#146eb4"
+							text = "Buy on Amazon"
+							icon = "shopping_cart"
+						/>
+					</GridCell>
+				</RightCol>
+			</Container1>
+		</div>
+	)
 );
 
 export default BookPage;

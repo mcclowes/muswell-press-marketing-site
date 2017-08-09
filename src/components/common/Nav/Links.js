@@ -1,45 +1,43 @@
 import React from "react";
 import styled, { css, } from "styled-components";
-import { NavLink, } from 'react-router-dom';
+import { NavLink, } from "react-router-dom";
 
 import * as m from "../../style/mixins";
 import * as v from "../../style/vars";
 
 // --------------------------------------------------
 
-export default (props) => (
+export default props =>
 	<Wrapper open = { props.open }>
 		<div>
-		{
-			props.links			
-			.filter(route => route.show)
-			.map((route, i) => (
+			{props.links.filter(route => route.show).map((route, i) =>
 				<Button
 					key = { route.title }
 					to = { route.link || route.path }
 					activeClassName = "active"
 					onClick = { props.close }
 				>
-					{ route.title }
-				</Button>
-			))
-		}
+					{route.title}
+				</Button>,
+			)}
 		</div>
-	</Wrapper>
-);
+	</Wrapper>;
 
 // --------------------------------------------------
 
 const wrapperStyle = [
 	css`
-		transform: translateY(${p => p.open ? 0 : -110}%);
+		transform: translateY(${p => (p.open ? 0 : -110)}%);
 		transition: 0.3s all ease-out;
 		${m.shadow(2)}
 		position: absolute;
 		left: 0;
 		right: 0;
 		top: ${v.dim.nav.height.xs};
-		background: ${props => props && props.colors && props.colors.bg ? props.colors.bg : v.colors.nav};
+		background: ${props =>
+		props && props.colors && props.colors.bg
+			? props.colors.bg
+			: v.colors.nav};
 	`,
 
 	`
@@ -52,8 +50,7 @@ const wrapperStyle = [
 ];
 
 const Wrapper = styled.div`
-	${m.xs`${wrapperStyle[0]}`}
-	${m.bp.sm.min`${wrapperStyle[1]}`}
+	${m.xs`${wrapperStyle[0]}`} ${m.bp.sm.min`${wrapperStyle[1]}`};
 `;
 
 const buttonStyle = [
@@ -87,4 +84,3 @@ const Button = styled(NavLink)`
 	${m.xs`${buttonStyle[0]}`}
 	${m.bp.sm.min`${buttonStyle[1]}`}
 `;
-

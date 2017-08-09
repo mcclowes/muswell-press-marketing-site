@@ -2,9 +2,7 @@ import { ThemeProvider, } from "styled-components";
 import {
 	BrowserRouter as Router,
 	Route,
-	Link,
-	withRouter,
-} from 'react-router-dom';
+} from "react-router-dom";
 
 import routesConfig from "./routesConfig";
 import injectGlobalStyles from "./components/style/globalStyles";
@@ -29,30 +27,30 @@ const defaultColors = {
 	logo2: "#93DADC",
 };
 
-const routes = routesConfig.map(({ component: Comp, colors, ...rest }) => (
-	<Route
-		key = { rest.path }
-		{ ...rest }
-		render = {
-			props => <ThemeProvider theme = {{ ...defaultColors, ...colors }}>
-				<div>
-					<Nav colors = { colors } key = "Nav"/>
-					<Main colors = { colors } key = "Main">
-						<Comp colors = { colors } { ...props }/>
-					</Main>
-					<Footer colors = { colors } key = "Footer"/>
-				</div>
-			</ThemeProvider>
-		}
-	/>
-));
+const routes = routesConfig.map(({ component: Comp, colors, ...rest }) => {
+	const  render = props =>
+		<ThemeProvider theme = { { ...defaultColors, ...colors, } }>
+			<div>
+				<Nav colors = { colors } key = "Nav" />
+				<Main colors = { colors } key = "Main">
+					<Comp colors = { colors } { ...props } />
+				</Main>
+				<Footer colors = { colors } key = "Footer" />
+			</div>
+		</ThemeProvider> 
 
-export default () => (
+			return <Route
+				key = { rest.path }
+				{ ...rest }
+				render = { render }
+			/>
+});
+
+export default () =>
 	<Router>
 		<ScrollToTop>
 			<div>
-				{ routes }
+				{routes}
 			</div>
 		</ScrollToTop>
-	</Router>
-);
+	</Router>;

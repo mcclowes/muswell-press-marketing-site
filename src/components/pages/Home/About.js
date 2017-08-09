@@ -2,7 +2,16 @@ import styled from "styled-components";
 import { Link, } from "react-router-dom";
 import { compose, withState, withHandlers, } from "recompose";
 
-import { Container, GridCell, TextCell, FullWidthImg, Para, Button, PSpacing, Only, } from "../../common";
+import {
+	Container,
+	GridCell,
+	TextCell,
+	FullWidthImg,
+	Para,
+	Button,
+	PSpacing,
+	Only,
+} from "../../common";
 import * as v from "../../style/vars";
 import * as m from "../../style/mixins";
 import { objMap, } from "../../../lib/util";
@@ -22,27 +31,23 @@ const Bigly = styled(TextCell)`
 	text-align: center;
 `;
 
-const BigText = styled.p`
-	font-size: 1.5em;
-`;
+const BigText = styled.p`font-size: 1.5em;`;
 
-const NotAsBigText = styled.p`
-	font-size: 1.2em;
-`;
+const NotAsBigText = styled.p`font-size: 1.2em;`;
 
-const About = () => (
+const About = () =>
 	<Container maxWidth = { 800 }>
 		<TextCell align = "center">
-			<BigText>{ spiel1 }</BigText>
-			<NotAsBigText>{ spiel2 }</NotAsBigText>
-			<PSpacing/>
-			<Button
-				to = "/about"
-				text = "Find out more about us"
-			/>
-			<PSpacing/>
+			<BigText>
+				{spiel1}
+			</BigText>
+			<NotAsBigText>
+				{spiel2}
+			</NotAsBigText>
+			<PSpacing />
+			<Button to = "/about" text = "Find out more about us" />
+			<PSpacing />
 		</TextCell>
-	</Container>
-);
+	</Container>;
 
 export default About;

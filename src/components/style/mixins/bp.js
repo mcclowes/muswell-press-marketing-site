@@ -29,7 +29,7 @@ export const md = bp.md.only;
 export const lg = bp.lg.only;
 
 export const bpEach = (prop, vals) => css`
-	${Object.keys(vals).map((key) => bp[key].only`${prop}: ${vals[key]};`)}
+	${Object.keys(vals).map(key => bp[key].only`${prop}: ${vals[key]};`)}
 `;
 
 export const bpEither = (prop, vals) => css`

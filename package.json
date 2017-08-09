@@ -2,6 +2,9 @@
   "name": "muswell-press",
   "version": "0.1.0",
   "private": true,
+  "eslintConfig":  {
+	  "extends":"codogo"
+  },
   "dependencies": {
     "ramda": "^0.24.1",
     "react": "^15.6.1",
@@ -16,13 +19,17 @@
     "velocity-animate": "^1.5.0"
   },
   "devDependencies": {
-    "codogo-react-scripts": "1.0.8-beta.51"
+    "codogo-react-scripts": "1.0.8-beta.51",
+    "eslint": "^4.4.1",
+    "prettier": "^1.5.3"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "static": "react-scripts build && react-snapshot",
     "test": "react-scripts test --env=jsdom",
+    "lint": "react-scripts format",
+    "format": "react-scripts format",
     "eject": "react-scripts eject"
   }
 }
