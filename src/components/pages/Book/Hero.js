@@ -6,6 +6,8 @@ import {
 	Container,
 	GridCell,
 	TextCell,
+	Button,
+	PSpacing,
 } from "../../common";
 
 import * as vars from "../../style/vars";
@@ -70,6 +72,13 @@ const SubtitleText = styled.p`
 	color: #666;
 `;
 
+const NewText = styled.p`
+	color: #888;
+	font-family: Montserrat;
+	font-size: 1em;
+	margin: 0 0 -1em 0;
+`;
+
 const FlexCell = styled(GridCell)`
 	flex: 1;
 `;
@@ -93,6 +102,12 @@ const Cover = styled.img`
 	${ mixins.shadow(1) }
 `;
 
+const Metadata = styled.p`
+	border-left: 1px solid #666;
+	color: #666;
+	padding-left: 1em;
+`;
+
 // --------------------------------------------------
 
 const Hero = props =>
@@ -105,19 +120,41 @@ const Hero = props =>
 
 				<RightCol>
 					<TextCell>
-						<TitleText colors = { props.colors } > Classic.</TitleText>
+						<NewText>New</NewText>
 
-						<TitleText colors = { props.colors } > Cult.</TitleText>
+						<TitleText
+							colors = { props.colors }
+						>
+							The Rainbow Conspiracy
+						</TitleText>
 
-						<TitleText colors = { props.colors } > Evergreen.</TitleText>
-
-						<TitleText colors = { props.colors } > Blacklist.</TitleText>
+						<SubtitleText>Stuart Hopps</SubtitleText>
 					</TextCell>
 					
 					<TextCell> 
-						<p>Aenean eu leo quam. Pellentesque <b>The Rainbow Conspiracy</b> ornare sem lacinia quam venenatis vestibulum. <b>Stuart Hopps</b> fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+						<p>It is the mid eighties and successful theatrical agent Clive Spoke embarks on a quest to find the truth about his ex-lover’s early death. Travelling to the US he uncovers a devastating and destructive conspiracy aimed at the burgeoning gay community. Could the government really be involved?</p>
 
-						<p><a href = { `/book/${ props.title }` }>Find out more -></a></p>
+						<p>Stuart Hopps is an eminent award-winning choreographer who has worked on major feature films with directors such as Kenneth Branagh, Derek Jarman and Ang Lee. He has also produced work for the Royal Opera House and the Welsh National Opera.</p>
+					</TextCell>
+
+					<TextCell>
+						<Metadata>
+							Paperback<br/>
+							160 PP<br/>
+							Published 06/11/2017<br/>
+							978-09954822-2-7<br/>
+						</Metadata>
+					</TextCell>
+
+					<TextCell>
+						<PSpacing/>
+
+						<Button
+							href = "https://amazon.co.uk"
+							color = { props.colors.logo1 }
+							text = "Buy Now"
+							icon = "shopping_cart"
+						/>
 					</TextCell>
 				</RightCol>
 			</ContainerInner>

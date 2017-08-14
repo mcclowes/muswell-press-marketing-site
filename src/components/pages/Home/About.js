@@ -12,14 +12,15 @@ import {
 	PSpacing,
 	Only,
 } from "../../common";
-import * as v from "../../style/vars";
-import * as m from "../../style/mixins";
+
+import * as vars from "../../style/vars";
+import * as mixins from "../../style/mixins";
 import { objMap, } from "../../../lib/util";
 
 // --------------------------------------------------
 
 const spiel2 = `
- 	We are committed to editorial excellence, high-quality production and marketing our books with flair. We are currently in the process of refreshing and reinvigorating Muswell and our first new title will appear in Autumn 2017 with a fuller list in Spring ’18.
+	Sarah and Kate Beal acquired Muswell in 2016. With over 50 years publishing experience between them, at Bloomsbury, Faber, Walker Books, HarperCollins and Ottakar’s Bookshops amongst others, they bring a fresh approach and a wealth of knowledge and enthusiasm to the company.
 `;
 
 const spiel1 = `
@@ -39,13 +40,17 @@ const About = () =>
 	<Container maxWidth = { 800 }>
 		<TextCell align = "center">
 			<BigText>
-				{spiel1}
+				{ spiel1 }
 			</BigText>
+
 			<NotAsBigText>
-				{spiel2}
+				{ spiel2 }
 			</NotAsBigText>
+
 			<PSpacing />
+
 			<Button to = "/about" text = "Find out more about us" />
+			
 			<PSpacing />
 		</TextCell>
 	</Container>;

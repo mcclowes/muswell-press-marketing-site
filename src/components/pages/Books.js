@@ -12,8 +12,8 @@ import {
 	PSpacing,
 	Only,
 } from "../common";
-import * as v from "../style/vars";
-import * as m from "../style/mixins";
+import * as vars from "../style/vars";
+import * as mixins from "../style/mixins";
 import { objMap, } from "../../lib/util";
 
 // --------------------------------------------------
@@ -41,7 +41,7 @@ const colsMap = {
 const colWidths = objMap(colsMap, (k, v) => 100 / v + "%");
 
 const OtherBookWrapper = styled(GridCell)`
-	${m.bpEach("width", colWidths)}
+	${ mixins.bpEach("width", colWidths) }
 `;
 
 const OtherBookTitle = styled.h3`
@@ -50,18 +50,25 @@ const OtherBookTitle = styled.h3`
 `;
 
 const OtherBookCover = styled(FullWidthImg)`
-	${m.shadow(1)};
+	${ mixins.shadow(1) };
+	transition-duration: .3s;
+
+	&:hover {
+		${ mixins.shadow(2) };
+	}
 `;
 
 const OtherBook = props =>
 	<OtherBookWrapper>
 		<Link to = { `/book/${props.title}` }>
-			<OtherBookCover src = { v.bookUrl } />
+			<OtherBookCover src = { vars.bookUrl } />
+
 			<OtherBookTitle>
-				{props.title}
+				{ props.title }
 			</OtherBookTitle>
+
 			<div>
-				{props.author}
+				{ props.author }
 			</div>
 		</Link>
 	</OtherBookWrapper>;
@@ -74,21 +81,20 @@ const Row = styled.div`
 const Rows = ({ rows, cols, }) => {
 	const rowsArr = [];
 	for (let i = 0; i < rows; i++) {
-		console.log("lol");
 		rowsArr.push(
 			dummyBooks
-				.slice(i * cols, (i + 1) * cols)
-				.map((o, i) => <OtherBook { ...o } key = { o.title + i } />),
+			.slice(i * cols, (i + 1) * cols)
+			.map((o, i) => <OtherBook { ...o } key = { o.title + i } />),
 		);
 	}
 
 	return (
 		<div>
-			{rowsArr.map((row, r) =>
+			{ rowsArr.map((row, r) =>
 				<Row key = { r }>
-					{row}
+					{ row }
 				</Row>,
-			)}
+			) }
 		</div>
 	);
 };
@@ -110,30 +116,34 @@ const enhanceGrid = compose(
 const _Grid = props => {
 	return (
 		<div>
-			{Object.keys(colsMap).map(bp => {
-				const OnlyBp = Only[bp];
+			{ 
+				Object.keys(colsMap).map(bp => {
+					const OnlyBp = Only[bp];
 
-				return (
-					<OnlyBp key = { bp }>
-						<Rows rows = { props.rows } cols = { colsMap[bp] } />
-						{dummyBooks.length > props.rows * colsMap[bp]
-							? <CenterCell>
-								<Button
-									onClick = { props.loadMore }
-									text = "Load More"
-								/>
-							</CenterCell>
-							: null}
-					</OnlyBp>
-				);
-			})}
+					return (
+						<OnlyBp key = { bp }>
+							<Rows rows = { props.rows } cols = { colsMap[bp] } />
+
+							{ dummyBooks.length > props.rows * colsMap[bp]
+								? <CenterCell>
+									<Button
+										onClick = { props.loadMore }
+										text = "Load More"
+									/>
+								</CenterCell>
+								: null
+							}
+						</OnlyBp>
+					);
+				})
+			}
 		</div>
 	);
 };
 
 const Grid = enhanceGrid(_Grid);
 
-const Books = props =>
+const Books = () =>
 	<Container>
 		<Grid />
 	</Container>;

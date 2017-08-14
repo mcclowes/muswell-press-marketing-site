@@ -3,15 +3,15 @@ import styled from "styled-components";
 import {
 	Container,
 	GridCell,
-	TextCell,
 	FullWidthImg,
 	Para,
 	Button,
 	PSpacing,
-} from "../common";
-import * as v from "../style/vars";
-import * as m from "../style/mixins";
-import { objMap, } from "../../lib/util";
+} from "../../common";
+
+import * as vars from "../../style/vars";
+import * as mixins from "../../style/mixins";
+import { objMap, } from "../../../lib/util";
 
 // --------------------------------------------------
 
@@ -36,38 +36,38 @@ const leftColWidth = {
 };
 
 const colMinHeight = objMap(leftColWidth, (k, v) =>
-	m.px(m.num(v) * (424 / 290)),
+	mixins.px(mixins.num(v) * (424 / 290)),
 );
 
 const LeftCol = styled.div`
-	${m.bp.sm.min`
-		${m.bpEach("width", leftColWidth)};
+	${ mixins.bp.sm.min`
+		${ mixins.bpEach("width", leftColWidth) };
 		position: fixed;
 		float: left;
-	`} ${m.xs`
-		border-bottom: 1px solid ${v.colors.lines};
-		padding-bottom: ${v.dim.gutter.full.xs};
-		margin-bottom: ${v.dim.gutter.full.xs};
+	` } ${ mixins.xs`
+		border-bottom: 1px solid ${ vars.colors.lines };
+		padding-bottom: ${ vars.dim.gutter.full.xs };
+		margin-bottom: ${ vars.dim.gutter.full.xs };
 
 
 		& > div {
 			width: 200px;
 			margin: 0 auto;
 		}
-	`};
+	` };
 `;
 
 const RightCol = styled.div`
-	${m.bp.sm.min`
-		${m.bpEach("margin-left", leftColWidth)};
-		${m.bpEach("min-height", colMinHeight)};
-	`} ${m.xs`
+	${ mixins.bp.sm.min`
+		${ mixins.bpEach("margin-left", leftColWidth) };
+		${ mixins.bpEach("min-height", colMinHeight) };
+	` } ${ mixins.xs`
 		text-align: justify;
-	`};
+	` };
 `;
 
 const Container1 = styled(Container)`
-	${m.clearfix};
+	${ mixins.clearfix };
 `;
 
 const Title = styled.h2`
@@ -76,33 +76,40 @@ const Title = styled.h2`
 	margin-bottom: 0.2em;
 `;
 
-const Author = styled.h3`margin-top: 0;`;
+const Author = styled.h3`
+	margin-top: 0;
+`;
 
-const BookPage = props => (
-	console.log(props),
+const Main = props => (
 	(
 		<div>
 			<Container1>
 				<LeftCol>
 					<GridCell>
-						<FullWidthImg src = { v.bookUrl } />
+						<FullWidthImg src = { vars.bookUrl } />
 					</GridCell>
 				</LeftCol>
+
 				<RightCol>
 					<GridCell>
 						<Title>
-							{dummyContent.title}
+							{ dummyContent.title }
 						</Title>
+
 						<Author>
-							{dummyContent.author}
+							{ dummyContent.author }
 						</Author>
+
 						<Para>
-							{dummyContent.blurb}
+							{ dummyContent.blurb }
 						</Para>
+
 						<Para>
-							{dummyContent.blurb}
+							{ dummyContent.blurb }
 						</Para>
+
 						<PSpacing />
+
 						<Button
 							href = "https://amazon.co.uk"
 							color = "#146eb4"
@@ -116,4 +123,4 @@ const BookPage = props => (
 	)
 );
 
-export default BookPage;
+export default Main;

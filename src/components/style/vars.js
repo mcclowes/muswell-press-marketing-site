@@ -20,6 +20,9 @@ export const colors = {
 	footer: "#fff",
 	grey: "rgba(0,0,0,0.2)",
 	lines: "rgba(0,0,0,0.2)",
+	bg: "#EFD8B5",
+	primary: "#362c5a",
+	secondary: "#FFFDF1",
 };
 
 export const font = {
@@ -70,7 +73,7 @@ export const dimensions = {
 	nav: {
 		height: {
 			xs: "50px",
-			other: "64px",
+			other: "100px",
 		},
 		margin: {
 			xs: "10px",
@@ -115,7 +118,7 @@ export const dimensions = {
 	},
 };
 dimensions.gutter.container = {
-	...dimensions.gutter.tripleHalf,
+	...dimensions.gutter.full,
 	xs: dimensions.gutter.full.xs,
 };
 export const dim = dimensions;

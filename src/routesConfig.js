@@ -1,5 +1,3 @@
-// import Home from "./components/pages/Home";
-import { Container, } from "./components/common";
 import Home from "./components/pages/Home";
 import Book from "./components/pages/Book";
 import About from "./components/pages/About";
@@ -15,8 +13,9 @@ export default [
 		exact: true,
 		show: false,
 		colors: {
-			bg: "#f8ddbb",
-			logo1: "#4C9AA3",
+			bg: "#EFD8B5",
+			/*logo1: "#588D92",*/
+			logo1: "#362c5a",
 			logo2: "#FFFDF1",
 		},
 	},
@@ -39,17 +38,17 @@ export default [
 		title: "Book",
 		component: Book,
 		colors: {
-			bg: "pink",
-			logo1: "hotpink",
-			logo2: "white",
-			body: "pink",
-			footer: "pink",
+			bg: "#EFD8B5",
+			logo1: "#362c5a",
+			logo2: "#FFFDF1",
+			body: "#EFD8B5",
+			footer: "#EFD8B5",
 		},
 	},
 	{
 		path: "/test",
 		title: "Test",
-		component: () => <div>tets</div>,
+		component: () => <div>test</div>,
 		show: false,
 		colors: {
 			body: "#abdfbd",

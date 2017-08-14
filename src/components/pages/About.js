@@ -9,8 +9,8 @@ import {
 	Button,
 	PSpacing,
 } from "../common";
-import * as v from "../style/vars";
-import * as m from "../style/mixins";
+import * as vars from "../style/vars";
+import * as mixins from "../style/mixins";
 import { objMap, } from "../../lib/util";
 
 // --------------------------------------------------
@@ -38,10 +38,13 @@ const About = props =>
 	<Container maxWidth = { 800 }>
 		<GridCell>
 			<Title>Who we are</Title>
+
 			<Para>
-				{spiel}
+				{ spiel }
 			</Para>
+
 			<PSpacing />
+
 			<Pic />
 		</GridCell>
 	</Container>;

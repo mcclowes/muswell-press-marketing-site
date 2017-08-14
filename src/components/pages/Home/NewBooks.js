@@ -12,8 +12,9 @@ import {
 	PSpacing,
 	Only,
 } from "../../common";
-import * as v from "../../style/vars";
-import * as m from "../../style/mixins";
+
+import * as vars from "../../style/vars";
+import * as mixins from "../../style/mixins";
 import { objMap, } from "../../../lib/util";
 
 // --------------------------------------------------
@@ -31,7 +32,9 @@ const dummyBooks = R.repeat(dummyContent, 4);
 
 // --------------------------------------------------
 
-const Background1 = styled.div`// background: #ddd;`;
+const Background1 = styled.div`
+	// background: #ddd;
+`;
 
 const Container1 = styled(Container)`
 	display: flex;
@@ -40,7 +43,7 @@ const Container1 = styled(Container)`
 `;
 
 const FeaturedBookWrapper = styled(GridCell)`
-	${m.bpEither("width", {
+	${ mixins.bpEither("width", {
 		xs: "100%",
 		other: "50%",
 	})}
@@ -48,7 +51,7 @@ const FeaturedBookWrapper = styled(GridCell)`
 
 const BookTile = styled(GridCell)`
 	background: white;
-	${m.shadow(1)};
+	${ mixins.shadow(1) };
 	display: flex;
 	flex-direction: row;
 	justify-content: flex-start;
@@ -82,29 +85,36 @@ const FeaturedBookInner = styled(GridCell)`
 
 const FeaturedBookCover = styled.div`
 	width: 40%;
-	${m.shadow(2)};
+	${ mixins.shadow(1) };
 	position: relative;
 	z-index: 1;
 	transform: perspective(600px) rotateY(-15deg);
 	transform: none;
+
+	&:hover {
+		${ mixins.shadow(2) };
+	}
 `;
 
 const FeaturedBookDetails = styled(TextCell)`
-	
 	width: 60%;
 	position: absolute;
 	top: 0em;
 	right: 0;
 `;
 
-const FeaturedBookDetailsInner = styled.div`padding-left: 1em;`;
+const FeaturedBookDetailsInner = styled.div`
+	padding-left: 1em;
+`;
 
 const FeaturedBookTitle = styled.h3`
 	margin-bottom: 0.2em;
 	line-height: 1.1;
 `;
 
-const FeaturedBookAuthor = styled.div`font-weight: bold;`;
+const FeaturedBookAuthor = styled.div`
+	font-weight: bold;
+`;
 
 const CenterCell = styled(GridCell)`
 	text-align: center;
@@ -112,51 +122,70 @@ const CenterCell = styled(GridCell)`
 	margin-top: 3em;
 `;
 
+const SectionTitle = styled.h2`
+	text-align: center;
+	font-size: 2em;
+	text-transform: uppercase;
+	flex-basis: 100%;
+`;
+
 const FeaturedBook = props =>
 	<FeaturedBookWrapper>
-		<Link to = { `/book/${props.title}` }>
-			{false
+		<Link to = { `/book/${ props.title }` }>
+			{
+				false
 				? <BookTile>
 					<BookTileLeftCol>
-						<FullWidthImg src = { v.bookUrl } />
+						<FullWidthImg src = { vars.bookUrl } />
 					</BookTileLeftCol>
+
 					<BookTileRightCol>
 						<BookTileTitle>
-							{props.title}
+							{ props.title }
 						</BookTileTitle>
+
 						<BookTileAuthor>
-							{props.author}
+							{ props.author }
 						</BookTileAuthor>
+
 						<Para>
-							{props.blurb}
+							{ props.blurb }
 						</Para>
 					</BookTileRightCol>
 				</BookTile>
 				: <FeaturedBookInner>
 					<FeaturedBookCover>
-						<FullWidthImg src = { v.bookUrl } />
+						<FullWidthImg src = { vars.bookUrl } />
 					</FeaturedBookCover>
+
 					<FeaturedBookDetails>
 						<FeaturedBookDetailsInner>
 							<FeaturedBookTitle>
-								{props.title}
+								{ props.title }
 							</FeaturedBookTitle>
+
 							<FeaturedBookAuthor>
-								{props.author}
+								{ props.author }
 							</FeaturedBookAuthor>
+
 							<Para>
-								{props.blurb}
+								{ props.blurb }
 							</Para>
 						</FeaturedBookDetailsInner>
 					</FeaturedBookDetails>
-				</FeaturedBookInner>}
+				</FeaturedBookInner>
+			}
 		</Link>
 	</FeaturedBookWrapper>;
 
 export default () =>
 	<Container1 border>
-		{dummyBooks.map((o, i) => <FeaturedBook { ...o } key = { i } />)}
+		<SectionTitle>New and Noteworthy</SectionTitle>
+
+		{ dummyBooks.map((o, i) => <FeaturedBook { ...o } key = { i } />) }
+
 		<CenterCell>
-			<Button to = "/books" text = "View more of our publications" />
+			{/*<Button to = "/books" text = "View more of our publications" />*/}
+			See our full collection ->
 		</CenterCell>
 	</Container1>;
