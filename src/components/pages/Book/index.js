@@ -1,11 +1,11 @@
 import Main from "./Main";
-import Hero from "./Hero";
+import Summary from "./Summary";
 
 // --------------------------------------------------
 
 const Book = props =>
 	<div>
-		<Hero { ...props } />
+		<Summary { ...props } />
 
 		<Main />
 	</div>;

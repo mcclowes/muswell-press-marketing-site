@@ -37,17 +37,15 @@ const wrapperStyle = [
 		left: 0;
 		right: 0;
 		top: ${ vars.dim.nav.height.xs };
-		background: ${ props =>
-			props && props.colors && props.colors.bg
-			? props.colors.bg
-			: vars.colors.nav
+		background: ${ ({ theme: { bg, } }) =>
+			bg || vars.colors.nav
 		};
 		align-items: center;
 	`,
 
 	`
 		position: absolute;
-		right: ${ vars.dim.nav.margin.other };
+		right: ${ 0 };
 		top: 0;
 		bottom: 0;
 		display: flex;
@@ -69,6 +67,7 @@ const buttonStyle = [
 	`
 		line-height: ${ vars.dim.nav.height.other };
 		padding: 0 ${ vars.dim.nav.margin.other };
+		letter-spacing: 0.1em;
 
 		&:hover {
 			text-decoration: underline;
@@ -81,11 +80,11 @@ const Button = styled(NavLink)`
 	color: ${ props => props.colors ? props.colors.logo1 : props.theme.logo1 };
 	text-transform: uppercase;
 	font-family: Montserrat;
-	font-size: 1.2em;
+	font-size: 1.1em;
 
 	&.active {
 		font-weight: bold;
-	}	
+	}
 
 	${ mixins.xs`${ buttonStyle[0] }` }
 	${ mixins.bp.sm.min`${buttonStyle[1] }` }

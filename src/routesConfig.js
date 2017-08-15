@@ -21,14 +21,14 @@ export default [
 	},
 	{
 		path: "/books",
-		title: "Books",
+		title: "Our Collection",
 		component: Books,
 		exact: true,
 		show: true,
 	},
 	{
 		path: "/about",
-		title: "About",
+		title: "Who we are",
 		component: About,
 		exact: true,
 		show: true,

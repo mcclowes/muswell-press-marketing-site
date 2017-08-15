@@ -1,4 +1,7 @@
 import styled from "styled-components";
+import masonry from "masonry-layout";
+import imagesloaded from "imagesloaded"
+import { lifecycle, } from "recompose";
 
 import {
 	Container,
@@ -7,120 +10,136 @@ import {
 	Para,
 	Button,
 	PSpacing,
+	TextCell,
 } from "../../common";
 
 import * as vars from "../../style/vars";
 import * as mixins from "../../style/mixins";
-import { objMap, } from "../../../lib/util";
+import { objMap, sentenceCase, } from "../../../lib/util";
 
 // --------------------------------------------------
 
-const dummyContent = {
-	title: "The Rainbow Conspiracy",
-	author: "Stuart Hopps",
-	blurb: `
-		It is the mid eighties and successful theatrical agent Clive Spoke embarks on a quest to find the truth about his ex-lover’s early death. Travelling to the US he uncovers a devastating and destructive conspiracy aimed at the burgeoning gay community. Could the government really be involved?
-
-		Stuart Hopps is an eminent award-winning choreographer who has worked on major feature films with directors such as Kenneth Branagh, Derek Jarman and Ang Lee. He has also produced work for the Royal Opera House and the Welsh National Opera.
-	`,
-	isbn: "978-09954822-2-7",
+const doMasonry = () => {
+	setTimeout(
+		() => {
+			const masonryInstance = new masonry(".masonry-items", {
+				itemSelector: ".masonry-item",
+				percentPosition: true,
+			});
+			const imagesloadedInstance = new imagesloaded(".masonry-items", () => masonryInstance.layout())
+		},
+		1000
+	);
 };
 
-// --------------------------------------------------
+const enhance = lifecycle({
+	componentDidMount() {
+		doMasonry();
+	},
+});
 
-const leftColWidth = {
-	xs: "0px",
-	sm: "280px",
-	md: "300px",
-	lg: "320px",
-};
+const Background = styled.div`
+	background: ${R.pipe(
+		R.path([ "theme", "bg", ]),
+		color => mixins.darken(color, 0.1)
+	)};
+`;
 
-const colMinHeight = objMap(leftColWidth, (k, v) =>
-	mixins.px(mixins.num(v) * (424 / 290)),
+const Inner = styled.div`
+	${mixins.clearfix}
+`;
+
+const ThingWrapper = styled(GridCell)`
+	float: left;
+	width: 33.333333333%;
+`;
+
+const MaybeLink = ({ href, ...props, }) => (
+	href
+		? <a href = { href } { ...props }/>
+		: <div { ...props }/>
 );
 
-const LeftCol = styled.div`
-	${ mixins.bp.sm.min`
-		${ mixins.bpEach("width", leftColWidth) };
-		position: fixed;
-		float: left;
-	` } ${ mixins.xs`
-		border-bottom: 1px solid ${ vars.colors.lines };
-		padding-bottom: ${ vars.dim.gutter.full.xs };
-		margin-bottom: ${ vars.dim.gutter.full.xs };
-
-
-		& > div {
-			width: 200px;
-			margin: 0 auto;
-		}
-	` };
+const ThingInner = styled.div`
+	background: white;
 `;
 
-const RightCol = styled.div`
-	${ mixins.bp.sm.min`
-		${ mixins.bpEach("margin-left", leftColWidth) };
-		${ mixins.bpEach("min-height", colMinHeight) };
-	` } ${ mixins.xs`
-		text-align: justify;
-	` };
+const ThingTitle = styled.p`
+	font-family: Montserrat;
+	font-size: 1.2em;
+	font-weight: bold;
+	line-height: 1;
 `;
 
-const Container1 = styled(Container)`
-	${ mixins.clearfix };
+const ThingAuthor = styled.p`
+	opacity: 0.67;
+	line-height: 1;
 `;
 
-const Title = styled.h2`
-	margin: 0;
-	line-height: 1.1;
-	margin-bottom: 0.2em;
+const ThingQuote = styled.p`
+	font-family: Montserrat;
+	font-size: 1.2em;
+	font-weight: bold;
+	line-height: 1;
 `;
 
-const Author = styled.h3`
-	margin-top: 0;
-`;
+const lorem = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tempus sagittis est, sed convallis metus commodo et. Suspendisse a vehicula urna. Donec dapibus auctor elit ut malesuada. Nulla ligula nibh, faucibus at risus ut, sagittis tincidunt nulla. Ut accumsan mauris eget magna eleifend interdum. Vivamus ultricies nunc a venenatis convallis. Curabitur ut vehicula neque. Sed congue lectus eu velit viverra iaculis vel eget eros. Donec nec eros nec neque cursus rutrum sed sollicitudin nibh. Aliquam erat volutpat. Nullam gravida justo id nibh facilisis lobortis. Praesent in arcu consectetur, ultricies lorem quis, pellentesque nisi. Integer orci urna, consectetur eget massa eu, varius eleifend nibh. Suspendisse potenti.";
+const loremWords = lorem.toLowerCase().replace(",", "").replace(".", "").split(" ");
+const authorWords = [ "spoogly", "boogly", "benedict", "cumberbatch", "sausage", "mccree", "mcdickens", "charles", "spanner", ];
 
-const Main = props => (
-	(
-		<div>
-			<Container1>
-				<LeftCol>
-					<GridCell>
-						<FullWidthImg src = { vars.bookUrl } />
-					</GridCell>
-				</LeftCol>
+const randomInt = x => (Math.floor(Math.random() * x) % x);
 
-				<RightCol>
-					<GridCell>
-						<Title>
-							{ dummyContent.title }
-						</Title>
-
-						<Author>
-							{ dummyContent.author }
-						</Author>
-
-						<Para>
-							{ dummyContent.blurb }
-						</Para>
-
-						<Para>
-							{ dummyContent.blurb }
-						</Para>
-
-						<PSpacing />
-
-						<Button
-							href = "https://amazon.co.uk"
-							color = "#146eb4"
-							text = "Buy on Amazon"
-							icon = "shopping_cart"
-						/>
-					</GridCell>
-				</RightCol>
-			</Container1>
-		</div>
-	)
+const randomTitle = () => sentenceCase(
+	R.range(0, 5 + randomInt(5))
+	.map(() => loremWords[randomInt(loremWords.length)])
+	.join(" ")
 );
 
-export default Main;
+const randomAuthor = () => (
+	R.range(0, 2)
+	.map(() => sentenceCase(authorWords[randomInt(authorWords.length)]))
+	.join(" ")
+);
+
+const randomThings = () => (
+	R.range(0, 20)
+	.map(() => ({
+		title: randomTitle(),
+		author: randomAuthor(),
+		image: "https://source.unsplash.com/random/" + randomInt(100000),
+		link: "https://www.google.co.uk/",
+	}))
+);
+
+const things = randomThings();
+
+const Thing = ({ title, author, link, image, quote, }) => (
+	<ThingWrapper className = "masonry-item">
+		<MaybeLink href = { link }>
+			<ThingInner>
+				{ image ? <FullWidthImg src = { image }/> : null }
+				<GridCell>
+				<TextCell>
+					{ title ? <ThingTitle>{ title }</ThingTitle> : null }
+					{ quote ? <ThingQuote>"{ quote }"</ThingQuote> : null }
+					{ author ? <ThingAuthor>{ author }</ThingAuthor> : null }
+				</TextCell>
+				</GridCell>			
+			</ThingInner>
+		</MaybeLink>
+	</ThingWrapper>
+);
+
+const Main = props => (console.log(things),
+	<Background>
+		<Container>
+			<Inner className = "masonry-items">
+				{
+					things.map((x, i) => <Thing { ...x } key = { i }/>)
+				}
+			</Inner>
+		</Container>
+	</Background>
+);
+
+export default enhance(Main);

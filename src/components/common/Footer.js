@@ -4,6 +4,8 @@ import styled from "styled-components";
 import * as mixins from "../style/mixins";
 import * as vars from "../style/vars";
 
+import { Icon, } from "./misc";
+
 // --------------------------------------------------
 
 const Wrapper = styled.footer`
@@ -34,6 +36,13 @@ const Left = styled.div`
 
 const Right = styled.div`
 	opacity: 0.67;
+	display: flex;
+	flex-direction: row;
+	font-size: 1.5em;
+
+	a {
+		margin-left: 0.5em;
+	}
 
 	& > a:hover,
 	& > a:active {
@@ -48,15 +57,13 @@ const Footer = () =>
 		<Left>© Muswell Press 2017</Left>
 
 		<Right>
-			<a href = "/">Submissions</a>
 
-			<Divider>|</Divider>
+			<a href = "https://www.facebook.com/MuswellPress?fref=ts"><Icon type = "facebook-square"/></a>
 
-			<a href = "https://www.facebook.com/MuswellPress?fref=ts">Facebook</a>
+			<a href = "https://twitter.com/MuswellPress"><Icon type = "twitter"/></a>
 
-			<Divider>|</Divider>
 
-			<a href = "https://twitter.com/MuswellPress">Twitter</a>
+
 		</Right>
 	</Wrapper>;
 

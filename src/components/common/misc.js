@@ -75,19 +75,19 @@ const IconWrapper = styled.i`
 `;
 
 export const Icon = props =>
-	<IconWrapper className = "material-icons" { ...props }>
-		{ props.type }
+	<IconWrapper
+		className = { `fa fa-${props.type.replace("_","-")}` }
+		{ ...props }
+	>
 	</IconWrapper>;
 
 export const ButtonWrapper = styled.div`
 	display: inline-block;
-	padding: 0 1.25em;
+	padding: 0 1em;
 	line-height: 1;
-	height: 2.8em;
-	background: ${ p => p.color || vars.colors.text };
+	height: 2.6em;
 	transition: 0.1s linear background;
 	cursor: pointer;
-	color: white;
 	${ p => (p.margin ? "margin: 0.3em;" : "") } display: inline-flex;
 	flex-direction: row;
 	justify-content: center;
@@ -96,14 +96,40 @@ export const ButtonWrapper = styled.div`
 	&:hover,
 	&:visited,
 	&:active {
-		color: white;
+		color: ${ p => p.color || vars.colors.text };
 	}
 
-	&:hover {
-		background: ${ p =>
-			p.hoverColor ||
-			(p.color ? mixins.darken(p.color, 0.1) : mixins.lighten(vars.colors.text, 0.1))
-		};
+	${({ outline, color, hoverColor, }) => 
+		outline || true
+			? `
+				color: ${ color || vars.colors.text };
+				border: 1.5px solid ${ color || vars.colors.text };
+				background: transparent;
+
+				&:hover,
+				&:visited,
+				&:active {
+					color: ${ color || vars.colors.text };
+				}
+			`
+			: `
+				color: white;
+				background: ${ color || vars.colors.text };
+
+				&:hover,
+				&:visited,
+				&:active {
+					color: white;
+				}
+
+				&:hover {
+					background: ${
+						hoverColor ||
+						(color ? mixins.darken(color, 0.1) : mixins.lighten(vars.colors.text, 0.1))
+					};
+				}
+
+			`
 	}
 `;
 
@@ -126,7 +152,7 @@ export const IconButton = props => {
 					? <Icon
 						type = { props.icon }
 						size = "1.2em"
-						marginRight = "0.25em"
+						marginRight = "0.4em"
 					/>
 					: null
 				}

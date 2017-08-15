@@ -28,7 +28,7 @@ const dummyContent = {
 	isbn: "978-09954822-2-7",
 };
 
-const dummyBooks = R.repeat(dummyContent, 4);
+const dummyBooks = R.repeat(dummyContent, 3);
 
 // --------------------------------------------------
 
@@ -45,7 +45,7 @@ const Container1 = styled(Container)`
 const FeaturedBookWrapper = styled(GridCell)`
 	${ mixins.bpEither("width", {
 		xs: "100%",
-		other: "50%",
+		other: "33.333333%",
 	})}
 `;
 
@@ -79,32 +79,40 @@ const BookTileAuthor = styled.h3`
 
 const FeaturedBookInner = styled(GridCell)`
 	position: relative;
-	padding-left: 0;
-	padding-right: 0;
+	${mixins.xs`
+		padding-left: 0;
+		padding-right: 0;
+	`}
 `;
 
 const FeaturedBookCover = styled.div`
-	width: 40%;
-	${ mixins.shadow(1) };
-	position: relative;
-	z-index: 1;
-	transform: perspective(600px) rotateY(-15deg);
-	transform: none;
+	${mixins.xs`
+		width: 40%;		
+		position: relative;
+		z-index: 1;
+	`}
 
+	${ mixins.shadow(1) };
 	&:hover {
 		${ mixins.shadow(2) };
 	}
 `;
 
 const FeaturedBookDetails = styled(TextCell)`
-	width: 60%;
-	position: absolute;
-	top: 0em;
-	right: 0;
+	${mixins.xs`
+		width: 60%;
+		position: absolute;
+		top: 0em;
+		right: 0;
+	`}
+	${mixins.bp.sm.min`
+		padding: 0;
+		margin-top: 3em;
+	`}	
 `;
 
 const FeaturedBookDetailsInner = styled.div`
-	padding-left: 1em;
+	${mixins.xs`padding-left: 1em;`}
 `;
 
 const FeaturedBookTitle = styled.h3`
@@ -179,13 +187,12 @@ const FeaturedBook = props =>
 	</FeaturedBookWrapper>;
 
 export default () =>
-	<Container1 border>
+	<Container1 border maxWidth = { 1000 }>
 		<SectionTitle>New and Noteworthy</SectionTitle>
 
 		{ dummyBooks.map((o, i) => <FeaturedBook { ...o } key = { i } />) }
 
 		<CenterCell>
-			{/*<Button to = "/books" text = "View more of our publications" />*/}
-			See our full collection ->
+			<Button to = "/books" text = "See our full collection" />
 		</CenterCell>
 	</Container1>;
