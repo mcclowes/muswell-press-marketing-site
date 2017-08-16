@@ -27,18 +27,20 @@ const spiel1 = `
 	Muswell Press is a proudly independent publisher of great books, both fiction and non-fiction.
 `;
 
-const Bigly = styled(TextCell)`
-	font-size: 1.5em;
+const CenterCell = styled(TextCell)`
 	text-align: center;
+	${mixins.xs`text-align: left;`}
 `;
 
 const BigText = styled.p`font-size: 1.5em;`;
 
-const NotAsBigText = styled.p`font-size: 1.2em;`;
+const NotAsBigText = styled.p`
+	${mixins.bp.sm.min`font-size: 1.2em;`}
+`;
 
 const About = () =>
 	<Container maxWidth = { 800 }>
-		<TextCell align = "center">
+		<CenterCell>
 			<BigText>
 				{ spiel1 }
 			</BigText>
@@ -49,10 +51,10 @@ const About = () =>
 
 			<PSpacing />
 
-			<Button to = "/about" text = "Find out more about us" />
+			<Button to = "/about" text = "Find out more about us" icon = "users"/>
 			
 			<PSpacing />
-		</TextCell>
+		</CenterCell>
 	</Container>;
 
 export default About;

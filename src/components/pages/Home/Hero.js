@@ -6,6 +6,7 @@ import {
 	Container,
 	GridCell,
 	TextCell,
+	Button,
 } from "../../common";
 
 import * as vars from "../../style/vars";
@@ -14,25 +15,16 @@ import { objMap, } from "../../../lib/util";
 
 // --------------------------------------------------
 
-const LeftCol = styled.div`
-	flex: 1;
-	max-width: 400px;
-	margin-right: 1.5em;
-`;
-
-const RightCol = styled(GridCell)`
-	flex: 1;
-	margin-left: 1.5em;
-	max-width: 500px;
-`;
-
 const Background1 = styled.div`
-	${ props =>
-		props.colors && props.colors.bg
-		? `background-color: ${ props.colors.bg };`
-		: ""
-	};
+	background-color: ${R.path([ "theme", "bg", ])};
 `;
+
+const coverHeights = objMap(
+	vars.dim.gutter.fullNum,
+	(key, value) => `
+		calc(100vh - ${vars.dim.nav.height[key === "xs" ? "xs" : "other"]} - ${mixins.px(value * 2)})
+	`
+);
 
 const containerHeights = objMap(
 	vars.dim.nav.height,
@@ -40,88 +32,110 @@ const containerHeights = objMap(
 );
 
 const Container1 = styled(Container)`
-	${ mixins.bpEither("height", containerHeights) }
 	display: flex;
-	flex-direction: row;
 	justify-content: center;
+	flex-direction: row;
+	${mixins.xs`align-items: center;`}
+	@media (min-width: ${vars.bps.sm.min}px) and (orientation: landscape) {
+		min-height: calc(100vh - ${vars.dim.nav.height.other});
+	}
 `;
 
-const ContainerInner = styled(GridCell)`
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-	align-items: center;
+const Cover = styled.div`
+	width: 100%;
 	height: 100%;
+
+	background-image: url(${R.prop("src")});
+	background-position: top right;
+	background-size: contain;
+	background-repeat: no-repeat;
+
+	${mixins.xs`
+		padding-top: 150%;
+		background-position: top left;
+	`}
+`;
+
+const LeftCol = styled(GridCell)`
+	// background-color: blue;
+	max-width: 500px;
+	min-width: 100px;
+	flex: 1;
+	display: flex;
+	${mixins.bpEach("max-height", coverHeights)}
+`;
+
+const RightCol = styled(GridCell)`
+	// background-color: red;
+	max-width: 500px;
+	flex: 1;
+	margin-left: 1em;
+	${mixins.xs`
+		margin: 0;
+		padding-left: 0;
+		padding-right: 0;
+	`}
 `;
 
 const TitleText = styled.p`
-	color: ${ props => props.colors.logo1 };
-	font-family: Montserrat;
+	color: ${R.path([ "theme", "logo1", ])};
+	font-family: ${vars.font.title.family};
 	font-size: 2.9em;
+	${mixins.xs`font-size: 1.5em;`}
 	font-weight: bold;
 	line-height: 1.1em;
 	text-transform: uppercase;
 	letter-spacing: 0.1em;
 `;
 
-const SubtitleText = styled.p`
-	font-size: 1.4em;
-	font-family: Montserrat;
-	color: #666;
+const MobileText = styled(Container)`
+	padding-top: 0;
+	margin-top: -1em;
+	${mixins.bp.sm.min`display: none;`}
 `;
 
-const FlexCell = styled(GridCell)`
-	flex: 1;
-`;
-
-const ImageCell = styled(GridCell)`
-	height: 100%;
-`;
-
-const ContainedImg = styled.div`
-	height: 100%;
-	width: 100%;
-	background-image: url(${R.prop("src")});
-	background-position: center right;
-	background-size: contain;
-	background-repeat: no-repeat;
-`;
-
-const Cover = styled.img`
-	height: auto;
-	width: 100%;
-	${ mixins.shadow(1) }
+const DesktopText = styled.div`
+	${mixins.xs`display: none;`}
 `;
 
 // --------------------------------------------------
 
+const Text = () => (
+	<TextCell> 
+		<p>Aenean eu leo quam. Pellentesque <b>The Rainbow Conspiracy</b> ornare sem lacinia quam venenatis vestibulum. <b>Stuart Hopps</b> fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+
+		<p><Button to = "/book/lol" text = "Find out more"/></p>
+	</TextCell>
+);
+
 const Hero = props =>
-	<Background1 { ...props }>
+	<Background1>
 		<Container1>
-			<ContainerInner>
-				<LeftCol>
-					<Cover src = { vars.bookUrl } />
-				</LeftCol>
+			<LeftCol>
+				<Cover src = { vars.bookUrl } />
+			</LeftCol>
 
-				<RightCol>
-					<TextCell>
-						<TitleText colors = { props.colors } > Classic.</TitleText>
+			<RightCol>
+				<TextCell>
+					<TitleText> Classic.</TitleText>
 
-						<TitleText colors = { props.colors } > Cult.</TitleText>
+					<TitleText> Cult.</TitleText>
 
-						<TitleText colors = { props.colors } > Evergreen.</TitleText>
+					<TitleText> Evergreen.</TitleText>
 
-						<TitleText colors = { props.colors } > Blacklist.</TitleText>
-					</TextCell>
-					
-					<TextCell> 
-						<p>Aenean eu leo quam. Pellentesque <b>The Rainbow Conspiracy</b> ornare sem lacinia quam venenatis vestibulum. <b>Stuart Hopps</b> fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-
-						<p><a href = { `/book/${ props.title }` }>Find out more -></a></p>
-					</TextCell>
-				</RightCol>
-			</ContainerInner>
+					<TitleText> Blacklist.</TitleText>
+				</TextCell>
+				
+				<DesktopText>
+					<Text/>
+				</DesktopText>
+			</RightCol>			
 		</Container1>
+		<MobileText>
+			<Text/>
+		</MobileText>
 	</Background1>;
+
+
 
 export default Hero;

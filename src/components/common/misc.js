@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { css, } from "styled-components";
 import R from "ramda";
 import { Link, } from "react-router-dom";
 import MQ from "react-responsive";
@@ -101,9 +101,10 @@ export const ButtonWrapper = styled.div`
 
 	${({ outline, color, hoverColor, }) => 
 		outline || true
-			? `
+			? css`
 				color: ${ color || vars.colors.text };
 				border: 1.5px solid ${ color || vars.colors.text };
+				${mixins.xs`border-width: 1px;`}
 				background: transparent;
 
 				&:hover,

@@ -33,6 +33,10 @@ export const font = {
 		lg: "17px",
 	},
 
+	title: {
+		family: "Montserrat",
+	},
+
 	pageTitle: {
 		size: {
 			xs: "30px",

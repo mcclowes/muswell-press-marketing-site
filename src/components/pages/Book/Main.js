@@ -45,13 +45,23 @@ const Background = styled.div`
 	)};
 `;
 
+const ContainerAtEdges = styled(Container)`
+	${mixins.xs`margin: 0 -${vars.dim.gutter.tripleHalf.xs}`}
+`;
+
 const Inner = styled.div`
 	${mixins.clearfix}
 `;
 
+const colWidths = {
+	xs: "50%",
+	other: "33.333333333%",
+};
+
 const ThingWrapper = styled(GridCell)`
 	float: left;
-	width: 33.333333333%;
+	${mixins.bpEither("width", colWidths)}
+
 `;
 
 const MaybeLink = ({ href, ...props, }) => (
@@ -65,8 +75,9 @@ const ThingInner = styled.div`
 `;
 
 const ThingTitle = styled.p`
-	font-family: Montserrat;
+	font-family: ${vars.font.title.family};
 	font-size: 1.2em;
+	${mixins.xs`font-size: 1em;`}
 	font-weight: bold;
 	line-height: 1;
 `;
@@ -76,15 +87,10 @@ const ThingAuthor = styled.p`
 	line-height: 1;
 `;
 
-const ThingQuote = styled.p`
-	font-family: Montserrat;
-	font-size: 1.2em;
-	font-weight: bold;
-	line-height: 1;
-`;
+const ThingQuote = ThingTitle;
 
 const lorem = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tempus sagittis est, sed convallis metus commodo et. Suspendisse a vehicula urna. Donec dapibus auctor elit ut malesuada. Nulla ligula nibh, faucibus at risus ut, sagittis tincidunt nulla. Ut accumsan mauris eget magna eleifend interdum. Vivamus ultricies nunc a venenatis convallis. Curabitur ut vehicula neque. Sed congue lectus eu velit viverra iaculis vel eget eros. Donec nec eros nec neque cursus rutrum sed sollicitudin nibh. Aliquam erat volutpat. Nullam gravida justo id nibh facilisis lobortis. Praesent in arcu consectetur, ultricies lorem quis, pellentesque nisi. Integer orci urna, consectetur eget massa eu, varius eleifend nibh. Suspendisse potenti.";
-const loremWords = lorem.toLowerCase().replace(",", "").replace(".", "").split(" ");
+const loremWords = lorem.toLowerCase().replace(/,/g, "").replace(/\./g, "").split(" ");
 const authorWords = [ "spoogly", "boogly", "benedict", "cumberbatch", "sausage", "mccree", "mcdickens", "charles", "spanner", ];
 
 const randomInt = x => (Math.floor(Math.random() * x) % x);
@@ -101,8 +107,14 @@ const randomAuthor = () => (
 	.join(" ")
 );
 
-const randomThings = () => (
-	R.range(0, 20)
+const randomQuote = () => sentenceCase(
+	R.range(0, 15 + randomInt(5))
+	.map(() => loremWords[randomInt(loremWords.length)])
+	.join(" ")
+);
+
+const randomArticles = () => (
+	R.range(0, 5)
 	.map(() => ({
 		title: randomTitle(),
 		author: randomAuthor(),
@@ -111,7 +123,28 @@ const randomThings = () => (
 	}))
 );
 
-const things = randomThings();
+const randomSnippets = () => (
+	R.range(0, 5)
+	.map(() => ({
+		quote: randomQuote(),
+		author: randomAuthor(),
+	}))
+);
+
+const things = R.concat(randomArticles(), randomSnippets());
+
+const shuffle = arr => {
+	const r = [];
+	const arrCopy = [ ...arr, ]; 
+	arr.forEach(() => {
+		const randomIndex = randomInt(arrCopy.length);
+		r.push(arrCopy[randomIndex]);
+		arrCopy.splice(randomIndex, 1);
+	});
+	return r;
+};
+
+const shuffledThings = shuffle(things);
 
 const Thing = ({ title, author, link, image, quote, }) => (
 	<ThingWrapper className = "masonry-item">
@@ -132,13 +165,13 @@ const Thing = ({ title, author, link, image, quote, }) => (
 
 const Main = props => (console.log(things),
 	<Background>
-		<Container>
+		<ContainerAtEdges>
 			<Inner className = "masonry-items">
 				{
-					things.map((x, i) => <Thing { ...x } key = { i }/>)
+					shuffledThings.map((x, i) => <Thing { ...x } key = { i }/>)
 				}
 			</Inner>
-		</Container>
+		</ContainerAtEdges>
 	</Background>
 );
 

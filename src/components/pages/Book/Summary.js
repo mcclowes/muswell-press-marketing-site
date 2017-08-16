@@ -46,6 +46,9 @@ const Container1 = styled(Container)`
 	display: flex;
 	justify-content: center;
 	${mixins.bpEither("flex-direction", flexDir)}
+	@media (min-width: ${vars.bps.sm.min}px) and (orientation: landscape) {
+		min-height: calc(100vh - ${vars.dim.nav.height.other});
+	}
 `;
 
 const Cover = styled.div`
@@ -80,7 +83,7 @@ const RightCol = styled(GridCell)`
 
 const TitleText = styled.p`
 	color: ${ props => props.colors.logo1 };
-	font-family: Montserrat;
+	font-family: ${vars.font.title.family};
 	font-size: 2.9em;
 	font-weight: bold;
 	line-height: 1.1em;
@@ -90,13 +93,13 @@ const TitleText = styled.p`
 
 const SubtitleText = styled.p`
 	font-size: 1.4em;
-	font-family: Montserrat;
+	font-family: ${vars.font.title.family};
 	opacity: 0.67;
 `;
 
 const NewText = styled.p`
 	color: #888;
-	font-family: Montserrat;
+	font-family: ${vars.font.title.family};
 	font-size: 1em;
 	margin: 0 0 -1em 0;
 `;
@@ -127,7 +130,7 @@ const MobileCover = styled.div`
 
 // --------------------------------------------------
 
-const Summary = props => (console.log("coverHeights", coverHeights),
+const Summary = props => (
 	<Background1>
 		<Container1>
 			<LeftCol>
@@ -154,7 +157,7 @@ const Summary = props => (console.log("coverHeights", coverHeights),
 				<TextCell> 
 					<p>It is the mid eighties and successful theatrical agent Clive Spoke embarks on a quest to find the truth about his ex-lover’s early death. Travelling to the US he uncovers a devastating and destructive conspiracy aimed at the burgeoning gay community. Could the government really be involved?</p>
 
-					<p>Stuart Hopps is an eminent award-winning choreographer who has worked on major feature films with directors such as Kenneth Branagh, Derek Jarman and Ang Lee. He has also produced work for the Royal Opera House and the Welsh National Opera.</p>
+					<p style = {{ display: "none", }}>Stuart Hopps is an eminent award-winning choreographer who has worked on major feature films with directors such as Kenneth Branagh, Derek Jarman and Ang Lee. He has also produced work for the Royal Opera House and the Welsh National Opera.</p>
 				</TextCell>
 
 				<TextCell>

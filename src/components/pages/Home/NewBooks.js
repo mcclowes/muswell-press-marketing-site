@@ -125,14 +125,20 @@ const FeaturedBookAuthor = styled.div`
 `;
 
 const CenterCell = styled(GridCell)`
-	text-align: center;
 	flex: 1;
+	text-align: center;
 	margin-top: 3em;
+	${mixins.xs`
+		text-align: left;
+		margin-top: 1em;
+	`}
 `;
 
 const SectionTitle = styled.h2`
 	text-align: center;
 	font-size: 2em;
+	${mixins.xs`font-size: 1.5em`}
+	font-family: ${vars.font.title.family};
 	text-transform: uppercase;
 	flex-basis: 100%;
 `;
@@ -193,6 +199,6 @@ export default () =>
 		{ dummyBooks.map((o, i) => <FeaturedBook { ...o } key = { i } />) }
 
 		<CenterCell>
-			<Button to = "/books" text = "See our full collection" />
+			<Button to = "/books" text = "See our full collection" icon = "book"/>
 		</CenterCell>
 	</Container1>;
