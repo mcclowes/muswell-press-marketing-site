@@ -92,10 +92,10 @@ const Wrapper = styled.nav`
 	top: 0;
 	z-index: 2;
 
-	${ mixins.bp.sm.min`
-		.noScroll & {
-			right: ${vars.dim.scrollbar};
-		}
+	${mixins.sm`
+		padding: 0 1em;
+	`};
+	${mixins.bp.md.min`
 		padding: 0 3em;
 	`};
 `;

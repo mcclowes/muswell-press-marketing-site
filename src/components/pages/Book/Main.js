@@ -53,6 +53,20 @@ const Inner = styled.div`
 	${mixins.clearfix}
 `;
 
+const TitleCell = styled(TextCell)`
+	flex-basis: 100%;
+`;
+
+const SectionTitle = styled.h2`
+	text-align: center;
+	font-size: 2em;
+	${mixins.xs`
+		font-size: 1.5em;
+	`}
+	font-family: ${vars.font.title.family};
+	text-transform: uppercase;
+`;
+
 const colWidths = {
 	xs: "50%",
 	other: "33.333333333%",
@@ -163,9 +177,13 @@ const Thing = ({ title, author, link, image, quote, }) => (
 	</ThingWrapper>
 );
 
-const Main = props => (console.log(things),
+const Main = props => (
 	<Background>
 		<ContainerAtEdges>
+			<TitleCell>
+				<SectionTitle>Press</SectionTitle>
+			</TitleCell>
+
 			<Inner className = "masonry-items">
 				{
 					shuffledThings.map((x, i) => <Thing { ...x } key = { i }/>)

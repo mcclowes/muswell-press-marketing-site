@@ -50,11 +50,11 @@ const OtherBookTitle = styled.h3`
 `;
 
 const OtherBookCover = styled(FullWidthImg)`
-	${ mixins.shadow(1) };
+	${ mixins.shadow(0) };
 	transition-duration: .3s;
 
 	&:hover {
-		${ mixins.shadow(2) };
+		${ mixins.shadow(0) };
 	}
 `;
 
