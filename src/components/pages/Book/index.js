@@ -1,13 +1,26 @@
-import Main from "./Main";
+import Press from "./Press";
 import Summary from "./Summary";
+import NotFound from "../NotFound";
+
+import { booksMap, } from "src/data";
 
 // --------------------------------------------------
 
-const Book = props =>
-	<div>
-		<Summary { ...props } />
+const Book = ({ bookSlug, }) => {
+	const book = booksMap[bookSlug];
 
-		<Main />
-	</div>;
+	if(book) {
+		return (
+			<div>
+				<Summary { ...book } />
+				<Press { ...book } />
+			</div>
+		);
+	}
+	else {
+		return <NotFound/>;
+	}
+
+};
 
 export default Book;

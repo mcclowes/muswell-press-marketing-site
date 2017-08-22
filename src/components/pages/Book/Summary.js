@@ -9,6 +9,7 @@ import {
 	Button,
 	PSpacing,
 	FullWidthImg,
+	Para,
 } from "../../common";
 
 import * as vars from "../../style/vars";
@@ -18,11 +19,7 @@ import { objMap, } from "../../../lib/util";
 // --------------------------------------------------
 
 const Background1 = styled.div`
-	${ props =>
-		props.colors && props.colors.bg
-		? `background-color: ${ props.colors.bg };`
-		: ""
-	};
+	background-color: ${R.path([ "theme", "bg", ])};
 `;
 
 const coverHeights = objMap(
@@ -82,7 +79,7 @@ const RightCol = styled(GridCell)`
 `;
 
 const TitleText = styled.p`
-	color: ${ props => props.colors.logo1 };
+	color: ${R.path([ "theme", "logo1", ])};
 	font-family: ${vars.font.title.family};
 	font-size: 2.9em;
 	font-weight: bold;
@@ -98,15 +95,15 @@ const SubtitleText = styled.p`
 `;
 
 const NewText = styled.p`
-	color: #888;
+	opacity: 0.5;
 	font-family: ${vars.font.title.family};
 	font-size: 1em;
 	margin: 0 0 -1em 0;
 `;
 
 const Metadata = styled.p`
-	border-left: 1px solid #666;
-	color: #666;
+	border-left: 1px solid ${vars.colors.text};
+	opacity: 0.67;
 	padding-left: 1em;
 `;
 
@@ -134,38 +131,34 @@ const Summary = props => (
 	<Background1>
 		<Container1>
 			<LeftCol>
-				<Cover src = { vars.bookUrl } />
+				<Cover src = { props.cover && props.cover.url } />
 			</LeftCol>
 			<MobileCover>
 				<GridCell>
-					<FullWidthImg src = { vars.bookUrl } />
+					<FullWidthImg src = { props.cover && props.cover.url } />
 				</GridCell>
 			</MobileCover>
 			<RightCol>
 				<TextCell>
 					<NewText>New</NewText>
 
-					<TitleText
-						colors = { props.colors }
-					>
-						The Rainbow Conspiracy
+					<TitleText>
+						{ props.title }
 					</TitleText>
 
-					<SubtitleText>Stuart Hopps</SubtitleText>
+					<SubtitleText>{ props.author }</SubtitleText>
 				</TextCell>
 				
 				<TextCell> 
-					<p>It is the mid eighties and successful theatrical agent Clive Spoke embarks on a quest to find the truth about his ex-lover’s early death. Travelling to the US he uncovers a devastating and destructive conspiracy aimed at the burgeoning gay community. Could the government really be involved?</p>
-
-					<p style = {{ display: "none", }}>Stuart Hopps is an eminent award-winning choreographer who has worked on major feature films with directors such as Kenneth Branagh, Derek Jarman and Ang Lee. He has also produced work for the Royal Opera House and the Welsh National Opera.</p>
+					<Para>{ props.blurb }</Para>
 				</TextCell>
 
 				<TextCell>
 					<Metadata>
-						Paperback<br/>
-						160 PP<br/>
-						Published 06/11/2017<br/>
-						978-09954822-2-7<br/>
+						{
+							(props.details || [])
+							.map((s, i) => <div key = { i }>{ s }</div>)
+						}
 					</Metadata>
 				</TextCell>
 
@@ -173,8 +166,7 @@ const Summary = props => (
 					<PSpacing/>
 
 					<Button
-						href = "https://amazon.co.uk"
-						color = { props.colors.logo1 }
+						href = { props.amazonLink }
 						text = "Buy Now"
 						icon = "shopping_cart"
 					/>

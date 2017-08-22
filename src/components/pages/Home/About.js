@@ -17,6 +17,8 @@ import * as vars from "../../style/vars";
 import * as mixins from "../../style/mixins";
 import { objMap, } from "../../../lib/util";
 
+import { homePage, } from "src/data";
+
 // --------------------------------------------------
 
 const spiel2 = `
@@ -42,16 +44,16 @@ const About = () =>
 	<Container maxWidth = { 800 }>
 		<CenterCell>
 			<BigText>
-				{ spiel1 }
+				{ homePage.aboutText1 }
 			</BigText>
 
 			<NotAsBigText>
-				{ spiel2 }
+				{ homePage.aboutText2 }
 			</NotAsBigText>
 
 			<PSpacing />
 
-			<Button to = "/about" text = "Find out more about us" icon = "users"/>
+			<Button to = "/about" text = { homePage.aboutLink } icon = "users"/>
 			
 			<PSpacing />
 		</CenterCell>

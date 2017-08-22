@@ -13,16 +13,12 @@ import * as vars from "../style/vars";
 import * as mixins from "../style/mixins";
 import { objMap, } from "../../lib/util";
 
+import { aboutPage, } from "src/data";
+
 // --------------------------------------------------
 
-const spiel = `
-	Muswell Press is a proudly independent publisher of great books, both fiction and non-fiction. Sarah and Kate Beal acquired Muswell in 2016. With over 50 years publishing experience between them, at Bloomsbury, Faber, Walker Books, HarperCollins and Ottakar’s Bookshops amongst others, they bring a fresh approach and a wealth of knowledge and enthusiasm to the company.
-
-	We are committed to editorial excellence, high-quality production and marketing our books with flair. We are currently in the process of refreshing and reinvigorating Muswell and our first new title will appear in Autumn 2017 with a fuller list in Spring ’18.
-`;
-
 const Pic = styled.div`
-	background-image: url(https://ak3.picdn.net/shutterstock/videos/13702646/thumb/1.jpg);
+	background-image: url(${aboutPage.picture && aboutPage.picture.url});
 	background-size: cover;
 	background-position: top center;
 	width: 100%;
@@ -37,10 +33,10 @@ const Title = styled.h1`
 const About = props =>
 	<Container maxWidth = { 800 }>
 		<GridCell>
-			<Title>Who we are</Title>
+			<Title>{ aboutPage.title }</Title>
 
 			<Para>
-				{ spiel }
+				{ aboutPage.text }
 			</Para>
 
 			<PSpacing />

@@ -17,7 +17,6 @@ export default props =>
 						to = { route.link || route.path }
 						activeClassName = "active"
 						onClick = { props.close }
-						colors = { props.colors }
 					>
 						{ route.title }
 					</Button>,
@@ -77,7 +76,7 @@ const buttonStyle = [
 
 // should be Link
 const Button = styled(NavLink)`
-	color: ${ props => props.colors ? props.colors.logo1 : props.theme.logo1 };
+	color: ${R.path([ "theme", "logo1", ])};
 	text-transform: uppercase;
 	font-family: Montserrat;
 	font-size: 1.1em;

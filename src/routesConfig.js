@@ -2,6 +2,10 @@ import Home from "./components/pages/Home";
 import Book from "./components/pages/Book";
 import About from "./components/pages/About";
 import Books from "./components/pages/Books";
+import Data from "./components/pages/Data";
+import NotFound from "./components/pages/NotFound";
+
+import * as data from "./data";
 
 // --------------------------------------------------
 
@@ -12,46 +16,46 @@ export default [
 		component: Home,
 		exact: true,
 		show: false,
-		colors: {
-			bg: "#EFD8B5",
-			/*logo1: "#588D92",*/
-			logo1: "#362c5a",
-			logo2: "#FFFDF1",
-		},
+		// colors: {
+		// 	bg: "#EFD8B5",
+		// 	/*logo1: "#588D92",*/
+		// 	logo1: "#362c5a",
+		// 	logo2: "#FFFDF1",
+		// 	nav: "#EFD8B5",
+		// },
 	},
 	{
 		path: "/books",
-		title: "Our Collection",
+		title: data.siteSettings.booksLinkText,
 		component: Books,
 		exact: true,
 		show: true,
 	},
 	{
 		path: "/about",
-		title: "Who we are",
+		title: data.siteSettings.aboutLinkText,
 		component: About,
 		exact: true,
 		show: true,
 	},
 	{
-		path: "/book/:bookId",
-		title: "Book",
-		component: Book,
-		colors: {
-			bg: "#EFD8B5",
-			logo1: "#362c5a",
-			logo2: "#FFFDF1",
-			body: "#EFD8B5",
-			footer: "#EFD8B5",
-		},
+		path: "/data",
+		title: "Data",
+		component: Data(data),
+		show: true,
 	},
+	...(
+		data.booksList
+		.map(o => ({
+			path: "/book/" + o.slug,
+			component: Book,
+			colors: o.colors,
+			data: {
+				bookSlug: o.slug,
+			},
+		}))
+	),
 	{
-		path: "/test",
-		title: "Test",
-		component: () => <div>test</div>,
-		show: false,
-		colors: {
-			body: "#abdfbd",
-		},
+		component: NotFound,
 	},
 ];

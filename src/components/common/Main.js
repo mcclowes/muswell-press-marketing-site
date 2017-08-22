@@ -16,7 +16,6 @@ export default styled.div`
 	${ mixins.bpEither("margin-top", vars.dim.nav.height) } ${ mixins.bpEither(
 			"min-height",
 			minHeights,
-		) } ${ ({ colors, }) =>
-			colors && colors.body ? `background-color: ${colors.body};` : ""
-	};
+	) }
+	background-color: ${R.path([ "theme", "body", ])};
 `;

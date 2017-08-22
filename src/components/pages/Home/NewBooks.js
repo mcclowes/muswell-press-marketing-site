@@ -17,18 +17,20 @@ import * as vars from "../../style/vars";
 import * as mixins from "../../style/mixins";
 import { objMap, } from "../../../lib/util";
 
+import { homePage, } from "src/data";
+
 // --------------------------------------------------
 
-const dummyContent = {
-	title: "The Rainbow Conspiracy",
-	author: "Stuart Hopps",
-	blurb: `
-		It is the mid eighties and successful theatrical agent Clive Spoke embarks on a quest to find the truth about his ex-lover’s early death.
-	`,
-	isbn: "978-09954822-2-7",
-};
+const books = [ ...homePage.booksBooks, ];
 
-const dummyBooks = R.repeat(dummyContent, 3);
+const extraBooksNeeded = 3 - books.length;
+for(let i = 0; i < extraBooksNeeded; i++) {
+	books.push({
+		title: "<BOOK TITLE>",
+		author: "<BOOK AUTHOR>",
+		shorterBlurb: "<BOOK SHORT BLURB>",
+	});
+};
 
 // --------------------------------------------------
 
@@ -64,6 +66,16 @@ const FeaturedBookCover = styled.div`
 	&:hover {
 		${ mixins.shadow(0) };
 	}
+`;
+
+const FeaturedBookCoverImage = styled.div`
+	width: 100%;
+	padding-top: 150%;
+	background-image: url(${R.prop("src")});
+	background-position: top right;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-color: #eee;
 `;
 
 const FeaturedBookDetails = styled(TextCell)`
@@ -119,10 +131,10 @@ const SectionTitle = styled.h2`
 
 const FeaturedBook = props =>
 	<FeaturedBookWrapper>
-		<Link to = { `/book/${ props.title }` }>
+		<Link to = { `/book/${ props.slug }` }>
 			<FeaturedBookInner>
 				<FeaturedBookCover>
-					<FullWidthImg src = { vars.bookUrl } />
+					<FeaturedBookCoverImage src = { props.cover && props.cover.url } />
 				</FeaturedBookCover>
 				<FeaturedBookDetails>
 					<FeaturedBookDetailsInner>
@@ -135,7 +147,7 @@ const FeaturedBook = props =>
 						</FeaturedBookAuthor>
 
 						<Para>
-							{ props.blurb }
+							{ props.shorterBlurb }
 						</Para>
 					</FeaturedBookDetailsInner>
 				</FeaturedBookDetails>
@@ -146,12 +158,12 @@ const FeaturedBook = props =>
 export default () =>
 	<Container1 border maxWidth = { 1000 }>
 		<TitleCell>
-			<SectionTitle>New and Noteworthy</SectionTitle>
+			<SectionTitle>{ homePage.booksTitle }</SectionTitle>
 		</TitleCell>
 
-		{ dummyBooks.map((o, i) => <FeaturedBook { ...o } key = { i } />) }
+		{ books.map((o, i) => <FeaturedBook { ...o } key = { i } />) }
 
 		<CenterCell>
-			<Button to = "/books" text = "See our full collection" icon = "book"/>
+			<Button to = "/books" text = { homePage.booksLink } icon = "book"/>
 		</CenterCell>
 	</Container1>;

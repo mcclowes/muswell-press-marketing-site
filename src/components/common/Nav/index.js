@@ -23,10 +23,9 @@ export default class Nav extends React.Component {
 	}
 
 	render() {
-		const { colors, } = this.props;
 
 		return (
-			<Wrapper colors = { colors }>
+			<Wrapper>
 				<Inner>
 					<MobileStuff>
 						<Fade visible = { this.state.open }>
@@ -47,11 +46,10 @@ export default class Nav extends React.Component {
 								open: false,
 							}) }
 						{ ...this.state }
-						colors = { colors }
 					/>
 
 					<MobileStuff>
-						<Overlay { ...this.state } colors = { colors } />
+						<Overlay { ...this.state }/>
 						
 						<BurgerWrapper
 							onClick = { () =>
@@ -81,11 +79,8 @@ const Wrapper = styled.nav`
 	${ mixins.bp.sm.min`${ mixins.shadow(0) }` } ${ mixins.bpEither(
 		"height",
 		vars.dim.nav.height,
-	) } background: ${ props =>
-		props && props.colors && props.colors.bg
-		? props.colors.bg
-		: vars.colors.nav
-	};
+	) }
+	background-color: ${R.path([ "theme", "nav", ])};
 	left: 0;
 	position: absolute;
 	right: 0;
@@ -118,10 +113,7 @@ const Dark = styled.div`
 const Overlay = styled.div`
 	${ mixins.contained() } ${({ open, }) =>
 	open ? mixins.shadow(1) : ""} transition: 0.3s all ease-out;
-	background: ${props =>
-		props && props.colors && props.colors.bg
-			? props.colors.bg
-			: vars.colors.nav};
+	background-color: ${R.path([ "theme", "nav", ])};
 `;
 
 const BurgerWrapper = styled.div`

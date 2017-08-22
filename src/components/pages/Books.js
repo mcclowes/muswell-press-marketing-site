@@ -16,18 +16,7 @@ import * as vars from "../style/vars";
 import * as mixins from "../style/mixins";
 import { objMap, } from "../../lib/util";
 
-// --------------------------------------------------
-
-const dummyContent = {
-	title: "The Rainbow Conspiracy",
-	author: "Stuart Hopps",
-	blurb: `
-		It is the mid eighties and successful theatrical agent Clive Spoke embarks on a quest to find the truth about his ex-lover’s early death.
-	`,
-	isbn: "978-09954822-2-7",
-};
-
-const dummyBooks = R.repeat(dummyContent, 17);
+import { booksList, } from "src/data";
 
 // --------------------------------------------------
 
@@ -49,19 +38,19 @@ const OtherBookTitle = styled.h3`
 	margin-bottom: 0.2em;
 `;
 
-const OtherBookCover = styled(FullWidthImg)`
-	${ mixins.shadow(0) };
-	transition-duration: .3s;
-
-	&:hover {
-		${ mixins.shadow(0) };
-	}
+const OtherBookCover = styled.div`
+	width: 100%;
+	padding-top: 150%;
+	background-image: url(${R.prop("src")});
+	background-position: top right;
+	background-size: cover;
+	background-repeat: no-repeat;
 `;
 
 const OtherBook = props =>
 	<OtherBookWrapper>
-		<Link to = { `/book/${props.title}` }>
-			<OtherBookCover src = { vars.bookUrl } />
+		<Link to = { `/book/${props.slug}` }>
+			<OtherBookCover src = { props.cover && props.cover.url } />
 
 			<OtherBookTitle>
 				{ props.title }
@@ -82,7 +71,7 @@ const Rows = ({ rows, cols, }) => {
 	const rowsArr = [];
 	for (let i = 0; i < rows; i++) {
 		rowsArr.push(
-			dummyBooks
+			booksList
 			.slice(i * cols, (i + 1) * cols)
 			.map((o, i) => <OtherBook { ...o } key = { o.title + i } />),
 		);
@@ -124,7 +113,7 @@ const _Grid = props => {
 						<OnlyBp key = { bp }>
 							<Rows rows = { props.rows } cols = { colsMap[bp] } />
 
-							{ dummyBooks.length > props.rows * colsMap[bp]
+							{ booksList.length > props.rows * colsMap[bp]
 								? <CenterCell>
 									<Button
 										onClick = { props.loadMore }

@@ -32,7 +32,7 @@ const Block = styled.div`
 
 const Block1 = styled(Block)`
 	transform: skewY(-45deg);
-	background: ${ props => props.colors ? props.colors.logo1 : props.theme.logo1 };
+	background: ${R.path([ "theme", "logo1", ])};
 
 	&:nth-child(3) {
 		margin-left: -1px;
@@ -41,11 +41,11 @@ const Block1 = styled(Block)`
 
 const Block2 = styled(Block)`
 	transform: skewY(45deg);
-	background: ${ props => props.colors ? props.colors.logo2 : props.theme.logo2 };
+	background: ${R.path([ "theme", "logo2", ])};
 `;
 
 const Text = styled.div`
-	color: ${ props => props.colors ? props.colors.logo1 : props.theme.logo1 };
+	color: ${R.path([ "theme", "logo1", ])};
 	font-size: 1.2em;
 	text-transform: uppercase;
 	font-weight: bold;

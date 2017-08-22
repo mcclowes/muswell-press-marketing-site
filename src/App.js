@@ -2,6 +2,7 @@ import { ThemeProvider, } from "styled-components";
 import {
 	BrowserRouter as Router,
 	Route,
+	Switch,
 } from "react-router-dom";
 import Helmet from "react-helmet";
 
@@ -15,20 +16,15 @@ import ScrollToTop from "./components/common/ScrollToTop";
 
 import * as vars from "./components/style/vars";
 
+import { siteSettings, booksMap, } from "src/data";
+
 // --------------------------------------------------
 
 injectGlobalStyles();
 
-const defaultColors = {
-	bg: "#fff",
-	body: "transparent",
-	footer: vars.colors.footer,
-	nav: vars.colors.nav,
-	logo1: vars.colors.text,
-	logo2: "#93DADC",
-};
+const defaultColors = siteSettings.defaultColors;
 
-const routes = routesConfig.map(({ component: Comp, colors, ...rest }) => {
+const routes = routesConfig.map(({ component: Comp, colors, data, ...rest }, i) => {
 	const render = props => (
 		<ThemeProvider theme = { { ...defaultColors, ...colors, } }>
 			<div>
@@ -40,19 +36,19 @@ const routes = routesConfig.map(({ component: Comp, colors, ...rest }) => {
 					<link rel="canonical" href="http://http://www.muswell-press.co.uk/" />
 				</Helmet>
 
-				<Nav colors = { colors } key = "Nav" />
+				<Nav key = "Nav" />
 
-				<Main colors = { colors } key = "Main">
-					<Comp colors = { colors } { ...props } />
+				<Main key = "Main">
+					<Comp { ...props } { ...data }/>
 				</Main>
 				
-				<Footer colors = { colors } key = "Footer" />
+				<Footer key = "Footer" />
 			</div>
 		</ThemeProvider>
 	)
 
 	return <Route
-		key = { rest.path }
+		key = { rest.path + i }
 		{ ...rest }
 		render = { render }
 	/>
@@ -62,7 +58,9 @@ export default () =>
 	<Router>
 		<ScrollToTop>
 			<div>
-				{ routes }
+				<Switch>
+					{ routes }
+				</Switch>
 			</div>
 		</ScrollToTop>
 	</Router>;

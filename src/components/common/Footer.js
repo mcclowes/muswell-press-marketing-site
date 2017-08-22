@@ -6,6 +6,8 @@ import * as vars from "../style/vars";
 
 import { Icon, } from "./misc";
 
+import { siteSettings, } from "src/data";
+
 // --------------------------------------------------
 
 const Wrapper = styled.footer`
@@ -54,13 +56,13 @@ const Divider = styled.span`margin: 0 0.5em;`;
 
 const Footer = () =>
 	<Wrapper>
-		<Left>© Muswell Press 2017</Left>
+		<Left>{ siteSettings.footerText }</Left>
 
 		<Right>
 
-			<a href = "https://www.facebook.com/MuswellPress?fref=ts"><Icon type = "facebook-square"/></a>
+			<a href = { siteSettings.facebookUrl }><Icon type = "facebook-square"/></a>
 
-			<a href = "https://twitter.com/MuswellPress"><Icon type = "twitter"/></a>
+			<a href = { siteSettings.twitterUrl }><Icon type = "twitter"/></a>
 
 
 
