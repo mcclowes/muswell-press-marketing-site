@@ -11,9 +11,9 @@ import {
 } from "../common";
 import * as vars from "../style/vars";
 import * as mixins from "../style/mixins";
-import { objMap, } from "../../lib/util";
+import { objMap } from "../../lib/util";
 
-import { aboutPage, } from "src/data";
+import { aboutPage } from "src/data";
 
 // --------------------------------------------------
 
@@ -27,22 +27,25 @@ const Pic = styled.div`
 
 const Title = styled.h1`
 	line-height: 1;
-	margin: 0;
+	text-align: center;
+	text-transform: uppercase;
+	font-family: Montserrat;
+	margin-bottom: 1em;
+	margin-top: 0;
 `;
 
-const About = props =>
-	<Container maxWidth = { 800 }>
+const About = props => (
+	<Container maxWidth={800}>
 		<GridCell>
-			<Title>{ aboutPage.title }</Title>
+			<Title>{aboutPage.title}</Title>
 
-			<Para>
-				{ aboutPage.text }
-			</Para>
+			<Para>{aboutPage.text}</Para>
 
 			<PSpacing />
 
 			<Pic />
 		</GridCell>
-	</Container>;
+	</Container>
+);
 
 export default About;

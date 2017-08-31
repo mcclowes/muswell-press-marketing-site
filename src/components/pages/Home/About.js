@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { Link, } from "react-router-dom";
-import { compose, withState, withHandlers, } from "recompose";
+import { Link } from "react-router-dom";
+import { compose, withState, withHandlers } from "recompose";
 
 import {
 	Container,
@@ -15,9 +15,9 @@ import {
 
 import * as vars from "../../style/vars";
 import * as mixins from "../../style/mixins";
-import { objMap, } from "../../../lib/util";
+import { objMap } from "../../../lib/util";
 
-import { homePage, } from "src/data";
+import { homePage } from "src/data";
 
 // --------------------------------------------------
 
@@ -31,32 +31,27 @@ const spiel1 = `
 
 const CenterCell = styled(TextCell)`
 	text-align: center;
-	${mixins.xs`text-align: left;`}
+	${mixins.xs`text-align: left;`};
 `;
 
 const BigText = styled.p`font-size: 1.5em;`;
 
-const NotAsBigText = styled.p`
-	${mixins.bp.sm.min`font-size: 1.2em;`}
-`;
+const NotAsBigText = styled.p`${mixins.bp.sm.min`font-size: 1.2em;`};`;
 
-const About = () =>
-	<Container maxWidth = { 800 }>
+const About = () => (
+	<Container maxWidth={800}>
 		<CenterCell>
-			<BigText>
-				{ homePage.aboutText1 }
-			</BigText>
+			<BigText>{homePage.aboutText1}</BigText>
 
-			<NotAsBigText>
-				{ homePage.aboutText2 }
-			</NotAsBigText>
+			<NotAsBigText>{homePage.aboutText2}</NotAsBigText>
 
 			<PSpacing />
 
-			<Button to = "/about" text = { homePage.aboutLink } icon = "users"/>
-			
+			<Button to="/about" text={homePage.aboutLink} icon="users" />
+
 			<PSpacing />
 		</CenterCell>
-	</Container>;
+	</Container>
+);
 
 export default About;

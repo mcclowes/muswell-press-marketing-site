@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { Link, } from "react-router-dom";
-import { compose, withState, withHandlers, } from "recompose";
+import { Link } from "react-router-dom";
+import { compose, withState, withHandlers } from "recompose";
 
 import {
 	Container,
@@ -15,22 +15,23 @@ import {
 
 import * as vars from "../../style/vars";
 import * as mixins from "../../style/mixins";
-import { objMap, } from "../../../lib/util";
+import { objMap } from "../../../lib/util";
 
-import { homePage, } from "src/data";
+import { homePage } from "src/data";
 
 // --------------------------------------------------
 
-const books = [ ...homePage.booksBooks, ];
+const books = [...homePage.booksBooks];
 
 const extraBooksNeeded = 3 - books.length;
-for(let i = 0; i < extraBooksNeeded; i++) {
+
+for (let i = 0; i < extraBooksNeeded; i++) {
 	books.push({
 		title: "<BOOK TITLE>",
 		author: "<BOOK AUTHOR>",
 		shorterBlurb: "<BOOK SHORT BLURB>",
 	});
-};
+}
 
 // --------------------------------------------------
 
@@ -41,10 +42,10 @@ const Container1 = styled(Container)`
 `;
 
 const FeaturedBookWrapper = styled(GridCell)`
-	${ mixins.bpEither("width", {
+	${mixins.bpEither("width", {
 		xs: "100%",
 		other: "33.333333%",
-	})}
+	})};
 `;
 
 const FeaturedBookInner = styled(GridCell)`
@@ -52,7 +53,7 @@ const FeaturedBookInner = styled(GridCell)`
 	${mixins.xs`
 		padding-left: 0;
 		padding-right: 0;
-	`}
+	`};
 `;
 
 const FeaturedBookCover = styled.div`
@@ -60,11 +61,9 @@ const FeaturedBookCover = styled.div`
 		width: 40%;		
 		position: relative;
 		z-index: 1;
-	`}
-
-	${ mixins.shadow(0) };
+	`} ${mixins.shadow(0)};
 	&:hover {
-		${ mixins.shadow(0) };
+		${mixins.shadow(0)};
 	}
 `;
 
@@ -84,25 +83,20 @@ const FeaturedBookDetails = styled(TextCell)`
 		position: absolute;
 		top: 0em;
 		right: 0;
-	`}
-	${mixins.bp.sm.min`
+	`} ${mixins.bp.sm.min`
 		padding: 0;
 		margin-top: 3em;
-	`}	
+	`};
 `;
 
-const FeaturedBookDetailsInner = styled.div`
-	${mixins.xs`padding-left: 1em;`}
-`;
+const FeaturedBookDetailsInner = styled.div`${mixins.xs`padding-left: 1em;`};`;
 
 const FeaturedBookTitle = styled.h3`
 	margin-bottom: 0.2em;
 	line-height: 1.1;
 `;
 
-const FeaturedBookAuthor = styled.div`
-	font-weight: bold;
-`;
+const FeaturedBookAuthor = styled.div`font-weight: bold;`;
 
 const CenterCell = styled(GridCell)`
 	flex: 1;
@@ -111,12 +105,10 @@ const CenterCell = styled(GridCell)`
 	${mixins.xs`
 		text-align: left;
 		margin-top: 1em;
-	`}
+	`};
 `;
 
-const TitleCell = styled(TextCell)`
-	flex-basis: 100%;
-`;
+const TitleCell = styled(TextCell)`flex-basis: 100%;`;
 
 const SectionTitle = styled.h2`
 	text-align: center;
@@ -124,46 +116,44 @@ const SectionTitle = styled.h2`
 	${mixins.xs`
 		text-align: left;
 		font-size: 1.5em;
-	`}
-	font-family: ${vars.font.title.family};
+	`} font-family: ${vars.font.title.family};
 	text-transform: uppercase;
 `;
 
-const FeaturedBook = props =>
+const FeaturedBook = props => (
 	<FeaturedBookWrapper>
-		<Link to = { `/book/${ props.slug }` }>
+		<Link to={`/book/${props.slug}`}>
 			<FeaturedBookInner>
 				<FeaturedBookCover>
-					<FeaturedBookCoverImage src = { props.cover && props.cover.url } />
+					<FeaturedBookCoverImage
+						src={props.cover && props.cover.url}
+					/>
 				</FeaturedBookCover>
+
 				<FeaturedBookDetails>
 					<FeaturedBookDetailsInner>
-						<FeaturedBookTitle>
-							{ props.title }
-						</FeaturedBookTitle>
+						<FeaturedBookTitle>{props.title}</FeaturedBookTitle>
 
-						<FeaturedBookAuthor>
-							{ props.author }
-						</FeaturedBookAuthor>
+						<FeaturedBookAuthor>{props.author}</FeaturedBookAuthor>
 
-						<Para>
-							{ props.shorterBlurb }
-						</Para>
+						<Para>{props.shorterBlurb}</Para>
 					</FeaturedBookDetailsInner>
 				</FeaturedBookDetails>
 			</FeaturedBookInner>
 		</Link>
-	</FeaturedBookWrapper>;
+	</FeaturedBookWrapper>
+);
 
-export default () =>
-	<Container1 border maxWidth = { 1000 }>
+export default () => (
+	<Container1 border maxWidth={1000}>
 		<TitleCell>
-			<SectionTitle>{ homePage.booksTitle }</SectionTitle>
+			<SectionTitle>{homePage.booksTitle}</SectionTitle>
 		</TitleCell>
 
-		{ books.map((o, i) => <FeaturedBook { ...o } key = { i } />) }
+		{books.map((o, i) => <FeaturedBook {...o} key={i} />)}
 
 		<CenterCell>
-			<Button to = "/books" text = { homePage.booksLink } icon = "book"/>
+			<Button to="/books" text={homePage.booksLink} icon="book" />
 		</CenterCell>
-	</Container1>;
+	</Container1>
+);

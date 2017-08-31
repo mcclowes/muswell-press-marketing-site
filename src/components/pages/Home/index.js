@@ -4,13 +4,14 @@ import Hero from "./Hero";
 
 // --------------------------------------------------
 
-const Home = props =>
+const Home = props => (
 	<div>
-		<Hero { ...props } />
+		<Hero {...props} />
 
 		<NewBooks />
-		
+
 		<About />
-	</div>;
+	</div>
+);
 
 export default Home;

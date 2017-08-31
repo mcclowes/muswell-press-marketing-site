@@ -4,9 +4,9 @@ import styled from "styled-components";
 import * as mixins from "../style/mixins";
 import * as vars from "../style/vars";
 
-import { Icon, } from "./misc";
+import { Icon } from "./misc";
 
-import { siteSettings, } from "src/data";
+import { siteSettings } from "src/data";
 
 // --------------------------------------------------
 
@@ -15,20 +15,19 @@ const Wrapper = styled.footer`
 	bottom: 0;
 	left: 0;
 	right: 0;
-	${ mixins.bpEither("height", vars.dim.footer.height) } overflow: hidden;
+	${mixins.bpEither("height", vars.dim.footer.height)} overflow: hidden;
 
-	${ ({ theme: { footer, }, }) => `
+	${({ theme: { footer } }) => `
 		background-color: ${footer};
-		${ footer && footer !== vars.colors.footer
+		${footer && footer !== vars.colors.footer
 			? ""
-			: `border-top: 1px solid ${ mixins.tr(0.2) };`
-		}		
+			: `border-top: 1px solid ${mixins.tr(0.2)};`}		
 	`};
 
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	${ mixins.bpEither("padding", vars.dim.nav.margin) };
+	${mixins.bpEither("padding", vars.dim.nav.margin)};
 `;
 
 const Left = styled.div`
@@ -54,19 +53,20 @@ const Right = styled.div`
 
 const Divider = styled.span`margin: 0 0.5em;`;
 
-const Footer = () =>
+const Footer = () => (
 	<Wrapper>
-		<Left>{ siteSettings.footerText }</Left>
+		<Left>{siteSettings.footerText}</Left>
 
 		<Right>
+			<a href={siteSettings.facebookUrl}>
+				<Icon type="facebook-square" />
+			</a>
 
-			<a href = { siteSettings.facebookUrl }><Icon type = "facebook-square"/></a>
-
-			<a href = { siteSettings.twitterUrl }><Icon type = "twitter"/></a>
-
-
-
+			<a href={siteSettings.twitterUrl}>
+				<Icon type="twitter" />
+			</a>
 		</Right>
-	</Wrapper>;
+	</Wrapper>
+);
 
 export default Footer;

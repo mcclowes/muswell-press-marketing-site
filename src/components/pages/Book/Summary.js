@@ -1,6 +1,8 @@
 import styled from "styled-components";
-import { Link, } from "react-router-dom";
-import { compose, withState, withHandlers, } from "recompose";
+import { Link } from "react-router-dom";
+import { compose, withState, withHandlers } from "recompose";
+
+import Moment from "moment";
 
 import {
 	Container,
@@ -14,19 +16,19 @@ import {
 
 import * as vars from "../../style/vars";
 import * as mixins from "../../style/mixins";
-import { objMap, } from "../../../lib/util";
+import { objMap } from "../../../lib/util";
 
 // --------------------------------------------------
 
-const Background1 = styled.div`
-	background-color: ${R.path([ "theme", "bg", ])};
-`;
+const Background1 = styled.div`background-color: ${R.path(["theme", "bg"])};`;
 
 const coverHeights = objMap(
 	vars.dim.gutter.fullNum,
 	(key, value) => `
-		calc(100vh - ${vars.dim.nav.height[key === "xs" ? "xs" : "other"]} - ${mixins.px(value * 2)})
-	`
+		calc(100vh - ${vars.dim.nav.height[
+			key === "xs" ? "xs" : "other"
+		]} - ${mixins.px(value * 2)})
+	`,
 );
 
 const containerHeights = objMap(
@@ -37,13 +39,13 @@ const containerHeights = objMap(
 const flexDir = {
 	xs: "column",
 	other: "row",
-}
+};
 
 const Container1 = styled(Container)`
 	display: flex;
 	justify-content: center;
-	${mixins.bpEither("flex-direction", flexDir)}
-	@media (min-width: ${vars.bps.sm.min}px) and (orientation: landscape) {
+	${mixins.bpEither("flex-direction", flexDir)} @media (min-width: ${vars.bps
+			.sm.min}px) and (orientation: landscape) {
 		min-height: calc(100vh - ${vars.dim.nav.height.other});
 	}
 `;
@@ -62,8 +64,7 @@ const LeftCol = styled(GridCell)`
 	max-width: 500px;
 	flex: 1;
 	display: flex;
-	${mixins.bpEach("max-height", coverHeights)}
-	${mixins.xs`display: none;`}
+	${mixins.bpEach("max-height", coverHeights)} ${mixins.xs`display: none;`};
 `;
 
 const RightCol = styled(GridCell)`
@@ -75,11 +76,11 @@ const RightCol = styled(GridCell)`
 		margin: 0;
 		padding-left: 0;
 		padding-right: 0;
-	`}
+	`};
 `;
 
 const TitleText = styled.p`
-	color: ${R.path([ "theme", "logo1", ])};
+	color: ${R.path(["theme", "logo1"])};
 	font-family: ${vars.font.title.family};
 	font-size: 2.9em;
 	font-weight: bold;
@@ -108,22 +109,19 @@ const Metadata = styled.p`
 `;
 
 const MobileCover = styled.div`
-	${ mixins.bp.sm.min`
+	${mixins.bp.sm.min`
 		display: none;
-	` }
-	${ mixins.xs`
-		border-bottom: 1px solid ${ vars.colors.lines };
-		padding-bottom: ${ vars.dim.gutter.full.xs };
-		margin-bottom: ${ vars.dim.gutter.full.xs };
+	`} ${mixins.xs`
+		border-bottom: 1px solid ${vars.colors.lines};
+		padding-bottom: ${vars.dim.gutter.full.xs};
+		margin-bottom: ${vars.dim.gutter.full.xs};
 
 		& > div {
 			width: 250px;
 			margin: 0 auto;
 		}
-	` };
+	`};
 `;
-
-
 
 // --------------------------------------------------
 
@@ -131,44 +129,44 @@ const Summary = props => (
 	<Background1>
 		<Container1>
 			<LeftCol>
-				<Cover src = { props.cover && props.cover.url } />
+				<Cover src={props.cover && props.cover.url} />
 			</LeftCol>
+
 			<MobileCover>
 				<GridCell>
-					<FullWidthImg src = { props.cover && props.cover.url } />
+					<FullWidthImg src={props.cover && props.cover.url} />
 				</GridCell>
 			</MobileCover>
+
 			<RightCol>
 				<TextCell>
 					<NewText>New</NewText>
 
-					<TitleText>
-						{ props.title }
-					</TitleText>
+					<TitleText>{props.title}</TitleText>
 
-					<SubtitleText>{ props.author }</SubtitleText>
+					<SubtitleText>{props.author}</SubtitleText>
 				</TextCell>
-				
-				<TextCell> 
-					<Para>{ props.blurb }</Para>
+
+				<TextCell>
+					<Para>{props.blurb}</Para>
 				</TextCell>
 
 				<TextCell>
 					<Metadata>
-						{
-							(props.details || [])
-							.map((s, i) => <div key = { i }>{ s }</div>)
-						}
+						<div>Published { Moment(props.releaseDate).format('Do MMMM YYYY') }</div>
+
+						{(props.details || [])
+						.map((s, i) => <div key={i}>{s}</div>)}
 					</Metadata>
 				</TextCell>
 
 				<TextCell>
-					<PSpacing/>
+					<PSpacing />
 
 					<Button
-						href = { props.amazonLink }
-						text = "Buy Now"
-						icon = "shopping_cart"
+						href={props.amazonLink}
+						text="Buy Now"
+						icon="shopping_cart"
 					/>
 				</TextCell>
 			</RightCol>

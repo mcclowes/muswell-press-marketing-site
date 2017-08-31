@@ -1,9 +1,5 @@
-import { ThemeProvider, } from "styled-components";
-import {
-	BrowserRouter as Router,
-	Route,
-	Switch,
-} from "react-router-dom";
+import { ThemeProvider } from "styled-components";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Helmet from "react-helmet";
 
 import routesConfig from "./routesConfig";
@@ -16,7 +12,7 @@ import ScrollToTop from "./components/common/ScrollToTop";
 
 import * as vars from "./components/style/vars";
 
-import { siteSettings, booksMap, } from "src/data";
+import { siteSettings, booksMap } from "src/data";
 
 // --------------------------------------------------
 
@@ -24,43 +20,43 @@ injectGlobalStyles();
 
 const defaultColors = siteSettings.defaultColors;
 
-const routes = routesConfig.map(({ component: Comp, colors, data, ...rest }, i) => {
-	const render = props => (
-		<ThemeProvider theme = { { ...defaultColors, ...colors, } }>
-			<div>
-				<Helmet>
-					<meta charSet="utf-8" />
+const routes = routesConfig.map(
+	({ component: Comp, colors, data, ...rest }, i) => {
+		const render = props => (
+			<ThemeProvider theme={{ ...defaultColors, ...colors }}>
+				<div>
+					<Helmet>
+						<meta charSet="utf-8" />
 
-					<title>Muswell Press</title>
-					
-					<link rel="canonical" href="http://http://www.muswell-press.co.uk/" />
-				</Helmet>
+						<title>Muswell Press</title>
 
-				<Nav key = "Nav" />
+						<link
+							rel="canonical"
+							href="http://http://www.muswell-press.co.uk/"
+						/>
+					</Helmet>
 
-				<Main key = "Main">
-					<Comp { ...props } { ...data }/>
-				</Main>
-				
-				<Footer key = "Footer" />
-			</div>
-		</ThemeProvider>
-	)
+					<Nav key="Nav" />
 
-	return <Route
-		key = { rest.path + i }
-		{ ...rest }
-		render = { render }
-	/>
-});
+					<Main key="Main">
+						<Comp {...props} {...data} />
+					</Main>
 
-export default () =>
+					<Footer key="Footer" />
+				</div>
+			</ThemeProvider>
+		);
+
+		return <Route key={rest.path + i} {...rest} render={render} />;
+	},
+);
+
+export default () => (
 	<Router>
 		<ScrollToTop>
 			<div>
-				<Switch>
-					{ routes }
-				</Switch>
+				<Switch>{routes}</Switch>
 			</div>
 		</ScrollToTop>
-	</Router>;
+	</Router>
+);

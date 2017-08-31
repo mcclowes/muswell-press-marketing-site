@@ -1,29 +1,26 @@
 import styled from "styled-components";
-import { Link, } from "react-router-dom";
-import { compose, withState, withHandlers, } from "recompose";
+import { Link } from "react-router-dom";
+import { compose, withState, withHandlers } from "recompose";
 
-import {
-	Container,
-	GridCell,
-	TextCell,
-	Button,
-} from "../../common";
+import { Container, GridCell, TextCell, Button } from "../../common";
 
 import * as vars from "../../style/vars";
 import * as mixins from "../../style/mixins";
-import { objMap, } from "../../../lib/util";
+import { objMap } from "../../../lib/util";
+
+import { homePage } from "src/data";
 
 // --------------------------------------------------
 
-const Background1 = styled.div`
-	background-color: ${R.path([ "theme", "bg", ])};
-`;
+const Background1 = styled.div`background-color: ${R.path(["theme", "bg"])};`;
 
 const coverHeights = objMap(
 	vars.dim.gutter.fullNum,
 	(key, value) => `
-		calc(100vh - ${vars.dim.nav.height[key === "xs" ? "xs" : "other"]} - ${mixins.px(value * 2)})
-	`
+		calc(100vh - ${vars.dim.nav.height[
+			key === "xs" ? "xs" : "other"
+		]} - ${mixins.px(value * 2)})
+	`,
 );
 
 const containerHeights = objMap(
@@ -35,8 +32,8 @@ const Container1 = styled(Container)`
 	display: flex;
 	justify-content: center;
 	flex-direction: row;
-	${mixins.xs`align-items: center;`}
-	@media (min-width: ${vars.bps.sm.min}px) and (orientation: landscape) {
+	${mixins.xs`align-items: center;`} @media (min-width: ${vars.bps.sm
+			.min}px) and (orientation: landscape) {
 		min-height: calc(100vh - ${vars.dim.nav.height.other});
 	}
 `;
@@ -53,16 +50,15 @@ const Cover = styled.div`
 	${mixins.xs`
 		padding-top: 150%;
 		background-position: top left;
-	`}
+	`};
 `;
 
 const LeftCol = styled(GridCell)`
-	// background-color: blue;
 	max-width: 500px;
 	min-width: 100px;
 	flex: 1;
 	display: flex;
-	${mixins.bpEach("max-height", coverHeights)}
+	${mixins.bpEach("max-height", coverHeights)};
 `;
 
 const RightCol = styled(GridCell)`
@@ -74,15 +70,14 @@ const RightCol = styled(GridCell)`
 		margin: 0;
 		padding-left: 0;
 		padding-right: 0;
-	`}
+	`};
 `;
 
 const TitleText = styled.p`
-	color: ${R.path([ "theme", "logo1", ])};
+	color: ${R.path(["theme", "logo1"])};
 	font-family: ${vars.font.title.family};
 	font-size: 2.9em;
-	${mixins.xs`font-size: 1.5em;`}
-	font-weight: bold;
+	${mixins.xs`font-size: 1.5em;`} font-weight: bold;
 	line-height: 1.1em;
 	text-transform: uppercase;
 	letter-spacing: 0.1em;
@@ -91,51 +86,52 @@ const TitleText = styled.p`
 const MobileText = styled(Container)`
 	padding-top: 0;
 	margin-top: -1em;
-	${mixins.bp.sm.min`display: none;`}
+	${mixins.bp.sm.min`display: none;`};
 `;
 
-const DesktopText = styled.div`
-	${mixins.xs`display: none;`}
-`;
+const DesktopText = styled.div`${mixins.xs`display: none;`};`;
+
+const HeroLink =  "/book/" +  homePage.hero.fields.heroLink.fields.title.toLowerCase().split(' ').join('-');
 
 // --------------------------------------------------
 
 const Text = () => (
-	<TextCell> 
-		<p>Aenean eu leo quam. Pellentesque <b>The Rainbow Conspiracy</b> ornare sem lacinia quam venenatis vestibulum. <b>Stuart Hopps</b> fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+	<TextCell>
+		{ homePage.hero.fields.heroDescription }
 
-		<p><Button to = "/book/lol" text = "Find out more"/></p>
+		<p>
+			<Button 
+				to={ HeroLink } 
+				text="Find out more"
+			/>
+		</p>
 	</TextCell>
 );
 
-const Hero = props =>
+const Hero = props => (
 	<Background1>
 		<Container1>
 			<LeftCol>
-				<Cover src = { vars.bookUrl } />
+				<Cover src={ homePage.hero.fields.heroLink.fields.cover.fields.file.url } />
 			</LeftCol>
 
 			<RightCol>
 				<TextCell>
-					<TitleText> Classic.</TitleText>
-
-					<TitleText> Cult.</TitleText>
-
-					<TitleText> Evergreen.</TitleText>
-
-					<TitleText> Blacklist.</TitleText>
+					<TitleText>
+						<Link to={ HeroLink }>{ homePage.hero.fields.heroTitle }</Link>
+					</TitleText>
 				</TextCell>
-				
+
 				<DesktopText>
-					<Text/>
+					<Text />
 				</DesktopText>
-			</RightCol>			
+			</RightCol>
 		</Container1>
+
 		<MobileText>
-			<Text/>
+			<Text />
 		</MobileText>
-	</Background1>;
-
-
+	</Background1>
+);
 
 export default Hero;

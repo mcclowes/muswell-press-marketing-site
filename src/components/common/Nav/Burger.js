@@ -3,13 +3,14 @@ import styled from "styled-components";
 
 // --------------------------------------------------
 
-const Burger = props =>
-	<Wrapper { ...props }>
-		<Bottom { ...props }>
-			<Top { ...props } />
-			<Middle { ...props } />
+const Burger = props => (
+	<Wrapper {...props}>
+		<Bottom {...props}>
+			<Top {...props} />
+			<Middle {...props} />
 		</Bottom>
-	</Wrapper>;
+	</Wrapper>
+);
 
 Burger.defaultProps = {
 	padding: 10,
@@ -47,8 +48,7 @@ const Bottom = styled(Bar)`
 		p.open
 			? `transform: translate3d(0, ${(p.layerSpacing + p.layerHeight) *
 					-1}px, 0) rotate(-45deg);`
-			: ""}
-	transition-duration: ${p => 0.15 * 2 * p.transitionDuration}s;
+			: ""} transition-duration: ${p => 0.15 * 2 * p.transitionDuration}s;
 	transition-delay: ${p =>
 		p.open
 			? 0.32 * 2 * p.transitionDuration
@@ -61,8 +61,7 @@ const Bottom = styled(Bar)`
 
 const Middle = styled(Bar)`
 	top: ${p => (p.open ? 0 : (p.layerSpacing + p.layerHeight) * -1)}px;
-	${p => (p.open ? `transform: rotate(-90deg);` : "")}	
-	${p => `transition:
+	${p => (p.open ? `transform: rotate(-90deg);` : "")} ${p => `transition:
 		top
 		${0.12 * 2 * p.transitionDuration}s
 		${(p.open ? 0.18 : 0.3) * 2 * p.transitionDuration}s
@@ -72,9 +71,9 @@ const Middle = styled(Bar)`
 		${0.15 * 2 * p.transitionDuration}s
 		${p.open ? `${0.42 * 2 * p.transitionDuration}s` : ""}
 		${p.open
-		? "cubic-bezier(0.215, 0.61, 0.355, 1)"
-		: "cubic-bezier(0.55, 0.055, 0.675, 0.19)"};
-	`}
+			? "cubic-bezier(0.215, 0.61, 0.355, 1)"
+			: "cubic-bezier(0.55, 0.055, 0.675, 0.19)"};
+	`};
 `;
 
 const Top = styled(Bar)`
@@ -91,7 +90,7 @@ const Top = styled(Bar)`
 		${0.1 * 2 * p.transitionDuration}s
 		${p.open ? `${0.27 * 2 * p.transitionDuration}s` : ""}
 		linear;
-	`}
+	`};
 `;
 
 // --------------------------------------------------

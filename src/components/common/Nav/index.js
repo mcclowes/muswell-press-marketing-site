@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components";
-import { Link, } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import * as mixins from "../../style/mixins";
 import * as vars from "../../style/vars";
-import { objMap, } from "../../../lib/util";
+import { objMap } from "../../../lib/util";
 import routesConfig from "../../../routesConfig";
 
 import Links from "./Links";
@@ -23,49 +23,46 @@ export default class Nav extends React.Component {
 	}
 
 	render() {
-
 		return (
 			<Wrapper>
 				<Inner>
 					<MobileStuff>
-						<Fade visible = { this.state.open }>
+						<Fade visible={this.state.open}>
 							<Dark
-								onClick = { () =>
+								onClick={() =>
 									this.setState({
 										open: false,
-									}) 
-								}
+									})}
 							/>
 						</Fade>
 					</MobileStuff>
 
 					<Links
-						links = { routesConfig }
-						close = { () =>
+						links={routesConfig}
+						close={() =>
 							this.setState({
 								open: false,
-							}) }
-						{ ...this.state }
+							})}
+						{...this.state}
 					/>
 
 					<MobileStuff>
-						<Overlay { ...this.state }/>
-						
+						<Overlay {...this.state} />
+
 						<BurgerWrapper
-							onClick = { () =>
+							onClick={() =>
 								this.setState({
 									open: !this.state.open,
-								})
-							}
+								})}
 						>
 							<Burger
-								{ ...this.state }
-								padding = { mixins.num(vars.dim.nav.margin.xs) }
-								color = { vars.colors.text }
+								{...this.state}
+								padding={mixins.num(vars.dim.nav.margin.xs)}
+								color={vars.colors.text}
 							/>
 						</BurgerWrapper>
 					</MobileStuff>
-					
+
 					<Logo />
 				</Inner>
 			</Wrapper>
@@ -76,11 +73,10 @@ export default class Nav extends React.Component {
 // --------------------------------------------------
 
 const Wrapper = styled.nav`
-	${ mixins.bp.sm.min`${ mixins.shadow(0) }` } ${ mixins.bpEither(
-		"height",
-		vars.dim.nav.height,
-	) }
-	background-color: ${R.path([ "theme", "nav", ])};
+	${mixins.bp.sm.min`${mixins.shadow(0)}`} ${mixins.bpEither(
+			"height",
+			vars.dim.nav.height,
+		)} background-color: ${R.path(["theme", "nav"])};
 	left: 0;
 	position: absolute;
 	right: 0;
@@ -102,18 +98,18 @@ const Inner = styled.div`
 `;
 
 const MobileStuff = styled.div`
-	${ mixins.bp.sm.min`display: none;`} ${mixins.contained()};
+	${mixins.bp.sm.min`display: none;`} ${mixins.contained()};
 `;
 
 const Dark = styled.div`
-	${ mixins.contained() } position: fixed;
+	${mixins.contained()} position: fixed;
 	background: ${mixins.tr(0.5)};
 `;
 
 const Overlay = styled.div`
-	${ mixins.contained() } ${({ open, }) =>
-	open ? mixins.shadow(1) : ""} transition: 0.3s all ease-out;
-	background-color: ${R.path([ "theme", "nav", ])};
+	${mixins.contained()} ${({ open }) =>
+			open ? mixins.shadow(1) : ""} transition: 0.3s all ease-out;
+	background-color: ${R.path(["theme", "nav"])};
 `;
 
 const BurgerWrapper = styled.div`
@@ -123,8 +119,8 @@ const BurgerWrapper = styled.div`
 	margin-top: -20px;
 `;
 
-const Logo = props =>
-	<LogoWrapper to = "/">
+const Logo = props => (
+	<LogoWrapper to="/">
 		{
 			// true
 			// ? <LogoText>Muswell Press</LogoText>
@@ -132,16 +128,17 @@ const Logo = props =>
 		}
 
 		<_Logo />
-	</LogoWrapper>;
+	</LogoWrapper>
+);
 
-const IndexLink = props => <Link to = "/" { ...props } />;
+const IndexLink = props => <Link to="/" {...props} />;
 
-const LogoWrapper = styled(IndexLink)` // should be IndexLink
+const LogoWrapper = styled(IndexLink)`
+	// should be IndexLink
 	position: absolute;
 	top: 0;
 	bottom: 0;
-	${ mixins.bpEither("left", vars.dim.nav.margin )}
-	display: flex;
+	${mixins.bpEither("left", vars.dim.nav.margin)} display: flex;
 	flex-direction: row;
 	align-items: center;
 `;
