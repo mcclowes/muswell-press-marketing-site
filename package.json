@@ -33,7 +33,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "yarn install && yarn run build && react-scripts build",
+    "build": "yarn install && yarn run data && react-scripts build",
     "static": "node scripts/static",
     "data": "node scripts/static/makeDataFile",
     "test": "react-scripts test --env=jsdom",
