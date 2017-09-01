@@ -43,13 +43,13 @@ const Cover = styled.div`
 	height: 100%;
 
 	background-image: url(${R.prop("src")});
-	background-position: top right;
+	//background-position: top right;
 	background-size: contain;
 	background-repeat: no-repeat;
 
 	${mixins.xs`
-		padding-top: 150%;
-		background-position: top left;
+		padding-top: 100%;
+		background-position: center center;
 	`};
 `;
 
@@ -71,6 +71,7 @@ const RightCol = styled(GridCell)`
 		padding-left: 0;
 		padding-right: 0;
 	`};
+	${mixins.xs`display: none;`};
 `;
 
 const TitleText = styled.p`
@@ -85,15 +86,22 @@ const TitleText = styled.p`
 
 const MobileText = styled(Container)`
 	padding-top: 0;
-	margin-top: -1em;
 	${mixins.bp.sm.min`display: none;`};
 `;
-
-const DesktopText = styled.div`${mixins.xs`display: none;`};`;
 
 const HeroLink =  "/book/" +  homePage.hero.fields.heroLink.fields.title.toLowerCase().split(' ').join('-');
 
 // --------------------------------------------------
+
+const Header = () => (
+	<TextCell>
+		<TitleText>
+			<Link to={ HeroLink }>
+				{ homePage.hero.fields.heroTitle }
+			</Link>
+		</TitleText>
+	</TextCell>
+);
 
 const Text = () => (
 	<TextCell>
@@ -116,19 +124,15 @@ const Hero = props => (
 			</LeftCol>
 
 			<RightCol>
-				<TextCell>
-					<TitleText>
-						<Link to={ HeroLink }>{ homePage.hero.fields.heroTitle }</Link>
-					</TitleText>
-				</TextCell>
+				<Header />
 
-				<DesktopText>
-					<Text />
-				</DesktopText>
+				<Text />
 			</RightCol>
 		</Container1>
 
 		<MobileText>
+			<Header />
+
 			<Text />
 		</MobileText>
 	</Background1>

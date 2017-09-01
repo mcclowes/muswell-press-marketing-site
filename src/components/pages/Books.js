@@ -23,8 +23,8 @@ import { booksList, } from "src/data";
 booksList.reverse();
 
 const colsMap = {
-	xs: 3,
-	sm: 4,
+	xs: 2,
+	sm: 3,
 	md: 5,
 	lg: 5,
 };
