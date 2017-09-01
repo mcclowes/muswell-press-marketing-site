@@ -33,7 +33,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "node scripts/static/makeDataFile && react-scripts build",
     "static": "node scripts/static",
     "data": "node scripts/static/makeDataFile",
     "test": "react-scripts test --env=jsdom",
