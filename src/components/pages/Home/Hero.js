@@ -97,7 +97,7 @@ const Header = () => (
 	<TextCell>
 		<TitleText>
 			<Link to={ HeroLink }>
-				{ homePage.hero.fields.heroTitle }
+				{ homePage.hero.fields.heroHeader }
 			</Link>
 		</TitleText>
 	</TextCell>
