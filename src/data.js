@@ -3,11 +3,10 @@ import marked from "marked";
 
 import rawdata from "./rawdata";
 
-const slugify = x => (
+const slugify = x =>
 	_slugify(x, {
 		lower: true,
-	})
-);
+	});
 
 const makeMapUsingSlugs = list =>
 	list.reduce(
@@ -23,11 +22,7 @@ const makeMapUsingSlugs = list =>
 // transform a field or do something to an existing field to add a new one
 const adjustFields = (a, b, fn) => fieldsObj => ({
 	...fieldsObj,
-	...(
-		fieldsObj[a]
-		? { [b]: fn(fieldsObj[a]), }
-		: {}
-	),
+	...(fieldsObj[a] ? { [b]: fn(fieldsObj[a]) } : {}),
 });
 
 const shapeImageField = o => {
@@ -36,13 +31,7 @@ const shapeImageField = o => {
 			fields: {
 				file: {
 					url,
-					details: {
-						size,
-						image: {
-							width,
-							height,
-						},
-					},
+					details: { size, image: { width, height } },
 					fileName,
 					contentType,
 				},
@@ -57,8 +46,7 @@ const shapeImageField = o => {
 			url,
 			width,
 		};
-	}
-	else {
+	} else {
 		return o;
 	}
 };
@@ -76,38 +64,38 @@ const defaultFieldShaping = R.pipe(
 let siteData = {};
 
 const constructBase = (target, dest) => {
-	if ( typeof target === "object" || typeof target === "array" ) {
+	if (typeof target === "object" || typeof target === "array") {
 		R.pipe(
 			R.map(item => {
 				let shapedItem = null;
 
 				if (item && item.sys) {
-					const itemType = item.sys.contentType ? item.sys.contentType.sys.id : item.sys.type;
+					const itemType = item.sys.contentType
+						? item.sys.contentType.sys.id
+						: item.sys.type;
 
 					shapedItem = {
 						...defaultFieldShaping(item.fields),
 						createdAt: item.sys.createdAt,
 					};
 
-					dest[itemType] = (
-						dest[itemType]
+					dest[itemType] = dest[itemType]
 						? dest[itemType].concat(shapedItem)
-						: [ shapedItem, ]
-					);
+						: [shapedItem];
 				} else {
 					shapedItem = item;
 				}
-			})
+			}),
 		)(target);
 	}
 };
 
-const shapeObjectNicely = (target) => {
+const shapeObjectNicely = target => {
 	let shapedTarget = target;
 
-	if ( typeof target === "object" || typeof target === "array" ) {
+	if (typeof target === "object" || typeof target === "array") {
 		return R.map(item => {
-			if (item && item.fields) { 
+			if (item && item.fields) {
 				item.fields = {
 					...defaultFieldShaping(item.fields),
 					createdAt: item.sys.createdAt,
@@ -126,7 +114,7 @@ const shapeObjectNicely = (target) => {
 constructBase(rawdata.items, siteData);
 siteData = shapeObjectNicely(siteData);
 // Flatten objects containing single objects
-siteData = R.map(x => x.length === 1 ? x[0] : x)(siteData);
+siteData = R.map(x => (x.length === 1 ? x[0] : x))(siteData);
 
 console.log(siteData);
 

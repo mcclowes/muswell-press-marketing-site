@@ -90,8 +90,8 @@ export const dimensions = {
 	},
 	footer: {
 		height: {
-			xs: "50px",
-			other: "60px",
+			xs: "200px",
+			other: "120px",
 		},
 	},
 	gutter: {

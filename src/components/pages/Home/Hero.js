@@ -1,11 +1,11 @@
 import styled from "styled-components";
-import { Link, } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-import { Container, GridCell, TextCell, Button, Para, } from "../../common";
+import { Container, GridCell, TextCell, Button, Para } from "../../common";
 
 import * as vars from "../../style/vars";
 import * as mixins from "../../style/mixins";
-import { objMap, } from "../../../lib/util";
+import { objMap } from "../../../lib/util";
 
 import siteData from "src/data";
 
@@ -88,31 +88,29 @@ const MobileText = styled(Container)`
 	${mixins.bp.sm.min`display: none;`};
 `;
 
-const HeroLink =  "/book/" +  siteData.homePage.hero.heroLink.title.toLowerCase().split(' ').join('-');
+const HeroLink =
+	"/book/" +
+	siteData.homePage.hero.heroLink.title
+		.toLowerCase()
+		.split(" ")
+		.join("-");
 
 // --------------------------------------------------
 
 const Header = () => (
 	<TextCell>
 		<TitleText>
-			<Link to={ HeroLink }>
-				{ siteData.homePage.hero.heroHeader }
-			</Link>
+			<Link to={HeroLink}>{siteData.homePage.hero.heroHeader}</Link>
 		</TitleText>
 	</TextCell>
 );
 
 const Text = () => (
 	<TextCell>
-		<Para>
-			{ siteData.homePage.hero.heroDescription }
-		</Para>
+		<Para>{siteData.homePage.hero.heroDescription}</Para>
 
 		<div>
-			<Button 
-				to = { HeroLink } 
-				text = "Find out more"
-			/>
+			<Button to={HeroLink} text="Find out more" />
 		</div>
 	</TextCell>
 );
@@ -121,7 +119,7 @@ const Hero = props => (
 	<Background1>
 		<Container1>
 			<LeftCol>
-				<Cover src = { siteData.homePage.hero.heroLink.cover.url } />
+				<Cover src={siteData.homePage.hero.heroLink.cover.url} />
 			</LeftCol>
 
 			<RightCol>

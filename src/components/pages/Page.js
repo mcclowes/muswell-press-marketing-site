@@ -1,21 +1,16 @@
 import styled from "styled-components";
 
-import {
-	Container,
-	GridCell,
-	Para,
-	PSpacing,
-} from "../common";
+import { Container, GridCell, Para, PSpacing } from "../common";
 import * as vars from "../style/vars";
 import * as mixins from "../style/mixins";
-import { objMap, } from "../../lib/util";
+import { objMap } from "../../lib/util";
 
 import siteData from "src/data";
 
 // --------------------------------------------------
 
 const Pic = styled.div`
-	background-image: url(${ ( { page, } ) => page && page.url });
+	background-image: url(${({ page }) => page && page.url});
 	background-size: cover;
 	background-position: top center;
 	width: 100%;
@@ -32,40 +27,40 @@ const Title = styled.h1`
 	margin-top: 0;
 `;
 
-const Page = ( { pageSlug, } ) => {
-	const page = siteData.aboutPage.find( ({ slug, }) => slug === pageSlug );
-	
-	return ( 
-		<Container maxWidth = { 800 }>
-			<GridCell>
-				{ page.title && <Title>{ page.title }</Title> }
+const Page = ({ pageSlug }) => {
+	const page = siteData.aboutPage.find(({ slug }) => slug === pageSlug);
 
-				{ 
-					page.text && 
-					<div dangerouslySetInnerHTML = {{
-						__html: page.text,
-					}}/> 
-				}
+	return (
+		<Container maxWidth={800}>
+			<GridCell>
+				{page.title && <Title>{page.title}</Title>}
+
+				{page.text && (
+					<div
+						dangerouslySetInnerHTML={{
+							__html: page.text,
+						}}
+					/>
+				)}
 
 				<PSpacing />
 
-				{ page.picture && <Pic page = { page.picture } /> }
+				{page.picture && <Pic page={page.picture} />}
 
-				{ 
-					page.advisoryBoard && 
-					(
-						<div>
-							<Title>Advisory Board</Title>
-						
-							<div dangerouslySetInnerHTML = {{
+				{page.advisoryBoard && (
+					<div>
+						<Title>Advisory Board</Title>
+
+						<div
+							dangerouslySetInnerHTML={{
 								__html: page.advisoryBoard,
-							}}/> 
-						</div>
-					)
-				}
+							}}
+						/>
+					</div>
+				)}
 			</GridCell>
 		</Container>
-	)
+	);
 };
 
 export default Page;

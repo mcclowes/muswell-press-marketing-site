@@ -5,23 +5,19 @@ import { compose, withState, withHandlers } from "recompose";
 import {
 	Container,
 	GridCell,
-	TextCell,
-	FullWidthImg,
-	Para,
-	Button,
-	PSpacing,
 	Only,
 } from "../common";
-import * as vars from "../style/vars";
 import * as mixins from "../style/mixins";
-import { objMap, } from "../../lib/util";
+import { objMap } from "../../lib/util";
 
 import siteData from "src/data";
 
 // --------------------------------------------------
 
 const booksList = siteData.book;
-booksList.sort( (x, y) => ( x.releaseDate || x.createdAt ) + ( y.releaseDate || y.createdDate ) );
+booksList.sort(
+	(x, y) => (x.releaseDate || x.createdAt) + (y.releaseDate || y.createdDate),
+);
 
 const colsMap = {
 	xs: 2,
@@ -52,20 +48,12 @@ const OtherBookCover = styled.div`
 
 const OtherBook = props => (
 	<OtherBookWrapper>
-		<Link to = { `/book/${ props.slug }` }>
-			<OtherBookCover src = { props.cover && props.cover.url }  />
+		<Link to={`/book/${props.slug}`}>
+			<OtherBookCover src={props.cover && props.cover.url} />
 
 			<OtherBookTitle>{props.title}</OtherBookTitle>
 
-			{
-				props.author
-				? (
-					<div>
-						{ props.author.map( x => x.name ) }
-					</div>
-				)
-				: null
-			}
+			{props.author ? <div>{props.author.map(x => x.name)}</div> : null}
 		</Link>
 	</OtherBookWrapper>
 );
@@ -75,14 +63,14 @@ const Row = styled.div`
 	flex-direction: row;
 `;
 
-const Rows = ( { rows, cols, } ) => {
+const Rows = ({ rows, cols }) => {
 	const rowsArr = [];
 
 	for (let i = 0; i < rows; i++) {
 		rowsArr.push(
 			booksList
-			.slice(i * cols, (i + 1) * cols)
-			.map((o, i) => <OtherBook { ...o } key = { o.title + i } />),
+				.slice(i * cols, (i + 1) * cols)
+				.map((o, i) => <OtherBook {...o} key={o.title + i} />),
 		);
 	}
 
@@ -116,26 +104,24 @@ const Title = styled.h1`
 const _Grid = props => {
 	return (
 		<div>
-			{
-				Object.keys(colsMap).map(bp => {
-					const OnlyBp = Only[bp];
+			{Object.keys(colsMap).map(bp => {
+				const OnlyBp = Only[bp];
 
-					return (
-						<OnlyBp key={bp}>
-							<Rows rows={props.rows} cols={colsMap[bp]} />
+				return (
+					<OnlyBp key={bp}>
+						<Rows rows={props.rows} cols={colsMap[bp]} />
 
-							{booksList.length > props.rows * colsMap[bp] ? (
-								<CenterCell>
-									<Button
-										onClick={props.loadMore}
-										text="Load More"
-									/>
-								</CenterCell>
-							) : null}
-						</OnlyBp>
-					);
-				})
-			}
+						{booksList.length > props.rows * colsMap[bp] ? (
+							<CenterCell>
+								<Button
+									onClick={props.loadMore}
+									text="Load More"
+								/>
+							</CenterCell>
+						) : null}
+					</OnlyBp>
+				);
+			})}
 		</div>
 	);
 };

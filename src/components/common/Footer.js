@@ -4,18 +4,26 @@ import styled from "styled-components";
 import * as mixins from "../style/mixins";
 import * as vars from "../style/vars";
 
-import { Icon, Container, } from "./misc";
+import { Icon } from "./misc";
 
 import siteData from "src/data";
 
 // --------------------------------------------------
 
 const Wrapper = styled.footer`
-	position: absolute;
+	align-items: center;
 	bottom: 0;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
 	left: 0;
-	right: 0;
+	margin: 0;
 	overflow: hidden;
+	position: absolute;
+	right: 0;
+
+	${mixins.bpEither("height", vars.dim.footer.height)};
+	${mixins.bpEither("max-height", vars.dim.footer.height)};
 
 	${({ theme: { footer } }) => `
 		background-color: ${footer};
@@ -23,78 +31,86 @@ const Wrapper = styled.footer`
 			? ""
 			: `border-top: 1px solid ${mixins.tr(0.2)};`}		
 	`};
-
-	> div {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-	}
 `;
 
-const Left = styled.div`
-	font-weight: bold;
-	opacity: 0.67;
-	font-size: 0.8em;
-
-	a {
-		display: block;
-	}
-
-	& > a {
-		&:hover,
-		&:active {
-			text-decoration: underline;
-		}
-	}
-`;
-
-const Right = styled.div`
-	opacity: 0.67;
+const Links = styled.div`
 	display: flex;
-	flex-direction: row;
-	font-size: 1.5em;
+	justify-content: space-around;
+
+	margin: 0 1em;
+
+	${mixins.bpEither("flex-direction", {
+		xs: "column",
+		other: "row",
+	})};
+
+	${mixins.bpEither("align-items", {
+		xs: "flex-start",
+		other: "center",
+	})};
+
+	${mixins.bpEither("align-self", {
+		xs: "flex-start",
+		other: "center",
+	})};
 
 	a {
-		margin-left: 0.5em;
-	}
-
-	& > a {
-		&:hover,
-		&:active {
-			text-decoration: underline;
-		}
+		margin: 0.2em 0.5em;
 	}
 `;
 
-const Divider = styled.span`margin: 0 0.5em;`;
+const Social = styled.div`
+	align-items: center;
+	display: flex;
+	justify-content: space-around;
+
+	a {
+		font-size: 24px;
+		margin: 0 0.3em;
+	}
+`;
+
+const FooterText = styled.div`
+	align-items: center;
+	display: flex;
+	justify-content: space-around;
+`;
 
 // --------------------------------------------------
 
 const Footer = () => (
 	<Wrapper>
-		<Container maxWidth = { 800 }>
-			<Left>
-				{
-					siteData.aboutPage.map( page => {
-						return <a href = { "/" + page.slug }>
-							{ page.title }
-						</a>
-					})
-				}
+		<Links>
+			{siteData.aboutPage.map(({ slug, title }) => {
+				return (
+					<a href={"/" + slug} key={slug}>
+						{title}
+					</a>
+				);
+			})}
+		</Links>
 
-				{ siteData.generalSettings.footerText }
-			</Left>
+		<Social>
+			<a href={siteData.generalSettings.facebookUrl}>
+				<Icon type="facebook-square" />
+			</a>
 
-			<Right>
-				<a href = { siteData.generalSettings.facebookUrl }>
-					<Icon type = "facebook-square" />
-				</a>
+			<a href={siteData.generalSettings.twitterUrl}>
+				<Icon type="twitter" />
+			</a>
 
-				<a href = { siteData.generalSettings.twitterUrl }>
-					<Icon type = "twitter" />
-				</a>
-			</Right>
-		</Container>
+			<a href={siteData.generalSettings.instagramUrl}>
+				<Icon type="instagram" />
+			</a>
+
+			<a href={siteData.generalSettings.linkedinUrl}>
+				<Icon type="linkedin" />
+			</a>
+		</Social>
+
+		<FooterText>
+			<a href="/">{siteData.generalSettings.footerText}</a>
+		</FooterText>
 	</Wrapper>
 );
 

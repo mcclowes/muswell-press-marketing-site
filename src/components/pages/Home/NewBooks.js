@@ -1,24 +1,20 @@
 import styled from "styled-components";
-import { Link, } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-import {
-	Container,
-	GridCell,
-	TextCell,
-	Para,
-	Button,
-} from "../../common";
+import { Container, GridCell, TextCell, Para, Button } from "../../common";
 
 import * as vars from "../../style/vars";
 import * as mixins from "../../style/mixins";
-import { objMap, } from "../../../lib/util";
+import { objMap } from "../../../lib/util";
 
 import siteData from "src/data";
 
 // --------------------------------------------------
 
-const books = [ ...siteData.homePage.booksBooks, ];
-books.sort( (x, y) => ( x.releaseDate || x.createdAt ) + ( y.releaseDate || y.createdDate ) );
+const books = [...siteData.homePage.booksBooks];
+books.sort(
+	(x, y) => (x.releaseDate || x.createdAt) + (y.releaseDate || y.createdDate),
+);
 
 const extraBooksNeeded = 3 - books.length;
 
@@ -39,10 +35,10 @@ const Container1 = styled(Container)`
 `;
 
 const FeaturedBookWrapper = styled(GridCell)`
-	${ mixins.bpEither("width", {
+	${mixins.bpEither("width", {
 		xs: "100%",
 		other: "33.333333%",
-	}) };
+	})};
 `;
 
 const FeaturedBookInner = styled(GridCell)`
@@ -121,27 +117,25 @@ const SectionTitle = styled.h2`
 
 const FeaturedBook = props => (
 	<FeaturedBookWrapper>
-		<Link to = { `/book/${ props.slug }` }>
+		<Link to={`/book/${props.slug}`}>
 			<FeaturedBookInner>
 				<FeaturedBookCover>
-					<FeaturedBookCoverImage src = { props.cover && props.cover.url }/>
+					<FeaturedBookCoverImage
+						src={props.cover && props.cover.url}
+					/>
 				</FeaturedBookCover>
 
 				<FeaturedBookDetails>
 					<FeaturedBookDetailsInner>
-						<FeaturedBookTitle>{ props.title }</FeaturedBookTitle>
+						<FeaturedBookTitle>{props.title}</FeaturedBookTitle>
 
-						{
-							props.author
-							? (
-								<FeaturedBookAuthor>
-									{ props.author.map( x => x.name ) }
-								</FeaturedBookAuthor>
-							)
-							: null
-						}
+						{props.author ? (
+							<FeaturedBookAuthor>
+								{props.author.map(x => x.name)}
+							</FeaturedBookAuthor>
+						) : null}
 
-						<Para>{ props.shorterBlurb }</Para>
+						<Para>{props.shorterBlurb}</Para>
 					</FeaturedBookDetailsInner>
 				</FeaturedBookDetails>
 			</FeaturedBookInner>
@@ -150,19 +144,19 @@ const FeaturedBook = props => (
 );
 
 export default () => (
-	<Container1 border maxWidth = { 1000 }>
+	<Container1 border maxWidth={1000}>
 		<TitleCell>
-			<SectionTitle>{ siteData.homePage.booksTitle }</SectionTitle>
+			<SectionTitle>{siteData.homePage.booksTitle}</SectionTitle>
 		</TitleCell>
 
-		{ 
-			R.pipe(
-				R.map( (o, i) => <FeaturedBook { ...o } key = { i } />),
-			)(books)
-		}
+		{R.pipe(R.map((o, i) => <FeaturedBook {...o} key={i} />))(books)}
 
 		<CenterCell>
-			<Button to="/books" text = { siteData.homePage.booksLink } icon = "book" />
+			<Button
+				to="/books"
+				text={siteData.homePage.booksLink}
+				icon="book"
+			/>
 		</CenterCell>
 	</Container1>
 );

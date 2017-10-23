@@ -115,21 +115,27 @@ const shuffle = arr => {
 
 // --------------------------------------------------
 
-const Thing = ({ title, text, author, link, image, quote, }) => (
+const Thing = ({ title, text, author, link, image, quote }) => (
 	<ThingWrapper className="masonry-item">
-		<MaybeLink href = { link }>
+		<MaybeLink href={link}>
 			<ThingInner>
-				{ image ? <FullWidthImg src = { image } /> : null }
+				{image ? <FullWidthImg src={image} /> : null}
 
 				<GridCell>
 					<TextCell>
-						{ title ? <ThingTitle>{ title }</ThingTitle> : null }
+						{title ? <ThingTitle>{title}</ThingTitle> : null}
 
-						{ text ? <ThingText><p dangerouslySetInnerHTML = {{ __html: text, }}/> </ThingText> : null }
+						{text ? (
+							<ThingText>
+								<p
+									dangerouslySetInnerHTML={{ __html: text }}
+								/>{" "}
+							</ThingText>
+						) : null}
 
-						{ quote ? <ThingQuote>"{ quote }"</ThingQuote> : null }
+						{quote ? <ThingQuote>"{quote}"</ThingQuote> : null}
 
-						{ author ? <ThingAuthor>{ author }</ThingAuthor> : null }
+						{author ? <ThingAuthor>{author}</ThingAuthor> : null}
 					</TextCell>
 				</GridCell>
 			</ThingInner>
@@ -139,25 +145,21 @@ const Thing = ({ title, text, author, link, image, quote, }) => (
 
 // --------------------------------------------------
 
-const Main = props => (
-	( props.press )
-	? (
+const Main = props =>
+	props.press ? (
 		<Background>
 			<ContainerAtEdges>
 				<TitleCell>
 					<SectionTitle>Press</SectionTitle>
 				</TitleCell>
 
-				<Inner className = "masonry-items">
-					{
-						shuffle( props.press )
-						.map((x, i) => <Thing { ...x } key = { i } />)
-					}
+				<Inner className="masonry-items">
+					{shuffle(props.press).map((x, i) => (
+						<Thing {...x} key={i} />
+					))}
 				</Inner>
 			</ContainerAtEdges>
 		</Background>
-	)
-	: null
-);
+	) : null;
 
 export default enhance(Main);
