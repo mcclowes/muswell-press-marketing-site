@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import masonry from "masonry-layout";
 import imagesloaded from "imagesloaded";
-import { lifecycle } from "recompose";
+import { lifecycle, } from "recompose";
 
 import {
 	Container,
@@ -15,7 +15,7 @@ import {
 
 import * as vars from "../../style/vars";
 import * as mixins from "../../style/mixins";
-import { objMap, sentenceCase } from "../../../lib/util";
+import { objMap, sentenceCase, } from "../../../lib/util";
 
 import siteData from "src/data";
 
@@ -42,7 +42,7 @@ const enhance = lifecycle({
 });
 
 const Background = styled.div`
-	background: ${R.pipe(R.path(["theme", "bg"]), color =>
+	background: ${R.pipe(R.path(["theme", "bg",]), color =>
 		mixins.darken(color, 0.1),
 	)};
 `;
@@ -51,9 +51,13 @@ const ContainerAtEdges = styled(Container)`
 	${mixins.xs`margin: 0 -${vars.dim.gutter.tripleHalf.xs}`};
 `;
 
-const Inner = styled.div`${mixins.clearfix};`;
+const Inner = styled.div`
+	${mixins.clearfix};
+`;
 
-const TitleCell = styled(TextCell)`flex-basis: 100%;`;
+const TitleCell = styled(TextCell)`
+	flex-basis: 100%;
+`;
 
 const SectionTitle = styled.h2`
 	text-align: center;
@@ -75,9 +79,11 @@ const ThingWrapper = styled(GridCell)`
 `;
 
 const MaybeLink = ({ href, ...props }) =>
-	href ? <a href={href} {...props} /> : <div {...props} />;
+	href ? <a href = { href } { ...props } /> : <div { ...props } />;
 
-const ThingInner = styled.div`background: white;`;
+const ThingInner = styled.div`
+	background: white;
+`;
 
 const ThingTitle = styled.p`
 	font-family: ${vars.font.title.family};
@@ -104,7 +110,7 @@ const randomInt = x => Math.floor(Math.random() * x) % x;
 
 const shuffle = arr => {
 	const r = [];
-	const arrCopy = [...arr];
+	const arrCopy = [...arr,];
 	arr.forEach(() => {
 		const randomIndex = randomInt(arrCopy.length);
 		r.push(arrCopy[randomIndex]);
@@ -115,11 +121,11 @@ const shuffle = arr => {
 
 // --------------------------------------------------
 
-const Thing = ({ title, text, author, link, image, quote }) => (
-	<ThingWrapper className="masonry-item">
-		<MaybeLink href={link}>
+const Thing = ({ title, text, author, link, image, quote, }) => (
+	<ThingWrapper className = "masonry-item">
+		<MaybeLink href = { link }>
 			<ThingInner>
-				{image ? <FullWidthImg src={image} /> : null}
+				{image ? <FullWidthImg src = { image } /> : null}
 
 				<GridCell>
 					<TextCell>
@@ -128,7 +134,7 @@ const Thing = ({ title, text, author, link, image, quote }) => (
 						{text ? (
 							<ThingText>
 								<p
-									dangerouslySetInnerHTML={{ __html: text }}
+									dangerouslySetInnerHTML = { { __html: text, } }
 								/>{" "}
 							</ThingText>
 						) : null}
@@ -153,9 +159,9 @@ const Main = props =>
 					<SectionTitle>Press</SectionTitle>
 				</TitleCell>
 
-				<Inner className="masonry-items">
+				<Inner className = "masonry-items">
 					{shuffle(props.press).map((x, i) => (
-						<Thing {...x} key={i} />
+						<Thing { ...x } key = { i } />
 					))}
 				</Inner>
 			</ContainerAtEdges>

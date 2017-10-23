@@ -1,6 +1,6 @@
 import React from "react";
-import styled, { css } from "styled-components";
-import { NavLink } from "react-router-dom";
+import styled, { css, } from "styled-components";
+import { NavLink, } from "react-router-dom";
 
 import * as mixins from "../../style/mixins";
 import * as vars from "../../style/vars";
@@ -8,14 +8,14 @@ import * as vars from "../../style/vars";
 // --------------------------------------------------
 
 export default props => (
-	<Wrapper open={props.open}>
+	<Wrapper open = { props.open }>
 		<div>
 			{props.links.filter(route => route.show).map((route, i) => (
 				<Button
-					key={route.title}
-					to={route.link || route.path}
-					activeClassName="active"
-					onClick={props.close}
+					key = { route.title }
+					to = { route.link || route.path }
+					activeClassName = "active"
+					onClick = { props.close }
 				>
 					{route.title}
 				</Button>
@@ -34,7 +34,7 @@ const wrapperStyle = [
 		left: 0;
 		right: 0;
 		top: ${vars.dim.nav.height.xs};
-		background: ${({ theme: { bg } }) => bg || vars.colors.nav};
+		background: ${({ theme: { bg, }, }) => bg || vars.colors.nav};
 		align-items: center;
 	`,
 
@@ -72,7 +72,7 @@ const buttonStyle = [
 
 // should be Link
 const Button = styled(NavLink)`
-	color: ${R.path(["theme", "logo1"])};
+	color: ${R.path(["theme", "logo1",])};
 	text-transform: uppercase;
 	font-family: Montserrat;
 	font-size: 1.1em;

@@ -6,15 +6,15 @@ import siteData from "src/data";
 
 // --------------------------------------------------
 
-const Book = ({ bookSlug }) => {
-	const book = siteData.book.find(({ slug }) => slug === bookSlug);
+const Book = ({ bookSlug, }) => {
+	const book = siteData.book.find(({ slug, }) => slug === bookSlug);
 
 	if (book) {
 		return (
 			<div>
-				<Summary {...book} />
+				<Summary { ...book } />
 
-				<Press {...book} />
+				<Press { ...book } />
 			</div>
 		);
 	} else {

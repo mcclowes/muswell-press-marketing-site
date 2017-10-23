@@ -1,14 +1,10 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
-import { compose, withState, withHandlers } from "recompose";
+import { Link, } from "react-router-dom";
+import { compose, withState, withHandlers, } from "recompose";
 
-import {
-	Container,
-	GridCell,
-	Only,
-} from "../common";
+import { Container, GridCell, Only, } from "../common";
 import * as mixins from "../style/mixins";
-import { objMap } from "../../lib/util";
+import { objMap, } from "../../lib/util";
 
 import siteData from "src/data";
 
@@ -48,8 +44,8 @@ const OtherBookCover = styled.div`
 
 const OtherBook = props => (
 	<OtherBookWrapper>
-		<Link to={`/book/${props.slug}`}>
-			<OtherBookCover src={props.cover && props.cover.url} />
+		<Link to = { `/book/${props.slug}` }>
+			<OtherBookCover src = { props.cover && props.cover.url } />
 
 			<OtherBookTitle>{props.title}</OtherBookTitle>
 
@@ -63,18 +59,18 @@ const Row = styled.div`
 	flex-direction: row;
 `;
 
-const Rows = ({ rows, cols }) => {
+const Rows = ({ rows, cols, }) => {
 	const rowsArr = [];
 
 	for (let i = 0; i < rows; i++) {
 		rowsArr.push(
 			booksList
 				.slice(i * cols, (i + 1) * cols)
-				.map((o, i) => <OtherBook {...o} key={o.title + i} />),
+				.map((o, i) => <OtherBook { ...o } key = { o.title + i } />),
 		);
 	}
 
-	return <div>{rowsArr.map((row, r) => <Row key={r}>{row}</Row>)}</div>;
+	return <div>{rowsArr.map((row, r) => <Row key = { r }>{row}</Row>)}</div>;
 };
 
 const CenterCell = styled(GridCell)`
@@ -85,7 +81,7 @@ const CenterCell = styled(GridCell)`
 const enhanceGrid = compose(
 	withState("rows", "setRows", 2),
 	withHandlers({
-		loadMore: ({ setRows, rows }) => () => {
+		loadMore: ({ setRows, rows, }) => () => {
 			setRows(rows + 1);
 		},
 	}),
@@ -108,14 +104,14 @@ const _Grid = props => {
 				const OnlyBp = Only[bp];
 
 				return (
-					<OnlyBp key={bp}>
-						<Rows rows={props.rows} cols={colsMap[bp]} />
+					<OnlyBp key = { bp }>
+						<Rows rows = { props.rows } cols = { colsMap[bp] } />
 
 						{booksList.length > props.rows * colsMap[bp] ? (
 							<CenterCell>
 								<Button
-									onClick={props.loadMore}
-									text="Load More"
+									onClick = { props.loadMore }
+									text = "Load More"
 								/>
 							</CenterCell>
 						) : null}

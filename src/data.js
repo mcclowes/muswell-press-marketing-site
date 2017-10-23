@@ -22,7 +22,7 @@ const makeMapUsingSlugs = list =>
 // transform a field or do something to an existing field to add a new one
 const adjustFields = (a, b, fn) => fieldsObj => ({
 	...fieldsObj,
-	...(fieldsObj[a] ? { [b]: fn(fieldsObj[a]) } : {}),
+	...(fieldsObj[a] ? { [b]: fn(fieldsObj[a]), } : {}),
 });
 
 const shapeImageField = o => {
@@ -31,7 +31,7 @@ const shapeImageField = o => {
 			fields: {
 				file: {
 					url,
-					details: { size, image: { width, height } },
+					details: { size, image: { width, height, }, },
 					fileName,
 					contentType,
 				},
@@ -81,7 +81,7 @@ const constructBase = (target, dest) => {
 
 					dest[itemType] = dest[itemType]
 						? dest[itemType].concat(shapedItem)
-						: [shapedItem];
+						: [shapedItem,];
 				} else {
 					shapedItem = item;
 				}

@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 import * as mixins from "../style/mixins";
 import * as vars from "../style/vars";
-import { objMap } from "src/lib/util";
+import { objMap, } from "src/lib/util";
 
 // --------------------------------------------------
 
@@ -13,7 +13,7 @@ const minHeights = objMap(
 
 export default styled.div`
 	${mixins.bpEither("margin-top", vars.dim.nav.height)} ${mixins.bpEither(
-			"min-height",
-			minHeights,
-		)} background-color: ${R.path(["theme", "body"])};
+	"min-height",
+	minHeights,
+)} background-color: ${R.path(["theme", "body",])};
 `;

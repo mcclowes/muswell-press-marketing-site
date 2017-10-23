@@ -4,7 +4,7 @@ import styled from "styled-components";
 import * as mixins from "../style/mixins";
 import * as vars from "../style/vars";
 
-import { Icon } from "./misc";
+import { Icon, } from "./misc";
 
 import siteData from "src/data";
 
@@ -25,11 +25,11 @@ const Wrapper = styled.footer`
 	${mixins.bpEither("height", vars.dim.footer.height)};
 	${mixins.bpEither("max-height", vars.dim.footer.height)};
 
-	${({ theme: { footer } }) => `
+	${({ theme: { footer, }, }) => `
 		background-color: ${footer};
 		${footer && footer !== vars.colors.footer
-			? ""
-			: `border-top: 1px solid ${mixins.tr(0.2)};`}		
+		? ""
+		: `border-top: 1px solid ${mixins.tr(0.2)};`}		
 	`};
 `;
 
@@ -81,9 +81,9 @@ const FooterText = styled.div`
 const Footer = () => (
 	<Wrapper>
 		<Links>
-			{siteData.aboutPage.map(({ slug, title }) => {
+			{siteData.aboutPage.map(({ slug, title, }) => {
 				return (
-					<a href={"/" + slug} key={slug}>
+					<a href = { "/" + slug } key = { slug }>
 						{title}
 					</a>
 				);
@@ -91,25 +91,25 @@ const Footer = () => (
 		</Links>
 
 		<Social>
-			<a href={siteData.generalSettings.facebookUrl}>
-				<Icon type="facebook-square" />
+			<a href = { siteData.generalSettings.facebookUrl }>
+				<Icon type = "facebook-square" />
 			</a>
 
-			<a href={siteData.generalSettings.twitterUrl}>
-				<Icon type="twitter" />
+			<a href = { siteData.generalSettings.twitterUrl }>
+				<Icon type = "twitter" />
 			</a>
 
-			<a href={siteData.generalSettings.instagramUrl}>
-				<Icon type="instagram" />
+			<a href = { siteData.generalSettings.instagramUrl }>
+				<Icon type = "instagram" />
 			</a>
 
-			<a href={siteData.generalSettings.linkedinUrl}>
-				<Icon type="linkedin" />
+			<a href = { siteData.generalSettings.linkedinUrl }>
+				<Icon type = "linkedin" />
 			</a>
 		</Social>
 
 		<FooterText>
-			<a href="/">{siteData.generalSettings.footerText}</a>
+			<a href = "/">{siteData.generalSettings.footerText}</a>
 		</FooterText>
 	</Wrapper>
 );

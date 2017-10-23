@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
-import { compose, withState, withHandlers } from "recompose";
+import { Link, } from "react-router-dom";
+import { compose, withState, withHandlers, } from "recompose";
 
 import Moment from "moment";
 
@@ -16,18 +16,20 @@ import {
 
 import * as vars from "../../style/vars";
 import * as mixins from "../../style/mixins";
-import { objMap } from "../../../lib/util";
+import { objMap, } from "../../../lib/util";
 
 // --------------------------------------------------
 
-const Background1 = styled.div`background-color: ${R.path(["theme", "bg"])};`;
+const Background1 = styled.div`
+	background-color: ${R.path(["theme", "bg",])};
+`;
 
 const coverHeights = objMap(
 	vars.dim.gutter.fullNum,
 	(key, value) => `
 		calc(70vh - ${vars.dim.nav.height[
-			key === "xs" ? "xs" : "other"
-		]} - ${mixins.px(value * 2)})
+		key === "xs" ? "xs" : "other"
+	]} - ${mixins.px(value * 2)})
 	`,
 );
 
@@ -45,7 +47,7 @@ const Container1 = styled(Container)`
 	display: flex;
 	justify-content: center;
 	${mixins.bpEither("flex-direction", flexDir)} @media (min-width: ${vars.bps
-			.sm.min}px) and (orientation: landscape) {
+	.sm.min}px) and (orientation: landscape) {
 		min-height: calc(70vh - ${vars.dim.nav.height.other});
 	}
 `;
@@ -80,7 +82,7 @@ const RightCol = styled(GridCell)`
 `;
 
 const TitleText = styled.p`
-	color: ${R.path(["theme", "logo1"])};
+	color: ${R.path(["theme", "logo1",])};
 	font-family: ${vars.font.title.family};
 	font-size: 2.9em;
 	font-weight: bold;
@@ -123,7 +125,9 @@ const MobileCover = styled.div`
 	`};
 `;
 
-const CheckoutButton = styled(Button)`margin-right: 0.5em;`;
+const CheckoutButton = styled(Button)`
+	margin-right: 0.5em;
+`;
 
 // --------------------------------------------------
 
@@ -131,12 +135,12 @@ const Summary = props => (
 	<Background1>
 		<Container1>
 			<LeftCol>
-				<Cover src={props.cover && props.cover.url} />
+				<Cover src = { props.cover && props.cover.url } />
 			</LeftCol>
 
 			<MobileCover>
 				<GridCell>
-					<FullWidthImg src={props.cover && props.cover.url} />
+					<FullWidthImg src = { props.cover && props.cover.url } />
 				</GridCell>
 			</MobileCover>
 
@@ -179,25 +183,23 @@ const Summary = props => (
 								{x.isbn && (
 									<div>
 										ISBN{" "}
-										{x.isbn.length === 10 ? (
-											x.isbn.slice(0, 1) +
-											"-" +
-											x.isbn.slice(1, 3) +
-											"-" +
-											x.isbn.slice(3, 9) +
-											"-" +
-											x.isbn.slice(9)
-										) : (
-											x.isbn.slice(0, 3) +
-											"-" +
-											x.isbn.slice(3, 4) +
-											"-" +
-											x.isbn.slice(4, 7) +
-											"-" +
-											x.isbn.slice(7, 12) +
-											"-" +
-											x.isbn.slice(12)
-										)}
+										{x.isbn.length === 10
+											? x.isbn.slice(0, 1) +
+												"-" +
+												x.isbn.slice(1, 3) +
+												"-" +
+												x.isbn.slice(3, 9) +
+												"-" +
+												x.isbn.slice(9)
+											: x.isbn.slice(0, 3) +
+												"-" +
+												x.isbn.slice(3, 4) +
+												"-" +
+												x.isbn.slice(4, 7) +
+												"-" +
+												x.isbn.slice(7, 12) +
+												"-" +
+												x.isbn.slice(12)}
 									</div>
 								)}
 
@@ -218,9 +220,9 @@ const Summary = props => (
 					{props.bookEdition &&
 						props.bookEdition.map(x => (
 							<CheckoutButton
-								href={x.link || x.amazonLink}
-								text={x.format}
-								icon="shopping_cart"
+								href = { x.link || x.amazonLink }
+								text = { x.format }
+								icon = "shopping_cart"
 							/>
 						))}
 				</TextCell>
