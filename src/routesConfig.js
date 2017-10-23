@@ -1,10 +1,10 @@
 import Home from "./components/pages/Home";
 import Book from "./components/pages/Book";
-import About from "./components/pages/About";
+import Page from "./components/pages/Page";
 import Books from "./components/pages/Books";
 import NotFound from "./components/pages/NotFound";
 
-import * as data from "./data";
+import siteData from "src/data";
 
 // --------------------------------------------------
 
@@ -16,27 +16,30 @@ export default [
 		exact: true,
 		show: false,
 		colors: {
-			bg: data.homePage.hero.fields.heroColours.fields.bg,
-			logo1: data.homePage.hero.fields.heroColours.fields.logo1,
-			logo2: data.homePage.hero.fields.heroColours.fields.logo2,
-			nav: data.homePage.hero.fields.heroColours.fields.nav,
+			bg: siteData.homePage.hero.heroColours.bg,
+			logo1: siteData.homePage.hero.heroColours.logo1,
+			logo2: siteData.homePage.hero.heroColours.logo2,
+			nav: siteData.homePage.hero.heroColours.nav,
 		},
 	},
 	{
 		path: "/books",
-		title: data.siteSettings.booksLinkText,
+		title: siteData.generalSettings.booksLinkText,
 		component: Books,
 		exact: true,
 		show: true,
 	},
-	{
-		path: "/about",
-		title: data.siteSettings.aboutLinkText,
-		component: About,
+	...siteData.aboutPage.map(o => ({
+		path: "/" + o.slug,
+		title: o.title,
+		component: Page,
 		exact: true,
-		show: true,
-	},
-	...data.booksList.map(o => ({
+		show: o.nav,
+		data: {
+			pageSlug: o.slug,
+		},
+	})),
+	...siteData.book.map(o => ({
 		path: "/book/" + o.slug,
 		component: Book,
 		colors: o.colors,

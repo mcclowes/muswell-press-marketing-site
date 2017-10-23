@@ -4,9 +4,9 @@ import styled from "styled-components";
 import * as mixins from "../style/mixins";
 import * as vars from "../style/vars";
 
-import { Icon } from "./misc";
+import { Icon, Container, } from "./misc";
 
-import { siteSettings } from "src/data";
+import siteData from "src/data";
 
 // --------------------------------------------------
 
@@ -15,7 +15,7 @@ const Wrapper = styled.footer`
 	bottom: 0;
 	left: 0;
 	right: 0;
-	${mixins.bpEither("height", vars.dim.footer.height)} overflow: hidden;
+	overflow: hidden;
 
 	${({ theme: { footer } }) => `
 		background-color: ${footer};
@@ -24,15 +24,28 @@ const Wrapper = styled.footer`
 			: `border-top: 1px solid ${mixins.tr(0.2)};`}		
 	`};
 
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	${mixins.bpEither("padding", vars.dim.nav.margin)};
+	> div {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
 `;
 
 const Left = styled.div`
 	font-weight: bold;
 	opacity: 0.67;
+	font-size: 0.8em;
+
+	a {
+		display: block;
+	}
+
+	& > a {
+		&:hover,
+		&:active {
+			text-decoration: underline;
+		}
+	}
 `;
 
 const Right = styled.div`
@@ -45,27 +58,43 @@ const Right = styled.div`
 		margin-left: 0.5em;
 	}
 
-	& > a:hover,
-	& > a:active {
-		text-decoration: underline;
+	& > a {
+		&:hover,
+		&:active {
+			text-decoration: underline;
+		}
 	}
 `;
 
 const Divider = styled.span`margin: 0 0.5em;`;
 
+// --------------------------------------------------
+
 const Footer = () => (
 	<Wrapper>
-		<Left>{siteSettings.footerText}</Left>
+		<Container maxWidth = { 800 }>
+			<Left>
+				{
+					siteData.aboutPage.map( page => {
+						return <a href = { "/" + page.slug }>
+							{ page.title }
+						</a>
+					})
+				}
 
-		<Right>
-			<a href={siteSettings.facebookUrl}>
-				<Icon type="facebook-square" />
-			</a>
+				{ siteData.generalSettings.footerText }
+			</Left>
 
-			<a href={siteSettings.twitterUrl}>
-				<Icon type="twitter" />
-			</a>
-		</Right>
+			<Right>
+				<a href = { siteData.generalSettings.facebookUrl }>
+					<Icon type = "facebook-square" />
+				</a>
+
+				<a href = { siteData.generalSettings.twitterUrl }>
+					<Icon type = "twitter" />
+				</a>
+			</Right>
+		</Container>
 	</Wrapper>
 );
 

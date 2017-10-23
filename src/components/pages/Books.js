@@ -16,11 +16,12 @@ import * as vars from "../style/vars";
 import * as mixins from "../style/mixins";
 import { objMap, } from "../../lib/util";
 
-import { booksList, } from "src/data";
+import siteData from "src/data";
 
 // --------------------------------------------------
 
-booksList.reverse();
+const booksList = siteData.book;
+booksList.sort( (x, y) => ( x.releaseDate || x.createdAt ) + ( y.releaseDate || y.createdDate ) );
 
 const colsMap = {
 	xs: 2,
@@ -51,12 +52,20 @@ const OtherBookCover = styled.div`
 
 const OtherBook = props => (
 	<OtherBookWrapper>
-		<Link to={`/book/${props.slug}`}>
-			<OtherBookCover src={props.cover && props.cover.url} />
+		<Link to = { `/book/${ props.slug }` }>
+			<OtherBookCover src = { props.cover && props.cover.url }  />
 
 			<OtherBookTitle>{props.title}</OtherBookTitle>
 
-			<div>{props.author}</div>
+			{
+				props.author
+				? (
+					<div>
+						{ props.author.map( x => x.name ) }
+					</div>
+				)
+				: null
+			}
 		</Link>
 	</OtherBookWrapper>
 );
@@ -66,14 +75,14 @@ const Row = styled.div`
 	flex-direction: row;
 `;
 
-const Rows = ({ rows, cols }) => {
+const Rows = ( { rows, cols, } ) => {
 	const rowsArr = [];
 
 	for (let i = 0; i < rows; i++) {
 		rowsArr.push(
 			booksList
 			.slice(i * cols, (i + 1) * cols)
-			.map((o, i) => <OtherBook {...o} key={o.title + i} />),
+			.map((o, i) => <OtherBook { ...o } key = { o.title + i } />),
 		);
 	}
 
@@ -93,6 +102,16 @@ const enhanceGrid = compose(
 		},
 	}),
 );
+
+const Title = styled.h1`
+	line-height: 1;
+	text-align: center;
+	text-transform: uppercase;
+	font-family: Montserrat;
+	margin-bottom: 1em;
+`;
+
+// --------------------------------------------------
 
 const _Grid = props => {
 	return (
@@ -123,14 +142,7 @@ const _Grid = props => {
 
 const Grid = enhanceGrid(_Grid);
 
-const Title = styled.h1`
-	line-height: 1;
-	text-align: center;
-	text-transform: uppercase;
-	font-family: Montserrat;
-	margin-bottom: 1em;
-`;
-
+// --------------------------------------------------
 
 const Books = () => (
 	<Container>

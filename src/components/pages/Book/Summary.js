@@ -25,7 +25,7 @@ const Background1 = styled.div`background-color: ${R.path(["theme", "bg"])};`;
 const coverHeights = objMap(
 	vars.dim.gutter.fullNum,
 	(key, value) => `
-		calc(100vh - ${vars.dim.nav.height[
+		calc(70vh - ${vars.dim.nav.height[
 			key === "xs" ? "xs" : "other"
 		]} - ${mixins.px(value * 2)})
 	`,
@@ -33,7 +33,7 @@ const coverHeights = objMap(
 
 const containerHeights = objMap(
 	vars.dim.nav.height,
-	(key, value) => "calc(100vh - " + value + ")",
+	(key, value) => "calc(70vh - " + value + ")",
 );
 
 const flexDir = {
@@ -46,7 +46,7 @@ const Container1 = styled(Container)`
 	justify-content: center;
 	${mixins.bpEither("flex-direction", flexDir)} @media (min-width: ${vars.bps
 			.sm.min}px) and (orientation: landscape) {
-		min-height: calc(100vh - ${vars.dim.nav.height.other});
+		min-height: calc(70vh - ${vars.dim.nav.height.other});
 	}
 `;
 
@@ -54,7 +54,7 @@ const Cover = styled.div`
 	width: 100%;
 	height: 100%;
 	background-image: url(${R.prop("src")});
-	background-position: top right;
+	background-position: center center;
 	background-size: contain;
 	background-repeat: no-repeat;
 `;
@@ -123,51 +123,90 @@ const MobileCover = styled.div`
 	`};
 `;
 
+const CheckoutButton = styled(Button)`
+	margin-right: 0.5em;
+`;
+
 // --------------------------------------------------
 
 const Summary = props => (
 	<Background1>
 		<Container1>
 			<LeftCol>
-				<Cover src={props.cover && props.cover.url} />
+				<Cover src = { props.cover && props.cover.url } />
 			</LeftCol>
 
 			<MobileCover>
 				<GridCell>
-					<FullWidthImg src={props.cover && props.cover.url} />
+					<FullWidthImg src = { props.cover && props.cover.url } />
 				</GridCell>
 			</MobileCover>
 
 			<RightCol>
 				<TextCell>
-					<NewText>New</NewText>
+					{
+						Moment(props.releaseDate).isAfter(Moment().subtract(40, 'days')) &&
+						<NewText>New</NewText>
+					}
 
-					<TitleText>{props.title}</TitleText>
+					<TitleText>{ props.title }</TitleText>
 
-					<SubtitleText>{props.author}</SubtitleText>
+					{
+							props.author &&
+							(
+								<SubtitleText>
+									{ props.author.map( x => x.name ) }
+								</SubtitleText>
+							)
+						}
 				</TextCell>
 
-				<TextCell>
-					<Para>{props.blurb}</Para>
-				</TextCell>
+				{
+					( props.blurb || props.releaseDate ) &&
+					<TextCell>
+						{ props.blurb && <Para>{ props.blurb }</Para> }
+
+						{ props.releaseDate && <div>Published { Moment(props.releaseDate).format('Do MMMM YYYY') }</div> }
+					</TextCell>
+				}
+
+				{
+					props.bookEdition
+					&& props.bookEdition.map( x => (
+						<TextCell>
+							<Metadata>
+								{ x.format ? <div>{ x.format }</div> : null }
+
+								{ 
+									x.isbn &&
+									( <div>ISBN {
+										x.isbn.length === 10
+										? x.isbn.slice(0, 1) + "-" + x.isbn.slice(1, 3) + "-" + x.isbn.slice(3, 9) + "-" + x.isbn.slice(9) 
+										: x.isbn.slice(0, 3) + "-" + x.isbn.slice(3, 4) + "-" + x.isbn.slice(4, 7) + "-" + x.isbn.slice(7, 12) + "-" + x.isbn.slice(12) 
+									}</div> )
+								}
+
+								{ x.price ? <div>{ x.price }</div> : null }
+
+								{ x.pageCount ? <div>{ x.pageCount }PP</div> : null }
+
+								{ x.dimensions ? <div>{ x.dimensions }</div> : null }
+							</Metadata>
+						</TextCell>
+					))
+				}
 
 				<TextCell>
-					<Metadata>
-						<div>Published { Moment(props.releaseDate).format('Do MMMM YYYY') }</div>
-
-						{(props.details || [])
-						.map((s, i) => <div key={i}>{s}</div>)}
-					</Metadata>
-				</TextCell>
-
-				<TextCell>
-					<PSpacing />
-
-					<Button
-						href={props.amazonLink}
-						text="Buy Now"
-						icon="shopping_cart"
-					/>
+					{
+						props.bookEdition
+						&& props.bookEdition.map( x => (
+							<CheckoutButton
+								href = { x.link || x.amazonLink }
+								text = { x.format }
+								icon = "shopping_cart"
+							/>
+						))
+					}
 				</TextCell>
 			</RightCol>
 		</Container1>

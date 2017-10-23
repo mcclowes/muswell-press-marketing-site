@@ -1,14 +1,13 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
-import { compose, withState, withHandlers } from "recompose";
+import { Link, } from "react-router-dom";
 
-import { Container, GridCell, TextCell, Button } from "../../common";
+import { Container, GridCell, TextCell, Button, Para, } from "../../common";
 
 import * as vars from "../../style/vars";
 import * as mixins from "../../style/mixins";
-import { objMap } from "../../../lib/util";
+import { objMap, } from "../../../lib/util";
 
-import { homePage } from "src/data";
+import siteData from "src/data";
 
 // --------------------------------------------------
 
@@ -17,7 +16,7 @@ const Background1 = styled.div`background-color: ${R.path(["theme", "bg"])};`;
 const coverHeights = objMap(
 	vars.dim.gutter.fullNum,
 	(key, value) => `
-		calc(100vh - ${vars.dim.nav.height[
+		calc(70vh - ${vars.dim.nav.height[
 			key === "xs" ? "xs" : "other"
 		]} - ${mixins.px(value * 2)})
 	`,
@@ -34,7 +33,7 @@ const Container1 = styled(Container)`
 	flex-direction: row;
 	${mixins.xs`align-items: center;`} @media (min-width: ${vars.bps.sm
 			.min}px) and (orientation: landscape) {
-		min-height: calc(100vh - ${vars.dim.nav.height.other});
+		min-height: calc(70vh - ${vars.dim.nav.height.other});
 	}
 `;
 
@@ -43,7 +42,7 @@ const Cover = styled.div`
 	height: 100%;
 
 	background-image: url(${R.prop("src")});
-	//background-position: top right;
+	background-position: center center;
 	background-size: contain;
 	background-repeat: no-repeat;
 
@@ -89,7 +88,7 @@ const MobileText = styled(Container)`
 	${mixins.bp.sm.min`display: none;`};
 `;
 
-const HeroLink =  "/book/" +  homePage.hero.fields.heroLink.fields.title.toLowerCase().split(' ').join('-');
+const HeroLink =  "/book/" +  siteData.homePage.hero.heroLink.title.toLowerCase().split(' ').join('-');
 
 // --------------------------------------------------
 
@@ -97,7 +96,7 @@ const Header = () => (
 	<TextCell>
 		<TitleText>
 			<Link to={ HeroLink }>
-				{ homePage.hero.fields.heroHeader }
+				{ siteData.homePage.hero.heroHeader }
 			</Link>
 		</TitleText>
 	</TextCell>
@@ -105,14 +104,16 @@ const Header = () => (
 
 const Text = () => (
 	<TextCell>
-		{ homePage.hero.fields.heroDescription }
+		<Para>
+			{ siteData.homePage.hero.heroDescription }
+		</Para>
 
-		<p>
+		<div>
 			<Button 
-				to={ HeroLink } 
-				text="Find out more"
+				to = { HeroLink } 
+				text = "Find out more"
 			/>
-		</p>
+		</div>
 	</TextCell>
 );
 
@@ -120,7 +121,7 @@ const Hero = props => (
 	<Background1>
 		<Container1>
 			<LeftCol>
-				<Cover src={ homePage.hero.fields.heroLink.fields.cover.fields.file.url } />
+				<Cover src = { siteData.homePage.hero.heroLink.cover.url } />
 			</LeftCol>
 
 			<RightCol>

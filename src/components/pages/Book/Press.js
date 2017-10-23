@@ -17,7 +17,7 @@ import * as vars from "../../style/vars";
 import * as mixins from "../../style/mixins";
 import { objMap, sentenceCase } from "../../../lib/util";
 
-import { booksList } from "src/data";
+import siteData from "src/data";
 
 // --------------------------------------------------
 
@@ -113,27 +113,31 @@ const shuffle = arr => {
 	return r;
 };
 
-const Thing = ({ title, text, author, link, image, quote }) => (
+// --------------------------------------------------
+
+const Thing = ({ title, text, author, link, image, quote, }) => (
 	<ThingWrapper className="masonry-item">
-		<MaybeLink href={link}>
+		<MaybeLink href = { link }>
 			<ThingInner>
-				{image ? <FullWidthImg src={image} /> : null}
+				{ image ? <FullWidthImg src = { image } /> : null }
 
 				<GridCell>
 					<TextCell>
-						{title ? <ThingTitle>{title}</ThingTitle> : null}
+						{ title ? <ThingTitle>{ title }</ThingTitle> : null }
 
-						{text ? <ThingText>"{text}"</ThingText> : null}
+						{ text ? <ThingText><p dangerouslySetInnerHTML = {{ __html: text, }}/> </ThingText> : null }
 
-						{quote ? <ThingQuote>"{quote}"</ThingQuote> : null}
+						{ quote ? <ThingQuote>"{ quote }"</ThingQuote> : null }
 
-						{author ? <ThingAuthor>{author}</ThingAuthor> : null}
+						{ author ? <ThingAuthor>{ author }</ThingAuthor> : null }
 					</TextCell>
 				</GridCell>
 			</ThingInner>
 		</MaybeLink>
 	</ThingWrapper>
 );
+
+// --------------------------------------------------
 
 const Main = props => (
 	( props.press )
@@ -144,14 +148,10 @@ const Main = props => (
 					<SectionTitle>Press</SectionTitle>
 				</TitleCell>
 
-				<Inner className="masonry-items">
+				<Inner className = "masonry-items">
 					{
-						shuffle(
-							props.press.map( x => {
-								return x.fields;
-							})
-						)
-						.map((x, i) => <Thing {...x} key={i} />)
+						shuffle( props.press )
+						.map((x, i) => <Thing { ...x } key = { i } />)
 					}
 				</Inner>
 			</ContainerAtEdges>

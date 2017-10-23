@@ -12,13 +12,13 @@ import ScrollToTop from "./components/common/ScrollToTop";
 
 import * as vars from "./components/style/vars";
 
-import { siteSettings, booksMap } from "src/data";
+import siteData from "src/data";
 
 // --------------------------------------------------
 
 injectGlobalStyles();
 
-const defaultColors = siteSettings.defaultColors;
+const defaultColors = siteData.generalSettings.defaultColors;
 
 const routes = routesConfig.map(
 	({ component: Comp, colors, data, ...rest }, i) => {

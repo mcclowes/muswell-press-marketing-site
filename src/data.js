@@ -3,10 +3,11 @@ import marked from "marked";
 
 import rawdata from "./rawdata";
 
-const slugify = x =>
+const slugify = x => (
 	_slugify(x, {
 		lower: true,
-	});
+	})
+);
 
 const makeMapUsingSlugs = list =>
 	list.reduce(
@@ -17,41 +18,116 @@ const makeMapUsingSlugs = list =>
 		{},
 	);
 
-const booksList = rawdata.items
-	.filter(item => item.sys.contentType.sys.id === "book")
-	.map(item => ({
-		...item.fields,
-		cover: item.fields.cover ? item.fields.cover.fields.file : {},
-		slug: slugify(item.fields.title),
-		colors: item.fields.colors ? item.fields.colors.fields : {},
-	}));
+// --------------------------------------------------
 
-const booksMap = makeMapUsingSlugs(booksList);
+// transform a field or do something to an existing field to add a new one
+const adjustFields = (a, b, fn) => fieldsObj => ({
+	...fieldsObj,
+	...(
+		fieldsObj[a]
+		? { [b]: fn(fieldsObj[a]), }
+		: {}
+	),
+});
 
-const homePage = (item => ({
-	...item.fields,
-	booksBooks: (item.fields.booksBooks || [])
-		.map(o => booksMap[slugify(o.fields.title)]),
-}))(
-	rawdata.items.filter(item => item.sys.contentType.sys.id === "homePage")[0],
+const shapeImageField = o => {
+	if (o.fields) {
+		const {
+			fields: {
+				file: {
+					url,
+					details: {
+						size,
+						image: {
+							width,
+							height,
+						},
+					},
+					fileName,
+					contentType,
+				},
+			},
+		} = o;
+
+		return {
+			contentType,
+			fileName,
+			height,
+			size,
+			url,
+			width,
+		};
+	}
+	else {
+		return o;
+	}
+};
+
+const defaultFieldShaping = R.pipe(
+	adjustFields("image", "image", shapeImageField),
+	adjustFields("picture", "picture", shapeImageField),
+	adjustFields("cover", "cover", shapeImageField),
+	adjustFields("title", "slug", slugify),
+	adjustFields("content", "html", marked),
+	adjustFields("text", "text", marked),
+	adjustFields("advisoryBoard", "advisoryBoard", marked),
 );
 
-const aboutPage = (item => ({
-	...item.fields,
-	picture: item.fields.picture ? item.fields.picture.fields.file : {},
-}))(
-	rawdata.items.filter(
-		item => item.sys.contentType.sys.id === "aboutPage",
-	)[0],
-);
+let siteData = {};
 
-const siteSettings = (item => ({
-	...item.fields,
-	defaultColors: item.fields.defaultColors.fields,
-}))(
-	rawdata.items.filter(
-		item => item.sys.contentType.sys.id === "generalSettings",
-	)[0],
-);
+const constructBase = (target, dest) => {
+	if ( typeof target === "object" || typeof target === "array" ) {
+		R.pipe(
+			R.map(item => {
+				let shapedItem = null;
 
-export { booksList, booksMap, homePage, aboutPage, siteSettings, rawdata };
+				if (item && item.sys) {
+					const itemType = item.sys.contentType ? item.sys.contentType.sys.id : item.sys.type;
+
+					shapedItem = {
+						...defaultFieldShaping(item.fields),
+						createdAt: item.sys.createdAt,
+					};
+
+					dest[itemType] = (
+						dest[itemType]
+						? dest[itemType].concat(shapedItem)
+						: [ shapedItem, ]
+					);
+				} else {
+					shapedItem = item;
+				}
+			})
+		)(target);
+	}
+};
+
+const shapeObjectNicely = (target) => {
+	let shapedTarget = target;
+
+	if ( typeof target === "object" || typeof target === "array" ) {
+		return R.map(item => {
+			if (item && item.fields) { 
+				item.fields = {
+					...defaultFieldShaping(item.fields),
+					createdAt: item.sys.createdAt,
+				};
+
+				item = item.fields;
+			}
+
+			return shapeObjectNicely(item);
+		})(shapedTarget);
+	}
+
+	return shapedTarget;
+};
+
+constructBase(rawdata.items, siteData);
+siteData = shapeObjectNicely(siteData);
+// Flatten objects containing single objects
+siteData = R.map(x => x.length === 1 ? x[0] : x)(siteData);
+
+console.log(siteData);
+
+export default siteData;
