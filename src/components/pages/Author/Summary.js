@@ -18,6 +18,8 @@ import * as vars from "../../style/vars";
 import * as mixins from "../../style/mixins";
 import { objMap, } from "../../../lib/util";
 
+import siteData from "src/data";
+
 // --------------------------------------------------
 
 const Background1 = styled.div`
@@ -146,86 +148,20 @@ const Summary = props => (
 
 			<RightCol>
 				<TextCell>
-					{Moment(props.releaseDate).isAfter(
-						Moment().subtract(40, "days"),
-					) && <NewText>New</NewText>}
-
-					<TitleText>{props.title}</TitleText>
-
-					{props.author && (
-						<SubtitleText>
-							{props.author.map(
-								(x, i) => `${i > 0 ? ", " : ""}${x.name}`,
-							)}
-						</SubtitleText>
-					)}
+					<TitleText>{props.name}</TitleText>
 				</TextCell>
 
-				{(props.blurb || props.releaseDate) && (
-					<TextCell>
-						{props.blurb && <Para>{props.blurb}</Para>}
-
-						{props.releaseDate && (
-							<div>
-								Published{" "}
-								{Moment(props.releaseDate).format(
-									"Do MMMM YYYY",
-								)}
-							</div>
-						)}
-					</TextCell>
-				)}
-
-				{props.bookEdition &&
-					props.bookEdition.map(x => (
-						<TextCell>
-							<Metadata>
-								{x.format ? <div>{x.format}</div> : null}
-
-								{x.isbn && (
-									<div>
-										ISBN{" "}
-										{x.isbn.length === 10
-											? x.isbn.slice(0, 1) +
-												"-" +
-												x.isbn.slice(1, 3) +
-												"-" +
-												x.isbn.slice(3, 9) +
-												"-" +
-												x.isbn.slice(9)
-											: x.isbn.slice(0, 3) +
-												"-" +
-												x.isbn.slice(3, 4) +
-												"-" +
-												x.isbn.slice(4, 7) +
-												"-" +
-												x.isbn.slice(7, 12) +
-												"-" +
-												x.isbn.slice(12)}
-									</div>
-								)}
-
-								{x.price ? <div>{x.price}</div> : null}
-
-								{x.pageCount ? (
-									<div>{x.pageCount}PP</div>
-								) : null}
-
-								{x.dimensions ? (
-									<div>{x.dimensions}</div>
-								) : null}
-							</Metadata>
-						</TextCell>
-					))}
+				<TextCell>{props.biography}</TextCell>
 
 				<TextCell>
-					{props.bookEdition &&
-						props.bookEdition.map(x => (
-							<CheckoutButton
-								href = { x.link || x.amazonLink }
-								text = { x.format }
-								icon = "shopping_cart"
-							/>
+					<SubtitleText>Books</SubtitleText>
+
+					{siteData.book
+						.filter(({ author, }) =>
+							author.some(({ slug, }) => props.slug === slug),
+						)
+						.map(book => (
+							<a href = { "/book/" + book.slug }>{book.title}</a>
 						))}
 				</TextCell>
 			</RightCol>

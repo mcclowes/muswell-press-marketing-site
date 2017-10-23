@@ -137,7 +137,9 @@ const FeaturedBook = props => (
 
 						{props.author ? (
 							<FeaturedBookAuthor>
-								{props.author.map(x => x.name)}
+								{props.author.map(
+									(x, i) => `${i > 0 ? ", " : ""}${x.name}`,
+								)}
 							</FeaturedBookAuthor>
 						) : null}
 

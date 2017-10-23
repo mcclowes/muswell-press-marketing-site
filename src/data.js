@@ -56,6 +56,7 @@ const defaultFieldShaping = R.pipe(
 	adjustFields("picture", "picture", shapeImageField),
 	adjustFields("cover", "cover", shapeImageField),
 	adjustFields("title", "slug", slugify),
+	adjustFields("name", "slug", slugify),
 	adjustFields("content", "html", marked),
 	adjustFields("text", "text", marked),
 	adjustFields("advisoryBoard", "advisoryBoard", marked),

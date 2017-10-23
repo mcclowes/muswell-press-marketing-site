@@ -7,17 +7,11 @@ import {
 	Container,
 	GridCell,
 	FullWidthImg,
-	Para,
-	Button,
-	PSpacing,
 	TextCell,
-} from "../../common";
+} from "src/components/common";
 
-import * as vars from "../../style/vars";
-import * as mixins from "../../style/mixins";
-import { objMap, sentenceCase, } from "../../../lib/util";
-
-import siteData from "src/data";
+import * as vars from "../style/vars";
+import * as mixins from "../style/mixins";
 
 // --------------------------------------------------
 

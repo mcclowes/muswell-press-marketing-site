@@ -6,15 +6,15 @@ import siteData from "src/data";
 
 // --------------------------------------------------
 
-const Book = ({ bookSlug, }) => {
-	const book = siteData.book.find(({ slug, }) => slug === bookSlug);
+const Author = ({ authorSlug, }) => {
+	const author = siteData.author.find(({ slug, }) => slug === authorSlug);
 
-	if (book) {
+	if (author) {
 		return (
 			<div>
-				<Summary { ...book } />
+				<Summary { ...author } />
 
-				<Press { ...book } />
+				<Press { ...author } />
 			</div>
 		);
 	} else {
@@ -22,4 +22,4 @@ const Book = ({ bookSlug, }) => {
 	}
 };
 
-export default Book;
+export default Author;

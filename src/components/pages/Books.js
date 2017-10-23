@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { Link, } from "react-router-dom";
 import { compose, withState, withHandlers, } from "recompose";
 
-import { Container, GridCell, Only, } from "../common";
+import { Button, Container, GridCell, Only, } from "../common";
 import * as mixins from "../style/mixins";
 import { objMap, } from "../../lib/util";
 
@@ -49,7 +49,13 @@ const OtherBook = props => (
 
 			<OtherBookTitle>{props.title}</OtherBookTitle>
 
-			{props.author ? <div>{props.author.map(x => x.name)}</div> : null}
+			{props.author ? (
+				<div>
+					{props.author.map(
+						(x, i) => `${i > 0 ? ", " : ""}${x.name}`,
+					)}
+				</div>
+			) : null}
 		</Link>
 	</OtherBookWrapper>
 );
