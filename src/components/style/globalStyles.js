@@ -1,9 +1,9 @@
 import React from "react";
-import { injectGlobal } from "styled-components";
+import { injectGlobal, } from "styled-components";
 
 import * as vars from "./vars";
 import * as mixins from "./mixins";
-import { objMap } from "../../lib/util";
+import { objMap, } from "../../lib/util";
 
 // --------------------------------------------------
 

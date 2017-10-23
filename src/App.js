@@ -1,5 +1,5 @@
-import { ThemeProvider } from "styled-components";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { ThemeProvider, } from "styled-components";
+import { BrowserRouter as Router, Route, Switch, } from "react-router-dom";
 import Helmet from "react-helmet";
 
 import routesConfig from "./routesConfig";
@@ -23,31 +23,31 @@ const defaultColors = siteData.generalSettings.defaultColors;
 const routes = routesConfig.map(
 	({ component: Comp, colors, data, ...rest }, i) => {
 		const render = props => (
-			<ThemeProvider theme={{ ...defaultColors, ...colors }}>
+			<ThemeProvider theme = { { ...defaultColors, ...colors, } }>
 				<div>
 					<Helmet>
-						<meta charSet="utf-8" />
+						<meta charSet = "utf-8" />
 
 						<title>Muswell Press</title>
 
 						<link
-							rel="canonical"
-							href="http://http://www.muswell-press.co.uk/"
+							rel = "canonical"
+							href = "http://http://www.muswell-press.co.uk/"
 						/>
 					</Helmet>
 
-					<Nav key="Nav" />
+					<Nav key = "Nav" />
 
-					<Main key="Main">
-						<Comp {...props} {...data} />
+					<Main key = "Main">
+						<Comp { ...props } { ...data } />
 					</Main>
 
-					<Footer key="Footer" />
+					<Footer key = "Footer" />
 				</div>
 			</ThemeProvider>
 		);
 
-		return <Route key={rest.path + i} {...rest} render={render} />;
+		return <Route key = { rest.path + i } { ...rest } render = { render } />;
 	},
 );
 

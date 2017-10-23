@@ -1,4 +1,5 @@
 import Home from "./components/pages/Home";
+import Author from "./components/pages/Author";
 import Book from "./components/pages/Book";
 import Page from "./components/pages/Page";
 import Books from "./components/pages/Books";
@@ -45,6 +46,13 @@ export default [
 		colors: o.colors,
 		data: {
 			bookSlug: o.slug,
+		},
+	})),
+	...siteData.author.map(o => ({
+		path: "/author/" + o.slug,
+		component: Author,
+		data: {
+			authorSlug: o.slug,
 		},
 	})),
 	{

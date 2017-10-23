@@ -6,7 +6,7 @@ import Hero from "./Hero";
 
 const Home = props => (
 	<div>
-		<Hero {...props} />
+		<Hero { ...props } />
 
 		<NewBooks />
 

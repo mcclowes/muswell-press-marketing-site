@@ -1,4 +1,4 @@
-const defaultColor = [255, 255, 255, 1]; // white
+const defaultColor = [255, 255, 255, 1,]; // white
 
 export const hexToColor = hex => {
 	let regex = new RegExp();

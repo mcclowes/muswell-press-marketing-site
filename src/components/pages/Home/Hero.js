@@ -11,14 +11,16 @@ import siteData from "src/data";
 
 // --------------------------------------------------
 
-const Background1 = styled.div`background-color: ${R.path(["theme", "bg"])};`;
+const Background1 = styled.div`
+	background-color: ${R.path(["theme", "bg",])};
+`;
 
 const coverHeights = objMap(
 	vars.dim.gutter.fullNum,
 	(key, value) => `
 		calc(70vh - ${vars.dim.nav.height[
-			key === "xs" ? "xs" : "other"
-		]} - ${mixins.px(value * 2)})
+		key === "xs" ? "xs" : "other"
+	]} - ${mixins.px(value * 2)})
 	`,
 );
 
@@ -32,7 +34,7 @@ const Container1 = styled(Container)`
 	justify-content: center;
 	flex-direction: row;
 	${mixins.xs`align-items: center;`} @media (min-width: ${vars.bps.sm
-			.min}px) and (orientation: landscape) {
+	.min}px) and (orientation: landscape) {
 		min-height: calc(70vh - ${vars.dim.nav.height.other});
 	}
 `;
@@ -74,7 +76,7 @@ const RightCol = styled(GridCell)`
 `;
 
 const TitleText = styled.p`
-	color: ${R.path(["theme", "logo1"])};
+	color: ${R.path(["theme", "logo1",])};
 	font-family: ${vars.font.title.family};
 	font-size: 2.9em;
 	${mixins.xs`font-size: 1.5em;`} font-weight: bold;
@@ -88,31 +90,29 @@ const MobileText = styled(Container)`
 	${mixins.bp.sm.min`display: none;`};
 `;
 
-const HeroLink =  "/book/" +  siteData.homePage.hero.heroLink.title.toLowerCase().split(' ').join('-');
+const HeroLink =
+	"/book/" +
+	siteData.homePage.hero.heroLink.title
+		.toLowerCase()
+		.split(" ")
+		.join("-");
 
 // --------------------------------------------------
 
 const Header = () => (
 	<TextCell>
 		<TitleText>
-			<Link to={ HeroLink }>
-				{ siteData.homePage.hero.heroHeader }
-			</Link>
+			<Link to = { HeroLink }>{siteData.homePage.hero.heroHeader}</Link>
 		</TitleText>
 	</TextCell>
 );
 
 const Text = () => (
 	<TextCell>
-		<Para>
-			{ siteData.homePage.hero.heroDescription }
-		</Para>
+		<Para>{siteData.homePage.hero.heroDescription}</Para>
 
 		<div>
-			<Button 
-				to = { HeroLink } 
-				text = "Find out more"
-			/>
+			<Button to = { HeroLink } text = "Find out more" />
 		</div>
 	</TextCell>
 );

@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import * as mixins from "../style/mixins";
 import * as vars from "../style/vars";
-import { objMap } from "../../lib/util";
+import { objMap, } from "../../lib/util";
 
 // --------------------------------------------------
 
@@ -33,14 +33,14 @@ const Wrapper = styled.div`
 
 const Block = styled.div`
 	${mixins.bpEither("height", blockHeights)} ${mixins.bpEither(
-			"width",
-			blockWidths,
-		)};
+	"width",
+	blockWidths,
+)};
 `;
 
 const Block1 = styled(Block)`
 	transform: skewY(-45deg);
-	background: ${R.path(["theme", "logo1"])};
+	background: ${R.path(["theme", "logo1",])};
 
 	&:nth-child(3) {
 		margin-left: -1px;
@@ -49,11 +49,11 @@ const Block1 = styled(Block)`
 
 const Block2 = styled(Block)`
 	transform: skewY(45deg);
-	background: ${R.path(["theme", "logo2"])};
+	background: ${R.path(["theme", "logo2",])};
 `;
 
 const Text = styled.div`
-	color: ${R.path(["theme", "logo1"])};
+	color: ${R.path(["theme", "logo1",])};
 	font-size: 1.2em;
 	text-transform: uppercase;
 	font-weight: bold;

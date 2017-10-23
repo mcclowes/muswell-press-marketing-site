@@ -17,11 +17,11 @@ const Wrapper = styled.footer`
 	right: 0;
 	overflow: hidden;
 
-	${({ theme: { footer } }) => `
+	${({ theme: { footer, }, }) => `
 		background-color: ${footer};
 		${footer && footer !== vars.colors.footer
-			? ""
-			: `border-top: 1px solid ${mixins.tr(0.2)};`}		
+		? ""
+		: `border-top: 1px solid ${mixins.tr(0.2)};`}		
 	`};
 
 	> div {
@@ -66,7 +66,9 @@ const Right = styled.div`
 	}
 `;
 
-const Divider = styled.span`margin: 0 0.5em;`;
+const Divider = styled.span`
+	margin: 0 0.5em;
+`;
 
 // --------------------------------------------------
 
@@ -74,15 +76,11 @@ const Footer = () => (
 	<Wrapper>
 		<Container maxWidth = { 800 }>
 			<Left>
-				{
-					siteData.aboutPage.map( page => {
-						return <a href = { "/" + page.slug }>
-							{ page.title }
-						</a>
-					})
-				}
+				{siteData.aboutPage.map(page => {
+					return <a href = { "/" + page.slug }>{page.title}</a>;
+				})}
 
-				{ siteData.generalSettings.footerText }
+				{siteData.generalSettings.footerText}
 			</Left>
 
 			<Right>

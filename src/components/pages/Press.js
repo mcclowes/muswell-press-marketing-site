@@ -1,23 +1,18 @@
 import styled from "styled-components";
 import masonry from "masonry-layout";
 import imagesloaded from "imagesloaded";
-import { lifecycle } from "recompose";
+import { lifecycle, } from "recompose";
 
 import {
 	Container,
 	GridCell,
 	FullWidthImg,
-	Para,
-	Button,
-	PSpacing,
 	TextCell,
-} from "../../common";
+} from "src/components/common";
 
-import * as vars from "../../style/vars";
-import * as mixins from "../../style/mixins";
-import { objMap, sentenceCase } from "../../../lib/util";
-
-import siteData from "src/data";
+import * as vars from "src/components/style/vars";
+import * as mixins from "src/components/style/mixins";
+import { objMap, sentenceCase, } from "src/lib/util";
 
 // --------------------------------------------------
 
@@ -42,7 +37,7 @@ const enhance = lifecycle({
 });
 
 const Background = styled.div`
-	background: ${R.pipe(R.path(["theme", "bg"]), color =>
+	background: ${R.pipe(R.path(["theme", "bg",]), color =>
 		mixins.darken(color, 0.1),
 	)};
 `;
@@ -51,9 +46,13 @@ const ContainerAtEdges = styled(Container)`
 	${mixins.xs`margin: 0 -${vars.dim.gutter.tripleHalf.xs}`};
 `;
 
-const Inner = styled.div`${mixins.clearfix};`;
+const Inner = styled.div`
+	${mixins.clearfix};
+`;
 
-const TitleCell = styled(TextCell)`flex-basis: 100%;`;
+const TitleCell = styled(TextCell)`
+	flex-basis: 100%;
+`;
 
 const SectionTitle = styled.h2`
 	text-align: center;
@@ -75,9 +74,11 @@ const ThingWrapper = styled(GridCell)`
 `;
 
 const MaybeLink = ({ href, ...props }) =>
-	href ? <a href={href} {...props} /> : <div {...props} />;
+	href ? <a href = { href } { ...props } /> : <div { ...props } />;
 
-const ThingInner = styled.div`background: white;`;
+const ThingInner = styled.div`
+	background: white;
+`;
 
 const ThingTitle = styled.p`
 	font-family: ${vars.font.title.family};
@@ -104,7 +105,7 @@ const randomInt = x => Math.floor(Math.random() * x) % x;
 
 const shuffle = arr => {
 	const r = [];
-	const arrCopy = [...arr];
+	const arrCopy = [...arr,];
 	arr.forEach(() => {
 		const randomIndex = randomInt(arrCopy.length);
 		r.push(arrCopy[randomIndex]);
@@ -116,20 +117,26 @@ const shuffle = arr => {
 // --------------------------------------------------
 
 const Thing = ({ title, text, author, link, image, quote, }) => (
-	<ThingWrapper className="masonry-item">
+	<ThingWrapper className = "masonry-item">
 		<MaybeLink href = { link }>
 			<ThingInner>
-				{ image ? <FullWidthImg src = { image } /> : null }
+				{image ? <FullWidthImg src = { image } /> : null}
 
 				<GridCell>
 					<TextCell>
-						{ title ? <ThingTitle>{ title }</ThingTitle> : null }
+						{title ? <ThingTitle>{title}</ThingTitle> : null}
 
-						{ text ? <ThingText><p dangerouslySetInnerHTML = {{ __html: text, }}/> </ThingText> : null }
+						{text ? (
+							<ThingText>
+								<p
+									dangerouslySetInnerHTML = { { __html: text, } }
+								/>{" "}
+							</ThingText>
+						) : null}
 
-						{ quote ? <ThingQuote>"{ quote }"</ThingQuote> : null }
+						{quote ? <ThingQuote>"{quote}"</ThingQuote> : null}
 
-						{ author ? <ThingAuthor>{ author }</ThingAuthor> : null }
+						{author ? <ThingAuthor>{author}</ThingAuthor> : null}
 					</TextCell>
 				</GridCell>
 			</ThingInner>
@@ -139,9 +146,8 @@ const Thing = ({ title, text, author, link, image, quote, }) => (
 
 // --------------------------------------------------
 
-const Main = props => (
-	( props.press )
-	? (
+const Main = props =>
+	props.press ? (
 		<Background>
 			<ContainerAtEdges>
 				<TitleCell>
@@ -149,15 +155,12 @@ const Main = props => (
 				</TitleCell>
 
 				<Inner className = "masonry-items">
-					{
-						shuffle( props.press )
-						.map((x, i) => <Thing { ...x } key = { i } />)
-					}
+					{shuffle(props.press).map((x, i) => (
+						<Thing { ...x } key = { i } />
+					))}
 				</Inner>
 			</ContainerAtEdges>
 		</Background>
-	)
-	: null
-);
+	) : null;
 
 export default enhance(Main);

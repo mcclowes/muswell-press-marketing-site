@@ -13,7 +13,7 @@ const minHeights = objMap(
 
 export default styled.div`
 	${mixins.bpEither("margin-top", vars.dim.nav.height)} ${mixins.bpEither(
-			"min-height",
-			minHeights,
-		)} background-color: ${R.path(["theme", "body"])};
+	"min-height",
+	minHeights,
+)} background-color: ${R.path(["theme", "body",])};
 `;

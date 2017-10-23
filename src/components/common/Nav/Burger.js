@@ -4,10 +4,10 @@ import styled from "styled-components";
 // --------------------------------------------------
 
 const Burger = props => (
-	<Wrapper {...props}>
-		<Bottom {...props}>
-			<Top {...props} />
-			<Middle {...props} />
+	<Wrapper { ...props }>
+		<Bottom { ...props }>
+			<Top { ...props } />
+			<Middle { ...props } />
 		</Bottom>
 	</Wrapper>
 );
@@ -71,8 +71,8 @@ const Middle = styled(Bar)`
 		${0.15 * 2 * p.transitionDuration}s
 		${p.open ? `${0.42 * 2 * p.transitionDuration}s` : ""}
 		${p.open
-			? "cubic-bezier(0.215, 0.61, 0.355, 1)"
-			: "cubic-bezier(0.55, 0.055, 0.675, 0.19)"};
+		? "cubic-bezier(0.215, 0.61, 0.355, 1)"
+		: "cubic-bezier(0.55, 0.055, 0.675, 0.19)"};
 	`};
 `;
 

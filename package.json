@@ -27,7 +27,7 @@
     "velocity-animate": "^1.5.0"
   },
   "devDependencies": {
-    "codogo-react-scripts": "1.0.8-beta.51",
+    "codogo-react-scripts": "^1.0.14-delta.84",
     "eslint": "^4.4.1",
     "prettier": "^1.6.1"
   },
