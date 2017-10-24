@@ -62,6 +62,14 @@ export default () => injectGlobal`
 		color: ${vars.colors.text};
 	}
 
+	p > a {
+		font-weight: bold;
+	}
+
+	p > a:hover {
+		text-decoration: underline;
+	}
+
 	a.white-link,
 	a.white-link:hover,
 	a.white-link:visited,

@@ -146,26 +146,34 @@ const Summary = props => (
 
 			<RightCol>
 				<TextCell>
-					{Moment(props.releaseDate).isAfter(
-						Moment().subtract(40, "days"),
-					) && <NewText>New</NewText>}
+					{
+						Moment(props.releaseDate).isAfter(Moment().subtract(40, "days"),)
+						&& (
+							Moment(props.releaseDate).isAfter(Moment()) ?
+							<NewText>Coming Soon</NewText>
+							: <NewText>New</NewText>
+						)
+					}
 
 					<TitleText>{props.title}</TitleText>
 
-					{props.author && (
-						<SubtitleText>
-							{props.author.map(
-								(x, i) => {
-									return (
-										<span>
-											{ i > 0 && ", " }
-											<a href = { `/author/${ x.slug }` }>{ x.name }</a>
-										</span>
-									)
-								}
-							)}
-						</SubtitleText>
-					)}
+					{
+						props.author 
+						&& (
+							<SubtitleText>
+								{props.author.map(
+									(x, i) => {
+										return (
+											<span>
+												{ i > 0 && ", " }
+												<a href = { `/author/${ x.slug }` }>{ x.name }</a>
+											</span>
+										)
+									}
+								)}
+							</SubtitleText>
+						)
+					}
 				</TextCell>
 
 				{(props.blurb || props.releaseDate) && (

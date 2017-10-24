@@ -75,7 +75,7 @@ const RightCol = styled(GridCell)`
 	${mixins.xs`display: none;`};
 `;
 
-const TitleText = styled.p`
+const TitleText = styled.h2`
 	color: ${R.path(["theme", "logo1",])};
 	font-family: ${vars.font.title.family};
 	font-size: 2.9em;

@@ -35,10 +35,10 @@ const Page = ({ pageSlug, }) => {
 			<GridCell>
 				{page.title && <Title>{page.title}</Title>}
 
-				{page.text && (
+				{page.html && (
 					<div
 						dangerouslySetInnerHTML = { {
-							__html: page.text,
+							__html: page.html,
 						} }
 					/>
 				)}

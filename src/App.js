@@ -12,6 +12,8 @@ import ScrollToTop from "./components/common/ScrollToTop";
 
 import siteData from "src/data";
 
+import Head from "src/components/common/Head";
+
 // --------------------------------------------------
 
 injectGlobalStyles();
@@ -33,6 +35,8 @@ const routes = routesConfig.map(
 							href = "http://http://www.muswell-press.co.uk/"
 						/>
 					</Helmet>
+
+					<Head />
 
 					<Nav key = "Nav" />
 

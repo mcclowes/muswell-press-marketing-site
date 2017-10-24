@@ -8,6 +8,8 @@ import { objMap, } from "../../lib/util";
 
 import siteData from "src/data";
 
+import Head from "src/components/common/Head";
+
 // --------------------------------------------------
 
 const booksList = siteData.book;
@@ -47,7 +49,12 @@ const OtherBookCover = styled.div`
 const OtherBook = props => (
 	<OtherBookWrapper>
 		<Link to = { `/book/${props.slug}` }>
-			<OtherBookCover src = { props.cover && props.cover.url } />
+			<OtherBookCover 
+				src = { 
+					props.cover 
+					&& `http://res.cloudinary.com/codogo/image/fetch/h_500,c_fill,g_face,f_auto/https:${ props.cover.url }`
+				}
+			/>
 
 			<OtherBookTitle>{props.title}</OtherBookTitle>
 
@@ -136,6 +143,8 @@ const Grid = enhanceGrid(_Grid);
 
 const Books = () => (
 	<Container>
+		<Head pageTitle = "Our Collection" />
+
 		<Title>Our Collection</Title>
 
 		<Grid />
