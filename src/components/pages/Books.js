@@ -73,7 +73,7 @@ const InvisLink = styled(Link)`
 `;
 
 const AllBookLinks = <div>
-	{ booksList.map(o => <InvisLink to = { `/book/${o.slug}` }/>) }
+	{ booksList.map(o => <InvisLink to = { `/book/${o.slug}` } key = { o.slug }/>) }
 </div>;
 
 const Rows = ({ rows, cols, }) => {
@@ -135,9 +135,7 @@ const _Grid = props => {
 					</OnlyBp>
 				);
 			})}
-			<div>
-				{ AllBookLinks }
-			</div>
+			{ AllBookLinks }
 		</div>
 	);
 };
