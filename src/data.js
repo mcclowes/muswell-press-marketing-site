@@ -119,6 +119,6 @@ siteData = shapeObjectNicely(siteData);
 // Flatten objects containing single objects
 siteData = R.map(x => (x.length === 1 ? x[0] : x))(siteData);
 
-console.log(siteData);
+// console.log(siteData);
 
 export default siteData;
