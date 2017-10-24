@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 
-import * as mixins from "../style/mixins";
-import * as vars from "../style/vars";
+import * as mixins from "src/components/style/mixins";
+import * as vars from "src/components/style/vars";
 
 import { Icon, } from "./misc";
 
@@ -21,6 +21,8 @@ const Wrapper = styled.footer`
 	overflow: hidden;
 	position: absolute;
 	right: 0;
+	padding-top: 1em;
+	padding-bottom: 1em;
 
 	${mixins.bpEither("height", vars.dim.footer.height)};
 	${mixins.bpEither("max-height", vars.dim.footer.height)};
@@ -36,8 +38,8 @@ const Wrapper = styled.footer`
 const Links = styled.div`
 	display: flex;
 	justify-content: space-around;
-
-	margin: 0 1em;
+	margin: 1em;
+	color: #eee;
 
 	${mixins.bpEither("flex-direction", {
 		xs: "column",
@@ -53,20 +55,28 @@ const Links = styled.div`
 		xs: "flex-start",
 		other: "center",
 	})};
-
-	a {
-		margin: 0.2em 0.5em;
-	}
 `;
 
 const Social = styled.div`
 	align-items: center;
 	display: flex;
 	justify-content: space-around;
+	margin: 1em;
+	opacity: 0.67;
 
-	a {
+	> a {
 		font-size: 24px;
 		margin: 0 0.3em;
+	}
+`;
+
+const FooterLink = styled.a`
+	display: flex;
+	margin: 1em;
+	opacity: 0.67;
+
+	&:hover {
+		text-decoration: underline;
 	}
 `;
 
@@ -74,6 +84,12 @@ const FooterText = styled.div`
 	align-items: center;
 	display: flex;
 	justify-content: space-around;
+	margin: 1em;
+	opacity: 0.67;
+
+	a:hover {
+		text-decoration: underline;
+	}
 `;
 
 // --------------------------------------------------
@@ -81,35 +97,57 @@ const FooterText = styled.div`
 const Footer = () => (
 	<Wrapper>
 		<Links>
-			{siteData.aboutPage.map(({ slug, title, }) => {
+			{ siteData.aboutPage.map(({ slug, title, }) => {
 				return (
-					<a href = { "/" + slug } key = { slug }>
-						{title}
-					</a>
+					<FooterLink href = { "/" + slug } key = { slug }>
+						{ title }
+					</FooterLink>
 				);
-			})}
+			}) }
 		</Links>
 
 		<Social>
-			<a href = { siteData.generalSettings.facebookUrl }>
-				<Icon type = "facebook-square" />
-			</a>
+			{ 
+				siteData.generalSettings.facebookUrl
+				&& (
+					<a href = { siteData.generalSettings.facebookUrl }>
+						<Icon type = "facebook-square" />
+					</a>
+				)
+			}
 
-			<a href = { siteData.generalSettings.twitterUrl }>
-				<Icon type = "twitter" />
-			</a>
+			{ 
+				siteData.generalSettings.twitterUrl
+				&& (
+					<a href = { siteData.generalSettings.twitterUrl }>
+						<Icon type = "twitter" />
+					</a>
+				)
+			}
 
-			<a href = { siteData.generalSettings.instagramUrl }>
-				<Icon type = "instagram" />
-			</a>
+			{ 
+				siteData.generalSettings.instagramUrl
+				&& (
+					<a href = { siteData.generalSettings.instagramUrl }>
+						<Icon type = "instagram" />
+					</a>
+				)
+			}
 
-			<a href = { siteData.generalSettings.linkedinUrl }>
-				<Icon type = "linkedin" />
-			</a>
+			{ 
+				siteData.generalSettings.linkedinUrl
+				&& (
+					<a href = { siteData.generalSettings.linkedinUrl }>
+						<Icon type = "linkedin" />
+					</a>
+				)
+			}
 		</Social>
 
 		<FooterText>
-			<a href = "/">{siteData.generalSettings.footerText}</a>
+			<a href = "/">{ siteData.generalSettings.footerText }</a>
+			<span dangerouslySetInnerHTML = { { __html: "&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;" } }/>
+			<a href = "https://consulting.codogo.io">Site by Codogo</a>
 		</FooterText>
 	</Wrapper>
 );

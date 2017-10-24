@@ -10,8 +10,6 @@ import Main from "./components/common/Main";
 import Footer from "./components/common/Footer";
 import ScrollToTop from "./components/common/ScrollToTop";
 
-import * as vars from "./components/style/vars";
-
 import siteData from "src/data";
 
 // --------------------------------------------------

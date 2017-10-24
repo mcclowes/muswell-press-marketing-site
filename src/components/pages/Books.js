@@ -12,7 +12,9 @@ import siteData from "src/data";
 
 const booksList = siteData.book;
 booksList.sort(
-	(x, y) => (x.releaseDate || x.createdAt) + (y.releaseDate || y.createdDate),
+	(x, y) => {
+		return new Date(y.releaseDate || y.createdAt) - new Date(x.releaseDate || x.createdDate);
+	}
 );
 
 const colsMap = {

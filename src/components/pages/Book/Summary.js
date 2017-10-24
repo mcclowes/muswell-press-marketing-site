@@ -155,7 +155,14 @@ const Summary = props => (
 					{props.author && (
 						<SubtitleText>
 							{props.author.map(
-								(x, i) => `${i > 0 ? ", " : ""}${x.name}`,
+								(x, i) => {
+									return (
+										<span>
+											{ i > 0 && ", " }
+											<a href = { `/author/${ x.slug }` }>{ x.name }</a>
+										</span>
+									)
+								}
 							)}
 						</SubtitleText>
 					)}
