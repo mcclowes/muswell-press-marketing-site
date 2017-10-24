@@ -67,6 +67,15 @@ const Row = styled.div`
 	flex-direction: row;
 `;
 
+const InvisLink = styled(Link)`
+	display: none;
+	visibility: hidden;
+`;
+
+const AllBookLinks = <div>
+	{ booksList.map(o => <InvisLink to = { `/book/${o.slug}` }/>) }
+</div>;
+
 const Rows = ({ rows, cols, }) => {
 	const rowsArr = [];
 
@@ -126,6 +135,9 @@ const _Grid = props => {
 					</OnlyBp>
 				);
 			})}
+			<div>
+				{ AllBookLinks }
+			</div>
 		</div>
 	);
 };
