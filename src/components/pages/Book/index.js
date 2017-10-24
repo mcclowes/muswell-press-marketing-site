@@ -4,6 +4,8 @@ import NotFound from "../NotFound";
 
 import siteData from "src/data";
 
+import Head from "src/components/common/Head";
+
 // --------------------------------------------------
 
 const Book = ({ bookSlug, }) => {
@@ -12,6 +14,12 @@ const Book = ({ bookSlug, }) => {
 	if (book) {
 		return (
 			<div>
+				<Head 
+					pageTitle = { book.title }
+					pageDescription = { book.blurb }
+					pageImage = { book.cover }
+				/>
+				
 				<Summary { ...book } />
 
 				<Press { ...book } />

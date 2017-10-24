@@ -19,6 +19,8 @@ import { objMap, } from "../../../lib/util";
 
 import siteData from "src/data";
 
+import Head from "src/components/common/Head";
+
 // --------------------------------------------------
 
 const CenterCell = styled(TextCell)`
@@ -36,6 +38,8 @@ const NotAsBigText = styled.p`
 
 const About = () => (
 	<Container maxWidth = { 800 }>
+		<Head pageTitle = "Our Collection" />
+
 		<CenterCell>
 			<BigText>{siteData.homePage.aboutText1}</BigText>
 
@@ -44,7 +48,7 @@ const About = () => (
 			<PSpacing />
 
 			<Button
-				to = "/about"
+				to = "/who-we-are"
 				text = { siteData.homePage.aboutLink }
 				icon = "users"
 			/>

@@ -146,7 +146,9 @@ const Footer = () => (
 
 		<FooterText>
 			<a href = "/">{ siteData.generalSettings.footerText }</a>
+			
 			<span dangerouslySetInnerHTML = { { __html: "&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;" } }/>
+			
 			<a href = "https://consulting.codogo.io">Site by Codogo</a>
 		</FooterText>
 	</Wrapper>

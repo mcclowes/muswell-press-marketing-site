@@ -130,3 +130,10 @@ export const dim = dimensions;
 export const imageViewerFadeDuration = 200;
 
 export const bookUrl = "/img/the-rainbow-conspiracy.png";
+
+export const meta = {
+	twitterUsername: "mcclowes",
+	twitterCreator: "MuswellPress",
+	googleAnalytics: "UA-89374864-3",
+	googleSearch: "YQs24--DxVBln2zZc8hPo1kZFoxzc2amoF6-QWkDe7k",
+};
