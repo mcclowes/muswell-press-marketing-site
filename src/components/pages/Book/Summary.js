@@ -170,7 +170,14 @@ const Summary = props => (
 
 				{(props.blurb || props.releaseDate) && (
 					<TextCell>
-						{props.blurb && <Para>{props.blurb}</Para>}
+						{
+							props.html &&
+							<div
+								dangerouslySetInnerHTML = { {
+									__html: props.html,
+								} }
+							/>
+						}
 
 						{props.releaseDate && (
 							<div>

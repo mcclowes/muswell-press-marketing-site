@@ -151,7 +151,16 @@ const Summary = props => (
 					<TitleText>{props.name}</TitleText>
 				</TextCell>
 
-				<TextCell>{props.biography}</TextCell>
+				{
+					props.html &&
+					<TextCell>
+						<div
+							dangerouslySetInnerHTML = { {
+								__html: props.html,
+							} }
+						/>
+					</TextCell>
+				}
 
 				<TextCell>
 					<SubtitleText>Books</SubtitleText>
@@ -161,7 +170,7 @@ const Summary = props => (
 							author.some(({ slug, }) => props.slug === slug),
 						)
 						.map(book => (
-							<a href = { "/book/" + book.slug }>{book.title}</a>
+							<div><a href = { "/book/" + book.slug }>{book.title}</a></div>
 						))}
 				</TextCell>
 			</RightCol>
