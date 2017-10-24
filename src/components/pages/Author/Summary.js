@@ -137,12 +137,12 @@ const Summary = props => (
 	<Background1>
 		<Container1>
 			<LeftCol>
-				<Cover src = { props.cover && props.cover.url } />
+				<Cover src = { props.image && props.image.url } />
 			</LeftCol>
 
 			<MobileCover>
 				<GridCell>
-					<FullWidthImg src = { props.cover && props.cover.url } />
+					<FullWidthImg src = { props.image && props.image.url } />
 				</GridCell>
 			</MobileCover>
 
