@@ -127,13 +127,13 @@ const FeaturedBook = props => (
 			<FeaturedBookInner>
 				<FeaturedBookCover>
 					<FeaturedBookCoverImage
-						src = { props.cover && props.cover.url }
+						src = { props.cover && `http://res.cloudinary.com/codogo/image/fetch/h_500,c_fill,g_face,f_auto/https:${props.cover.url }` }
 					/>
 				</FeaturedBookCover>
 
 				<FeaturedBookDetails>
 					<FeaturedBookDetailsInner>
-						<FeaturedBookTitle>{props.title}</FeaturedBookTitle>
+						<FeaturedBookTitle>{ props.title }</FeaturedBookTitle>
 
 						{props.author ? (
 							<FeaturedBookAuthor>
@@ -143,7 +143,7 @@ const FeaturedBook = props => (
 							</FeaturedBookAuthor>
 						) : null}
 
-						<Para>{props.shorterBlurb}</Para>
+						<Para>{ props.shorterBlurb }</Para>
 					</FeaturedBookDetailsInner>
 				</FeaturedBookDetails>
 			</FeaturedBookInner>

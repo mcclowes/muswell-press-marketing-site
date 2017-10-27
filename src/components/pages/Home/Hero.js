@@ -121,7 +121,7 @@ const Hero = props => (
 	<Background1>
 		<Container1>
 			<LeftCol>
-				<Cover src = { siteData.homePage.hero.heroLink.cover.url } />
+				<Cover src = { siteData.homePage.hero && `http://res.cloudinary.com/codogo/image/fetch/h_500,c_fill,g_face,f_auto/https:${ siteData.homePage.hero.heroLink.cover.url}` } />
 			</LeftCol>
 
 			<RightCol>

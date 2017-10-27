@@ -140,7 +140,7 @@ const Summary = props => (
 
 			<MobileCover>
 				<GridCell>
-					<FullWidthImg src = { props.cover && props.cover.url } />
+					<FullWidthImg src = { props.cover && `http://res.cloudinary.com/codogo/image/fetch/h_500,c_fill,g_face,f_auto/https:${props.cover.url }` } />
 				</GridCell>
 			</MobileCover>
 

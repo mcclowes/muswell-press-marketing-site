@@ -99,17 +99,12 @@ const SubtitleText = styled.p`
 	opacity: 0.67;
 `;
 
-const NewText = styled.p`
-	opacity: 0.5;
-	font-family: ${vars.font.title.family};
-	font-size: 1em;
-	margin: 0 0 -1em 0;
-`;
+const BookLink = styled.a`
+	font-weight: bold;
 
-const Metadata = styled.p`
-	border-left: 1px solid ${vars.colors.text};
-	opacity: 0.67;
-	padding-left: 1em;
+	&:hover {
+		text-decoration: underline;
+	}
 `;
 
 const MobileCover = styled.div`
@@ -127,10 +122,6 @@ const MobileCover = styled.div`
 	`};
 `;
 
-const CheckoutButton = styled(Button)`
-	margin-right: 0.5em;
-`;
-
 // --------------------------------------------------
 
 const Summary = props => (
@@ -142,7 +133,7 @@ const Summary = props => (
 
 			<MobileCover>
 				<GridCell>
-					<FullWidthImg src = { props.image && props.image.url } />
+					<FullWidthImg src = { props.image && `http://res.cloudinary.com/codogo/image/fetch/h_500,c_fill,g_face,f_auto/https:${props.image.url }` } />
 				</GridCell>
 			</MobileCover>
 
@@ -170,7 +161,7 @@ const Summary = props => (
 							author.some(({ slug, }) => props.slug === slug),
 						)
 						.map(book => (
-							<div><a href = { "/book/" + book.slug }>{book.title}</a></div>
+							<BookLink><a href = { "/book/" + book.slug }>{book.title}</a></BookLink>
 						))}
 				</TextCell>
 			</RightCol>
