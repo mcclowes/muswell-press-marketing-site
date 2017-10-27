@@ -6,6 +6,7 @@ import rawdata from "./rawdata";
 const slugify = x =>
 	_slugify(x, {
 		lower: true,
+		remove: /[^\w\s]/,
 	});
 
 const makeMapUsingSlugs = list =>
