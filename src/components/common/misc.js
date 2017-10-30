@@ -97,6 +97,7 @@ export const ButtonWrapper = styled.div`
 	&:visited,
 	&:active {
 		color: ${p => p.color || vars.colors.text};
+		opacity: 0.7;
 	}
 
 	${({ outline, color, hoverColor, }) =>

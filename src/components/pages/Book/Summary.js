@@ -188,11 +188,11 @@ const Summary = props => (
 						}
 
 						{props.releaseDate && (
-							<div>
+							<div><b>
 								Published{" "}
 								{Moment(props.releaseDate).format(
 									"Do MMMM YYYY",
-								)}
+								)}</b>
 							</div>
 						)}
 					</TextCell>
@@ -237,18 +237,23 @@ const Summary = props => (
 									<div>{x.dimensions}</div>
 								) : null}
 							</Metadata>
-						</TextCell>
-					))}
 
-				<TextCell>
-					{props.bookEdition &&
-						props.bookEdition.map(x => (
 							<CheckoutButton
 								href = { x.link || x.amazonLink }
 								text = { x.format }
 								icon = "shopping_cart"
 							/>
-						))}
+						</TextCell>
+					))}
+
+				<TextCell>
+					<br/>
+					<CheckoutButton
+						href = "https://www.booksellers.org.uk/bookshopsearch"
+						target = "_blank"
+						text = "Find a bookshop"
+						icon = "compass"
+					/>
 				</TextCell>
 			</RightCol>
 		</Container1>
