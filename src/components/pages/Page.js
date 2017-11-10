@@ -10,13 +10,18 @@ import siteData from "src/data";
 // --------------------------------------------------
 
 const Pic = styled.div`
-	background-image: url(${({ page, }) => page && page.url});
+	background-image: url(${R.prop("src")});
 	background-size: cover;
 	background-position: top center;
 	width: 100%;
-	padding-top: 33%;
-	margin-bottom: 2em;
+	padding-top: 55%;
+	margin-bottom: 4em;
 `;
+
+// const Pic = styled.img`
+// 	width: 100%;
+// 	margin-bottom: 2em;
+// `;
 
 const Title = styled.h1`
 	line-height: 1;
@@ -45,7 +50,7 @@ const Page = ({ pageSlug, }) => {
 
 				<PSpacing />
 
-				{page.picture && <Pic page = { page.picture } />}
+				{page.picture && <Pic src = { page.picture && `http://res.cloudinary.com/codogo/image/fetch/w_1000/https:${page.picture.url }` } />}
 
 				{page.advisoryBoard && (
 					<div>

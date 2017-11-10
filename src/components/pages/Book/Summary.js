@@ -56,9 +56,10 @@ const Cover = styled.div`
 	width: 100%;
 	height: 100%;
 	background-image: url(${R.prop("src")});
-	background-position: center center;
+	background-position: center right;
 	background-size: contain;
 	background-repeat: no-repeat;
+	${mixins.bpEach("max-height", coverHeights)} 
 `;
 
 const LeftCol = styled(GridCell)`
@@ -66,7 +67,10 @@ const LeftCol = styled(GridCell)`
 	max-width: 500px;
 	flex: 1;
 	display: flex;
-	${mixins.bpEach("max-height", coverHeights)} ${mixins.xs`display: none;`};
+	flex-direction: column;
+	align-items: flex-end;
+	
+	${mixins.xs`display: none;`};
 `;
 
 const RightCol = styled(GridCell)`
@@ -135,13 +139,39 @@ const CheckoutButton = styled(Button)`
 	margin-right: 0.5em;
 `;
 
+const Quote = styled.div`
+	font-family: ${vars.font.title.family};
+	text-align: right;
+	font-weight: bold;
+	font-size: 1.5em;
+	line-height: 1.3;
+	margin-top: 2em;
+	max-width: 20em;
+`;
+
+const QuoteText = styled.div`
+	color: rgba(0,0,0,0.5);
+`;
+
+const QuoteAuthor = styled.div`
+	color: rgba(0,0,0,0.33);
+	font-style: italic;
+	margin-top: 0.1em;
+`;
+
 // --------------------------------------------------
 
 const Summary = props => (
 	<Background1>
 		<Container1>
 			<LeftCol>
-				<Cover src = { props.cover && props.cover.url } />
+				<Cover src = { props.cover && `http://res.cloudinary.com/codogo/image/fetch/h_500,c_fill,g_face,f_auto/https:${props.cover.url }` } />
+				{ props.primaryQuote && (
+					<Quote>
+						<QuoteText>"{ props.primaryQuote.textmd }"</QuoteText>
+						<QuoteAuthor>- { props.primaryQuote.author }</QuoteAuthor>
+					</Quote>
+				)}
 			</LeftCol>
 
 			<MobileCover>

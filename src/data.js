@@ -61,6 +61,7 @@ const defaultFieldShaping = R.pipe(
 	adjustFields("content", "html", marked),
 	adjustFields("blurb", "html", marked),
 	adjustFields("biography", "html", marked),
+	adjustFields("text", "textmd", R.identity),
 	adjustFields("text", "text", marked),
 	adjustFields("advisoryBoard", "advisoryBoard", marked),
 );
