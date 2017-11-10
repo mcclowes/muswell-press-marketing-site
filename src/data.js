@@ -64,6 +64,16 @@ const defaultFieldShaping = R.pipe(
 	adjustFields("text", "textmd", R.identity),
 	adjustFields("text", "text", marked),
 	adjustFields("advisoryBoard", "advisoryBoard", marked),
+	adjustFields("price", "price", price => price.includes("£") ? price : "£" + price),
+	adjustFields("isbn", "isbn", isbn => isbn.replace(/\-/g, "")),
+	fields => ({
+		...fields,
+		...(
+			fields.format && fields.format.toLowerCase() === "ebook" && !fields.price
+			? { price: "£4.99", }
+			: {}
+		),
+	}),
 );
 
 let siteData = {};
@@ -122,6 +132,7 @@ constructBase(rawdata.items, siteData);
 siteData = shapeObjectNicely(siteData);
 // Flatten objects containing single objects
 siteData = R.map(x => (x.length === 1 ? x[0] : x))(siteData);
+siteData.booksObj = makeMapUsingSlugs(siteData.book);
 
 console.log(siteData);
 

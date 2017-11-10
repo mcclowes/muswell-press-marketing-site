@@ -151,6 +151,19 @@ const Quote = styled.div`
 
 const QuoteText = styled.div`
 	color: rgba(0,0,0,0.5);
+	font-size: ${({ children, }) => {
+		console.log("children", children);
+		const quote = children[1];
+		if (quote) {
+			if (quote.length < 80) {
+				return 1;
+			}
+			else {
+				return Math.max(0.7, 1 - (0.3 * ((quote.length - 80) / 200)));
+			}
+		}
+		return "";
+	}}em;
 `;
 
 const QuoteAuthor = styled.div`
@@ -224,11 +237,11 @@ const Summary = props => (
 						}
 
 						{props.releaseDate && (
-							<div><b>
+							<div>
 								Published{" "}
 								{Moment(props.releaseDate).format(
 									"Do MMMM YYYY",
-								)}</b>
+								)}
 							</div>
 						)}
 					</TextCell>
@@ -266,7 +279,7 @@ const Summary = props => (
 								{x.price ? <div>{x.price}</div> : null}
 
 								{x.pageCount ? (
-									<div>{x.pageCount}PP</div>
+									<div>{x.pageCount}pp</div>
 								) : null}
 
 								{x.dimensions ? (
