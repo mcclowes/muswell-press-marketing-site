@@ -152,7 +152,6 @@ const Quote = styled.div`
 const QuoteText = styled.div`
 	color: rgba(0,0,0,0.5);
 	font-size: ${({ children, }) => {
-		console.log("children", children);
 		const quote = children[1];
 		if (quote) {
 			if (quote.length < 80) {

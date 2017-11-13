@@ -49,8 +49,6 @@ const booksList = [
 	)
 ];
 
-console.log("booksList", booksList);
-
 const colsMap = {
 	xs: 2,
 	sm: 3,
