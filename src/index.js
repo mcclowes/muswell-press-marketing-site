@@ -1,8 +1,16 @@
 import React from "react";
 //import ReactDOM from "react-dom";
 import App from "./App";
-//import registerServiceWorker from "./registerServiceWorker";
+// import registerServiceWorker from "./registerServiceWorker";
 import { render, } from "react-snapshot";
 
 render(<App />, document.getElementById("root"));
-//registerServiceWorker();
+// registerServiceWorker();
+
+console.log("attempting to remove service workers...");
+navigator.serviceWorker.getRegistrations().then(registrations => {
+	console.log("service workers found:", registrations);
+	registrations.forEach(reg => {
+		reg.unregister();
+	});
+});
