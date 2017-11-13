@@ -101,7 +101,7 @@ const SubtitleText = styled.p`
 	opacity: 0.67;
 `;
 
-const Author = styled.a`
+const Author = styled(Link)`
 	&:hover {
 		text-decoration: underline;
 	}
@@ -215,7 +215,7 @@ const Summary = props => (
 										return (
 											<span>
 												{ i > 0 && ", " }
-												<Author href = { `/author/${ x.slug }` }>{ x.name }</Author>
+												<Author to = { `/author/${ x.slug }` }>{ x.name }</Author>
 											</span>
 										)
 									}

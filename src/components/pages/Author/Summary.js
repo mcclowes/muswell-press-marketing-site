@@ -58,7 +58,7 @@ const Cover = styled.div`
 	width: 100%;
 	height: 100%;
 	background-image: url(${R.prop("src")});
-	background-position: center center;
+	background-position: center right;
 	background-size: contain;
 	background-repeat: no-repeat;
 `;
