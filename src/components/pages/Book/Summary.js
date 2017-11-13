@@ -142,7 +142,6 @@ const CheckoutButton = styled(Button)`
 const Quote = styled.div`
 	font-family: ${vars.font.title.family};
 	text-align: right;
-	font-weight: bold;
 	font-size: 1.5em;
 	line-height: 1.3;
 	margin-top: 2em;
@@ -151,6 +150,7 @@ const Quote = styled.div`
 
 const QuoteText = styled.div`
 	color: rgba(0,0,0,0.5);
+	font-weight: bold;
 	font-size: ${({ children, }) => {
 		const quote = children[1];
 		if (quote) {
