@@ -13,16 +13,14 @@ import siteData from "src/data";
 const Wrapper = styled.footer`
 	align-items: center;
 	bottom: 0;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-around;
+	display: block;
+	text-align: center;
 	left: 0;
 	margin: 0;
 	overflow: hidden;
 	position: absolute;
 	right: 0;
-	padding-top: 1em;
-	padding-bottom: 1em;
+	padding: 1em 0;
 
 	${mixins.bpEither("height", vars.dim.footer.height)};
 	${mixins.bpEither("max-height", vars.dim.footer.height)};
@@ -37,8 +35,8 @@ const Wrapper = styled.footer`
 
 const Links = styled.div`
 	display: flex;
-	justify-content: space-around;
-	margin: 1em;
+	justify-content: center;
+	margin: 0.5em;
 	color: #eee;
 
 	${mixins.bpEither("flex-direction", {
@@ -47,12 +45,7 @@ const Links = styled.div`
 	})};
 
 	${mixins.bpEither("align-items", {
-		xs: "flex-start",
-		other: "center",
-	})};
-
-	${mixins.bpEither("align-self", {
-		xs: "flex-start",
+		xs: "center",
 		other: "center",
 	})};
 `;
@@ -60,20 +53,22 @@ const Links = styled.div`
 const Social = styled.div`
 	align-items: center;
 	display: flex;
-	justify-content: space-around;
-	margin: 1em;
+	justify-content: center;
+	margin: 0.5em;
 	opacity: 0.67;
 
 	> a {
 		font-size: 24px;
+		line-height: 1;
 		margin: 0 0.3em;
 	}
 `;
 
 const FooterLink = styled.a`
 	display: flex;
-	margin: 1em;
+	margin: 0 0.5em;
 	opacity: 0.67;
+	text-align: center;
 
 	&:hover {
 		text-decoration: underline;
@@ -83,8 +78,8 @@ const FooterLink = styled.a`
 const FooterText = styled.div`
 	align-items: center;
 	display: flex;
-	justify-content: space-around;
-	margin: 1em;
+	justify-content: center;
+	margin: 0.5em;
 	opacity: 0.67;
 
 	a:hover {
@@ -151,6 +146,8 @@ const Footer = () => (
 			
 			<a href = "https://consulting.codogo.io">Site by Codogo</a>
 		</FooterText>
+
+		<FooterText>Registered in England and Wales 06626047</FooterText>
 	</Wrapper>
 );
 

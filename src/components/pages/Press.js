@@ -81,21 +81,24 @@ const ThingInner = styled.div`
 
 const ThingTitle = styled.p`
 	font-family: ${vars.font.title.family};
-	font-size: 1.2em;
-	${mixins.xs`font-size: 1em;`} font-weight: bold;
-	line-height: 1;
+	font-size: 1.1em;
+	${mixins.xs`font-size: 1em;`}
+	line-height: 1.3;
 `;
 
 const ThingText = styled.p`
 	font-family: ${vars.font.title.family};
-	font-size: 1.2em;
-	${mixins.xs`font-size: 1em;`} font-weight: bold;
-	line-height: 1;
+	font-size: 1.1em;
+	${mixins.xs`font-size: 1em;`}
+	line-height: 1.3;
 `;
 
 const ThingAuthor = styled.p`
-	opacity: 0.67;
-	line-height: 1;
+	opacity: 0.5;
+    line-height: 1;
+    text-align: right;
+    font-style: italic;
+    font-family: ${vars.font.title.family};
 `;
 
 const ThingQuote = ThingTitle;

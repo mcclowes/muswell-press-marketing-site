@@ -1,7 +1,12 @@
 import _slugify from "slugify";
 import marked from "marked";
+import Moment from "moment";
 
 import rawdata from "./rawdata";
+
+marked.setOptions({
+	breaks: true,
+});
 
 const slugify = x =>
 	_slugify(x, {
@@ -65,7 +70,16 @@ const defaultFieldShaping = R.pipe(
 	adjustFields("text", "text", marked),
 	adjustFields("advisoryBoard", "advisoryBoard", marked),
 	adjustFields("price", "price", price => price.includes("£") ? price : "£" + price),
-	adjustFields("isbn", "isbn", isbn => isbn.replace(/\-/g, "")),
+	adjustFields("isbn", "isbn", isbn => isbn.replace(/-/g, "")),
+	adjustFields("releaseDate", "releaseDateText", releaseDate => (
+		Moment(releaseDate).isAfter(Moment().subtract(40, "days"),)
+		? (
+			Moment(releaseDate).isAfter(Moment())
+			? "Coming Soon"
+			: "Just Published"
+		)
+		: ""
+	)),
 	fields => ({
 		...fields,
 		...(

@@ -101,6 +101,7 @@ const SubtitleText = styled.p`
 
 const BookLink = styled.a`
 	font-weight: bold;
+	display: block;
 
 	&:hover {
 		text-decoration: underline;

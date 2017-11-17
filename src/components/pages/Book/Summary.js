@@ -195,12 +195,7 @@ const Summary = props => (
 			<RightCol>
 				<TextCell>
 					{
-						Moment(props.releaseDate).isAfter(Moment().subtract(40, "days"),)
-						&& (
-							Moment(props.releaseDate).isAfter(Moment()) ?
-							<NewText>Coming Soon</NewText>
-							: <NewText>New</NewText>
-						)
+						props.releaseDateText && <NewText>{ props.releaseDateText }</NewText>
 					}
 
 					<TitleText>{props.title}</TitleText>

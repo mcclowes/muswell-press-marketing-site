@@ -62,12 +62,13 @@ const FeaturedBookCover = styled.div`
 
 const FeaturedBookCoverImage = styled.div`
 	width: 100%;
-	padding-top: 150%;
+	padding-top: 160%;
 	background-image: url(${R.prop("src")});
-	background-position: top right;
+	background-position: center center;
 	background-size: cover;
 	background-repeat: no-repeat;
 	background-color: #eee;
+	margin-bottom: 1em;
 `;
 
 const FeaturedBookDetails = styled(TextCell)`
@@ -78,17 +79,28 @@ const FeaturedBookDetails = styled(TextCell)`
 		right: 0;
 	`} ${mixins.bp.sm.min`
 		padding: 0;
-		margin-top: 3em;
+		margin-top: 2em;
 	`};
 `;
 
-const FeaturedBookDetailsInner = styled.div`
+const FeaturedBookDetailsInner = styled(GridCell)`
+	padding-left: 0;
+	padding-right: 0;
 	${mixins.xs`padding-left: 1em;`};
+
 `;
 
 const FeaturedBookTitle = styled.h3`
-	margin-bottom: 0.2em;
 	line-height: 1.1;
+	margin: 0.2em 0;
+	font-family: ${vars.font.title.family};
+`;
+
+const FeaturedBookReleaseText = styled.div`
+	opacity: 0.5;
+	text-transform: uppercase;
+	font-size: 0.9em;
+	font-family: ${vars.font.title.family};
 `;
 
 const FeaturedBookAuthor = styled.div`
@@ -98,7 +110,7 @@ const FeaturedBookAuthor = styled.div`
 const CenterCell = styled(GridCell)`
 	flex: 1;
 	text-align: center;
-	margin-top: 3em;
+	margin-top: 1em;
 	${mixins.xs`
 		text-align: left;
 		margin-top: 1em;
@@ -133,6 +145,9 @@ const FeaturedBook = props => (
 
 				<FeaturedBookDetails>
 					<FeaturedBookDetailsInner>
+						{ props.releaseDateText &&
+							<FeaturedBookReleaseText>{ props.releaseDateText }</FeaturedBookReleaseText> }
+
 						<FeaturedBookTitle>{ props.title }</FeaturedBookTitle>
 
 						{props.author ? (

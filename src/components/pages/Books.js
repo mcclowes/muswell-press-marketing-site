@@ -4,6 +4,7 @@ import { compose, withState, withHandlers, } from "recompose";
 
 import { Button, Container, GridCell, Only, } from "../common";
 import * as mixins from "../style/mixins";
+import * as vars from "../style/vars";
 import { objMap, } from "../../lib/util";
 
 import siteData from "src/data";
@@ -58,35 +59,45 @@ const colsMap = {
 
 const colWidths = objMap(colsMap, (k, v) => 100 / v + "%");
 
-const OtherBookWrapper = styled(GridCell)`
+const BookWrapper = styled(GridCell)`
 	${mixins.bpEach("width", colWidths)};
 `;
 
-const OtherBookTitle = styled.h3`
+const BookTitle = styled.h3`
 	line-height: 1.1;
-	margin-bottom: 0.2em;
+	margin: 0.2em 0;
+	font-family: ${vars.font.title.family};
 `;
 
-const OtherBookCover = styled.div`
+const BookCover = styled.div`
 	width: 100%;
 	padding-top: 160%;
 	background-image: url(${R.prop("src")});
 	background-position: center center;
 	background-size: cover;
 	background-repeat: no-repeat;
+	margin-bottom: 1em;
 `;
 
-const OtherBook = props => (
-	<OtherBookWrapper>
+const BookReleaseText = styled.div`
+	opacity: 0.5;
+	text-transform: uppercase;
+	font-size: 0.9em;
+	font-family: ${vars.font.title.family};
+	line-height: 1;
+`;
+
+const Book = props => (
+	<BookWrapper>
 		<Link to = { `/book/${props.slug}` }>
-			<OtherBookCover 
+			<BookCover 
 				src = { 
 					props.cover 
 					&& `http://res.cloudinary.com/codogo/image/fetch/h_500,c_fill,g_face,f_auto/https:${ props.cover.url }`
 				}
 			/>
-
-			<OtherBookTitle>{props.title}</OtherBookTitle>
+			{ props.releaseDateText && <BookReleaseText>{ props.releaseDateText }</BookReleaseText> }
+			<BookTitle>{props.title}</BookTitle>
 
 			{props.author ? (
 				<div>
@@ -96,7 +107,7 @@ const OtherBook = props => (
 				</div>
 			) : null}
 		</Link>
-	</OtherBookWrapper>
+	</BookWrapper>
 );
 
 const Row = styled.div`
@@ -120,7 +131,7 @@ const Rows = ({ rows, cols, }) => {
 		rowsArr.push(
 			booksList
 				.slice(i * cols, (i + 1) * cols)
-				.map((o, i) => <OtherBook { ...o } key = { o.title + i } />),
+				.map((o, i) => <Book { ...o } key = { o.title + i } />),
 		);
 	}
 

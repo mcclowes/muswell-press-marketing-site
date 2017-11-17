@@ -110,4 +110,8 @@ export default () => injectGlobal`
 	  opacity: 1;
 	  transition: opacity 250ms ease-in;
 	}
+
+	ul {
+		padding-left: 1em;
+	}
 `;
