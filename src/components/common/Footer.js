@@ -1,154 +1,169 @@
 import React from "react";
 import styled from "styled-components";
+import { Link, } from "react-router-dom";
 
 import * as mixins from "src/components/style/mixins";
 import * as vars from "src/components/style/vars";
-
-import { Icon, } from "./misc";
 
 import siteData from "src/data";
 
 // --------------------------------------------------
 
-const Wrapper = styled.footer`
-	align-items: center;
-	bottom: 0;
-	display: block;
-	text-align: center;
-	left: 0;
-	margin: 0;
-	overflow: hidden;
-	position: absolute;
-	right: 0;
-	padding: 1em 0;
 
+const Wrapper = styled.footer`
 	${mixins.bpEither("height", vars.dim.footer.height)};
 	${mixins.bpEither("max-height", vars.dim.footer.height)};
 
+	display: block;
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	padding: 1em 0;
+
+	font-size: 0.9em;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+
 	${({ theme: { footer, }, }) => `
-		background-color: ${footer};
-		${footer && footer !== vars.colors.footer
-		? ""
-		: `border-top: 1px solid ${mixins.tr(0.2)};`}		
-	`};
-`;
+		background-color: ${footer || vars.colors.footer};
+		color: white;	
+	`}
 
-const Links = styled.div`
-	display: flex;
-	justify-content: center;
-	margin: 0.5em;
-	color: #eee;
-
-	${mixins.bpEither("flex-direction", {
-		xs: "column",
-		other: "row",
-	})};
-
-	${mixins.bpEither("align-items", {
-		xs: "center",
-		other: "center",
-	})};
-`;
-
-const Social = styled.div`
-	align-items: center;
-	display: flex;
-	justify-content: center;
-	margin: 0.5em;
-	opacity: 0.67;
-
-	> a {
-		font-size: 24px;
-		line-height: 1;
-		margin: 0 0.3em;
-	}
-`;
-
-const FooterLink = styled.a`
-	display: flex;
-	margin: 0 0.5em;
-	opacity: 0.67;
-	text-align: center;
-
-	&:hover {
+	& a:hover {
 		text-decoration: underline;
 	}
+
+	${mixins.xs`
+		padding: 2em;
+	`}
 `;
 
-const FooterText = styled.div`
-	align-items: center;
-	display: flex;
-	justify-content: center;
-	margin: 0.5em;
-	opacity: 0.67;
-
-	a:hover {
-		text-decoration: underline;
-	}
-`;
-
-// --------------------------------------------------
-
-const Footer = () => (
-	<Wrapper>
-		<Links>
-			{ siteData.aboutPage.map(({ slug, title, }) => {
-				return (
-					<FooterLink href = { "/" + slug } key = { slug }>
-						{ title }
-					</FooterLink>
-				);
-			}) }
-		</Links>
-
-		<Social>
-			{ 
-				siteData.generalSettings.facebookUrl
-				&& (
-					<a href = { siteData.generalSettings.facebookUrl }>
-						<Icon type = "facebook-square" />
-					</a>
-				)
-			}
-
-			{ 
-				siteData.generalSettings.twitterUrl
-				&& (
-					<a href = { siteData.generalSettings.twitterUrl }>
-						<Icon type = "twitter" />
-					</a>
-				)
-			}
-
-			{ 
-				siteData.generalSettings.instagramUrl
-				&& (
-					<a href = { siteData.generalSettings.instagramUrl }>
-						<Icon type = "instagram" />
-					</a>
-				)
-			}
-
-			{ 
-				siteData.generalSettings.linkedinUrl
-				&& (
-					<a href = { siteData.generalSettings.linkedinUrl }>
-						<Icon type = "linkedin" />
-					</a>
-				)
-			}
-		</Social>
-
-		<FooterText>
-			<a href = "/">{ siteData.generalSettings.footerText }</a>
-			
-			<span dangerouslySetInnerHTML = { { __html: "&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;" } }/>
-			
-			<a href = "https://consulting.codogo.io">Site by Codogo</a>
-		</FooterText>
-
-		<FooterText>Registered in England and Wales 06626047</FooterText>
-	</Wrapper>
+const MaybeLink = props => (
+	props.to
+	? <Link { ...props }/>
+	: <span { ...props }/>
 );
 
-export default Footer;
+const FooterLink = styled(MaybeLink)`
+	padding: 0 0.8em;
+	margin: 0.33em 0;
+	${mixins.bp.sm.min`
+		&:not(:last-child) {
+			border-right: 1px rgba(255,255,255,0.2) solid;
+		}		
+	`}
+	${mixins.xs`
+		display: block;
+	`}
+	${props => props.br ? "color: transparent;" : ""}
+`;
+
+const Mobile = styled.div`
+	${mixins.bp.sm.min`display: none;`}
+`;
+
+const Desktop = styled.div`
+	${mixins.xs`display: none;`}
+`;
+
+const Row = styled.div`
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+
+	&:last-child {
+		color: #999;
+	}
+`;
+
+const Columns = styled.div`
+	display: flex;
+	flex-direction: row;
+`;
+
+const Column = styled.div`
+	width: 50%;
+`;
+
+const BottomRow = styled.div`
+	margin-top: 1em;
+`;
+
+export default () => (
+	<Wrapper>
+		<Desktop>
+
+			<Row>
+				{ siteData.aboutPage.map(({ slug, title, }) => {
+					return (
+						<FooterLink to = { "/" + slug } key = { slug }>
+							{ title }
+						</FooterLink>
+					);
+				}) }
+				<FooterLink to = { siteData.generalSettings.facebookUrl }>			
+					Facebook
+				</FooterLink>
+				<FooterLink to = { siteData.generalSettings.twitterUrl }>
+					Twitter
+				</FooterLink>
+			</Row>
+
+			<Row>
+				<FooterLink>{ siteData.generalSettings.footerText }</FooterLink>
+								
+				<FooterLink>Registered in England and Wales 06626047</FooterLink>
+
+				<FooterLink to = "https://consulting.codogo.io">Site by Codogo</FooterLink>
+
+			</Row>
+
+
+
+			
+
+		</Desktop>
+
+
+		<Mobile>
+			<Columns>
+				<Column>
+					{ siteData.aboutPage.map(({ slug, title, }) => {
+						return (
+							<FooterLink to = { "/" + slug } key = { slug }>
+								{ title }
+							</FooterLink>
+						);
+					}) }
+				</Column>
+
+				<Column>
+					<FooterLink to = { siteData.generalSettings.facebookUrl }>			
+						Facebook
+					</FooterLink>
+					<FooterLink to = { siteData.generalSettings.twitterUrl }>
+						Twitter
+					</FooterLink>
+
+					<FooterLink br>dfdfdf</FooterLink>
+
+					<FooterLink>{ siteData.generalSettings.footerText }</FooterLink>
+								
+					<FooterLink to = "https://consulting.codogo.io">Site by Codogo</FooterLink>
+
+				</Column>
+
+			</Columns>
+			<BottomRow>
+				<FooterLink>Registered in England and Wales 06626047</FooterLink>
+			</BottomRow>
+
+		</Mobile>
+
+
+	</Wrapper>
+
+)

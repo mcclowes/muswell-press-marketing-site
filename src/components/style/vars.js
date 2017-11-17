@@ -17,7 +17,7 @@ export const bps = breakpoints;
 export const colors = {
 	text: "#444",
 	nav: "#fff",
-	footer: "#fff",
+	footer: "#444",
 	grey: "rgba(0,0,0,0.2)",
 	lines: "rgba(0,0,0,0.2)",
 	bg: "#EFD8B5",
@@ -90,8 +90,8 @@ export const dimensions = {
 	},
 	footer: {
 		height: {
-			xs: "206px",
-			other: "179px",
+			xs: "180px",
+			other: "120px",
 		},
 	},
 	gutter: {

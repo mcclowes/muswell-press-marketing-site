@@ -59,7 +59,7 @@ export default () => injectGlobal`
 	a:visited,
 	a:active {
 		text-decoration: none;
-		color: ${vars.colors.text};
+		color: currentColor;
 	}
 
 	p > a {
