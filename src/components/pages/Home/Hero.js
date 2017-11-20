@@ -55,7 +55,7 @@ const Cover = styled.div`
 `;
 
 const LeftCol = styled(GridCell)`
-	max-width: 500px;
+	max-width: 50vh;
 	min-width: 100px;
 	flex: 1;
 	display: flex;
