@@ -114,10 +114,22 @@ const NewText = styled.p`
 	margin: 0 0 -1em 0;
 `;
 
+const Editions = styled.div`
+	display: flex;
+	flex-direction: row;
+	align-items: stretch;
+
+`;
+
+const EditionCell = styled(GridCell)`
+	width: 50%;
+	display: flex;
+	flex-direction: column;
+`;
+
 const Metadata = styled.p`
-	border-left: 1px solid ${vars.colors.text};
 	opacity: 0.67;
-	padding-left: 1em;
+	font-size: 0.85em;
 `;
 
 const MobileCover = styled.div`
@@ -135,8 +147,12 @@ const MobileCover = styled.div`
 	`};
 `;
 
+const CheckoutButtonWrapper = styled.div`
+	margin-top: auto;
+`;
+
 const CheckoutButton = styled(Button)`
-	margin-right: 0.5em;
+	margin-top: auto;
 `;
 
 const Quote = styled.div`
@@ -241,9 +257,10 @@ const Summary = props => (
 					</TextCell>
 				)}
 
+				<Editions>
 				{props.bookEdition &&
 					props.bookEdition.map(x => (
-						<TextCell>
+						<EditionCell>
 							<Metadata>
 								{x.format ? <div>{x.format}</div> : null}
 
@@ -281,13 +298,16 @@ const Summary = props => (
 								) : null}
 							</Metadata>
 
-							<CheckoutButton
-								href = { x.link || x.amazonLink }
-								text = { x.format }
-								icon = "shopping_cart"
-							/>
-						</TextCell>
+							<CheckoutButtonWrapper>
+								<CheckoutButton
+									href = { x.link || x.amazonLink }
+									text = { x.format }
+									icon = "shopping_cart"
+								/>
+							</CheckoutButtonWrapper>
+						</EditionCell>
 					))}
+				</Editions>
 
 				<TextCell>
 					<br/>

@@ -28,7 +28,7 @@ const Wrapper = styled.footer`
 	justify-content: center;
 
 	${({ theme: { footer, }, }) => `
-		background-color: ${footer || vars.colors.footer};
+		background-color: ${vars.colors.footer};
 		color: white;	
 	`}
 
