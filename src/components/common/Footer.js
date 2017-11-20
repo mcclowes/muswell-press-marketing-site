@@ -76,6 +76,7 @@ const Row = styled.div`
 
 	&:last-child {
 		color: #999;
+		font-size: 0.9em
 	}
 `;
 

@@ -75,6 +75,10 @@ const RightCol = styled(GridCell)`
 	${mixins.xs`display: none;`};
 `;
 
+const TitleCell = styled(TextCell)`
+	padding-top: 0;
+`;
+
 const TitleText = styled.h2`
 	color: ${R.path(["theme", "logo1",])};
 	font-family: ${vars.font.title.family};
@@ -100,11 +104,11 @@ const HeroLink =
 // --------------------------------------------------
 
 const Header = () => (
-	<TextCell>
+	<TitleCell>
 		<TitleText>
 			<Link to = { HeroLink }>{siteData.homePage.hero.heroHeader}</Link>
 		</TitleText>
-	</TextCell>
+	</TitleCell>
 );
 
 const Text = () => (
