@@ -189,6 +189,15 @@ const QuoteAuthor = styled.div`
 
 // --------------------------------------------------
 
+const formatReleaseDate = R.pipe(
+	releaseDate => Moment(releaseDate),
+	m => (
+		m.isBefore(Moment().month("Nov").year(2016))
+		? m.format("MMMM YYYY")
+		: m.format("Do MMMM YYYY")
+	)
+);
+
 const Summary = props => (
 	<Background1>
 		<Container1>
@@ -196,7 +205,7 @@ const Summary = props => (
 				<Cover src = { props.cover && `http://res.cloudinary.com/codogo/image/fetch/h_500,c_fill,g_face,f_auto/https:${props.cover.url }` } />
 				{ props.primaryQuote && (
 					<Quote>
-						<QuoteText>"{ props.primaryQuote.textmd }"</QuoteText>
+						<QuoteText>'{ props.primaryQuote.textmd }'</QuoteText>
 						<QuoteAuthor>- { props.primaryQuote.author }</QuoteAuthor>
 					</Quote>
 				)}
@@ -249,9 +258,7 @@ const Summary = props => (
 						{props.releaseDate && (
 							<div>
 								Published{" "}
-								{Moment(props.releaseDate).format(
-									"Do MMMM YYYY",
-								)}
+								{ formatReleaseDate(props.releaseDate) }
 							</div>
 						)}
 					</TextCell>
@@ -259,7 +266,9 @@ const Summary = props => (
 
 				<Editions>
 				{props.bookEdition &&
-					props.bookEdition.map(x => (
+					props.bookEdition
+					.sort((l,r) => l.format === "eBook" ? 1 : 0)
+					.map(x => (
 						<EditionCell>
 							<Metadata>
 								{x.format ? <div>{x.format}</div> : null}

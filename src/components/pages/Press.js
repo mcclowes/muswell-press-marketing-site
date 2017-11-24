@@ -118,7 +118,7 @@ const shuffle = arr => {
 
 // --------------------------------------------------
 
-const Thing = ({ title, text, author, link, image, quote, }) => (
+const Thing = ({ title, text, author, link, image, otherText, textmd, }) => (
 	<ThingWrapper className = "masonry-item">
 		<MaybeLink href = { link }>
 			<ThingInner>
@@ -128,15 +128,15 @@ const Thing = ({ title, text, author, link, image, quote, }) => (
 					<TextCell>
 						{title ? <ThingTitle>{title}</ThingTitle> : null}
 
-						{text ? (
+						{textmd ? (
 							<ThingText>
-								<p
-									dangerouslySetInnerHTML = { { __html: text, } }
-								/>{" "}
+								<p>'{ textmd }'</p>
 							</ThingText>
 						) : null}
 
-						{quote ? <ThingQuote>"{quote}"</ThingQuote> : null}
+						{otherText ? <ThingQuote dangerouslySetInnerHTML = {{
+							__html: otherText,
+						}}/> : null}
 
 						{author ? <ThingAuthor>{author}</ThingAuthor> : null}
 					</TextCell>
