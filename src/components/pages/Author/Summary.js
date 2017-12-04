@@ -162,7 +162,7 @@ const Summary = props => (
 							author.some(({ slug, }) => props.slug === slug),
 						)
 						.map(book => (
-							<BookLink><a href = { "/book/" + book.slug }>{book.title}</a></BookLink>
+							<BookLink><Link to = { "/book/" + book.slug }>{book.title}</Link></BookLink>
 						))}
 				</TextCell>
 			</RightCol>
