@@ -146,4 +146,6 @@ siteData = shapeObjectNicely(siteData);
 siteData = R.map(x => (x.length === 1 ? x[0] : x))(siteData);
 siteData.booksObj = makeMapUsingSlugs(siteData.book);
 
+console.log(siteData);
+
 export default siteData;

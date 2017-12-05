@@ -307,13 +307,22 @@ const Summary = props => (
 								) : null}
 							</Metadata>
 
-							<CheckoutButtonWrapper>
-								<CheckoutButton
-									href = { x.link || x.amazonLink }
-									text = { x.format }
-									icon = "shopping_cart"
-								/>
-							</CheckoutButtonWrapper>
+							{
+								(x.amazonProductCode || x.link )
+								&& (
+									<CheckoutButtonWrapper>
+										<CheckoutButton
+											href = { 
+												x.amazonProductCode
+												? `https://www.amazon.co.uk/gp/product/${x.amazonProductCode}/ref=as_li_tl?ie=UTF8&camp=1634&creative=6738&creativeASIN=0995482225&linkCode=as2&tag=codogo-21&linkId=052e3a21b4f437cd0fa7ed4a7eb8844a`
+												: x.link 
+											}
+											text = { x.format }
+											icon = "shopping_cart"
+										/>
+									</CheckoutButtonWrapper>
+								)
+							}
 						</EditionCell>
 					))}
 				</Editions>
