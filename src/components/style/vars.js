@@ -134,6 +134,6 @@ export const bookUrl = "/img/the-rainbow-conspiracy.png";
 export const meta = {
 	twitterUsername: "mcclowes",
 	twitterCreator: "MuswellPress",
-	googleAnalytics: "UA-89374864-3",
-	googleSearch: "YQs24--DxVBln2zZc8hPo1kZFoxzc2amoF6-QWkDe7k",
+	googleAnalytics: "UA-110705275-1",
+	googleSearch: "u5G6ZP0nSQ6z_H1XD0qxdtfCmoWoXX_WOghcZ8YE_E4",
 };
