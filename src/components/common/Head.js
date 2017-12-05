@@ -109,7 +109,7 @@ const Head = ( props ) => (
 		<meta name = "google-site-verification" content = { vars.meta.googleSearch } />
 
 		{/*Google analytics*/}
-
+		
 		{/* Cookie Warning*/}
 	</Helmet>
 );

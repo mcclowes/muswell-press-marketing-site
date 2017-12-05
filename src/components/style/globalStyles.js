@@ -12,7 +12,7 @@ export default () => injectGlobal`
 	@import url('https://fonts.googleapis.com/css?family=IM+Fell+English:400i');
 	@import url('https://fonts.googleapis.com/css?family=Arvo:400,400i,700,700i');
 	@import url('https://fonts.googleapis.com/css?family=Archivo:400,600');
-	@import url('https://fonts.googleapis.com/css?family=Montserrat');
+	@import url('https://fonts.googleapis.com/css?family=Montserrat:400,600');
 
 	@font-face {
 	  font-family: 'TradeGothic';
