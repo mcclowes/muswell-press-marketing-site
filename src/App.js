@@ -11,6 +11,7 @@ import Footer from "./components/common/Footer";
 import ScrollToTop from "./components/common/ScrollToTop";
 
 import siteData from "src/data";
+import withTracker from './withTracker';
 
 import Head from "src/components/common/Head";
 
@@ -53,12 +54,18 @@ const routes = routesConfig.map(
 	},
 );
 
-export default () => (
-	<Router>
+const TrackerWrapper = withTracker(
+	() => (
 		<ScrollToTop>
 			<div>
 				<Switch>{routes}</Switch>
 			</div>
 		</ScrollToTop>
+	)
+);
+
+export default () => (
+	<Router>
+		<Route component = { TrackerWrapper } /> 
 	</Router>
 );
