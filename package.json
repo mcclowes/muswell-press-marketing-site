@@ -24,6 +24,7 @@
     "react-router-dom": "^4.1.2",
     "react-snapshot": "^1.2.0",
     "recompose": "^0.24.0",
+    "sitemap-static": "^0.4.2",
     "slugify": "^1.2.1",
     "split": "^1.0.1",
     "styled-components": "^2.1.2",
@@ -37,11 +38,12 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "static": "yarn data && yarn build && react-snapshot",
+    "static": "yarn data && yarn build && react-snapshot && yarn sitemap",
     "data": "node scripts/static/makeDataFile",
     "test": "react-scripts test --env=jsdom",
     "lint": "react-scripts format",
     "format": "react-scripts format",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "sitemap": "sitemap-static --prefix=http://www.muswell-press.co.uk/ build | sed -e \"s/\\.html//g\" > build/sitemap.xml"
   }
 }

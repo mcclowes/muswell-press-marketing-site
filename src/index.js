@@ -8,7 +8,7 @@ render(<App />, document.getElementById("root"));
 // registerServiceWorker();
 
 //console.log("attempting to remove service workers...");
-navigator.serviceWorker.getRegistrations().then(registrations => {
+navigator && navigator.serviceWorker && navigator.serviceWorker.getRegistrations().then(registrations => {
 	//console.log("service workers found:", registrations);
 	registrations.forEach(reg => {
 		reg.unregister();
