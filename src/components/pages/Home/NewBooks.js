@@ -172,7 +172,7 @@ export default () => (
 			<SectionTitle>{siteData.homePage.booksTitle}</SectionTitle>
 		</TitleCell>
 
-		{R.pipe(R.map((o, i) => <FeaturedBook { ...o } key = { i } />))(books)}
+		{R.pipe(R.map((o, i) => <FeaturedBook { ...o } key = { `${ i }-${ o.title }` } />))(books)}
 
 		<CenterCell>
 			<Button

@@ -58,7 +58,7 @@ const FooterLink = styled(MaybeLink)`
 	${mixins.xs`
 		display: block;
 	`}
-	${props => props.br ? "color: transparent;" : ""}
+	${props => props.hidden ? "color: transparent;" : ""}
 `;
 
 const Mobile = styled.div`
@@ -121,13 +121,7 @@ export default () => (
 				<FooterLink to = "https://consulting.codogo.io">Site by Codogo</FooterLink>
 
 			</Row>
-
-
-
-			
-
 		</Desktop>
-
 
 		<Mobile>
 			<Columns>
@@ -145,11 +139,12 @@ export default () => (
 					<FooterLink to = { siteData.generalSettings.facebookUrl }>			
 						Facebook
 					</FooterLink>
+
 					<FooterLink to = { siteData.generalSettings.twitterUrl }>
 						Twitter
 					</FooterLink>
 
-					<FooterLink br>dfdfdf</FooterLink>
+					<FooterLink hidden>dfdfdf</FooterLink>
 
 					<FooterLink>{ siteData.generalSettings.footerText }</FooterLink>
 								
@@ -158,6 +153,7 @@ export default () => (
 				</Column>
 
 			</Columns>
+
 			<BottomRow>
 				<FooterLink>Registered in England and Wales 06626047</FooterLink>
 			</BottomRow>

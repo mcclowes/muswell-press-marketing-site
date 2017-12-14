@@ -49,7 +49,7 @@ const Head = ( props ) => (
 			{ 
 				props && props.pageImage
 				? props.pageImage.url
-				: siteData.generalSettings.image.url
+				: `https${siteData.generalSettings.image.url}`
 			}
 		/>
 
@@ -58,7 +58,7 @@ const Head = ( props ) => (
 			{ 
 				props && props.pageImage
 				? props.pageImage.url
-				: siteData.generalSettings.image.url
+				: `https${siteData.generalSettings.image.url}`
 			}
 		/>
 		<meta property = "og:image:width" content = "180" />
@@ -69,7 +69,7 @@ const Head = ( props ) => (
 			content = { 
 				props && props.pageImage
 				? props.pageImage.url
-				: siteData.generalSettings.image.url
+				: `https${siteData.generalSettings.image.url}`
 			}
 		/>
 		<meta property = "og:image:width" content = "600" />
@@ -100,7 +100,7 @@ const Head = ( props ) => (
 			{ 
 				props && props.pageImage
 				? props.pageImage.url
-				: siteData.generalSettings.image.url
+				: `https${siteData.generalSettings.image.url}`
 			}
 		/>
 
