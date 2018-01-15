@@ -135,11 +135,10 @@ const Text = () => (
 	</TextCell>
 );
 
-const Hero = props => (
-	R.path([ "homePage", "hero", "heroImage", "file", "url", ])
+export default () => (
+	R.path([ "homePage", "hero", "heroImage", "file", "url", ], siteData )
 	? <Background heroImage = { siteData.homePage.hero.heroImage } />
-	:
-	<Background>
+	: <Background>
 		<StyledContainer>
 			<LeftCol>
 				<Cover src = { siteData.homePage.hero && `http://res.cloudinary.com/codogo/image/fetch/h_1000,c_fill,g_face,f_auto/https:${ siteData.homePage.hero.heroLink.cover.url}` } />
@@ -159,5 +158,3 @@ const Hero = props => (
 		</MobileText>
 	</Background>
 );
-
-export default Hero;
