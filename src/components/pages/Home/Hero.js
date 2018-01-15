@@ -11,16 +11,30 @@ import siteData from "src/data";
 
 // --------------------------------------------------
 
-const Background1 = styled.div`
+const Background = styled.div`
 	background-color: ${R.path(["theme", "bg",])};
+	${mixins.bp.sm.min`
+		min-height: calc(70vh - ${vars.dim.nav.height.other});
+	`};
+	${mixins.bp.sm.max`
+		min-height: calc(35vh - ${vars.dim.nav.height.other});
+	`};
+	${R.when(
+		R.path([ "heroImage", "file", "url", ]),
+		({ heroImage: { file: { url, }, }, }) => `
+			background: url("http://res.cloudinary.com/codogo/image/fetch/h_1000,c_fill,g_face,f_auto/https:${url}");
+			background-size: cover;
+			background-position: center center;
+		`,
+	)}
 `;
 
 const coverHeights = objMap(
 	vars.dim.gutter.fullNum,
 	(key, value) => `
 		calc(70vh - ${vars.dim.nav.height[
-		key === "xs" ? "xs" : "other"
-	]} - ${mixins.px(value * 2)})
+			key === "xs" ? "xs" : "other"
+		]} - ${mixins.px(value * 2)})
 	`,
 );
 
@@ -29,7 +43,7 @@ const containerHeights = objMap(
 	(key, value) => "calc(100vh - " + value + ")",
 );
 
-const Container1 = styled(Container)`
+const StyledContainer = styled(Container)`
 	display: flex;
 	justify-content: center;
 	flex-direction: row;
@@ -97,9 +111,9 @@ const MobileText = styled(Container)`
 const HeroLink =
 	"/book/" +
 	siteData.homePage.hero.heroLink.title
-		.toLowerCase()
-		.split(" ")
-		.join("-");
+	.toLowerCase()
+	.split(" ")
+	.join("-");
 
 // --------------------------------------------------
 
@@ -122,8 +136,11 @@ const Text = () => (
 );
 
 const Hero = props => (
-	<Background1>
-		<Container1>
+	R.path([ "homePage", "hero", "heroImage", "file", "url", ])
+	? <Background heroImage = { siteData.homePage.hero.heroImage } />
+	:
+	<Background>
+		<StyledContainer>
 			<LeftCol>
 				<Cover src = { siteData.homePage.hero && `http://res.cloudinary.com/codogo/image/fetch/h_1000,c_fill,g_face,f_auto/https:${ siteData.homePage.hero.heroLink.cover.url}` } />
 			</LeftCol>
@@ -133,14 +150,14 @@ const Hero = props => (
 
 				<Text />
 			</RightCol>
-		</Container1>
+		</StyledContainer>
 
 		<MobileText>
 			<Header />
 
 			<Text />
 		</MobileText>
-	</Background1>
+	</Background>
 );
 
 export default Hero;
