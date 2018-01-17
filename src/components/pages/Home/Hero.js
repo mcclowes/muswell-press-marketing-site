@@ -110,7 +110,7 @@ const MobileText = styled(Container)`
 
 const HeroLink =
 	"/book/" +
-	siteData.homePage.hero.heroLink.title
+	R.path([ "homePage", "hero", "heroLink", "title", ])(siteData)
 	.toLowerCase()
 	.split(" ")
 	.join("-");

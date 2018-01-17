@@ -16,12 +16,7 @@ export default [
 		component: Home,
 		exact: true,
 		show: false,
-		colors: {
-			bg: siteData.homePage.hero.heroColours.bg,
-			logo1: siteData.homePage.hero.heroColours.logo1,
-			logo2: siteData.homePage.hero.heroColours.logo2,
-			nav: siteData.homePage.hero.heroColours.nav,
-		},
+		colors: siteData.homePage.hero.heroColours,
 	},
 	{
 		path: "/books",

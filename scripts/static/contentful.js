@@ -9,7 +9,9 @@ exports.default = (opts = {}) => (
 		accessToken: process.env.CONTENTFUL_ACCESS_TOKEN || "",
 		space: process.env.CONTENTFUL_SPACE_ID || "",
 	})
-	.getEntries({'limit': 200})
+	.getEntries({
+		limit: 500,
+	})
 	.then(res => {
 		if (opts.log) {
 			console.log(JSON.stringify(res, null, "  "));
