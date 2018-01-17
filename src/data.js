@@ -88,6 +88,7 @@ const defaultFieldShaping = R.pipe(
 			: {}
 		),
 	}),
+	adjustFields("heroImage", "heroImage", shapeImageField),
 );
 
 let siteData = {};

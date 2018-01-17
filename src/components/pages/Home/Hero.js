@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { Link, } from "react-router-dom";
 
-import { Container, GridCell, TextCell, Button, Para, } from "../../common";
+import { Container, GridCell, TextCell, Button, Para, Only, } from "../../common";
 
 import * as vars from "../../style/vars";
 import * as mixins from "../../style/mixins";
@@ -28,6 +28,74 @@ const Background = styled.div`
 		`,
 	)}
 `;
+
+const Wrapper  = styled.div`
+	background-color: ${R.path(["theme", "bg",])};
+	${mixins.bp.sm.min`
+		height: calc(70vh - ${vars.dim.nav.height.other});
+	`};
+	${mixins.bp.sm.max`
+		height: calc(35vh - ${vars.dim.nav.height.other});
+	`};
+	display: flex;
+	flex-direction: row;
+	align-items: stretch;
+`;
+
+const Image = styled.img`
+	height: 100%;
+	width: auto;
+	position: relative;
+	z-index: 0;
+`;
+
+const MobileImage = styled.img`
+	width: 100%;
+	height: auto;
+`;
+
+const LR = styled.div`
+	flex: 1;
+	background-image: linear-gradient(
+		to ${props => props.left ? "left" : "right"},
+		transparent,
+		${x => x.color || "#000"} 2em,
+		${x => x.color || "#000"}
+	);
+	margin-${props => props.right ? "left" : "right"}: -2em;
+	position: relative;
+	z-index: 1;
+`;
+
+const HeroImage = ({ image, edgesColor, }) => (
+	<div>
+		<Only.xs>
+			<MobileImage src = { image && image.url }/>
+		</Only.xs>
+
+		<Only.sm>
+			<MobileImage src = { image && image.url }/>
+		</Only.sm>
+
+		<Only.md>
+			<Wrapper>
+				{ console.log("image", image) }
+				<LR left color = { edgesColor }/>
+				<Image src = { image && image.url }/>
+				<LR right color = { edgesColor }/>
+			</Wrapper>
+		</Only.md>
+
+		<Only.lg>
+			<Wrapper>
+				{ console.log("image", image) }
+				<LR left color = { edgesColor }/>
+				<Image src = { image && image.url }/>
+				<LR right color = { edgesColor }/>
+			</Wrapper>
+		</Only.lg>
+	</div>
+);
 
 const coverHeights = objMap(
 	vars.dim.gutter.fullNum,
@@ -136,8 +204,11 @@ const Text = () => (
 );
 
 export default () => (
-	R.path([ "homePage", "hero", "heroImage", "file", "url", ], siteData )
-	? <Background heroImage = { siteData.homePage.hero.heroImage } />
+	R.path([ "homePage", "hero", "heroImage", "url", ], siteData )
+	? <HeroImage
+		image = { siteData.homePage.hero.heroImage }
+		edgesColor = { siteData.homePage.hero.heroImageEdgesColour }
+	/>
 	: <Background>
 		<StyledContainer>
 			<LeftCol>

@@ -58,7 +58,7 @@ export const Bg = styled.div`
 
 export const Para = props => (
 	<div>
-		{props.children
+		{(props.children || "")
 			.split("\n")
 			.map((p, i) => <p key = { `${p.slice(0, 5)}/${i}` }>{p}</p>)}
 	</div>
