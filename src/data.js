@@ -108,10 +108,6 @@ const constructBase = (target, dest) => {
 						createdAt: item.sys.createdAt,
 					};
 
-					if (itemType === "homePage") {
-						console.log("homePage item", item, shapedItem);
-					}
-
 					dest[itemType] = dest[itemType]
 						? dest[itemType].concat(shapedItem)
 						: [shapedItem,];
@@ -150,11 +146,11 @@ siteData = shapeObjectNicely(siteData);
 siteData = R.map(x => (x.length === 1 ? x[0] : x))(siteData);
 siteData.booksObj = makeMapUsingSlugs(siteData.book);
 
-console.log(siteData);
+// console.log(siteData);
 
-console.log("raw", rawdata.items.filter(R.pipe(
-	R.path([ "sys", "contentType", "sys", "id", ]),
-	x => (x === "homePage" || x === "hero")
-)));
+// console.log("raw", rawdata.items.filter(R.pipe(
+// 	R.path([ "sys", "contentType", "sys", "id", ]),
+// 	x => (x === "homePage" || x === "hero")
+// )));
 
 export default siteData;
