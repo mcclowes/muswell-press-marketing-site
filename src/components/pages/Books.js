@@ -14,9 +14,9 @@ import Head from "src/components/common/Head";
 // --------------------------------------------------
 
 const bookOrder = [
+	"the-girls-book-of-priesthood",
 	"the-dissent-of-annie-lang",
 	"the-last-train-to-helsingor",
-	"the-girls-book-of-priesthood",
 	"the-rainbow-conspiracy",
 	"a-girl-called-flotsam",
 	"tonight-the-moon-is-red",

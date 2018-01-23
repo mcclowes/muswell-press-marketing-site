@@ -101,7 +101,19 @@ const ThingAuthor = styled.p`
     font-family: ${vars.font.title.family};
 `;
 
-const ThingQuote = ThingTitle;
+const ThingQuote = styled(ThingTitle)`
+	position: relative;
+	quotes: "“";
+
+	&:after {
+		position: absolute;
+		content: open-quote;
+		color: rgba(0,0,0,0.1);
+		left: -0.05em;
+		top: -0.3em;
+		font-size: 17em;
+	}
+`;
 
 const randomInt = x => Math.floor(Math.random() * x) % x;
 
@@ -118,7 +130,7 @@ const shuffle = arr => {
 
 // --------------------------------------------------
 
-const Thing = ({ title, text, author, link, image, otherText, textmd, }) => (
+const Thing = ({ title, content, text, author, link, image, textmd, }) => (
 	<ThingWrapper className = "masonry-item">
 		<MaybeLink href = { link }>
 			<ThingInner>
@@ -126,19 +138,30 @@ const Thing = ({ title, text, author, link, image, otherText, textmd, }) => (
 
 				<GridCell>
 					<TextCell>
-						{title ? <ThingTitle>{title}</ThingTitle> : null}
+						{ 
+							console.log(content, text, author, link, image, textmd),
+							(title && !text) 
+							? <ThingTitle>
+								{ title }
+							</ThingTitle> 
+							: null
+						}
 
-						{textmd ? (
-							<ThingText>
-								<p>'{ textmd }'</p>
-							</ThingText>
-						) : null}
+						{
+							//quote
+							text
+							? <ThingQuote dangerouslySetInnerHTML = {{
+								__html: text,
+								}
+							}/> 
+							: null
+						}
 
-						{otherText ? <ThingQuote dangerouslySetInnerHTML = {{
-							__html: otherText,
-						}}/> : null}
-
-						{author ? <ThingAuthor>{author}</ThingAuthor> : null}
+						{
+							author 
+							? <ThingAuthor>{ author }</ThingAuthor> 
+							: null
+						}
 					</TextCell>
 				</GridCell>
 			</ThingInner>
