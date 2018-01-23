@@ -2,7 +2,9 @@ import Home from "./components/pages/Home";
 import Author from "./components/pages/Author";
 import Book from "./components/pages/Book";
 import Page from "./components/pages/Page";
+import PressSingle from "./components/pages/PressSingle";
 import Books from "./components/pages/Books";
+import News from "./components/pages/News";
 import NotFound from "./components/pages/NotFound";
 
 import siteData from "src/data";
@@ -25,6 +27,13 @@ export default [
 		exact: true,
 		show: true,
 	},
+	{
+		path: "/news",
+		title: "News",
+		component: News,
+		exact: true,
+		show: true,
+	},
 	...siteData.aboutPage.map(o => ({
 		path: "/" + o.slug,
 		title: o.title,
@@ -41,6 +50,14 @@ export default [
 		colors: o.colors,
 		data: {
 			bookSlug: o.slug,
+		},
+	})),
+	...siteData.press.map(o => ({
+		path: "/press/" + o.slug,
+		component: PressSingle,
+		colors: o.colors,
+		data: {
+			pressSlug: o.slug,
 		},
 	})),
 	...siteData.author.map(o => ({

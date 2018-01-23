@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { Container, GridCell, Para, PSpacing, } from "../common";
+import { Container, GridCell, PSpacing, } from "../common";
 import * as vars from "../style/vars";
 import * as mixins from "../style/mixins";
 import { objMap, } from "../../lib/util";
@@ -18,11 +18,6 @@ const Pic = styled.div`
 	margin-bottom: 4em;
 `;
 
-// const Pic = styled.img`
-// 	width: 100%;
-// 	margin-bottom: 2em;
-// `;
-
 const Title = styled.h1`
 	line-height: 1;
 	text-align: center;
@@ -32,12 +27,19 @@ const Title = styled.h1`
 	margin-top: 0;
 `;
 
-const Page = ({ pageSlug, }) => {
-	const page = siteData.aboutPage.find(({ slug, }) => slug === pageSlug);
+const Page = ({ pressSlug, }) => {
+	const page = siteData.press.find(({ slug, }) => slug === pressSlug);
 
 	return (
 		<Container maxWidth = { 800 }>
 			<GridCell>
+				{ 
+					page.image 
+					&& <Pic src = { page.image && `http://res.cloudinary.com/codogo/image/fetch/w_1000/https:${page.image.url }` } />
+				}
+
+				<PSpacing />
+
 				{
 					page.title
 					&& <Title>{ page.title }</Title>
@@ -53,25 +55,6 @@ const Page = ({ pageSlug, }) => {
 						/>
 					)
 				}
-
-				<PSpacing />
-
-				{ 
-					page.picture 
-					&& <Pic src = { page.picture && `http://res.cloudinary.com/codogo/image/fetch/w_1000/https:${page.picture.url }` } />
-				}
-
-				{ page.advisoryBoard && (
-					<div>
-						<Title>Advisory Board</Title>
-
-						<div
-							dangerouslySetInnerHTML = { {
-								__html: page.advisoryBoard,
-							} }
-						/>
-					</div>
-				) }
 			</GridCell>
 		</Container>
 	);

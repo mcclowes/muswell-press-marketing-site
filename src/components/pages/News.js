@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { Link, } from "react-router-dom";
 import { compose, withState, withHandlers, } from "recompose";
+import moment from "moment";
 
 import { Button, Container, GridCell, Only, } from "../common";
 import * as mixins from "../style/mixins";
@@ -13,65 +14,36 @@ import Head from "src/components/common/Head";
 
 // --------------------------------------------------
 
-const bookOrder = [
-	"the-dissent-of-annie-lang",
-	"the-last-train-to-helsingor",
-	"the-girls-book-of-priesthood",
-	"the-rainbow-conspiracy",
-	"a-girl-called-flotsam",
-	"tonight-the-moon-is-red",
-	"van-gogh-in-brixton",
-	"the-gardens-that-mended-a-marriage",
-	"a-faraway-country",
-	"a-fridge-for-a-picasso",
-	"the-notes-of-doctor-newgate",
-	"the-adventures-of-wendy-howardwatt",
-	"sins-of-the-sons",
-	"going-over",
-];
-
-// const booksList = siteData.book;
-// booksList.sort(
-// 	(x, y) => (new Date(y.releaseDate || y.createdAt) - new Date(x.releaseDate || x.createdAt))
-// );
-
-const booksList = [
-	...(
-		bookOrder
-		.map(slug => siteData.booksObj[slug])
-		.filter(Boolean)
-	),
-	...(
-		siteData.book
-		.filter(({ slug, }) => !bookOrder.includes(slug))
-		.sort(
-			(x, y) => (new Date(y.releaseDate || y.createdAt) - new Date(x.releaseDate || x.createdAt))
-		)
+const pressList = (
+	siteData.press
+	.filter( (o) => { return o.news } )
+	.sort(
+		(x, y) => (new Date(y.releaseDate || y.createdAt) - new Date(x.releaseDate || x.createdAt))
 	)
-];
+);
 
 const colsMap = {
-	xs: 2,
-	sm: 3,
-	md: 5,
-	lg: 5,
+	xs: 1,
+	sm: 2,
+	md: 3,
+	lg: 3,
 };
 
 const colWidths = objMap(colsMap, (k, v) => 100 / v + "%");
 
-const BookWrapper = styled(GridCell)`
+const NewsWrapper = styled(GridCell)`
 	${mixins.bpEach("width", colWidths)};
 `;
 
-const BookTitle = styled.h3`
+const NewsTitle = styled.h3`
 	line-height: 1.1;
 	margin: 0.2em 0;
 	font-family: ${vars.font.title.family};
 `;
 
-const BookCover = styled.div`
+const NewsCover = styled.div`
 	width: 100%;
-	padding-top: 160%;
+	padding-top: 66.66%;
 	background-image: url(${R.prop("src")});
 	background-position: center center;
 	background-size: cover;
@@ -79,7 +51,7 @@ const BookCover = styled.div`
 	margin-bottom: 1em;
 `;
 
-const BookReleaseText = styled.div`
+const NewsReleaseText = styled.div`
 	opacity: 0.5;
 	text-transform: uppercase;
 	font-size: 0.9em;
@@ -87,28 +59,35 @@ const BookReleaseText = styled.div`
 	line-height: 1;
 `;
 
+const NewsDate = styled.div`
+	color: #888;
+`;
+
 const Book = props => (
-	<BookWrapper>
-		<Link to = { `/book/${props.slug}` }>
-			<BookCover 
+	<NewsWrapper>
+		<Link to = { `/press/${props.slug}` }>
+			<NewsCover 
 				src = { 
-					props.cover 
-					&& `http://res.cloudinary.com/codogo/image/fetch/h_500,c_fill,g_face,f_auto/https:${ props.cover.url }`
+					props.image 
+					&& `http://res.cloudinary.com/codogo/image/fetch/h_500,c_fill,g_face,f_auto/https:${ props.image.url }`
 				}
 			/>
-			{ props.releaseDateText && <BookReleaseText>{ props.releaseDateText }</BookReleaseText> }
-			<BookTitle>{props.title}</BookTitle>
+			
+			{ 
+				props.releaseDateText 
+				&& <NewsReleaseText>{ props.releaseDateText }</NewsReleaseText> 
+			}
+			
+			<NewsTitle>
+				{ props.title }
+			</NewsTitle>
 
-			{props.author ? (
-				<div>
-					{props.author.map(
-						(x, i) => `${i > 0 ? ", " : ""}${x.name}`,
-					)}
-				</div>
-			) : null}
+			<NewsDate>{ moment(props.date).fromNow() }</NewsDate>
 		</Link>
-	</BookWrapper>
+	</NewsWrapper>
 );
+
+// --------------------------------------------------
 
 const Row = styled.div`
 	display: flex;
@@ -121,7 +100,7 @@ const InvisLink = styled(Link)`
 `;
 
 const AllBookLinks = <div>
-	{ booksList.map(o => <InvisLink to = { `/book/${o.slug}` } key = { o.slug }/>) }
+	{ pressList.map(o => <InvisLink to = { `/book/${o.slug}` } key = { o.slug }/>) }
 </div>;
 
 const Rows = ({ rows, cols, }) => {
@@ -129,7 +108,7 @@ const Rows = ({ rows, cols, }) => {
 
 	for (let i = 0; i < rows; i++) {
 		rowsArr.push(
-			booksList
+			pressList
 				.slice(i * cols, (i + 1) * cols)
 				.map((o, i) => <Book { ...o } key = { o.title + i } />),
 		);
@@ -137,6 +116,8 @@ const Rows = ({ rows, cols, }) => {
 
 	return <div>{rowsArr.map((row, r) => <Row key = { r }>{row}</Row>)}</div>;
 };
+
+// --------------------------------------------------
 
 const CenterCell = styled(GridCell)`
 	text-align: center;
@@ -165,24 +146,31 @@ const Title = styled.h1`
 const _Grid = props => {
 	return (
 		<div>
-			{Object.keys(colsMap).map(bp => {
-				const OnlyBp = Only[bp];
+			{
+				Object.keys(colsMap).map(bp => {
+					const OnlyBp = Only[bp];
 
-				return (
-					<OnlyBp key = { bp }>
-						<Rows rows = { props.rows } cols = { colsMap[bp] } />
+					return (
+						<OnlyBp key = { bp }>
+							<Rows rows = { props.rows } cols = { colsMap[bp] } />
 
-						{booksList.length > props.rows * colsMap[bp] ? (
-							<CenterCell>
-								<Button
-									onClick = { props.loadMore }
-									text = "Load More"
-								/>
-							</CenterCell>
-						) : null}
-					</OnlyBp>
-				);
-			})}
+							{
+								pressList.length > props.rows * colsMap[bp] 
+								? (
+									<CenterCell>
+										<Button
+											onClick = { props.loadMore }
+											text = "Load More"
+										/>
+									</CenterCell>
+								)
+								: null
+							}
+						</OnlyBp>
+					);
+				})
+			}
+
 			{ AllBookLinks }
 		</div>
 	);
@@ -194,9 +182,9 @@ const Grid = enhanceGrid(_Grid);
 
 const Books = () => (
 	<Container>
-		<Head pageTitle = "Our Collection" />
+		<Head pageTitle = "News" />
 
-		<Title>Our Collection</Title>
+		<Title>News</Title>
 
 		<Grid />
 	</Container>

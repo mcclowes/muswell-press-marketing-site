@@ -2,7 +2,7 @@ import { objMap, } from "../../lib/util";
 
 // --------------------------------------------------
 
-const sm = 768;
+const sm = 848;
 const md = 992;
 const lg = 1200;
 
