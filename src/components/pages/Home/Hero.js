@@ -79,18 +79,20 @@ const HeroImage = ({ image, edgesColor, }) => (
 
 		<Only.md>
 			<Wrapper>
-				{ console.log("image", image) }
 				<LR left color = { edgesColor }/>
+				
 				<Image src = { image && image.url }/>
+				
 				<LR right color = { edgesColor }/>
 			</Wrapper>
 		</Only.md>
 
 		<Only.lg>
 			<Wrapper>
-				{ console.log("image", image) }
 				<LR left color = { edgesColor }/>
+				
 				<Image src = { image && image.url }/>
+				
 				<LR right color = { edgesColor }/>
 			</Wrapper>
 		</Only.lg>
@@ -205,10 +207,13 @@ const Text = () => (
 
 export default () => (
 	R.path([ "homePage", "hero", "heroImage", "url", ], siteData )
-	? <HeroImage
-		image = { siteData.homePage.hero.heroImage }
-		edgesColor = { siteData.homePage.hero.heroImageEdgesColour }
-	/>
+	? 
+		<Link to = { `book/${ siteData.homePage.hero.heroLink.slug }` }>
+			<HeroImage
+				image = { siteData.homePage.hero.heroImage }
+				edgesColor = { siteData.homePage.hero.heroImageEdgesColour }
+			/>
+		</Link>
 	: <Background>
 		<StyledContainer>
 			<LeftCol>
