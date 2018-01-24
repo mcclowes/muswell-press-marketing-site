@@ -114,7 +114,7 @@ const Rows = ({ rows, cols, }) => {
 		);
 	}
 
-	return <div>{rowsArr.map((row, r) => <Row key = { r }>{row}</Row>)}</div>;
+	return <div>{ rowsArr.map((row, r) => <Row key = { r }>{row}</Row>) }</div>;
 };
 
 // --------------------------------------------------

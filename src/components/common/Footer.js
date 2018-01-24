@@ -9,7 +9,6 @@ import siteData from "src/data";
 
 // --------------------------------------------------
 
-
 const Wrapper = styled.footer`
 	${mixins.bpEither("height", vars.dim.footer.height)};
 	${mixins.bpEither("max-height", vars.dim.footer.height)};
@@ -47,7 +46,7 @@ const MaybeLink = props => (
 	: <span { ...props }/>
 );
 
-const FooterLink = styled(MaybeLink)`
+const LinkStyling = `
 	padding: 0 0.8em;
 	margin: 0.33em 0;
 	${mixins.bp.sm.min`
@@ -59,6 +58,14 @@ const FooterLink = styled(MaybeLink)`
 		display: block;
 	`}
 	${props => props.hidden ? "color: transparent;" : ""}
+`;
+
+const FooterLink = styled(MaybeLink)`
+	${ LinkStyling }
+`;
+
+const FooterSocialLink = styled.a`
+	${ LinkStyling }
 `;
 
 const Mobile = styled.div`
@@ -93,24 +100,30 @@ const BottomRow = styled.div`
 	margin-top: 1em;
 `;
 
+// --------------------------------------------------
+
 export default () => (
 	<Wrapper>
 		<Desktop>
 
 			<Row>
-				{ siteData.aboutPage.map(({ slug, title, }) => {
-					return (
-						<FooterLink to = { "/" + slug } key = { slug }>
-							{ title }
-						</FooterLink>
-					);
-				}) }
-				<FooterLink to = { siteData.generalSettings.facebookUrl }>			
+				{ 
+					siteData.aboutPage.map(({ slug, title, }) => {
+						return (
+							<FooterLink to = { "/" + slug } key = { slug }>
+								{ title }
+							</FooterLink>
+						);
+					}) 
+				}
+
+				<FooterSocialLink href = { siteData.generalSettings.facebookUrl }>			
 					Facebook
-				</FooterLink>
-				<FooterLink to = { siteData.generalSettings.twitterUrl }>
+				</FooterSocialLink>
+
+				<FooterSocialLink href = { siteData.generalSettings.twitterUrl }>
 					Twitter
-				</FooterLink>
+				</FooterSocialLink>
 			</Row>
 
 			<Row>
@@ -118,49 +131,44 @@ export default () => (
 								
 				<FooterLink>Registered in England and Wales 06626047</FooterLink>
 
-				<FooterLink to = "https://consulting.codogo.io">Site by Codogo</FooterLink>
-
+				<FooterSocialLink href = "https://consulting.codogo.io">Site by Codogo</FooterSocialLink>
 			</Row>
 		</Desktop>
 
 		<Mobile>
 			<Columns>
 				<Column>
-					{ siteData.aboutPage.map(({ slug, title, }) => {
-						return (
-							<FooterLink to = { "/" + slug } key = { slug }>
-								{ title }
-							</FooterLink>
-						);
-					}) }
+					{ 
+						siteData.aboutPage.map(({ slug, title, }) => {
+							return (
+								<FooterLink to = { "/" + slug } key = { slug }>
+									{ title }
+								</FooterLink>
+							);
+						})
+					}
 				</Column>
 
 				<Column>
-					<FooterLink to = { siteData.generalSettings.facebookUrl }>			
+					<FooterSocialLink href = { siteData.generalSettings.facebookUrl }>			
 						Facebook
-					</FooterLink>
+					</FooterSocialLink>
 
-					<FooterLink to = { siteData.generalSettings.twitterUrl }>
+					<FooterSocialLink href = { siteData.generalSettings.twitterUrl }>
 						Twitter
-					</FooterLink>
+					</FooterSocialLink>
 
 					<FooterLink hidden>dfdfdf</FooterLink>
 
 					<FooterLink>{ siteData.generalSettings.footerText }</FooterLink>
 								
-					<FooterLink to = "https://consulting.codogo.io">Site by Codogo</FooterLink>
-
+					<FooterSocialLink href = "https://consulting.codogo.io">Site by Codogo</FooterSocialLink>
 				</Column>
-
 			</Columns>
 
 			<BottomRow>
 				<FooterLink>Registered in England and Wales 06626047</FooterLink>
 			</BottomRow>
-
 		</Mobile>
-
-
 	</Wrapper>
-
 )

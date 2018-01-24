@@ -109,9 +109,9 @@ const BookLink = styled.a`
 `;
 
 const MobileCover = styled.div`
-	${mixins.bp.sm.min`
+	${ mixins.bp.sm.min`
 		display: none;
-	`} ${mixins.xs`
+	`} ${ mixins.xs`
 		border-bottom: 1px solid ${vars.colors.lines};
 		padding-bottom: ${vars.dim.gutter.full.xs};
 		margin-bottom: ${vars.dim.gutter.full.xs};
@@ -140,7 +140,7 @@ const Summary = props => (
 
 			<RightCol>
 				<TextCell>
-					<TitleText>{props.name}</TitleText>
+					<TitleText>{ props.name }</TitleText>
 				</TextCell>
 
 				{
@@ -157,13 +157,15 @@ const Summary = props => (
 				<TextCell>
 					<SubtitleText>Books</SubtitleText>
 
-					{siteData.book
+					{
+						siteData.book
 						.filter(({ author, }) =>
 							author.some(({ slug, }) => props.slug === slug),
 						)
 						.map(book => (
 							<BookLink><Link to = { "/book/" + book.slug }>{book.title}</Link></BookLink>
-						))}
+						))
+					}
 				</TextCell>
 			</RightCol>
 		</Container1>
