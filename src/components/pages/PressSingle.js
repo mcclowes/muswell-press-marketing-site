@@ -27,12 +27,21 @@ const Title = styled.h1`
 	margin-top: 0;
 `;
 
+const PressArticle = styled(GridCell)`
+	p > img {
+		width: 100%;
+		max-height: 50vh;
+		object-fit: contain;
+		margin: 0.5em 0;
+	}
+`;
+
 const Page = ({ pressSlug, }) => {
 	const page = siteData.press.find(({ slug, }) => slug === pressSlug);
 
 	return (
 		<Container maxWidth = { 800 }>
-			<GridCell>
+			<PressArticle>
 				{ 
 					page.image 
 					&& <Pic src = { page.image && `http://res.cloudinary.com/codogo/image/fetch/w_1000/https:${page.image.url }` } />
@@ -55,7 +64,7 @@ const Page = ({ pressSlug, }) => {
 						/>
 					)
 				}
-			</GridCell>
+			</PressArticle>
 		</Container>
 	);
 };
