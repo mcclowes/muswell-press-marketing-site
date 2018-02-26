@@ -1,9 +1,6 @@
 import styled from "styled-components";
 
 import { Container, GridCell, PSpacing, } from "../common";
-import * as vars from "../style/vars";
-import * as mixins from "../style/mixins";
-import { objMap, } from "../../lib/util";
 
 import siteData from "src/data";
 
@@ -11,7 +8,8 @@ import siteData from "src/data";
 
 const Pic = styled.div`
 	background-image: url(${R.prop("src")});
-	background-size: cover;
+	background-size: contain;
+	background-repeat: no-repeat;
 	background-position: top center;
 	width: 100%;
 	padding-top: 55%;

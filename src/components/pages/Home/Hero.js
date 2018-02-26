@@ -30,7 +30,7 @@ const Background = styled.div`
 `;
 
 const Wrapper  = styled.div`
-	background-color: ${R.path(["theme", "bg",])};
+	background-color: ${ (props) => props.edgesColor ? props.edgesColor : R.path(["theme", "bg",])};
 	${mixins.bp.sm.min`
 		height: calc(70vh - ${vars.dim.nav.height.other});
 	`};
@@ -78,7 +78,7 @@ const HeroImage = ({ image, edgesColor, }) => (
 		</Only.sm>
 
 		<Only.md>
-			<Wrapper>
+			<Wrapper background = { edgesColor }>
 				<LR left color = { edgesColor }/>
 				
 				<Image src = { image && image.url }/>
@@ -88,7 +88,7 @@ const HeroImage = ({ image, edgesColor, }) => (
 		</Only.md>
 
 		<Only.lg>
-			<Wrapper>
+			<Wrapper background = { edgesColor }>
 				<LR left color = { edgesColor }/>
 				
 				<Image src = { image && image.url }/>
