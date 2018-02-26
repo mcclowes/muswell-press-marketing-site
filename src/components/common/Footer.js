@@ -56,6 +56,10 @@ const LinkStyling = `
 	`}
 	${mixins.xs`
 		display: block;
+
+		&:first-child {
+			padding-left: 0;
+		}
 	`}
 	${props => props.hidden ? "color: transparent;" : ""}
 `;
@@ -90,10 +94,16 @@ const Row = styled.div`
 const Columns = styled.div`
 	display: flex;
 	flex-direction: row;
+	flex-wrap: wrap;
+
 `;
 
 const Column = styled.div`
 	width: 50%;
+	${mixins.bp.sm.max`
+		width: 100%;
+		margin-bottom: 0.75em;
+	`}
 `;
 
 const BottomRow = styled.div`

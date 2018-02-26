@@ -13,37 +13,9 @@ import Head from "src/components/common/Head";
 
 // --------------------------------------------------
 
-const bookOrder = [
-	"the-girls-book-of-priesthood",
-	"the-dissent-of-annie-lang",
-	"the-last-train-to-helsingor",
-	"the-rainbow-conspiracy",
-	"a-girl-called-flotsam",
-	"tonight-the-moon-is-red",
-	"van-gogh-in-brixton",
-	"the-gardens-that-mended-a-marriage",
-	"a-faraway-country",
-	"a-fridge-for-a-picasso",
-	"the-notes-of-doctor-newgate",
-	"the-adventures-of-wendy-howardwatt",
-	"sins-of-the-sons",
-	"going-over",
-];
-
-// const booksList = siteData.book;
-// booksList.sort(
-// 	(x, y) => (new Date(y.releaseDate || y.createdAt) - new Date(x.releaseDate || x.createdAt))
-// );
-
 const booksList = [
 	...(
-		bookOrder
-		.map(slug => siteData.booksObj[slug])
-		.filter(Boolean)
-	),
-	...(
 		siteData.book
-		.filter(({ slug, }) => !bookOrder.includes(slug))
 		.sort(
 			(x, y) => (new Date(y.releaseDate || y.createdAt) - new Date(x.releaseDate || x.createdAt))
 		)

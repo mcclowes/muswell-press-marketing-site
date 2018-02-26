@@ -68,7 +68,7 @@ const LR = styled.div`
 `;
 
 const HeroImage = ({ image, edgesColor, }) => (
-	<div>
+	<div style = {{ backgroundColor: edgesColor, }}>
 		<Only.xs>
 			<MobileImage src = { image && image.url }/>
 		</Only.xs>
