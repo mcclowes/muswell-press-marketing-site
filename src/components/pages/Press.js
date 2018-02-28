@@ -130,11 +130,15 @@ const shuffle = arr => {
 
 // --------------------------------------------------
 
-const Thing = ({ title, content, text, author, link, image, textmd, }) => (
+const Thing = ({ slug, title, content, text, author, link, image, textmd, }) => (
 	<ThingWrapper className = "masonry-item">
-		<MaybeLink href = { link }>
+		<MaybeLink href = { link || `/press/${ slug }` }>
 			<ThingInner>
-				{image ? <FullWidthImg src = { image } /> : null}
+				{
+					image ? 
+					<FullWidthImg src = { image.url } /> : 
+					null
+				}
 
 				<GridCell>
 					<TextCell>
