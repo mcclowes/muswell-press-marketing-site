@@ -1,6 +1,6 @@
-import GoogleAnalytics from 'react-ga';
+import GoogleAnalytics from "react-ga";
 
-import {meta, } from "src/components/style/vars";
+import { meta, } from "src/components/style/vars";
 
 GoogleAnalytics.initialize(meta.googleAnalytics);
 
@@ -29,7 +29,7 @@ const withTracker = (WrappedComponent, options = {}) => {
 		}
 
 		render() {
-			return <WrappedComponent {...this.props} />;
+			return <WrappedComponent { ...this.props } />;
 		}
 	};
 

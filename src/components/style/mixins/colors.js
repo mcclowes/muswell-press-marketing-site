@@ -1,4 +1,4 @@
-const defaultColor = [255, 255, 255, 1,]; // white
+const defaultColor = [ 255, 255, 255, 1, ]; // white
 
 export const hexToColor = hex => {
 	let regex = new RegExp();
@@ -76,4 +76,4 @@ export const darken = (color, num = 0.1) => mix("#000", color, num);
 
 export const lighten = (color, num = 0.1) => mix("#fff", color, num);
 
-export const tr = num => `rgba(0,0,0,${num})`;
+export const tr = num => `rgba(0,0,0,${ num })`;

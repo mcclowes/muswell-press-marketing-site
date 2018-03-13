@@ -11,7 +11,7 @@ import siteData from "src/data";
 
 // --------------------------------------------------
 
-const books = [...siteData.homePage.booksBooks,];
+const books = [ ...siteData.homePage.booksBooks, ];
 books.sort(
 	(x, y) => (x.releaseDate || x.createdAt) + (y.releaseDate || y.createdDate),
 );
@@ -35,35 +35,35 @@ const Container1 = styled(Container)`
 `;
 
 const FeaturedBookWrapper = styled(GridCell)`
-	${mixins.bpEither("width", {
+	${ mixins.bpEither("width", {
 		xs: "100%",
 		other: "33.333333%",
-	})};
+	}) };
 `;
 
 const FeaturedBookInner = styled(GridCell)`
 	position: relative;
-	${mixins.xs`
+	${ mixins.xs`
 		padding-left: 0;
 		padding-right: 0;
-	`};
+	` };
 `;
 
 const FeaturedBookCover = styled.div`
-	${mixins.xs`
+	${ mixins.xs`
 		width: 40%;		
 		position: relative;
 		z-index: 1;
-	`} ${mixins.shadow(0)};
+	` } ${ mixins.shadow(0) };
 	&:hover {
-		${mixins.shadow(0)};
+		${ mixins.shadow(0) };
 	}
 `;
 
 const FeaturedBookCoverImage = styled.div`
 	width: 100%;
 	padding-top: 160%;
-	background-image: url(${R.prop("src")});
+	background-image: url(${ R.prop("src") });
 	background-position: center center;
 	background-size: cover;
 	background-repeat: no-repeat;
@@ -72,35 +72,34 @@ const FeaturedBookCoverImage = styled.div`
 `;
 
 const FeaturedBookDetails = styled(TextCell)`
-	${mixins.xs`
+	${ mixins.xs`
 		width: 60%;
 		position: absolute;
 		top: 0em;
 		right: 0;
-	`} ${mixins.bp.sm.min`
+	` } ${ mixins.bp.sm.min`
 		padding: 0;
 		margin-top: 2em;
-	`};
+	` };
 `;
 
 const FeaturedBookDetailsInner = styled(GridCell)`
 	padding-left: 0;
 	padding-right: 0;
-	${mixins.xs`padding-left: 1em;`};
-
+	${ mixins.xs`padding-left: 1em;` };
 `;
 
 const FeaturedBookTitle = styled.h3`
 	line-height: 1.1;
 	margin: 0.2em 0;
-	font-family: ${vars.font.title.family};
+	font-family: ${ vars.font.title.family };
 `;
 
 const FeaturedBookReleaseText = styled.div`
 	opacity: 0.5;
 	text-transform: uppercase;
 	font-size: 0.9em;
-	font-family: ${vars.font.title.family};
+	font-family: ${ vars.font.title.family };
 `;
 
 const FeaturedBookAuthor = styled.div`
@@ -111,10 +110,10 @@ const CenterCell = styled(GridCell)`
 	flex: 1;
 	text-align: center;
 	margin-top: 1em;
-	${mixins.xs`
+	${ mixins.xs`
 		text-align: left;
 		margin-top: 1em;
-	`};
+	` };
 `;
 
 const TitleCell = styled(TextCell)`
@@ -124,10 +123,10 @@ const TitleCell = styled(TextCell)`
 const SectionTitle = styled.h2`
 	text-align: center;
 	font-size: 2em;
-	${mixins.xs`
+	${ mixins.xs`
 		text-align: left;
 		font-size: 1.5em;
-	`} font-family: ${vars.font.title.family};
+	` } font-family: ${ vars.font.title.family };
 	text-transform: uppercase;
 `;
 
@@ -135,30 +134,37 @@ const SectionTitle = styled.h2`
 
 const FeaturedBook = props => (
 	<FeaturedBookWrapper>
-		<Link to = { `/book/${props.slug}` }>
+		<Link to = { `/book/${ props.slug }` }>
 			<FeaturedBookInner>
 				<FeaturedBookCover>
 					<FeaturedBookCoverImage
-						src = { props.cover && `http://res.cloudinary.com/codogo/image/fetch/h_500,c_fill,g_face,f_auto/https:${props.cover.url }` }
+						src = {
+							props.cover &&
+							`http://res.cloudinary.com/codogo/image/fetch/h_500,c_fill,g_face,f_auto/https:${ props
+								.cover.url }`
+						}
 					/>
 				</FeaturedBookCover>
 
 				<FeaturedBookDetails>
 					<FeaturedBookDetailsInner>
-						{ props.releaseDateText &&
-							<FeaturedBookReleaseText>{ props.releaseDateText }</FeaturedBookReleaseText> }
+						{props.releaseDateText && (
+							<FeaturedBookReleaseText>
+								{props.releaseDateText}
+							</FeaturedBookReleaseText>
+						)}
 
-						<FeaturedBookTitle>{ props.title }</FeaturedBookTitle>
+						<FeaturedBookTitle>{props.title}</FeaturedBookTitle>
 
 						{props.author ? (
 							<FeaturedBookAuthor>
 								{props.author.map(
-									(x, i) => `${i > 0 ? ", " : ""}${x.name}`,
+									(x, i) => `${ i > 0 ? ", " : "" }${ x.name }`,
 								)}
 							</FeaturedBookAuthor>
 						) : null}
 
-						<Para>{ props.shorterBlurb }</Para>
+						<Para>{props.shorterBlurb}</Para>
 					</FeaturedBookDetailsInner>
 				</FeaturedBookDetails>
 			</FeaturedBookInner>
@@ -172,7 +178,9 @@ export default () => (
 			<SectionTitle>{siteData.homePage.booksTitle}</SectionTitle>
 		</TitleCell>
 
-		{R.pipe(R.map((o, i) => <FeaturedBook { ...o } key = { `${ i }-${ o.title }` } />))(books)}
+		{R.pipe(
+			R.map((o, i) => <FeaturedBook { ...o } key = { `${ i }-${ o.title }` } />),
+		)(books)}
 
 		<CenterCell>
 			<Button

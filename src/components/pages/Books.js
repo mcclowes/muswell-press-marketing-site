@@ -14,12 +14,11 @@ import Head from "src/components/common/Head";
 // --------------------------------------------------
 
 const booksList = [
-	...(
-		siteData.book
-		.sort(
-			(x, y) => (new Date(y.releaseDate || y.createdAt) - new Date(x.releaseDate || x.createdAt))
-		)
-	)
+	...siteData.book.sort(
+		(x, y) =>
+			new Date(y.releaseDate || y.createdAt) -
+			new Date(x.releaseDate || x.createdAt),
+	),
 ];
 
 const colsMap = {
@@ -32,19 +31,19 @@ const colsMap = {
 const colWidths = objMap(colsMap, (k, v) => 100 / v + "%");
 
 const BookWrapper = styled(GridCell)`
-	${mixins.bpEach("width", colWidths)};
+	${ mixins.bpEach("width", colWidths) };
 `;
 
 const BookTitle = styled.h3`
 	line-height: 1.1;
 	margin: 0.2em 0;
-	font-family: ${vars.font.title.family};
+	font-family: ${ vars.font.title.family };
 `;
 
 const BookCover = styled.div`
 	width: 100%;
 	padding-top: 160%;
-	background-image: url(${R.prop("src")});
+	background-image: url(${ R.prop("src") });
 	background-position: center center;
 	background-size: cover;
 	background-repeat: no-repeat;
@@ -55,26 +54,29 @@ const BookReleaseText = styled.div`
 	opacity: 0.5;
 	text-transform: uppercase;
 	font-size: 0.9em;
-	font-family: ${vars.font.title.family};
+	font-family: ${ vars.font.title.family };
 	line-height: 1;
 `;
 
 const Book = props => (
 	<BookWrapper>
-		<Link to = { `/book/${props.slug}` }>
-			<BookCover 
-				src = { 
-					props.cover 
-					&& `http://res.cloudinary.com/codogo/image/fetch/h_500,c_fill,g_face,f_auto/https:${ props.cover.url }`
+		<Link to = { `/book/${ props.slug }` }>
+			<BookCover
+				src = {
+					props.cover &&
+					`http://res.cloudinary.com/codogo/image/fetch/h_500,c_fill,g_face,f_auto/https:${ props
+						.cover.url }`
 				}
 			/>
-			{ props.releaseDateText && <BookReleaseText>{ props.releaseDateText }</BookReleaseText> }
+			{props.releaseDateText && (
+				<BookReleaseText>{props.releaseDateText}</BookReleaseText>
+			)}
 			<BookTitle>{props.title}</BookTitle>
 
 			{props.author ? (
 				<div>
 					{props.author.map(
-						(x, i) => `${i > 0 ? ", " : ""}${x.name}`,
+						(x, i) => `${ i > 0 ? ", " : "" }${ x.name }`,
 					)}
 				</div>
 			) : null}
@@ -92,9 +94,11 @@ const InvisLink = styled(Link)`
 	visibility: hidden;
 `;
 
-const AllBookLinks = <div>
-	{ booksList.map(o => <InvisLink to = { `/book/${o.slug}` } key = { o.slug }/>) }
-</div>;
+const AllBookLinks = (
+	<div>
+		{booksList.map(o => <InvisLink to = { `/book/${ o.slug }` } key = { o.slug } />)}
+	</div>
+);
 
 const Rows = ({ rows, cols, }) => {
 	const rowsArr = [];
@@ -155,7 +159,7 @@ const _Grid = props => {
 					</OnlyBp>
 				);
 			})}
-			{ AllBookLinks }
+			{AllBookLinks}
 		</div>
 	);
 };

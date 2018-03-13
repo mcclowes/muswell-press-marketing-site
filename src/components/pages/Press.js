@@ -36,17 +36,17 @@ const enhance = lifecycle({
 });
 
 const Background = styled.div`
-	background: ${R.pipe(R.path(["theme", "bg",]), color =>
+	background: ${ R.pipe(R.path([ "theme", "bg", ]), color =>
 		mixins.darken(color, 0.1),
-	)};
+	) };
 `;
 
 const ContainerAtEdges = styled(Container)`
-	${mixins.xs`margin: 0 -${vars.dim.gutter.tripleHalf.xs}`};
+	${ mixins.xs`margin: 0 -${ vars.dim.gutter.tripleHalf.xs }` };
 `;
 
 const Inner = styled.div`
-	${mixins.clearfix};
+	${ mixins.clearfix };
 `;
 
 const TitleCell = styled(TextCell)`
@@ -56,9 +56,9 @@ const TitleCell = styled(TextCell)`
 const SectionTitle = styled.h2`
 	text-align: center;
 	font-size: 2em;
-	${mixins.xs`
+	${ mixins.xs`
 		font-size: 1.5em;
-	`} font-family: ${vars.font.title.family};
+	` } font-family: ${ vars.font.title.family };
 	text-transform: uppercase;
 `;
 
@@ -69,7 +69,7 @@ const colWidths = {
 
 const ThingWrapper = styled(GridCell)`
 	float: left;
-	${mixins.bpEither("width", colWidths)};
+	${ mixins.bpEither("width", colWidths) };
 `;
 
 const MaybeLink = ({ href, ...props }) =>
@@ -80,25 +80,23 @@ const ThingInner = styled.div`
 `;
 
 const ThingTitle = styled.p`
-	font-family: ${vars.font.title.family};
+	font-family: ${ vars.font.title.family };
 	font-size: 1.1em;
-	${mixins.xs`font-size: 1em;`}
-	line-height: 1.3;
+	${ mixins.xs`font-size: 1em;` } line-height: 1.3;
 `;
 
 const ThingText = styled.p`
-	font-family: ${vars.font.title.family};
+	font-family: ${ vars.font.title.family };
 	font-size: 1.1em;
-	${mixins.xs`font-size: 1em;`}
-	line-height: 1.3;
+	${ mixins.xs`font-size: 1em;` } line-height: 1.3;
 `;
 
 const ThingAuthor = styled.p`
 	opacity: 0.5;
-    line-height: 1;
-    text-align: right;
-    font-style: italic;
-    font-family: ${vars.font.title.family};
+	line-height: 1;
+	text-align: right;
+	font-style: italic;
+	font-family: ${ vars.font.title.family };
 `;
 
 const ThingQuote = styled(ThingTitle)`
@@ -108,7 +106,7 @@ const ThingQuote = styled(ThingTitle)`
 	&:after {
 		position: absolute;
 		content: open-quote;
-		color: rgba(0,0,0,0.1);
+		color: rgba(0, 0, 0, 0.1);
 		left: -0.05em;
 		top: -0.3em;
 		font-size: 17em;
@@ -119,7 +117,7 @@ const randomInt = x => Math.floor(Math.random() * x) % x;
 
 const shuffle = arr => {
 	const r = [];
-	const arrCopy = [...arr,];
+	const arrCopy = [ ...arr, ];
 	arr.forEach(() => {
 		const randomIndex = randomInt(arrCopy.length);
 		r.push(arrCopy[randomIndex]);
@@ -134,37 +132,30 @@ const Thing = ({ slug, title, content, text, author, link, image, textmd, }) => 
 	<ThingWrapper className = "masonry-item">
 		<MaybeLink href = { link || `/press/${ slug }` }>
 			<ThingInner>
-				{
-					image ? 
-					<FullWidthImg src = { image.url } /> : 
-					null
-				}
+				{image ? <FullWidthImg src = { image.url } /> : null}
 
 				<GridCell>
 					<TextCell>
-						{ 
-							console.log(content, text, author, link, image, textmd),
-							(title && !text) 
-							? <ThingTitle>
-								{ title }
-							</ThingTitle> 
-							: null
+						{
+							title && !text ? (
+								<ThingTitle>{title}</ThingTitle>
+							) : null
+						}
+
+						{//quote
+							text ? (
+								<ThingQuote
+									dangerouslySetInnerHTML = { {
+										__html: text,
+									} }
+								/>
+							) : null
 						}
 
 						{
-							//quote
-							text
-							? <ThingQuote dangerouslySetInnerHTML = {{
-								__html: text,
-								}
-							}/> 
-							: null
-						}
-
-						{
-							author 
-							? <ThingAuthor>{ author }</ThingAuthor> 
-							: null
+							author ? 
+							<ThingAuthor>{author}</ThingAuthor> :
+							null
 						}
 					</TextCell>
 				</GridCell>

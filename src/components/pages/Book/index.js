@@ -14,12 +14,12 @@ const Book = ({ bookSlug, }) => {
 	if (book) {
 		return (
 			<div>
-				<Head 
+				<Head
 					pageTitle = { book.title }
 					pageDescription = { book.blurb }
 					pageImage = { book.cover }
 				/>
-				
+
 				<Summary { ...book } />
 
 				<Press { ...book } />

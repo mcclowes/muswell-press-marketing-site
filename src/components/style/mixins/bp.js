@@ -8,19 +8,19 @@ import { objMap, } from "../../../lib/util";
 export const bp = objMap(vars.bps, (key, val) => ({
 	min: (...cont) =>
 		css`
-			@media (min-width: ${val.min}px) {
-				${css(...cont)};
+			@media (min-width: ${ val.min }px) {
+				${ css(...cont) };
 			}
 		`,
 	max: (...cont) =>
 		css`
-			@media (max-width: ${val.max}px) {
-				${css(...cont)};
+			@media (max-width: ${ val.max }px) {
+				${ css(...cont) };
 			}
 		`,
 	only: (...cont) => css`
-		@media (min-width: ${val.min}px) and (max-width: ${val.max}px) {
-			${css(...cont)};
+		@media (min-width: ${ val.min }px) and (max-width: ${ val.max }px) {
+			${ css(...cont) };
 		}
 	`,
 }));
@@ -31,9 +31,9 @@ export const md = bp.md.only;
 export const lg = bp.lg.only;
 
 export const bpEach = (prop, vals) => css`
-	${Object.keys(vals).map(key => bp[key].only`${prop}: ${vals[key]};`)};
+	${ Object.keys(vals).map(key => bp[key].only`${ prop }: ${ vals[key] };`) };
 `;
 
 export const bpEither = (prop, vals) => css`
-	${xs`${prop}: ${vals.xs};`} ${bp.sm.min`${prop}: ${vals.other};`};
+	${ xs`${ prop }: ${ vals.xs };` } ${ bp.sm.min`${ prop }: ${ vals.other };` };
 `;

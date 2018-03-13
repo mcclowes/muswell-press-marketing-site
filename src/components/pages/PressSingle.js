@@ -7,7 +7,7 @@ import siteData from "src/data";
 // --------------------------------------------------
 
 const Pic = styled.div`
-	background-image: url(${R.prop("src")});
+	background-image: url(${ R.prop("src") });
 	background-size: contain;
 	background-repeat: no-repeat;
 	background-position: top center;
@@ -40,28 +40,27 @@ const Page = ({ pressSlug, }) => {
 	return (
 		<Container maxWidth = { 800 }>
 			<PressArticle>
-				{ 
-					page.image 
-					&& <Pic src = { page.image && `http://res.cloudinary.com/codogo/image/fetch/w_1000/https:${page.image.url }` } />
-				}
+				{page.image && (
+					<Pic
+						src = {
+							page.image &&
+							`http://res.cloudinary.com/codogo/image/fetch/w_1000/https:${ page
+								.image.url }`
+						}
+					/>
+				)}
 
 				<PSpacing />
 
-				{
-					page.title
-					&& <Title>{ page.title }</Title>
-				}
+				{page.title && <Title>{page.title}</Title>}
 
-				{
-					page.html 
-					&& (
-						<div
-							dangerouslySetInnerHTML = { {
-								__html: page.html,
-							} }
-						/>
-					)
-				}
+				{page.html && (
+					<div
+						dangerouslySetInnerHTML = { {
+							__html: page.html,
+						} }
+					/>
+				)}
 			</PressArticle>
 		</Container>
 	);

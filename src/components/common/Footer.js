@@ -10,8 +10,8 @@ import siteData from "src/data";
 // --------------------------------------------------
 
 const Wrapper = styled.footer`
-	${mixins.bpEither("height", vars.dim.footer.height)};
-	${mixins.bpEither("max-height", vars.dim.footer.height)};
+	${ mixins.bpEither("height", vars.dim.footer.height) };
+	${ mixins.bpEither("max-height", vars.dim.footer.height) };
 
 	display: block;
 	position: absolute;
@@ -26,58 +26,53 @@ const Wrapper = styled.footer`
 	flex-direction: column;
 	justify-content: center;
 
-	${({ theme: { footer, }, }) => `
-		background-color: ${vars.colors.footer};
+	${ ({ theme: { footer, }, }) => `
+		background-color: ${ vars.colors.footer };
 		color: white;	
-	`}
-
-	& a:hover {
+	` } & a:hover {
 		text-decoration: underline;
 	}
 
-	${mixins.xs`
+	${ mixins.xs`
 		padding: 2em;
-	`}
+	` };
 `;
 
-const MaybeLink = props => (
-	props.to
-	? <Link { ...props }/>
-	: <span { ...props }/>
-);
+const MaybeLink = props =>
+	props.to ? <Link { ...props } /> : <span { ...props } />;
 
 const LinkStyling = `
 	padding: 0 0.8em;
 	margin: 0.33em 0;
-	${mixins.bp.sm.min`
+	${ mixins.bp.sm.min`
 		&:not(:last-child) {
 			border-right: 1px rgba(255,255,255,0.2) solid;
 		}		
-	`}
-	${mixins.xs`
+	` }
+	${ mixins.xs`
 		display: block;
 
 		&:first-child {
 			padding-left: 0;
 		}
-	`}
-	${props => props.hidden ? "color: transparent;" : ""}
+	` }
+	${ props => (props.hidden ? "color: transparent;" : "") }
 `;
 
 const FooterLink = styled(MaybeLink)`
-	${ LinkStyling }
+	${ LinkStyling };
 `;
 
 const FooterSocialLink = styled.a`
-	${ LinkStyling }
+	${ LinkStyling };
 `;
 
 const Mobile = styled.div`
-	${mixins.bp.sm.min`display: none;`}
+	${ mixins.bp.sm.min`display: none;` };
 `;
 
 const Desktop = styled.div`
-	${mixins.xs`display: none;`}
+	${ mixins.xs`display: none;` };
 `;
 
 const Row = styled.div`
@@ -87,7 +82,7 @@ const Row = styled.div`
 
 	&:last-child {
 		color: #999;
-		font-size: 0.9em
+		font-size: 0.9em;
 	}
 `;
 
@@ -95,15 +90,14 @@ const Columns = styled.div`
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
-
 `;
 
 const Column = styled.div`
 	width: 50%;
-	${mixins.bp.sm.max`
+	${ mixins.bp.sm.max`
 		width: 100%;
 		margin-bottom: 0.75em;
-	`}
+	` };
 `;
 
 const BottomRow = styled.div`
@@ -115,19 +109,16 @@ const BottomRow = styled.div`
 export default () => (
 	<Wrapper>
 		<Desktop>
-
 			<Row>
-				{ 
-					siteData.aboutPage.map(({ slug, title, }) => {
-						return (
-							<FooterLink to = { "/" + slug } key = { slug }>
-								{ title }
-							</FooterLink>
-						);
-					}) 
-				}
+				{siteData.aboutPage.map(({ slug, title, }) => {
+					return (
+						<FooterLink to = { "/" + slug } key = { slug }>
+							{title}
+						</FooterLink>
+					);
+				})}
 
-				<FooterSocialLink href = { siteData.generalSettings.facebookUrl }>			
+				<FooterSocialLink href = { siteData.generalSettings.facebookUrl }>
 					Facebook
 				</FooterSocialLink>
 
@@ -137,48 +128,60 @@ export default () => (
 			</Row>
 
 			<Row>
-				<FooterLink>{ siteData.generalSettings.footerText }</FooterLink>
-								
-				<FooterLink>Registered in England and Wales 06626047</FooterLink>
+				<FooterLink>{siteData.generalSettings.footerText}</FooterLink>
 
-				<FooterSocialLink href = "https://consulting.codogo.io">Site by Codogo</FooterSocialLink>
+				<FooterLink>
+					Registered in England and Wales 06626047
+				</FooterLink>
+
+				<FooterSocialLink href = "https://consulting.codogo.io">
+					Site by Codogo
+				</FooterSocialLink>
 			</Row>
 		</Desktop>
 
 		<Mobile>
 			<Columns>
 				<Column>
-					{ 
-						siteData.aboutPage.map(({ slug, title, }) => {
-							return (
-								<FooterLink to = { "/" + slug } key = { slug }>
-									{ title }
-								</FooterLink>
-							);
-						})
-					}
+					{siteData.aboutPage.map(({ slug, title, }) => {
+						return (
+							<FooterLink to = { "/" + slug } key = { slug }>
+								{title}
+							</FooterLink>
+						);
+					})}
 				</Column>
 
 				<Column>
-					<FooterSocialLink href = { siteData.generalSettings.facebookUrl }>			
+					<FooterSocialLink
+						href = { siteData.generalSettings.facebookUrl }
+					>
 						Facebook
 					</FooterSocialLink>
 
-					<FooterSocialLink href = { siteData.generalSettings.twitterUrl }>
+					<FooterSocialLink
+						href = { siteData.generalSettings.twitterUrl }
+					>
 						Twitter
 					</FooterSocialLink>
 
 					<FooterLink hidden>dfdfdf</FooterLink>
 
-					<FooterLink>{ siteData.generalSettings.footerText }</FooterLink>
-								
-					<FooterSocialLink href = "https://consulting.codogo.io">Site by Codogo</FooterSocialLink>
+					<FooterLink>
+						{siteData.generalSettings.footerText}
+					</FooterLink>
+
+					<FooterSocialLink href = "https://consulting.codogo.io">
+						Site by Codogo
+					</FooterSocialLink>
 				</Column>
 			</Columns>
 
 			<BottomRow>
-				<FooterLink>Registered in England and Wales 06626047</FooterLink>
+				<FooterLink>
+					Registered in England and Wales 06626047
+				</FooterLink>
 			</BottomRow>
 		</Mobile>
 	</Wrapper>
-)
+);

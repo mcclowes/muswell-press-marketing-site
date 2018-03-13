@@ -9,7 +9,7 @@ export class Fader extends React.Component {
 	constructor(props) {
 		super(props);
 		this.ref = this.ref.bind(this);
-		["fadeIn", "fadeOut", "slideDown", "slideUp",].map(
+		[ "fadeIn", "fadeOut", "slideDown", "slideUp", ].map(
 			name => (this[name] = this[name].bind(this)),
 		);
 	}

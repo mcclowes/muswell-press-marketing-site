@@ -14,7 +14,7 @@ const Author = ({ authorSlug, }) => {
 	if (author) {
 		return (
 			<div>
-				<Head 
+				<Head
 					pageTitle = { author.name }
 					pageDescription = { author.biography }
 					pageImage = { author.image }

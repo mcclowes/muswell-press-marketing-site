@@ -14,13 +14,15 @@ import Head from "src/components/common/Head";
 
 // --------------------------------------------------
 
-const pressList = (
-	siteData.press
-	.filter( (o) => { return o.news } )
+const pressList = siteData.press
+	.filter(o => {
+		return o.news;
+	})
 	.sort(
-		(x, y) => (new Date(y.releaseDate || y.createdAt) - new Date(x.releaseDate || x.createdAt))
-	)
-);
+		(x, y) =>
+			new Date(y.releaseDate || y.createdAt) -
+			new Date(x.releaseDate || x.createdAt),
+	);
 
 const colsMap = {
 	xs: 1,
@@ -32,19 +34,19 @@ const colsMap = {
 const colWidths = objMap(colsMap, (k, v) => 100 / v + "%");
 
 const NewsWrapper = styled(GridCell)`
-	${mixins.bpEach("width", colWidths)};
+	${ mixins.bpEach("width", colWidths) };
 `;
 
 const NewsTitle = styled.h3`
 	line-height: 1.1;
 	margin: 0.2em 0;
-	font-family: ${vars.font.title.family};
+	font-family: ${ vars.font.title.family };
 `;
 
 const NewsCover = styled.div`
 	width: 100%;
 	padding-top: 66.66%;
-	background-image: url(${R.prop("src")});
+	background-image: url(${ R.prop("src") });
 	background-position: center center;
 	background-size: cover;
 	background-repeat: no-repeat;
@@ -55,7 +57,7 @@ const NewsReleaseText = styled.div`
 	opacity: 0.5;
 	text-transform: uppercase;
 	font-size: 0.9em;
-	font-family: ${vars.font.title.family};
+	font-family: ${ vars.font.title.family };
 	line-height: 1;
 `;
 
@@ -65,24 +67,22 @@ const NewsDate = styled.div`
 
 const Book = props => (
 	<NewsWrapper>
-		<Link to = { `/press/${props.slug}` }>
-			<NewsCover 
-				src = { 
-					props.image 
-					&& `http://res.cloudinary.com/codogo/image/fetch/h_500,c_fill,g_face,f_auto/https:${ props.image.url }`
+		<Link to = { `/press/${ props.slug }` }>
+			<NewsCover
+				src = {
+					props.image &&
+					`http://res.cloudinary.com/codogo/image/fetch/h_500,c_fill,g_face,f_auto/https:${ props
+						.image.url }`
 				}
 			/>
-			
-			{ 
-				props.releaseDateText 
-				&& <NewsReleaseText>{ props.releaseDateText }</NewsReleaseText> 
-			}
-			
-			<NewsTitle>
-				{ props.title }
-			</NewsTitle>
 
-			<NewsDate>{ moment(props.date).fromNow() }</NewsDate>
+			{props.releaseDateText && (
+				<NewsReleaseText>{props.releaseDateText}</NewsReleaseText>
+			)}
+
+			<NewsTitle>{props.title}</NewsTitle>
+
+			<NewsDate>{moment(props.date).fromNow()}</NewsDate>
 		</Link>
 	</NewsWrapper>
 );
@@ -99,9 +99,11 @@ const InvisLink = styled(Link)`
 	visibility: hidden;
 `;
 
-const AllBookLinks = <div>
-	{ pressList.map(o => <InvisLink to = { `/book/${o.slug}` } key = { o.slug }/>) }
-</div>;
+const AllBookLinks = (
+	<div>
+		{pressList.map(o => <InvisLink to = { `/book/${ o.slug }` } key = { o.slug } />)}
+	</div>
+);
 
 const Rows = ({ rows, cols, }) => {
 	const rowsArr = [];
@@ -114,7 +116,7 @@ const Rows = ({ rows, cols, }) => {
 		);
 	}
 
-	return <div>{ rowsArr.map((row, r) => <Row key = { r }>{row}</Row>) }</div>;
+	return <div>{rowsArr.map((row, r) => <Row key = { r }>{row}</Row>)}</div>;
 };
 
 // --------------------------------------------------
@@ -146,32 +148,26 @@ const Title = styled.h1`
 const _Grid = props => {
 	return (
 		<div>
-			{
-				Object.keys(colsMap).map(bp => {
-					const OnlyBp = Only[bp];
+			{Object.keys(colsMap).map(bp => {
+				const OnlyBp = Only[bp];
 
-					return (
-						<OnlyBp key = { bp }>
-							<Rows rows = { props.rows } cols = { colsMap[bp] } />
+				return (
+					<OnlyBp key = { bp }>
+						<Rows rows = { props.rows } cols = { colsMap[bp] } />
 
-							{
-								pressList.length > props.rows * colsMap[bp] 
-								? (
-									<CenterCell>
-										<Button
-											onClick = { props.loadMore }
-											text = "Load More"
-										/>
-									</CenterCell>
-								)
-								: null
-							}
-						</OnlyBp>
-					);
-				})
-			}
+						{pressList.length > props.rows * colsMap[bp] ? (
+							<CenterCell>
+								<Button
+									onClick = { props.loadMore }
+									text = "Load More"
+								/>
+							</CenterCell>
+						) : null}
+					</OnlyBp>
+				);
+			})}
 
-			{ AllBookLinks }
+			{AllBookLinks}
 		</div>
 	);
 };

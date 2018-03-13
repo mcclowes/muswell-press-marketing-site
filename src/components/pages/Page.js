@@ -10,7 +10,7 @@ import siteData from "src/data";
 // --------------------------------------------------
 
 const Pic = styled.div`
-	background-image: url(${R.prop("src")});
+	background-image: url(${ R.prop("src") });
 	background-size: cover;
 	background-position: top center;
 	width: 100%;
@@ -38,30 +38,29 @@ const Page = ({ pageSlug, }) => {
 	return (
 		<Container maxWidth = { 800 }>
 			<GridCell>
-				{
-					page.title
-					&& <Title>{ page.title }</Title>
-				}
+				{page.title && <Title>{page.title}</Title>}
 
-				{
-					page.html 
-					&& (
-						<div
-							dangerouslySetInnerHTML = { {
-								__html: page.html,
-							} }
-						/>
-					)
-				}
+				{page.html && (
+					<div
+						dangerouslySetInnerHTML = { {
+							__html: page.html,
+						} }
+					/>
+				)}
 
 				<PSpacing />
 
-				{ 
-					page.picture 
-					&& <Pic src = { page.picture && `http://res.cloudinary.com/codogo/image/fetch/w_1000/https:${page.picture.url }` } />
-				}
+				{page.picture && (
+					<Pic
+						src = {
+							page.picture &&
+							`http://res.cloudinary.com/codogo/image/fetch/w_1000/https:${ page
+								.picture.url }`
+						}
+					/>
+				)}
 
-				{ page.advisoryBoard && (
+				{page.advisoryBoard && (
 					<div>
 						<Title>Advisory Board</Title>
 
@@ -71,7 +70,7 @@ const Page = ({ pageSlug, }) => {
 							} }
 						/>
 					</div>
-				) }
+				)}
 			</GridCell>
 		</Container>
 	);

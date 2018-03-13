@@ -69,24 +69,29 @@ const defaultFieldShaping = R.pipe(
 	adjustFields("text", "textmd", R.identity),
 	adjustFields("text", "text", marked),
 	adjustFields("advisoryBoard", "advisoryBoard", marked),
-	adjustFields("price", "price", price => price.includes("£") ? price : "£" + price),
+	adjustFields(
+		"price",
+		"price",
+		price => (price.includes("£") ? price : "£" + price),
+	),
 	adjustFields("isbn", "isbn", isbn => isbn.replace(/-/g, "")),
-	adjustFields("releaseDate", "releaseDateText", releaseDate => (
-		Moment(releaseDate).isAfter(Moment().subtract(40, "days"),)
-		? (
-			Moment(releaseDate).isAfter(Moment())
-			? "Coming Soon"
-			: "Just Published"
-		)
-		: ""
-	)),
+	adjustFields(
+		"releaseDate",
+		"releaseDateText",
+		releaseDate =>
+			Moment(releaseDate).isAfter(Moment().subtract(40, "days"))
+				? Moment(releaseDate).isAfter(Moment())
+					? "Coming Soon"
+					: "Just Published"
+				: "",
+	),
 	fields => ({
 		...fields,
-		...(
-			fields.format && fields.format.toLowerCase() === "ebook" && !fields.price
+		...(fields.format &&
+		fields.format.toLowerCase() === "ebook" &&
+		!fields.price
 			? { price: "£4.99", }
-			: {}
-		),
+			: {}),
 	}),
 	adjustFields("heroImage", "heroImage", shapeImageField),
 );
@@ -111,7 +116,7 @@ const constructBase = (target, dest) => {
 
 					dest[itemType] = dest[itemType]
 						? dest[itemType].concat(shapedItem)
-						: [shapedItem,];
+						: [ shapedItem, ];
 				} else {
 					shapedItem = item;
 				}

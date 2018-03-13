@@ -25,7 +25,7 @@ import Head from "src/components/common/Head";
 
 const CenterCell = styled(TextCell)`
 	text-align: center;
-	${mixins.xs`text-align: left;`};
+	${ mixins.xs`text-align: left;` };
 `;
 
 const BigText = styled.p`
@@ -33,7 +33,7 @@ const BigText = styled.p`
 `;
 
 const NotAsBigText = styled.p`
-	${mixins.bp.sm.min`font-size: 1.2em;`};
+	${ mixins.bp.sm.min`font-size: 1.2em;` };
 `;
 
 const About = () => (
