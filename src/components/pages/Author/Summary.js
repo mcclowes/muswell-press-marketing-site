@@ -1,17 +1,11 @@
 import styled from "styled-components";
 import { Link, } from "react-router-dom";
-import { compose, withState, withHandlers, } from "recompose";
-
-import Moment from "moment";
 
 import {
 	Container,
 	GridCell,
 	TextCell,
-	Button,
-	PSpacing,
 	FullWidthImg,
-	Para,
 } from "../../common";
 
 import * as vars from "../../style/vars";
@@ -33,11 +27,6 @@ const coverHeights = objMap(
 		key === "xs" ? "xs" : "other"
 	] } - ${ mixins.px(value * 2) })
 	`,
-);
-
-const containerHeights = objMap(
-	vars.dim.nav.height,
-	(key, value) => "calc(70vh - " + value + ")",
 );
 
 const flexDir = {

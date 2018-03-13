@@ -1,20 +1,7 @@
-import styled from "styled-components";
-import { Link, } from "react-router-dom";
-import { compose, withState, withHandlers, } from "recompose";
-
 import {
 	Container,
 	GridCell,
-	TextCell,
-	FullWidthImg,
-	Para,
-	Button,
-	PSpacing,
-	Only,
-} from "../common";
-import * as vars from "../style/vars";
-import * as mixins from "../style/mixins";
-import { objMap, } from "../../lib/util";
+} from "src/components/common";
 
 // --------------------------------------------------
 

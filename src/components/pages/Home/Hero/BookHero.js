@@ -7,7 +7,6 @@ import {
 	TextCell,
 	Button,
 	Para,
-	Only,
 } from "src/components/common";
 
 import * as vars from "src/components/style/vars";

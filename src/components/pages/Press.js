@@ -85,12 +85,6 @@ const ThingTitle = styled.p`
 	${ mixins.xs`font-size: 1em;` } line-height: 1.3;
 `;
 
-const ThingText = styled.p`
-	font-family: ${ vars.font.title.family };
-	font-size: 1.1em;
-	${ mixins.xs`font-size: 1em;` } line-height: 1.3;
-`;
-
 const ThingAuthor = styled.p`
 	opacity: 0.5;
 	line-height: 1;
@@ -154,8 +148,8 @@ const Thing = ({ slug, title, content, text, author, link, image, textmd, }) => 
 
 						{
 							author ? 
-							<ThingAuthor>{author}</ThingAuthor> :
-							null
+								<ThingAuthor>{author}</ThingAuthor> :
+								null
 						}
 					</TextCell>
 				</GridCell>

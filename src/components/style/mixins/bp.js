@@ -1,4 +1,4 @@
-import styled, { css, } from "styled-components";
+import { css, } from "styled-components";
 
 import * as vars from "../vars";
 import { objMap, } from "../../../lib/util";

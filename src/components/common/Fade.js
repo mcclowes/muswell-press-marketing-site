@@ -1,5 +1,4 @@
 import React from "react";
-import styled from "styled-components";
 import ReactTransitionGroup from "react-addons-transition-group";
 import Velocity from "velocity-animate";
 

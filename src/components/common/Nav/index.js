@@ -4,7 +4,6 @@ import { Link, } from "react-router-dom";
 
 import * as mixins from "../../style/mixins";
 import * as vars from "../../style/vars";
-import { objMap, } from "../../../lib/util";
 import routesConfig from "../../../routesConfig";
 
 import Links from "./Links";

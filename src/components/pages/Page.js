@@ -1,9 +1,6 @@
 import styled from "styled-components";
 
-import { Container, GridCell, Para, PSpacing, } from "../common";
-import * as vars from "../style/vars";
-import * as mixins from "../style/mixins";
-import { objMap, } from "../../lib/util";
+import { Container, GridCell, PSpacing, } from "../common";
 
 import siteData from "src/data";
 
@@ -17,11 +14,6 @@ const Pic = styled.div`
 	padding-top: 55%;
 	margin-bottom: 4em;
 `;
-
-// const Pic = styled.img`
-// 	width: 100%;
-// 	margin-bottom: 2em;
-// `;
 
 const Title = styled.h1`
 	line-height: 1;
