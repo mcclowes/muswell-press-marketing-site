@@ -36,14 +36,12 @@
     "prettier": "^1.7.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "codogo-scripts start",
+    "build": "codogo-scripts pack",
     "static": "yarn data && yarn build && react-snapshot && yarn sitemap",
     "data": "node scripts/static/makeDataFile",
-    "test": "react-scripts test --env=jsdom",
-    "lint": "react-scripts format",
-    "format": "react-scripts format",
-    "eject": "react-scripts eject",
+    "lint": "codogo-scripts format",
+    "format": "codogo-scripts format",
     "sitemap": "sitemap-static --prefix=http://www.muswell-press.co.uk/ build | sed -e \"s/\\.html//g\" > build/sitemap.xml"
   }
 }
