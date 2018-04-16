@@ -25,7 +25,8 @@ const Wrapper = styled.div`
 				mixins.num(val) - 2 * mixins.num(vars.dim.nav.margin[key]),
 			),
 		),
-	) } position: relative;
+	) };
+	position: relative;
 	display: flex;
 	flex-direction: row;
 	align-items: center;
