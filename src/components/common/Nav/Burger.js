@@ -61,7 +61,7 @@ const Bottom = styled(Bar)`
 
 const Middle = styled(Bar)`
 	top: ${ p => (p.open ? 0 : (p.layerSpacing + p.layerHeight) * -1) }px;
-	${ p => (p.open ? `transform: rotate(-90deg);` : "") } ${ p => `transition:
+	${ p => (p.open ? "transform: rotate(-90deg);" : "") } ${ p => `transition:
 		top
 		${ 0.12 * 2 * p.transitionDuration }s
 		${ (p.open ? 0.18 : 0.3) * 2 * p.transitionDuration }s
