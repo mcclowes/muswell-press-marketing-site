@@ -4,26 +4,26 @@ import R from "ramda";
 import { Link, } from "react-router-dom";
 import MQ from "react-responsive";
 
-import * as mixins from "../style/mixins";
-import * as vars from "../style/vars";
-import { objMap, } from "../../lib/util";
+import * as mixins from "../../style/mixins";
+import * as vars from "../../style/vars";
+import { objMap, } from "../../../lib/util";
 
 // --------------------------------------------------
 
-export const GridCell = styled.div`
+const GridCell = styled.div`
 	${ mixins.bpEach("padding", vars.dim.gutter.half) } ${ p =>
 	p.flex ? `flex: ${ p.flex };` : "" };
 `;
 
 const textBoxMargins = objMap(vars.font.size, (key, val) => `-${ val } 0`);
 
-export const TextBox = styled.div`
+const TextBox = styled.div`
 	${ mixins.bpEach("margin", textBoxMargins) } ${ p =>
 	p.bold ? "font-weight: bold;" : "" } ${ p =>
 	p.align ? `text-align: ${ p.align };` : "" };
 `;
 
-export const TextCell = props => (
+const TextCell = props => (
 	<GridCell { ...props }>
 		<TextBox { ...R.pick([ "bold", "align", ])(props) }>
 			{props.children}
@@ -31,7 +31,7 @@ export const TextCell = props => (
 	</GridCell>
 );
 
-export const Container = styled.div`
+const Container = styled.div`
 	${ mixins.bpEach("padding", vars.dim.gutter.container) } ${ p =>
 	p.fullWidth ? "" : `max-width: ${ p.maxWidth || vars.bps.lg.min }px` };
 	margin: auto;
@@ -42,7 +42,7 @@ export const Container = styled.div`
 `;
 
 const bgTint = 0.3;
-export const Bg = styled.div`
+const Bg = styled.div`
 	${ p =>
 		p.image
 			? `
@@ -56,7 +56,7 @@ export const Bg = styled.div`
 			: "" } ${ p => (p.color ? `background-color: ${ p.color };` : "") };
 `;
 
-export const Para = props => (
+const Para = props => (
 	<div>
 		{(props.children || "")
 			.split("\n")
@@ -64,7 +64,7 @@ export const Para = props => (
 	</div>
 );
 
-export const FullWidthImg = styled.img`
+const FullWidthImg = styled.img`
 	width: 100%;
 	height: auto;
 `;
@@ -74,14 +74,14 @@ const IconWrapper = styled.i`
 	margin-right: ${ p => p.marginRight || 0 };
 `;
 
-export const Icon = props => (
+const Icon = props => (
 	<IconWrapper
 		className = { `fa fa-${ props.type.replace("_", "-") }` }
 		{ ...props }
 	/>
 );
 
-export const ButtonWrapper = styled.div`
+const ButtonWrapper = styled.div`
 	display: inline-block;
 	padding: 0 1em;
 	line-height: 1;
@@ -144,7 +144,7 @@ const MaybeLink = props =>
 		<a href = { props.href } children = { props.children } target = { props.target } />
 	);
 
-export const IconButton = props => {
+const IconButton = props => {
 	return (
 		<MaybeLink { ...props }>
 			<ButtonWrapper { ...props }>
@@ -158,15 +158,32 @@ export const IconButton = props => {
 	);
 };
 
-export const Button = IconButton;
+const Button = IconButton;
 
-export const PSpacing = styled.div`
+const PSpacing = styled.div`
 	${ mixins.bpEach("height", vars.font.size) };
 `;
 
-export const Only = objMap(vars.bps, (key, val) => ({ children, }) => (
+const Only = objMap(vars.bps, (key, val) => ({ children, }) => (
 	<MQ
 		query = { `(min-width: ${ val.min }px) and (max-width: ${ val.max }px)` }
 		children = { children }
 	/>
 ));
+
+export {  
+	Bg,
+	Button,
+	ButtonWrapper,
+	Container,
+	FullWidthImg,
+	GridCell,
+	Icon,
+	IconButton,
+	MaybeLink,
+	Only,
+	Para,
+	PSpacing,
+	TextBox,
+	TextCell,
+};

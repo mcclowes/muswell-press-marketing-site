@@ -1,16 +1,16 @@
-import styled from "styled-components";
-import { Link, } from "react-router-dom";
-import { compose, withState, withHandlers, } from "recompose";
-import moment from "moment";
-
-import { Button, Container, GridCell, Only, } from "../common";
 import * as mixins from "../style/mixins";
 import * as vars from "../style/vars";
+import { Button, Container, GridCell, Only, } from "../common";
+import { compose, withState, withHandlers, } from "recompose";
+import { Link, } from "react-router-dom";
+import { MaybeLink, } from "../common/Toolbox";
 import { objMap, } from "../../lib/util";
 
-import siteData from "src/data";
-
 import Head from "src/components/common/Head";
+import moment from "moment";
+import PropTypes from "prop-types";
+import siteData from "src/data";
+import styled from "styled-components";
 
 // --------------------------------------------------
 
@@ -65,27 +65,35 @@ const NewsDate = styled.div`
 	color: #888;
 `;
 
-const Book = props => (
+const NewsItem = ( { link, slug, image, releaseDateText, title, date, } ) => (
 	<NewsWrapper>
-		<Link to = { `/press/${ props.slug }` }>
+		<MaybeLink href = { link || `/press/${ slug }` }>
 			<NewsCover
 				src = {
-					props.image &&
-					`http://res.cloudinary.com/codogo/image/fetch/h_500,c_fill,g_face,f_auto/https:${ props
-						.image.url }`
+					image &&
+					`http://res.cloudinary.com/codogo/image/fetch/h_500,c_fill,g_face,f_auto/https:${ image.url }`
 				}
 			/>
 
-			{props.releaseDateText && (
-				<NewsReleaseText>{props.releaseDateText}</NewsReleaseText>
+			{releaseDateText && (
+				<NewsReleaseText>{releaseDateText}</NewsReleaseText>
 			)}
 
-			<NewsTitle>{props.title}</NewsTitle>
+			<NewsTitle>{title}</NewsTitle>
 
-			<NewsDate>{moment(props.date).fromNow()}</NewsDate>
-		</Link>
+			<NewsDate>{moment(date).fromNow()}</NewsDate>
+		</MaybeLink>
 	</NewsWrapper>
 );
+
+NewsItem.propTypes = {
+	link: PropTypes.any,
+	slug: PropTypes.any,
+	image: PropTypes.any,
+	releaseDateText: PropTypes.any,
+	title: PropTypes.any,
+	date: PropTypes.any,
+};
 
 // --------------------------------------------------
 
@@ -112,7 +120,7 @@ const Rows = ({ rows, cols, }) => {
 		rowsArr.push(
 			pressList
 				.slice(i * cols, (i + 1) * cols)
-				.map((o, i) => <Book { ...o } key = { o.title + i } />),
+				.map((o, i) => <NewsItem { ...o } key = { o.title + i } />),
 		);
 	}
 

@@ -1,8 +1,7 @@
-import styled from "styled-components";
-import masonry from "masonry-layout";
-import imagesloaded from "imagesloaded";
+import * as vars from "../style/vars";
+import * as mixins from "../style/mixins";
 import { lifecycle, } from "recompose";
-
+import { MaybeLink, } from "../common/Toolbox";
 import {
 	Container,
 	GridCell,
@@ -10,8 +9,9 @@ import {
 	TextCell,
 } from "src/components/common";
 
-import * as vars from "../style/vars";
-import * as mixins from "../style/mixins";
+import imagesloaded from "imagesloaded";
+import masonry from "masonry-layout";
+import styled from "styled-components";
 
 // --------------------------------------------------
 
@@ -67,25 +67,22 @@ const colWidths = {
 	other: "33.333333333%",
 };
 
-const ThingWrapper = styled(GridCell)`
+const PressItemWrapper = styled(GridCell)`
 	float: left;
 	${ mixins.bpEither("width", colWidths) };
 `;
 
-const MaybeLink = ({ href, ...props }) =>
-	href ? <a href = { href } { ...props } /> : <div { ...props } />;
-
-const ThingInner = styled.div`
+const PressItemInner = styled.div`
 	background: white;
 `;
 
-const ThingTitle = styled.p`
+const PressItemTitle = styled.p`
 	font-family: ${ vars.font.title.family };
 	font-size: 1.1em;
 	${ mixins.xs`font-size: 1em;` } line-height: 1.3;
 `;
 
-const ThingAuthor = styled.p`
+const PressItemAuthor = styled.p`
 	opacity: 0.5;
 	line-height: 1;
 	text-align: right;
@@ -93,7 +90,7 @@ const ThingAuthor = styled.p`
 	font-family: ${ vars.font.title.family };
 `;
 
-const ThingQuote = styled(ThingTitle)`
+const PressItemQuote = styled(PressItemTitle)`
 	position: relative;
 	quotes: "“";
 
@@ -122,23 +119,23 @@ const shuffle = arr => {
 
 // --------------------------------------------------
 
-const Thing = ({ slug, title, content, text, author, link, image, textmd, }) => (
-	<ThingWrapper className = "masonry-item">
+const PressItem = ( { slug, title, content, text, author, link, image, textmd, } ) => (
+	<PressItemWrapper className = "masonry-item">
 		<MaybeLink href = { link || `/press/${ slug }` }>
-			<ThingInner>
+			<PressItemInner>
 				{image ? <FullWidthImg src = { image.url } /> : null}
 
 				<GridCell>
 					<TextCell>
 						{
 							title && !text ? (
-								<ThingTitle>{title}</ThingTitle>
+								<PressItemTitle>{title}</PressItemTitle>
 							) : null
 						}
 
 						{//quote
 							text ? (
-								<ThingQuote
+								<PressItemQuote
 									dangerouslySetInnerHTML = { {
 										__html: text,
 									} }
@@ -148,14 +145,14 @@ const Thing = ({ slug, title, content, text, author, link, image, textmd, }) => 
 
 						{
 							author ? 
-								<ThingAuthor>{author}</ThingAuthor> :
+								<PressItemAuthor>{author}</PressItemAuthor> :
 								null
 						}
 					</TextCell>
 				</GridCell>
-			</ThingInner>
+			</PressItemInner>
 		</MaybeLink>
-	</ThingWrapper>
+	</PressItemWrapper>
 );
 
 // --------------------------------------------------
@@ -170,7 +167,7 @@ const Main = props =>
 
 				<Inner className = "masonry-items">
 					{shuffle(props.press).map((x, i) => (
-						<Thing { ...x } key = { i } />
+						<PressItem { ...x } key = { i } />
 					))}
 				</Inner>
 			</ContainerAtEdges>
