@@ -10,7 +10,6 @@
     "marked": "^0.3.6",
     "masonry-layout": "^4.2.0",
     "moment": "^2.18.1",
-    "pre-commit": "^1.2.2",
     "prop-types": "^15.6.2",
     "ramda": "^0.24.1",
     "react": "^15.6.1",
@@ -37,9 +36,6 @@
     "process-promises": "^1.0.0",
     "sitemap-static": "^0.4.2"
   },
-  "pre-commit": [
-    "lint"
-  ],
   "scripts": {
     "start": "mcclowes-scripts start",
     "build": "mcclowes-scripts pack",
