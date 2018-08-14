@@ -1,1 +1,1 @@
-export * from "./toolbox";
+export * from "./Toolbox";
