@@ -1,12 +1,11 @@
-import styled from "styled-components";
+import * as mixins from "../../style/mixins";
+import * as vars from "../../style/vars";
+import { Container, GridCell, TextCell, Para, Button, } from "../../common";
 import { Link, } from "react-router-dom";
 
-import { Container, GridCell, TextCell, Para, Button, } from "../../common";
-
-import * as vars from "../../style/vars";
-import * as mixins from "../../style/mixins";
-
+import marked from "marked";
 import siteData from "src/data";
+import styled from "styled-components";
 
 // --------------------------------------------------
 
@@ -42,6 +41,7 @@ const FeaturedBookWrapper = styled(GridCell)`
 
 const FeaturedBookInner = styled(GridCell)`
 	position: relative;
+
 	${ mixins.xs`
 		padding-left: 0;
 		padding-right: 0;
@@ -53,7 +53,9 @@ const FeaturedBookCover = styled.div`
 		width: 40%;		
 		position: relative;
 		z-index: 1;
-	` } ${ mixins.shadow(0) };
+	` };
+	${ mixins.shadow(0) };
+
 	&:hover {
 		${ mixins.shadow(0) };
 	}
@@ -76,7 +78,9 @@ const FeaturedBookDetails = styled(TextCell)`
 		position: absolute;
 		top: 0em;
 		right: 0;
-	` } ${ mixins.bp.sm.min`
+	` };
+
+	${ mixins.bp.sm.min`
 		padding: 0;
 		margin-top: 2em;
 	` };
@@ -109,6 +113,7 @@ const CenterCell = styled(GridCell)`
 	flex: 1;
 	text-align: center;
 	margin-top: 1em;
+
 	${ mixins.xs`
 		text-align: left;
 		margin-top: 1em;
@@ -122,11 +127,13 @@ const TitleCell = styled(TextCell)`
 const SectionTitle = styled.h2`
 	text-align: center;
 	font-size: 2em;
+	font-family: ${ vars.font.title.family };
+	text-transform: uppercase;
+
 	${ mixins.xs`
 		text-align: left;
 		font-size: 1.5em;
-	` } font-family: ${ vars.font.title.family };
-	text-transform: uppercase;
+	` };
 `;
 
 // --------------------------------------------------
@@ -163,7 +170,9 @@ const FeaturedBook = props => (
 							</FeaturedBookAuthor>
 						) : null}
 
-						<Para>{props.shorterBlurb}</Para>
+						<div
+							dangerouslySetInnerHTML = { { __html: marked(props.shorterBlurb,), } }
+						/>
 					</FeaturedBookDetailsInner>
 				</FeaturedBookDetails>
 			</FeaturedBookInner>
