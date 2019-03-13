@@ -44,7 +44,7 @@ const Page = ({ pressSlug, }) => {
 					<Pic
 						src = {
 							page.image &&
-							`http://res.cloudinary.com/codogo/image/fetch/w_1000/https:${ page
+							`https://res.cloudinary.com/codogo/image/fetch/w_1000/https:${ page
 								.image.url }`
 						}
 					/>

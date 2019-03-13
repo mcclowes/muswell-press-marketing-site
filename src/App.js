@@ -33,7 +33,7 @@ const routes = routesConfig.map(
 
 						<link
 							rel = "canonical"
-							href = "http://http://www.muswell-press.co.uk/"
+							href = "https://www.muswell-press.co.uk/"
 						/>
 					</Helmet>
 

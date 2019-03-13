@@ -31,18 +31,22 @@
     "dotenv": "^4.0.0",
     "eslint": "^4.9.0",
     "mcclowes-scripts": "^0.3.6",
+    "pre-commit": "^1.2.2",
     "prettier": "^1.7.4",
     "process-promises": "^1.0.0",
     "prop-types": "^15.6.2",
     "react-snapshot": "^1.2.0",
     "sitemap-static": "^0.4.4"
   },
+  "pre-commit": [
+    "format"
+  ],
   "scripts": {
     "start": "mcclowes-scripts start",
     "build": "mcclowes-scripts pack",
     "static": "npm run data && npm run build && react-snapshot && npm run sitemap",
     "data": "node scripts/static/makeDataFile",
     "format": "mcclowes-scripts format",
-    "sitemap": "sitemap-static --prefix=http://www.muswell-press.co.uk/ build | sed -e \"s/\\.html//g\" > build/sitemap.xml"
+    "sitemap": "sitemap-static --prefix=https://www.muswell-press.co.uk/ build | sed -e \"s/\\.html//g\" > build/sitemap.xml"
   }
 }

@@ -1,7 +1,6 @@
-import { injectGlobal, } from "styled-components";
-
-import * as vars from "./vars";
 import * as mixins from "./mixins";
+import * as vars from "./vars";
+import { injectGlobal, } from "styled-components";
 import { objMap, } from "../../lib/util";
 
 // --------------------------------------------------

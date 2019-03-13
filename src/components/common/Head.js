@@ -14,7 +14,7 @@ const Head = props => (
 
 		<link
 			rel = "canonical"
-			href = { `http://www.muswell-press.co.uk/${ props && props.slug
+			href = { `https://www.muswell-press.co.uk/${ props && props.slug
 				? props.slug
 				: "" }` }
 		/>
@@ -34,7 +34,7 @@ const Head = props => (
 		/>
 		<meta
 			property = "og:url"
-			content = { `http://www.muswell-press.co.uk/${ props && props.slug
+			content = { `https://www.muswell-press.co.uk/${ props && props.slug
 				? props.slug
 				: "" }` }
 		/>
@@ -112,7 +112,7 @@ const Head = props => (
 
 		<meta
 			name = "twitter:url"
-			content = { `http://www.muswell-press.co.uk/${ props && props.slug
+			content = { `https://www.muswell-press.co.uk/${ props && props.slug
 				? props.slug
 				: "" }` }
 		/>

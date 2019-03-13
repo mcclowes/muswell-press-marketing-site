@@ -71,7 +71,7 @@ const NewsItem = ( { link, slug, image, releaseDateText, title, date, } ) => (
 			<NewsCover
 				src = {
 					image &&
-					`http://res.cloudinary.com/codogo/image/fetch/h_500,c_fill,g_face,f_auto/https:${ image.url }`
+					`https://res.cloudinary.com/codogo/image/fetch/h_500,c_fill,g_face,f_auto/https:${ image.url }`
 				}
 			/>
 

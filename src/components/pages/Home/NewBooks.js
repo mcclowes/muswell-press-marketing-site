@@ -146,7 +146,7 @@ const FeaturedBook = props => (
 					<FeaturedBookCoverImage
 						src = {
 							props.cover &&
-							`http://res.cloudinary.com/codogo/image/fetch/h_500,c_fill,g_face,f_auto/https:${ props
+							`https://res.cloudinary.com/codogo/image/fetch/h_500,c_fill,g_face,f_auto/https:${ props
 								.cover.url }`
 						}
 					/>
