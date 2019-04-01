@@ -87,12 +87,12 @@ const NewsItem = ( { link, slug, image, releaseDateText, title, date, } ) => (
 );
 
 NewsItem.propTypes = {
-	link: PropTypes.any,
-	slug: PropTypes.any,
-	image: PropTypes.any,
-	releaseDateText: PropTypes.any,
-	title: PropTypes.any,
 	date: PropTypes.any,
+	image: PropTypes.any,
+	link: PropTypes.any,
+	releaseDateText: PropTypes.any,
+	slug: PropTypes.any,
+	title: PropTypes.any,
 };
 
 // --------------------------------------------------

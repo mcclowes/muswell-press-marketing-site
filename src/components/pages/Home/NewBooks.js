@@ -171,7 +171,7 @@ const FeaturedBook = props => (
 						) : null}
 
 						<div
-							dangerouslySetInnerHTML = { { __html: marked(props.shorterBlurb,), } }
+							dangerouslySetInnerHTML = { { __html: marked(props.shorterBlurb, ), } }
 						/>
 					</FeaturedBookDetailsInner>
 				</FeaturedBookDetails>
