@@ -44,7 +44,7 @@
   "scripts": {
     "start": "mcclowes-scripts start",
     "build": "mcclowes-scripts pack",
-    "static": "npm run data && npm run build && react-snapshot && npm run sitemap",
+    "static": "( npm run data && npm run build && react-snapshot && npm run sitemap ) > /dev/null",
     "data": "node scripts/static/makeDataFile",
     "format": "mcclowes-scripts format",
     "sitemap": "sitemap-static --prefix=https://www.muswell-press.co.uk/ build | sed -e \"s/\\.html//g\" > build/sitemap.xml"
