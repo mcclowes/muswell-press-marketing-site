@@ -28,7 +28,7 @@
   },
   "devDependencies": {
     "contentful": "^7.9.0",
-    "dotenv": "^8.0.0",
+    "dotenv": "^8.1.0",
     "eslint": "^4.19.1",
     "mcclowes-scripts": "^0.3.6",
     "pre-commit": "^1.2.2",
