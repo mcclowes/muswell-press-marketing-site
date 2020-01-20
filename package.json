@@ -27,7 +27,7 @@
     "velocity-animate": "^1.5.2"
   },
   "devDependencies": {
-    "contentful": "^7.13.0",
+    "contentful": "^7.13.1",
     "dotenv": "^8.2.0",
     "eslint": "^4.19.1",
     "mcclowes-scripts": "^0.3.6",
