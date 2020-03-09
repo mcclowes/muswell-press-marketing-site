@@ -19,7 +19,7 @@
     "react-helmet": "^5.2.1",
     "react-responsive": "^3.0.0",
     "react-router": "^4.3.1",
-    "react-router-dom": "^4.3.1",
+    "react-router-dom": "^5.1.2",
     "recompose": "^0.30.0",
     "slugify": "^1.4.0",
     "split": "^1.0.1",
