@@ -15,7 +15,7 @@
     "react": "^15.6.1",
     "react-addons-transition-group": "^15.6.0",
     "react-dom": "^15.6.1",
-    "react-ga": "^2.7.0",
+    "react-ga": "^3.0.0",
     "react-helmet": "^5.2.1",
     "react-responsive": "^3.0.0",
     "react-router": "^4.3.1",
