@@ -6,28 +6,26 @@ import siteData from "src/data";
 
 import Head from "src/components/common/Head";
 
-// --------------------------------------------------
+const Book = ({ bookSlug }) => {
+  const book = siteData.book.find(({ slug }) => slug === bookSlug);
 
-const Book = ({ bookSlug, }) => {
-	const book = siteData.book.find(({ slug, }) => slug === bookSlug);
+  if (book) {
+    return (
+      <div>
+        <Head
+          pageTitle={book.title}
+          pageDescription={book.blurb}
+          pageImage={book.cover}
+        />
 
-	if (book) {
-		return (
-			<div>
-				<Head
-					pageTitle = { book.title }
-					pageDescription = { book.blurb }
-					pageImage = { book.cover }
-				/>
+        <Summary {...book} />
 
-				<Summary { ...book } />
-
-				<Press { ...book } />
-			</div>
-		);
-	} else {
-		return <NotFound />;
-	}
+        <Press {...book} />
+      </div>
+    );
+  } else {
+    return <NotFound />;
+  }
 };
 
 export default Book;
