@@ -1,187 +1,173 @@
 import React from "react";
 import styled from "styled-components";
-import { Link, } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import * as mixins from "src/components/style/mixins";
 import * as vars from "src/components/style/vars";
 
 import siteData from "src/data";
 
-// --------------------------------------------------
-
 const Wrapper = styled.footer`
-	${ mixins.bpEither("height", vars.dim.footer.height) };
-	${ mixins.bpEither("max-height", vars.dim.footer.height) };
+  ${mixins.bpEither("height", vars.dim.footer.height)};
+  ${mixins.bpEither("max-height", vars.dim.footer.height)};
 
-	display: block;
-	position: absolute;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	padding: 1em 0;
+  display: block;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 1em 0;
 
-	font-size: 0.9em;
+  font-size: 0.9em;
 
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 
-	${ ({ theme: { footer, }, }) => `
-		background-color: ${ vars.colors.footer };
+  ${({ theme: { footer } }) => `
+		background-color: ${vars.colors.footer};
 		color: white;	
-	` } & a:hover {
-		text-decoration: underline;
-	}
+	`} & a:hover {
+    text-decoration: underline;
+  }
 
-	${ mixins.xs`
+  ${mixins.xs`
 		padding: 2em;
-	` };
+	`};
 `;
 
-const MaybeLink = props =>
-	props.to ? <Link { ...props } /> : <span { ...props } />;
+const MaybeLink = (props) =>
+  props.to ? <Link {...props} /> : <span {...props} />;
 
 const LinkStyling = `
 	padding: 0 0.8em;
 	margin: 0.33em 0;
-	${ mixins.bp.sm.min`
+	${mixins.bp.sm.min`
 		&:not(:last-child) {
 			border-right: 1px rgba(255,255,255,0.2) solid;
 		}		
-	` }
-	${ mixins.xs`
+	`}
+	${mixins.xs`
 		display: block;
 
 		&:first-child {
 			padding-left: 0;
 		}
-	` }
-	${ props => (props.hidden ? "color: transparent;" : "") }
+	`}
+	${(props) => (props.hidden ? "color: transparent;" : "")}
 `;
 
 const FooterLink = styled(MaybeLink)`
-	${ LinkStyling };
+  ${LinkStyling};
 `;
 
 const FooterSocialLink = styled.a`
-	${ LinkStyling };
+  ${LinkStyling};
 `;
 
 const Mobile = styled.div`
-	${ mixins.bp.sm.min`display: none;` };
+  ${mixins.bp.sm.min`display: none;`};
 `;
 
 const Desktop = styled.div`
-	${ mixins.xs`display: none;` };
+  ${mixins.xs`display: none;`};
 `;
 
 const Row = styled.div`
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 
-	&:last-child {
-		color: #999;
-		font-size: 0.9em;
-	}
+  &:last-child {
+    color: #999;
+    font-size: 0.9em;
+  }
 `;
 
 const Columns = styled.div`
-	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 `;
 
 const Column = styled.div`
-	width: 50%;
-	${ mixins.bp.sm.max`
+  width: 50%;
+  ${mixins.bp.sm.max`
 		width: 100%;
 		margin-bottom: 0.75em;
-	` };
+	`};
 `;
 
 const BottomRow = styled.div`
-	margin-top: 1em;
+  margin-top: 1em;
 `;
 
-// --------------------------------------------------
-
 export default () => (
-	<Wrapper>
-		<Desktop>
-			<Row>
-				{siteData.aboutPage.map(({ slug, title, }) => {
-					return (
-						<FooterLink to = { "/" + slug } key = { slug }>
-							{title}
-						</FooterLink>
-					);
-				})}
+  <Wrapper>
+    <Desktop>
+      <Row>
+        {siteData.aboutPage.map(({ slug, title }) => {
+          return (
+            <FooterLink to={"/" + slug} key={slug}>
+              {title}
+            </FooterLink>
+          );
+        })}
 
-				<FooterSocialLink href = { siteData.generalSettings.facebookUrl }>
-					Facebook
-				</FooterSocialLink>
+        <FooterSocialLink href={siteData.generalSettings.facebookUrl}>
+          Facebook
+        </FooterSocialLink>
 
-				<FooterSocialLink href = { siteData.generalSettings.twitterUrl }>
-					Twitter
-				</FooterSocialLink>
-			</Row>
+        <FooterSocialLink href={siteData.generalSettings.twitterUrl}>
+          Twitter
+        </FooterSocialLink>
+      </Row>
 
-			<Row>
-				<FooterLink>{siteData.generalSettings.footerText}</FooterLink>
+      <Row>
+        <FooterLink>{siteData.generalSettings.footerText}</FooterLink>
 
-				<FooterLink>
-					Registered in England and Wales 06626047
-				</FooterLink>
+        <FooterLink>Registered in England and Wales 06626047</FooterLink>
 
-				<FooterSocialLink href = "https://consulting.codogo.io">
-					Site by Codogo
-				</FooterSocialLink>
-			</Row>
-		</Desktop>
+        <FooterSocialLink href="https://consulting.codogo.io">
+          Site by Codogo
+        </FooterSocialLink>
+      </Row>
+    </Desktop>
 
-		<Mobile>
-			<Columns>
-				<Column>
-					{siteData.aboutPage.map(({ slug, title, }) => {
-						return (
-							<FooterLink to = { "/" + slug } key = { slug }>
-								{title}
-							</FooterLink>
-						);
-					})}
-				</Column>
+    <Mobile>
+      <Columns>
+        <Column>
+          {siteData.aboutPage.map(({ slug, title }) => {
+            return (
+              <FooterLink to={"/" + slug} key={slug}>
+                {title}
+              </FooterLink>
+            );
+          })}
+        </Column>
 
-				<Column>
-					<FooterSocialLink
-						href = { siteData.generalSettings.facebookUrl }
-					>
-						Facebook
-					</FooterSocialLink>
+        <Column>
+          <FooterSocialLink href={siteData.generalSettings.facebookUrl}>
+            Facebook
+          </FooterSocialLink>
 
-					<FooterSocialLink
-						href = { siteData.generalSettings.twitterUrl }
-					>
-						Twitter
-					</FooterSocialLink>
+          <FooterSocialLink href={siteData.generalSettings.twitterUrl}>
+            Twitter
+          </FooterSocialLink>
 
-					<FooterLink hidden>dfdfdf</FooterLink>
+          <FooterLink hidden>dfdfdf</FooterLink>
 
-					<FooterLink>
-						{siteData.generalSettings.footerText}
-					</FooterLink>
+          <FooterLink>{siteData.generalSettings.footerText}</FooterLink>
 
-					<FooterSocialLink href = "https://consulting.codogo.io">
-						Site by Codogo
-					</FooterSocialLink>
-				</Column>
-			</Columns>
+          <FooterSocialLink href="https://consulting.codogo.io">
+            Site by Codogo
+          </FooterSocialLink>
+        </Column>
+      </Columns>
 
-			<BottomRow>
-				<FooterLink>
-					Registered in England and Wales 06626047
-				</FooterLink>
-			</BottomRow>
-		</Mobile>
-	</Wrapper>
+      <BottomRow>
+        <FooterLink>Registered in England and Wales 06626047</FooterLink>
+      </BottomRow>
+    </Mobile>
+  </Wrapper>
 );

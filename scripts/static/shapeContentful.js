@@ -66,4 +66,4 @@
 // 	return r;
 // };
 
-exports.default = x => x;
+exports.default = (x) => x;

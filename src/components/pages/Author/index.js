@@ -6,28 +6,26 @@ import siteData from "src/data";
 
 import Head from "src/components/common/Head";
 
-// --------------------------------------------------
+const Author = ({ authorSlug }) => {
+  const author = siteData.author.find(({ slug }) => slug === authorSlug);
 
-const Author = ({ authorSlug, }) => {
-	const author = siteData.author.find(({ slug, }) => slug === authorSlug);
+  if (author) {
+    return (
+      <div>
+        <Head
+          pageTitle={author.name}
+          pageDescription={author.biography}
+          pageImage={author.image}
+        />
 
-	if (author) {
-		return (
-			<div>
-				<Head
-					pageTitle = { author.name }
-					pageDescription = { author.biography }
-					pageImage = { author.image }
-				/>
+        <Summary {...author} />
 
-				<Summary { ...author } />
-
-				<Press { ...author } />
-			</div>
-		);
-	} else {
-		return <NotFound />;
-	}
+        <Press {...author} />
+      </div>
+    );
+  } else {
+    return <NotFound />;
+  }
 };
 
 export default Author;
