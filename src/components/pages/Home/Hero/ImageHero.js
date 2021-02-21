@@ -44,47 +44,50 @@ const MobileImage = styled.img`
 const LR = styled.div`
 	flex: 1;
 	background-image: linear-gradient(
-		to ${(props) => (props.left ? "left" : "right")},
+		to ${({left}) => left ? "left" : "right"},
 		transparent,
 		${(x) => x.color || "#000"} 2em,
 		${(x) => x.color || "#000"}
 	);
-	margin-${(props) => (props.right ? "left" : "right")}: -2em;
+	margin-${({right}) => right ? "left" : "right"}: -2em;
 	position: relative;
 	z-index: 1;
 `;
 
-const HeroImage = ({ image, edgesColor }) => (
-  <HeroWrapper background={edgesColor}>
-    <Only.xs>
-      <MobileImage src={image && image.url} />
-    </Only.xs>
+const HeroImage = ({ image, edgesColor }) => {
+  console.log({image, edgesColor})
+  return (
+    <HeroWrapper background={edgesColor}>
+      <Only.xs>
+        <MobileImage src={image && image.url} />
+      </Only.xs>
 
-    <Only.sm>
-      <MobileImage src={image && image.url} />
-    </Only.sm>
+      <Only.sm>
+        <MobileImage src={image && image.url} />
+      </Only.sm>
 
-    <Only.md>
-      <ImageWrapper background={edgesColor}>
-        <LR left color={edgesColor} />
+      <Only.md>
+        <ImageWrapper background={edgesColor}>
+          { edgesColor ? <LR left color={edgesColor} /> : null }
 
-        <Image src={image && image.url} background={edgesColor} />
+          <Image src={image && image.url} background={edgesColor} />
 
-        <LR right color={edgesColor} />
-      </ImageWrapper>
-    </Only.md>
+          { edgesColor ? <LR right color={edgesColor} /> : null }
+        </ImageWrapper>
+      </Only.md>
 
-    <Only.lg>
-      <ImageWrapper background={edgesColor}>
-        <LR left color={edgesColor} />
+      <Only.lg>
+        <ImageWrapper background={edgesColor}>
+          { edgesColor ? <LR left color={edgesColor} /> : null }
 
-        <Image src={image && image.url} background={edgesColor} />
+          <Image src={image && image.url} background={edgesColor} />
 
-        <LR right color={edgesColor} />
-      </ImageWrapper>
-    </Only.lg>
-  </HeroWrapper>
-);
+          { edgesColor ? <LR right color={edgesColor} /> : null }
+        </ImageWrapper>
+      </Only.lg>
+    </HeroWrapper>
+  )
+};
 
 const ImageHero = () => (
   <Link to={`book/${siteData.homePage.hero.heroLink.slug}`}>
