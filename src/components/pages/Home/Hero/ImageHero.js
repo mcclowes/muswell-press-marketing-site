@@ -3,19 +3,19 @@ import { Link } from "react-router-dom";
 
 import { Only } from "src/components/common";
 
-import * as vars from "src/components/style/vars";
-import * as mixins from "src/components/style/mixins";
+import * as vars from "src/utils/styles/vars";
+import * as mixins from "src/utils/styles/mixins";
 
 import siteData from "src/data";
 
 const HeroWrapper = styled.div`
-  background-color: ${(props) =>
-    props.background ? props.background : R.path(["theme", "bg"])};
+  background-color: ${({background}) =>
+    background ? background : R.path(["theme", "bg"])};
 `;
 
 const ImageWrapper = styled.div`
-  background-color: ${(props) =>
-    props.background ? props.background : R.path(["theme", "bg"])};
+  background-color: ${({background}) =>
+    background ? background : R.path(["theme", "bg"])};
   display: flex;
   flex-direction: row;
   align-items: stretch;
@@ -28,12 +28,13 @@ const Image = styled.img`
   z-index: 0;
   object-fit: contain;
 
-  ${mixins.bp.sm.min`
+  ${mixins.bp.sm.min} {
 		max-height: calc(70vh - ${vars.dim.nav.height.other});
-	`};
-  ${mixins.bp.sm.max`
+	};
+  
+  ${mixins.bp.sm.max} {
 		max-height: calc(35vh - ${vars.dim.nav.height.other});
-	`};
+	};
 `;
 
 const MobileImage = styled.img`

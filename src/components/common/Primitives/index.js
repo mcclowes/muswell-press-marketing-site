@@ -4,9 +4,9 @@ import R from "ramda";
 import { Link } from "react-router-dom";
 import MQ from "react-responsive";
 
-import * as mixins from "../../style/mixins";
-import * as vars from "../../style/vars";
-import { objMap } from "../../../lib/util";
+import * as mixins from "src/utils/styles/mixins";
+import * as vars from "src/utils/styles/vars";
+import { objMap } from "src/utils/util";
 
 const GridCell = styled.div`
   ${mixins.bpEach("padding", vars.dim.gutter.half)} ${(p) =>
@@ -49,7 +49,8 @@ const Bg = styled.div`
 		background-size: cover;
 		background-position: center center;
 	`
-      : ""} ${(p) => (p.color ? `background-color: ${p.color};` : "")};
+      : ""};
+  ${({color}) => color ? `background-color: ${color};` : ""};
 `;
 
 const Para = (props) => (
@@ -98,7 +99,9 @@ const ButtonWrapper = styled.div`
       ? css`
           color: ${color || vars.colors.text};
           border: 1.5px solid ${color || vars.colors.text};
-          ${mixins.xs`border-width: 1px;`} background: transparent;
+          background: transparent;
+
+          ${mixins.xs} {border-width: 1px;} 
 
           &:hover,
           &:visited,

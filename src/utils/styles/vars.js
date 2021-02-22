@@ -1,4 +1,4 @@
-import { objMap } from "../../lib/util";
+import { objMap } from "src/utils/util";
 
 const sm = 848;
 const md = 992;

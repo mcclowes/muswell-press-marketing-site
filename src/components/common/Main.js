@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
-import * as mixins from "../style/mixins";
-import * as vars from "../style/vars";
-import { objMap } from "src/lib/util";
+import * as mixins from "src/utils/styles/mixins";
+import * as vars from "src/utils/styles/vars";
+import { objMap } from "src/utils/util";
 
 const minHeights = objMap(
   vars.dim.nav.height,

@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Helmet from "react-helmet";
 
 import routesConfig from "./routesConfig";
-import injectGlobalStyles from "./components/style/globalStyles";
+import injectGlobalStyles from "./utils/styles/globalStyles";
 
 import Nav from "./components/common/Nav";
 import Main from "./components/common/Main";
@@ -22,6 +22,8 @@ const defaultColors = siteData.generalSettings.defaultColors;
 const PageBody = styled.div`
   display: flex;
   flex-direction: column;
+  min-height: 100vh;
+  justify-content: space-between;
 `
 
 const routes = routesConfig.map(

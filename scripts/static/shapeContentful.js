@@ -1,4 +1,4 @@
-// const objMap = require("../../src/lib/util.oldsyntax").objMap;
+// const objMap = require("src/utils/util.oldsyntax").objMap;
 
 // exports.default = (rawData) => {
 // 	const r = {};

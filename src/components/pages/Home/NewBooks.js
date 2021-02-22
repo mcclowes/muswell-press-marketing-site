@@ -1,5 +1,5 @@
-import * as mixins from "../../style/mixins";
-import * as vars from "../../style/vars";
+import * as mixins from "src/utils/styles/mixins";
+import * as vars from "src/utils/styles/vars";
 import { Container, GridCell, TextCell, Para, Button } from "../../common";
 import { Link } from "react-router-dom";
 
@@ -38,18 +38,19 @@ const FeaturedBookWrapper = styled(GridCell)`
 const FeaturedBookInner = styled(GridCell)`
   position: relative;
 
-  ${mixins.xs`
+  ${mixins.xs} {
 		padding-left: 0;
 		padding-right: 0;
-	`};
+	};
 `;
 
 const FeaturedBookCover = styled.div`
-  ${mixins.xs`
+  ${mixins.xs} {
 		width: 40%;		
 		position: relative;
 		z-index: 1;
-	`};
+	};
+
   ${mixins.shadow(0)};
 
   &:hover {
@@ -69,23 +70,24 @@ const FeaturedBookCoverImage = styled.div`
 `;
 
 const FeaturedBookDetails = styled(TextCell)`
-  ${mixins.xs`
+  ${mixins.xs} {
 		width: 60%;
 		position: absolute;
 		top: 0em;
 		right: 0;
-	`};
+	};
 
-  ${mixins.bp.sm.min`
+  ${mixins.bp.sm.min} {
 		padding: 0;
 		margin-top: 2em;
-	`};
+	};
 `;
 
 const FeaturedBookDetailsInner = styled(GridCell)`
   padding-left: 0;
   padding-right: 0;
-  ${mixins.xs`padding-left: 1em;`};
+
+  ${mixins.xs} {padding-left: 1em;};
 `;
 
 const FeaturedBookTitle = styled.h3`
@@ -110,10 +112,10 @@ const CenterCell = styled(GridCell)`
   text-align: center;
   margin-top: 1em;
 
-  ${mixins.xs`
+  ${mixins.xs} {
 		text-align: left;
 		margin-top: 1em;
-	`};
+	};
 `;
 
 const TitleCell = styled(TextCell)`
@@ -126,10 +128,10 @@ const SectionTitle = styled.h2`
   font-family: ${vars.font.title.family};
   text-transform: uppercase;
 
-  ${mixins.xs`
+  ${mixins.xs} {
 		text-align: left;
 		font-size: 1.5em;
-	`};
+	};
 `;
 
 const FeaturedBook = (props) => (

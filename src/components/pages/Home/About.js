@@ -1,16 +1,12 @@
-import styled from "styled-components";
-
-import { Container, TextCell, Button, PSpacing } from "../../common";
-
-import * as mixins from "../../style/mixins";
-
-import siteData from "src/data";
-
+import * as mixins from "src/utils/styles/mixins";
 import Head from "src/components/common/Head";
+import siteData from "src/data";
+import styled from "styled-components";
+import { Container, TextCell, Button, PSpacing } from "../../common";
 
 const CenterCell = styled(TextCell)`
   text-align: center;
-  ${mixins.xs`text-align: left;`};
+  ${mixins.xs} {text-align: left;};
 `;
 
 const BigText = styled.p`
@@ -18,7 +14,7 @@ const BigText = styled.p`
 `;
 
 const NotAsBigText = styled.p`
-  ${mixins.bp.sm.min`font-size: 1.2em;`};
+  ${mixins.bp.sm.min} {font-size: 1.2em;};
 `;
 
 const About = () => (

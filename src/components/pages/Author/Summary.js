@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 
 import { Container, GridCell, TextCell, FullWidthImg } from "../../common";
 
-import * as vars from "../../style/vars";
-import * as mixins from "../../style/mixins";
-import { objMap } from "../../../lib/util";
+import * as vars from "src/utils/styles/vars";
+import * as mixins from "src/utils/styles/mixins";
+import { objMap } from "src/utils/util";
 
 import siteData from "src/data";
 
@@ -50,19 +50,20 @@ const LeftCol = styled(GridCell)`
   max-width: 500px;
   flex: 1;
   display: flex;
-  ${mixins.bpEach("max-height", coverHeights)} ${mixins.xs`display: none;`};
+  ${mixins.bpEach("max-height", coverHeights)} 
+  ${mixins.xs} {display: none;};
 `;
 
 const RightCol = styled(GridCell)`
-  // background-color: red;
   max-width: 500px;
   flex: 1;
   margin-left: 1em;
-  ${mixins.xs`
+
+  ${mixins.xs} {
 		margin: 0;
 		padding-left: 0;
 		padding-right: 0;
-	`};
+	};
 `;
 
 const TitleText = styled.p`
@@ -91,9 +92,11 @@ const BookLink = styled.a`
 `;
 
 const MobileCover = styled.div`
-  ${mixins.bp.sm.min`
+  ${mixins.bp.sm.min} {
 		display: none;
-	`} ${mixins.xs`
+	} 
+  
+  ${mixins.xs} {
 		border-bottom: 1px solid ${vars.colors.lines};
 		padding-bottom: ${vars.dim.gutter.full.xs};
 		margin-bottom: ${vars.dim.gutter.full.xs};
@@ -101,8 +104,8 @@ const MobileCover = styled.div`
 		& > div {
 			width: 250px;
 			margin: 0 auto;
-		}
-	`};
+  	}
+	};
 `;
 
 const Summary = (props) => (
