@@ -1,4 +1,4 @@
-import { ThemeProvider } from "styled-components";
+import styled, { ThemeProvider } from "styled-components";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Helmet from "react-helmet";
 
@@ -19,11 +19,16 @@ injectGlobalStyles();
 
 const defaultColors = siteData.generalSettings.defaultColors;
 
+const PageBody = styled.div`
+  display: flex;
+  flex-direction: column;
+`
+
 const routes = routesConfig.map(
   ({ component: Comp, colors, data, ...rest }, i) => {
     const render = (props) => (
       <ThemeProvider theme={{ ...defaultColors, ...colors }}>
-        <div>
+        <PageBody>
           <Helmet>
             <meta charSet="utf-8" />
 
@@ -41,7 +46,7 @@ const routes = routesConfig.map(
           </Main>
 
           <Footer key="Footer" />
-        </div>
+        </PageBody>
       </ThemeProvider>
     );
 

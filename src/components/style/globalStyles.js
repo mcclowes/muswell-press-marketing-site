@@ -39,12 +39,12 @@ export default () => injectGlobal`
 	body {
 		background: white;
 		font-family: Archivo, sans-serif;
-		${mixins.bpEach("font-size", vars.font.size)}
 		color: ${vars.colors.text};
 		margin: 0;
-		${mixins.bpEither("margin-bottom", vars.dim.footer.height)}
 		overflow-y: scroll;
 		line-height: 1.5;
+
+		${mixins.bpEach("font-size", vars.font.size)}
 	}
 
 	body.noScroll {
