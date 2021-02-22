@@ -8,15 +8,14 @@ import * as vars from "src/components/style/vars";
 import siteData from "src/data";
 
 const Wrapper = styled.footer`
-  ${mixins.bpEither("height", vars.dim.footer.height)};
-  ${mixins.bpEither("max-height", vars.dim.footer.height)};
+  
 
-  display: block;
+/*  display: block;
   position: absolute;
   left: 0;
   right: 0;
   bottom: 0;
-  padding: 1em 0;
+  padding: 1em 0;*/
 
   font-size: 0.9em;
 
@@ -42,11 +41,13 @@ const MaybeLink = (props) =>
 const LinkStyling = `
 	padding: 0 0.8em;
 	margin: 0.33em 0;
+
 	${mixins.bp.sm.min`
 		&:not(:last-child) {
 			border-right: 1px rgba(255,255,255,0.2) solid;
 		}		
 	`}
+
 	${mixins.xs`
 		display: block;
 
@@ -70,6 +71,8 @@ const Mobile = styled.div`
 `;
 
 const Desktop = styled.div`
+  padding: 1.5em;
+
   ${mixins.xs`display: none;`};
 `;
 
@@ -92,9 +95,13 @@ const Columns = styled.div`
 
 const Column = styled.div`
   width: 50%;
+  display: flex;
+  flex-direction: row;
+
   ${mixins.bp.sm.max`
 		width: 100%;
 		margin-bottom: 0.75em;
+    flex-direction: column;
 	`};
 `;
 
