@@ -22,6 +22,8 @@ const defaultColors = siteData.generalSettings.defaultColors;
 const PageBody = styled.div`
   display: flex;
   flex-direction: column;
+  min-height: 100vh;
+  justify-content: space-between;
 `
 
 const routes = routesConfig.map(

@@ -9,13 +9,13 @@ import * as mixins from "src/utils/styles/mixins";
 import siteData from "src/data";
 
 const HeroWrapper = styled.div`
-  background-color: ${(props) =>
-    props.background ? props.background : R.path(["theme", "bg"])};
+  background-color: ${({background}) =>
+    background ? background : R.path(["theme", "bg"])};
 `;
 
 const ImageWrapper = styled.div`
-  background-color: ${(props) =>
-    props.background ? props.background : R.path(["theme", "bg"])};
+  background-color: ${({background}) =>
+    background ? background : R.path(["theme", "bg"])};
   display: flex;
   flex-direction: row;
   align-items: stretch;

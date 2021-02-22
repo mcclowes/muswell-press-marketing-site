@@ -10,14 +10,7 @@ const minHeights = objMap(
 );
 
 export default styled.div`
-<<<<<<< HEAD
   ${mixins.bpEither("margin-top", vars.dim.nav.height)};
 
-=======
-  ${mixins.bpEither("margin-top", vars.dim.nav.height)} ${mixins.bpEither(
-    "min-height",
-    minHeights
-  )};
->>>>>>> 83c4720 ([chore] coherent utils, update breakpoint pattern)
   background-color: ${R.path(["theme", "body"])};
 `;

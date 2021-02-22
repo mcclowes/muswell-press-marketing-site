@@ -31,20 +31,18 @@ const MaybeLink = (props) =>
 const LinkStyling = `
 	padding: 0 0.8em;
 	margin: 0.33em 0;
-  ${({hidden}) => hidden ? "color: transparent;" : ""}
+  
+  ${({hidden}) => hidden ? "display: none !important;" : ""}
 
-	${mixins.bp.sm.min`
+	${mixins.bp.sm.min} {
 		&:not(:last-child) {
 			border-right: 1px rgba(255,255,255,0.2) solid;
 		}		
-	`}
+	}
 
-	${mixins.xs`
+	${mixins.xs} {
 		display: block;
-
-		&:first-child {
-			padding-left: 0;
-		}
+		padding-left: 0;
 	}
 `;
 

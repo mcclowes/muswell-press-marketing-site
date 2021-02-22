@@ -22,7 +22,6 @@ export const md = bp.md.only;
 export const lg = bp.lg.only;
 
 export const bpEach = (prop, vals) => {
-  console.log(prop, bp)
   return css`
     ${
       Object.keys(vals)
