@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 import { compose, withState, withHandlers } from "recompose";
 
 import { Button, Container, GridCell, Only } from "../common";
-import * as mixins from "../style/mixins";
-import * as vars from "../style/vars";
-import { objMap } from "../../lib/util";
+import * as mixins from "src/utils/styles/mixins";
+import * as vars from "src/utils/styles/vars";
+import { objMap } from "src/utils/util";
 
 import siteData from "src/data";
 

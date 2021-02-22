@@ -1,5 +1,5 @@
-import * as vars from "../style/vars";
-import * as mixins from "../style/mixins";
+import * as vars from "src/utils/styles/vars";
+import * as mixins from "src/utils/styles/mixins";
 import { lifecycle } from "recompose";
 import { MaybeLink } from "../common/Primitives";
 import {
@@ -40,7 +40,7 @@ const Background = styled.div`
 `;
 
 const ContainerAtEdges = styled(Container)`
-  ${mixins.xs`margin: 0 -${vars.dim.gutter.tripleHalf.xs}`};
+  ${mixins.xs} {margin: 0 -${vars.dim.gutter.tripleHalf.xs}};
 `;
 
 const Inner = styled.div`
@@ -54,10 +54,12 @@ const TitleCell = styled(TextCell)`
 const SectionTitle = styled.h2`
   text-align: center;
   font-size: 2em;
-  ${mixins.xs`
-		font-size: 1.5em;
-	`} font-family: ${vars.font.title.family};
+  font-family: ${vars.font.title.family};
   text-transform: uppercase;
+
+  ${mixins.xs} {
+    font-size: 1.5em;
+  } 
 `;
 
 const colWidths = {
@@ -67,6 +69,7 @@ const colWidths = {
 
 const PressItemWrapper = styled(GridCell)`
   float: left;
+
   ${mixins.bpEither("width", colWidths)};
 `;
 
@@ -77,7 +80,9 @@ const PressItemInner = styled.div`
 const PressItemTitle = styled.p`
   font-family: ${vars.font.title.family};
   font-size: 1.1em;
-  ${mixins.xs`font-size: 1em;`} line-height: 1.3;
+  line-height: 1.3;
+
+  ${mixins.xs} {font-size: 1em;} 
 `;
 
 const PressItemAuthor = styled.p`

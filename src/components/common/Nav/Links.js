@@ -2,8 +2,8 @@ import React from "react";
 import styled, { css } from "styled-components";
 import { NavLink } from "react-router-dom";
 
-import * as mixins from "../../style/mixins";
-import * as vars from "../../style/vars";
+import * as mixins from "src/utils/styles/mixins";
+import * as vars from "src/utils/styles/vars";
 
 export default (props) => (
   <Wrapper open={props.open}>
@@ -47,7 +47,8 @@ const wrapperStyle = [
 ];
 
 const Wrapper = styled.div`
-  ${mixins.xs`${wrapperStyle[0]}`} ${mixins.bp.sm.min`${wrapperStyle[1]}`};
+  ${mixins.xs} {${wrapperStyle[0]}} 
+  ${mixins.bp.sm.min} {${wrapperStyle[1]}};
 `;
 
 const buttonStyle = [
@@ -80,5 +81,6 @@ const Button = styled(NavLink)`
     opacity: 0.7;
   }
 
-  ${mixins.xs`${buttonStyle[0]}`} ${mixins.bp.sm.min`${buttonStyle[1]}`};
+  ${mixins.xs} {${buttonStyle[0]}} 
+  ${mixins.bp.sm.min} {${buttonStyle[1]}};
 `;

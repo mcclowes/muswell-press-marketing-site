@@ -1,4 +1,4 @@
-import * as vars from "../style/vars";
+import * as vars from "src/utils/styles/vars";
 import Helmet from "react-helmet";
 import siteData from "src/data";
 

@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 
-import * as mixins from "../style/mixins";
-import * as vars from "../style/vars";
-import { objMap } from "../../lib/util";
+import * as mixins from "src/utils/styles/mixins";
+import * as vars from "src/utils/styles/vars";
+import { objMap } from "src/utils/util";
 
 const blockHeights = objMap(vars.dim.nav.height, (key, val) =>
   mixins.px(mixins.num(val) * 0.75 - 1.5 * mixins.num(vars.dim.nav.margin[key]))

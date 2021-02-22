@@ -2,8 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-import * as mixins from "../../style/mixins";
-import * as vars from "../../style/vars";
+import * as mixins from "src/utils/styles/mixins";
+import * as vars from "src/utils/styles/vars";
 import routesConfig from "../../../routesConfig";
 
 import Links from "./Links";
@@ -71,22 +71,25 @@ export default class Nav extends React.Component {
 }
 
 const Wrapper = styled.nav`
-  ${mixins.bp.sm.min`${mixins.shadow(0)}`} ${mixins.bpEither(
+  ${mixins.bp.sm.min} {${mixins.shadow(0)}} 
+  ${mixins.bpEither(
     "height",
     vars.dim.nav.height
-  )} background-color: ${R.path(["theme", "nav"])};
+  )};
+  background-color: ${R.path(["theme", "nav"])};
   left: 0;
   position: absolute;
   right: 0;
   top: 0;
   z-index: 2;
 
-  ${mixins.sm`
+  ${mixins.sm} {
 		padding: 0 1em;
-	`};
-  ${mixins.bp.md.min`
+	};
+
+  ${mixins.bp.md.min} {
 		padding: 0 3em;
-	`};
+	};
 `;
 
 const Inner = styled.div`
@@ -96,7 +99,8 @@ const Inner = styled.div`
 `;
 
 const MobileStuff = styled.div`
-  ${mixins.bp.sm.min`display: none;`} ${mixins.contained()};
+  ${mixins.bp.sm.min} {display: none;};
+  ${mixins.contained()};
 `;
 
 const Dark = styled.div`

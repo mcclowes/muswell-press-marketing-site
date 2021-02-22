@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Helmet from "react-helmet";
 
 import routesConfig from "./routesConfig";
-import injectGlobalStyles from "./components/style/globalStyles";
+import injectGlobalStyles from "./utils/styles/globalStyles";
 
 import Nav from "./components/common/Nav";
 import Main from "./components/common/Main";

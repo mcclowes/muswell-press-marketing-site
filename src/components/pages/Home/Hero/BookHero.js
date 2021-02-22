@@ -1,6 +1,9 @@
+import * as mixins from "src/utils/styles/mixins";
+import * as vars from "src/utils/styles/vars";
+import siteData from "src/data";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-
+import { objMap } from "src/utils/util";
 import {
   Container,
   GridCell,
@@ -9,21 +12,16 @@ import {
   Para,
 } from "src/components/common";
 
-import * as vars from "src/components/style/vars";
-import * as mixins from "src/components/style/mixins";
-
-import { objMap } from "src/lib/util";
-
-import siteData from "src/data";
-
 const Background = styled.div`
   background-color: ${R.path(["theme", "bg"])};
-  ${mixins.bp.sm.min`
+
+  ${mixins.bp.sm.min} {
 		min-height: calc(70vh - ${vars.dim.nav.height.other});
-	`};
-  ${mixins.bp.sm.max`
+	};
+  
+  ${mixins.bp.sm.max} {
 		min-height: calc(35vh - ${vars.dim.nav.height.other});
-	`};
+	};
 `;
 
 const coverHeights = objMap(
@@ -39,7 +37,9 @@ const StyledContainer = styled(Container)`
   display: flex;
   justify-content: center;
   flex-direction: row;
-  ${mixins.xs`align-items: center;`};
+
+  ${mixins.xs} {align-items: center;};
+
   @media (min-width: ${vars.bps.sm.min}px) and (orientation: landscape) {
     min-height: calc(70vh - ${vars.dim.nav.height.other});
   }
@@ -54,10 +54,10 @@ const Cover = styled.div`
   background-size: contain;
   background-repeat: no-repeat;
 
-  ${mixins.xs`
+  ${mixins.xs} {
 		padding-top: 100%;
 		background-position: center center;
-	`};
+	};
 `;
 
 const LeftCol = styled(GridCell)`
@@ -65,20 +65,22 @@ const LeftCol = styled(GridCell)`
   min-width: 100px;
   flex: 1;
   display: flex;
+
   ${mixins.bpEach("max-height", coverHeights)};
 `;
 
 const RightCol = styled(GridCell)`
-  // background-color: red;
   max-width: 500px;
   flex: 1;
   margin-left: 1em;
-  ${mixins.xs`
+
+  ${mixins.xs} {
 		margin: 0;
 		padding-left: 0;
 		padding-right: 0;
-	`};
-  ${mixins.xs`display: none;`};
+	};
+
+  ${mixins.xs} {display: none;};
 `;
 
 const TitleCell = styled(TextCell)`
@@ -89,15 +91,18 @@ const TitleText = styled.h2`
   color: ${R.path(["theme", "logo1"])};
   font-family: ${vars.font.title.family};
   font-size: 2.9em;
-  ${mixins.xs`font-size: 1.5em;`} font-weight: bold;
+  font-weight: bold;
   line-height: 1.1em;
   text-transform: uppercase;
   letter-spacing: 0.1em;
+
+  ${mixins.xs} {font-size: 1.5em;} 
 `;
 
 const MobileText = styled(Container)`
   padding-top: 0;
-  ${mixins.bp.sm.min`display: none;`};
+  
+  ${mixins.bp.sm.min} {display: none;};
 `;
 
 const HeroLink =

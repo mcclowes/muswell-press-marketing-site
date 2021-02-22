@@ -2,23 +2,13 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-import * as mixins from "src/components/style/mixins";
-import * as vars from "src/components/style/vars";
+import * as mixins from "src/utils/styles/mixins";
+import * as vars from "src/utils/styles/vars";
 
 import siteData from "src/data";
 
 const Wrapper = styled.footer`
-  
-
-/*  display: block;
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  padding: 1em 0;*/
-
   font-size: 0.9em;
-
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -30,9 +20,9 @@ const Wrapper = styled.footer`
     text-decoration: underline;
   }
 
-  ${mixins.xs`
+  ${mixins.xs} {
 		padding: 2em;
-	`};
+	};
 `;
 
 const MaybeLink = (props) =>
@@ -41,6 +31,7 @@ const MaybeLink = (props) =>
 const LinkStyling = `
 	padding: 0 0.8em;
 	margin: 0.33em 0;
+  ${({hidden}) => hidden ? "color: transparent;" : ""}
 
 	${mixins.bp.sm.min`
 		&:not(:last-child) {
@@ -54,8 +45,7 @@ const LinkStyling = `
 		&:first-child {
 			padding-left: 0;
 		}
-	`}
-	${(props) => (props.hidden ? "color: transparent;" : "")}
+	}
 `;
 
 const FooterLink = styled(MaybeLink)`
@@ -67,13 +57,13 @@ const FooterSocialLink = styled.a`
 `;
 
 const Mobile = styled.div`
-  ${mixins.bp.sm.min`display: none;`};
+  ${mixins.bp.sm.min} {display: none;};
 `;
 
 const Desktop = styled.div`
   padding: 1.5em;
 
-  ${mixins.xs`display: none;`};
+  ${mixins.xs} {display: none;};
 `;
 
 const Row = styled.div`
@@ -98,11 +88,11 @@ const Column = styled.div`
   display: flex;
   flex-direction: row;
 
-  ${mixins.bp.sm.max`
+  ${mixins.bp.sm.max} {
 		width: 100%;
 		margin-bottom: 0.75em;
     flex-direction: column;
-	`};
+	};
 `;
 
 const BottomRow = styled.div`

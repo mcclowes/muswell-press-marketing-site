@@ -1,6 +1,6 @@
 import GoogleAnalytics from "react-ga";
 
-import { meta } from "src/components/style/vars";
+import { meta } from "src/utils/styles/vars";
 
 GoogleAnalytics.initialize(meta.googleAnalytics);
 

@@ -1,7 +1,7 @@
 import * as mixins from "./mixins";
 import * as vars from "./vars";
 import { injectGlobal } from "styled-components";
-import { objMap } from "../../lib/util";
+import { objMap } from "src/utils/util";
 
 export default () => injectGlobal`
 	@import url('https://fonts.googleapis.com/css?family=Fredoka+One');
@@ -30,10 +30,10 @@ export default () => injectGlobal`
 	}
 
 	html.noScroll {
-		${mixins.bp.md.min`
+		${mixins.bp.md.min} {
 			margin-right: ${vars.dim.scrollbar};
 			background-color: ${vars.scrollbar.color.track};
-		`}		
+		}		
 	}
 
 	body {
@@ -84,22 +84,6 @@ export default () => injectGlobal`
 	img {
 		vertical-align: bottom;
 	}
-
-	// ::-webkit-scrollbar-track {
-	// 	background-color: ${vars.scrollbar.color.track};
-	// }
-
-	// ::-webkit-scrollbar	{
-	// 	width: ${vars.dim.scrollbar};
-	// 	height: ${vars.dim.scrollbar};
-	// 	background-color: #F5F5F5;
-	// }
-
-	// ::-webkit-scrollbar-thumb {
-	// 	border-radius: 10px;
-	// 	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
-	// 	background-color: ${vars.scrollbar.color.thumb};
-	// }
 
 	.fade-enter {
 	  opacity: 0;

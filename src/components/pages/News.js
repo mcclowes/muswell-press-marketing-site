@@ -1,10 +1,10 @@
-import * as mixins from "../style/mixins";
-import * as vars from "../style/vars";
+import * as mixins from "src/utils/styles/mixins";
+import * as vars from "src/utils/styles/vars";
 import { Button, Container, GridCell, Only } from "../common";
 import { compose, withState, withHandlers } from "recompose";
 import { Link } from "react-router-dom";
 import { MaybeLink } from "../common/Primitives";
-import { objMap } from "../../lib/util";
+import { objMap } from "src/utils/util";
 
 import Head from "src/components/common/Head";
 import moment from "moment";
