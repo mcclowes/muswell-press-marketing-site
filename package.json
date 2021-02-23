@@ -24,7 +24,7 @@
     "recompose": "^0.30.0",
     "slugify": "^1.4.7",
     "split": "^1.0.1",
-    "styled-components": "^2.4.1",
+    "styled-components": "^3.4.10",
     "velocity-animate": "^1.5.2"
   },
   "devDependencies": {
