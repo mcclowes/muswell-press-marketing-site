@@ -150,8 +150,6 @@ export default () => (
             Twitter
           </FooterSocialLink>
 
-          <FooterLink hidden>dfdfdf</FooterLink>
-
           <FooterLink>{siteData.generalSettings.footerText}</FooterLink>
 
           <FooterSocialLink href="https://consulting.codogo.io">
