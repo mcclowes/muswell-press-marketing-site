@@ -31,7 +31,7 @@
     "contentful": "^7.14.8",
     "dotenv": "^8.2.0",
     "eslint": "^4.19.1",
-    "husky": "^5.1.0",
+    "husky": "^5.1.2",
     "mcclowes-scripts": "^0.3.6",
     "prettier": "^2.2.1",
     "pretty-quick": "^3.1.0",
