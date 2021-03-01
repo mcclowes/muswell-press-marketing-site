@@ -28,7 +28,7 @@
     "velocity-animate": "^1.5.2"
   },
   "devDependencies": {
-    "contentful": "^7.14.8",
+    "contentful": "^8.1.8",
     "dotenv": "^8.2.0",
     "eslint": "^4.19.1",
     "husky": "^5.1.0",
