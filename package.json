@@ -32,7 +32,7 @@
     "dotenv": "^8.2.0",
     "eslint": "^4.19.1",
     "husky": "^5.1.0",
-    "mcclowes-scripts": "^0.3.6",
+    "mcclowes-scripts": "^0.11.1",
     "prettier": "^2.2.1",
     "pretty-quick": "^3.1.0",
     "process-promises": "^1.0.0",
