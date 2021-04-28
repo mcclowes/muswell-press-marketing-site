@@ -1,0 +1,21 @@
+version: 2
+updates:
+- package-ecosystem: npm
+  directory: "/"
+  schedule:
+    interval: monthly
+    time: "11:00"
+  open-pull-requests-limit: 10
+  reviewers:
+  - mcclowes
+  assignees:
+  - mcclowes
+  ignore:
+  - dependency-name: contentful
+    versions:
+    - 8.1.6
+    - 8.1.7
+  - dependency-name: marked
+    versions:
+    - 1.2.7
+    - 1.2.8
