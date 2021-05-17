@@ -6,7 +6,14 @@ Muswell Press is a proudly independent publisher of great books, both fiction an
 
 Sarah and Kate Beal acquired Muswell in 2016. With over 50 years publishing experience between them, at Bloomsbury, Faber, Walker Books, HarperCollins and Ottakar’s Bookshops amongst others, they bring a fresh approach and a wealth of knowledge and enthusiasm to the company.
 
-# Deploying the site
+## Running the site locally
+
+1. `npm install`
+2. Add correct variables to `.env`
+3. Pull content - `npm run data`
+4. `npm run start`
+
+## Deploying the site
 
 1. `npm install`
 2. Add correct variables to `.env`
