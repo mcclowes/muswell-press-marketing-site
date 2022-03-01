@@ -12,7 +12,7 @@
     "marked": "^3.0.2",
     "masonry-layout": "^4.2.2",
     "moment": "^2.29.1",
-    "ramda": "^0.24.1",
+    "ramda": "^0.28.0",
     "react": "^15.7.0",
     "react-addons-transition-group": "^15.6.0",
     "react-dom": "^15.7.0",
