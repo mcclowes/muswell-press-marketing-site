@@ -22,7 +22,7 @@
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
     "recompose": "^0.30.0",
-    "slugify": "^1.6.0",
+    "slugify": "^1.6.5",
     "split": "^1.0.1",
     "styled-components": "^2.4.1",
     "velocity-animate": "^1.5.2"
